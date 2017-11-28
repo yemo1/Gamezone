@@ -6,14 +6,19 @@ using System.Threading.Tasks;
 
 namespace GameZone.VIEWMODEL
 {
+    public class RequestStatus
+    {
+        public virtual int code { get; set; }
+    }
     public class GameGenre
     {
         public virtual string url_friendly_id { get; set; }
         public virtual string title { get; set; }
     }
+
     public class Game
     {
-        public virtual long plays { get; set; }
+        public virtual int plays { get; set; }
         public virtual string language { get; set; }
         public virtual string title { get; set; }
         public virtual string date_added { get; set; }
@@ -27,10 +32,15 @@ namespace GameZone.VIEWMODEL
         public virtual string banner_small { get; set; }
         public virtual string long_description { get; set; }
     }
+    public class GameData
+    {
+        public virtual GameGenre genre { get; set; }
+        public virtual object games { get; set; }
+    }
 
     public class CategoryGames
     {
-        public virtual GameGenre genre { get; set; }
-        public virtual IList<Game> games { get; set; }
+        public virtual RequestStatus status { get; set; }
+        public virtual GameData data { get; set; }
     }    
 }
