@@ -1,6 +1,22 @@
-﻿
-@{
-    ViewBag.Title = "Index";
+﻿@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+@section style{
+    <style>
+        .gameImg{
+            cursor:pointer;
+        }
+    </style>
+}
+<div id="gameDiv" style="margin-top:50px;">
+
+
+</div>
+@section scripts{
+    <script type="text/javascript">
+        var _Title = "@ViewBag.Title";
+    </script>
+    <script src="~/Scripts/Games/Index.js"></script>
+}
