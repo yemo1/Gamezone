@@ -8,7 +8,7 @@ using System.Web.Routing;
 using System.Data.Entity;
 using GameData;
 using GameZone.Repositories;
-using GameZone.Classes;
+using GameZone.VIEWMODEL;
 
 namespace GameZone.Controllers
 {
@@ -32,6 +32,18 @@ namespace GameZone.Controllers
             }
 
             //return ResponseMessage(GetMessage("Valid User", HttpStatusCode.OK, 200));
+            return Ok(new ResponseStatus() { status = HttpStatusCode.OK, message = "Valid User" });
+        }
+
+        [Route("Auth/GetByTel?tell={tell}")]
+        public IHttpActionResult GetByTel(string tell)
+        {
+            var subscriber = new Subscriber();
+            var s = subscriber.GetUserByPhoneNo(tell);
+            if (s == null)
+            {
+                return ResponseMessage(Request.CreateResponse(new ResponseStatus() { status = HttpStatusCode.NotFound, message = "You do not have a valid subscription" }));
+            }            
             return Ok(new ResponseStatus() { status = HttpStatusCode.OK, message = "Valid User" });
         }
 

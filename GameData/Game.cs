@@ -19,6 +19,7 @@ namespace GameData
         public Nullable<System.DateTime> SubDate { get; set; }
         public Nullable<System.DateTime> ExpDate { get; set; }
         public string Token { get; set; }
-        public Nullable<System.DateTime> TimeStamped { get; set; }
+        public Nullable<System.DateTime> Timestamped { get; set; }
+        public Nullable<System.DateTime> LastAccess { get; set; }
     }
 }

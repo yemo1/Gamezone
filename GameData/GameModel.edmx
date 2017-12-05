@@ -4,40 +4,41 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="NGSubscriptionsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="NGSubscriptionsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Games">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MSISDN" Type="varchar" MaxLength="50" />
           <Property Name="SubDate" Type="datetime" />
           <Property Name="ExpDate" Type="datetime" />
-          <Property Name="Token" Type="varchar" MaxLength="50" />
-          <Property Name="TimeStamped" Type="datetime" />
+          <Property Name="Token" Type="varchar" MaxLength="20" />
+          <Property Name="Timestamped" Type="datetime" />
+          <Property Name="LastAccess" Type="datetime" />
         </EntityType>
         <EntityContainer Name="NGSubscriptionsModelStoreContainer">
           <EntitySet Name="Games" EntityType="Self.Games" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="NGSubscriptionsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="NGSubscriptionsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Games" EntityType="NGSubscriptionsModel.Game" />
+        </EntityContainer>
         <EntityType Name="Game">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MSISDN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="SubDate" Type="DateTime" Precision="3" />
           <Property Name="ExpDate" Type="DateTime" Precision="3" />
-          <Property Name="Token" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="TimeStamped" Type="DateTime" Precision="3" />
+          <Property Name="Token" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Timestamped" Type="DateTime" Precision="3" />
+          <Property Name="LastAccess" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityContainer Name="NGSubscriptionsEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Games" EntityType="Self.Game" />
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -47,12 +48,13 @@
           <EntitySetMapping Name="Games">
             <EntityTypeMapping TypeName="NGSubscriptionsModel.Game">
               <MappingFragment StoreEntitySet="Games">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="MSISDN" ColumnName="MSISDN" />
-                <ScalarProperty Name="SubDate" ColumnName="SubDate" />
-                <ScalarProperty Name="ExpDate" ColumnName="ExpDate" />
+                <ScalarProperty Name="LastAccess" ColumnName="LastAccess" />
+                <ScalarProperty Name="Timestamped" ColumnName="Timestamped" />
                 <ScalarProperty Name="Token" ColumnName="Token" />
-                <ScalarProperty Name="TimeStamped" ColumnName="TimeStamped" />
+                <ScalarProperty Name="ExpDate" ColumnName="ExpDate" />
+                <ScalarProperty Name="SubDate" ColumnName="SubDate" />
+                <ScalarProperty Name="MSISDN" ColumnName="MSISDN" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

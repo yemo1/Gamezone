@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GameData;
 
-namespace GameZone.TOOLS
+namespace GameZone.Repositories
 {
-    public class Class1
+    public interface ISubscriber
     {
+        Game GetUser(string tk);
     }
 }
