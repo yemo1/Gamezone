@@ -1,0 +1,72 @@
+@media screen and (max-width:991px){.white-bg nav.navbar.bootsnav ul.nav > li > a{padding:30px 8px;}
+.fixed-nav nav.navbar.bootsnav ul.nav > li > a{padding:18px 10px;}
+#blog.blog-style2 .blog-item .post-content{margin:0 0 40px;}
+}
+@media screen and (max-width:767px){nav.navbar.bootsnav .navbar-nav{background-color:#f9f9f9;}
+nav.navbar.bootsnav{border:none;}
+.navbar-brand .logo{height:60px;margin-top:10px;}
+.fixed-nav .navbar-brand .logo{height:40px;}
+nav.navbar.bootsnav .navbar-toggle{margin-top:20px;}
+nav.navbar.bootsnav.no-full .navbar-collapse{max-height:310px;}
+.navbar-collapse ul.nav.navbar-nav{margin-bottom:0;}
+nav.navbar.bootsnav ul.nav > li > a{padding:15px;}
+nav.navbar.bootsnav ul.nav > li > a, nav.navbar.bootsnav .dropdown .megamenu-content .col-menu ul > li > a{color:#222;}
+.navbar-collapse ul.nav.navbar-nav li:hover a, .navbar-collapse ul.nav.navbar-nav li a:hover{color:#fff;}
+.fixed-nav .navbar-collapse{margin-top:6px;}
+.navbar-nav{margin-top:0;}
+.navbar-toggle{margin:25px 0 0;}
+.fixed-nav .navbar-toggle{margin:14px 0 0;}
+.breadcrumb, #single-page-banner.page-title h2{text-align:center;}
+aside#pfolio-single-content{margin-top:30px;}
+.parallax{background-attachment:scroll;}
+#single-post-content{margin:0 0 20px;padding-bottom:0;}
+aside#sidebar{margin:20px 0 120px;padding-top:0;padding-bottom:0;}
+#blog.blog-style2.blog-page aside#sidebar{margin-top:30px;margin-bottom:50px;}
+#blog.blog-style2.blog-page aside#sidebar .widget{margin:50px 0;}
+#blog.blog-style2 .blog-item .post-content{margin:40px 0 40px 15px;}
+.isotopeContainer .col-sm-4.isotopeSelector,
+.dofilter-style .col-sm-4.isotopeSelector{width:100%;}
+.isotopeContainer .col-xs-6.isotopeSelector,
+.dofilter-style .col-xs-6.isotopeSelector{width:50%;}
+}
+@media screen and (max-width:667px){#blog .post-title > h3{font-size:18px;}
+}
+@media screen and (max-width:568px){.post-title h1{font-size:26px;}
+.service-box-wrap .btn{float:none;}
+.isotopeContainer .col-xs-6.isotopeSelector,
+.dofilter-style .col-xs-6.isotopeSelector,
+.isotopeContainer .col-sm-6,
+.isotopeContainer .col-sm-4,
+.isotopeContainer .col-sm-3,
+.isotopeContainer .col-xs-6,
+.isotopeContainer .col-xs-4{width:100%;}
+}
+@media screen and (max-width:480px){.title-text::before, .title-text::after{background-position:0 10px;}
+.title-text{font-size:32px;}
+.title-block h1{font-size:30px;}
+.service-box-wrap.border-left{border-left:0 none;padding-left:0;}
+.post-navigation .col-xs-6{width:50%;}
+.service-box{height:auto;}
+.price-wrap{height:auto;}
+#blog .post-wrap{margin:0 auto;max-width:330px;}
+#blog.blog-style2 .blog-item .post-content, #blog.blog-style2.single-collumn .blog-item .post-content{margin:0 0 40px;}
+}
+@media screen and (max-width:420px){.title-text::before, .title-text::after{background-position:0 8px;}
+.title-text{font-size:28px;}
+.post-title h1{font-size:26px;}
+.title-block h1{font-size:26px;}
+}
+@media screen and (max-width:360px){.title-block h1{font-size:24px;}
+.post-title h1{font-size:22px;}
+}
+@media screen and (max-width:320px){nav.navbar.bootsnav .navbar-toggle{margin-top:20px;}
+#single-page-banner{margin-top:60px;}
+.navbar-toggle{margin:14px 0 0;}
+}
+@media screen and (max-height:420px){nav.navbar.bootsnav.no-full .navbar-collapse{max-height:270px;}
+}
+@media screen and (max-height:360px){nav.navbar.bootsnav.no-full .navbar-collapse{max-height:240px;}
+}
+@media screen and (max-height:320px){nav.navbar.bootsnav.no-full .navbar-collapse{max-height:200px;}
+.pfolio-link a, .pfolio-caption a{font-size:16px;}
+}

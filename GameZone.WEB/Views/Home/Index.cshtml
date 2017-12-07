@@ -1,31 +1,348 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Home | Game Zone";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+
+@section style{
+    <style>
+        #game {
+            width: 100%;
+        }
+    </style>
+}
+<!-- LOADER -->
+<div id="loader-overflow">
+    <div id="loader3">Please enable JS</div>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
+<div class="site-container">
+    <header id="nav" class="header header-1 header-black animated fadeInDown sticky ">
+        <div class="header-wrapper">
+            <div class="container-m-30 clearfix">
+                <div class="logo-row">
+                    <div class="logo-container-2">
+                        <div class="logo-2">
+                            <a href="#" class="clearfix">
+                                <img src="~/Content/images/logo.png" alt="Gamezone logo">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="menu-btn-respons-container">
+                        <button id="menu-btn" type="button" class="navbar-toggle btn-navbar collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse">
+                            <span aria-hidden="true" class="icon_menu hamb-mob-icon"><i class="fa fa-bars"></i></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="main-menu-container">
+                <div class="container-m-30 clearfix">
+                    <div id="main-menu" class="">
+                        <div class="navbar navbar-default" role="navigation">
+                            <nav class="navbar-collapse right-1024 collapse" aria-expanded="false" style="height: 0px;">
+                                <ul class="nav navbar-nav">
+                                    <li class="parent current">
+                                        <a href="" class=""><div class="main-menu-title">Home</div></a>
+                                    </li>
+                                    <li class="parent ">
+                                        <a href="games.html" class=""><div class="main-menu-title">Games </div></a>
+
+                                    </li>
+                                </ul>
+                            </nav>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="main-content">
+        <section class="page-section home">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-5 col-md-5 col-xs-10 col-md-offset-1 col-xs-offset-1 col-sm-offset-1 home-text">
+                        <h1 class="main-header">Suscribe for fun &  <strike>cool</strike> awesome games!</h1>
+                        <h5 class="text-justify ">
+                            Play over 500 games on GameZone with just a single button click. Unleash over 500 fun, exciting and addictive games on GameZone.
+                        </h5>
+                        <a class="btn btn-lg  smooth-scroll scroll-down animate" data-animate="wobble" data-duration="1.0s" data-delay="0.4s" data-iteration="2" type="button" data-toggle="modal" data-target="#exampleModal">Subscribe for games</a>
+                    </div>
+                    <div class="col-sm-5 col-md-6 col-xs-12 ">
+                        <img src="~/Content/images/GameListHeroLeftLarge.png" alt="monkey bubble shooter characters">
+                        <!-- GameListHeroLeftLarge.png -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="page-section pale-white trial">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-5 col-md-7 col-xs-10 col-md-offset-1 col-xs-offset-1 col-sm-offset-1">
+                        <div class="panel-body">
+                            <iframe width="800" height="600" id="bonusGame" src="http://funmobilelive.html5games.net/serve?portal_id=4774417016029184&game_id=6066710801022976&branding_id=5848139915329536&ad_id=5284106556407808&portal_localization_id=4539491968614400&clear_cache=yes"></iframe>
+                            @*<a href="" class="" data-toggle="modal" data-target="#exampleModal">
+                                <img src="~/Content/images/whack-a-mole-large.png" alt="" class="animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.2s">
+                                                        </a>*@
+                        </div>
+                    </div>
+                    <div class="col-sm-5 col-md-3 col-xs-12">
+                        <h2 class="main-header">Bonus Game!</h2>
+                        <h5 class="text-justify ">
+                            Try out our FREE Game. We have over 500 other interesting games. To have it all, just click the button above to subscribe.
+                        </h5>
+                        <ul class="features_list">
+                            <li>
+                                <span class="icons"><i class="fa fa-smile-o blue_c"></i></span>
+                                <span class="text"> Easy and Fun</span>
+                            </li>
+                            <li>
+                                <span class="icons"><i class="fa fa-star blue_c"></i></span>
+                                <span class="text"> Ranks on Leaderboards </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <h3 class="modal-title text-center" id="exampleModalLabel">Subscribe for Games</h3>
+                            </div>
+                            <div class="modal-body">
+                                <form class="fomr-horizontal">
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
+                                            <input type="text" class="form-control" id="recipient-name" placeholder="kindly enter your phone number">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 col-sm-offset-3  col-xs-6 col-xs-offset-3">
+                                            <button class="btn btn-primary btn-block"> Subscribe</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="page-section " id="game-area">
+            <div class="game-filter">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <div class="filter-container isotopeFilters">
+                                <ul class="list-inline filter text-center">
+                                    @*<li class="active"><a href="#" data-filter="*">All games</a></li>*@
+                                    <li class="active gameMenu" id="family"><a href="#" data-filter=".family">Family</a></li>
+                                    <li class="gameMenu" id="strategy"><a href="#" data-filter=".strategy">Strategy</a></li>
+                                    <li class="gameMenu" id="action"><a href="#" data-filter=".action">Action</a></li>
+                                    <li class="gameMenu" id="cards"><a href="#" data-filter=".cards">Cards</a></li>
+                                    <li class="gameMenu" id="sports"><a href="#" data-filter=".sports">Sports</a></li>
+                                    <li class="gameMenu" id="adventure"><a href="#" data-filter=".adventure">Adventure</a></li>
+                                    <li class="gameMenu" id="puzzle"><a href="#" data-filter=".puzzle">Puzzle</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div id="isotopeContainer" class="isotopeContainer">
+                        @*<div class="col-xs-12 col-sm-8 col-md-4 isotopeSelector block adventure">
+                                <div class="service-wrap hovereffect panel clearfix animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.2s">
+                                    <a href="" class="game-link">
+                                        <img src="~/Content/images/candyland.jpg" alt="Sweet Candy Land" class="img-responsive ">
+                                        <div class="overlay description">
+                                            <h3 class="game-title">Sweet Candy Land</h3>
+                                            <p class="text-justify">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6 col-xs-12 isotopeSelector block adventure">
+                                <div class="service-wrap hovereffect panel clearfix animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.2s">
+                                    <a href="" class="game-link">
+                                        <img src="~/Content/images/monkeyshooter.png" alt="Sweet Candy Land" class="img-responsive ">
+                                        <div class="overlay description">
+                                            <h3 class="game-title">Monkey Bubble Shooter</h3>
+                                            <p class="text-justify">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry</p>
+
+                                        </div>
+                                    </a>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6 col-xs-12 isotopeSelector block adventure">
+                                <div class="service-wrap hovereffect panel clearfix animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.2s">
+                                    <a href="" class="game-link">
+                                        <img src="~/Content/images/monkeyshooter.png" alt="Sweet Candy Land" class="img-responsive ">
+                                        <div class="overlay description">
+                                            <h3 class="game-title">Monkey Bubble Shooter</h3>
+                                            <p class="text-justify">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry</p>
+
+                                        </div>
+                                    </a>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6 col-xs-12 isotopeSelector arcade block ">
+                                <div class="service-wrap hovereffect panel clearfix animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.2s">
+                                    <a href="" class="game-link">
+                                        <img src="~/Content/images/monkeyshooter.png" alt="Sweet Candy Land" class="img-responsive ">
+                                        <div class="overlay description">
+                                            <h3 class="game-title">Monkey Bubble Shooter</h3>
+                                            <p class="text-justify">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry</p>
+
+                                        </div>
+                                    </a>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6 col-xs-12 isotopeSelector arcade block ">
+                                <div class="service-wrap hovereffect panel clearfix animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.2s">
+                                    <a href="" class="game-link">
+                                        <img src="~/Content/images/monkeyshooter.png" alt="Sweet Candy Land" class="img-responsive ">
+                                        <div class="overlay description">
+                                            <h3 class="game-title">Monkey Bubble Shooter</h3>
+                                            <p class="text-justify">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry</p>
+
+                                        </div>
+                                    </a>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6 col-xs-12 isotopeSelector sports block ">
+                                <div class="service-wrap hovereffect panel clearfix animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.2s">
+                                    <a href="" class="game-link">
+                                        <img src="~/Content/images/monkeyshooter.png" alt="Sweet Candy Land" class="img-responsive ">
+                                        <div class="overlay description">
+                                            <h3 class="game-title">Monkey Bubble Shooter</h3>
+                                            <p class="text-justify">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry</p>
+
+                                        </div>
+                                    </a>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6 col-xs-12 isotopeSelector sports block ">
+                                <div class="service-wrap hovereffect panel clearfix animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.2s">
+                                    <a href="" class="game-link">
+                                        <img src="~/Content/images/monkeyshooter.png" alt="Sweet Candy Land" class="img-responsive ">
+                                        <div class="overlay description">
+                                            <h3 class="game-title">Monkey Bubble Shooter</h3>
+                                            <p class="text-justify">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry</p>
+
+                                        </div>
+                                    </a>
+
+                                </div>
+                            </div>*@
+
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <footer id="footer4" class="footer2-black site-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-sm-3 widget pt-10">
+                        <div class="footer2-text-cont contact">
+                            <h4 class=" ">Gamezone </h4>
+                            <address>
+                                2A, A.J Marinho Drive, Off Sinari<br>
+                                Daranijo Street,Victoria Island, <br>
+                                Lagos, Nigeria
+                            </address>
+                            <p><i class="fa  fa-phone-square "> </i> +234-1-271-1730 </p>
+                            <a href="mailto:ask@funmobilelive.com"><i class="fa fa-envelope-o"></i> ask@funmobilelive.com </a>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-3 widget pt-10">
+                        <ul class="links-list a-text-cont">
+                            <li><a href="">Games </a></li>
+                            <!-- <li><a href="">About</a></li> -->
+                            <li><a href="">Terms & Conditions</a></li>
+                            <li><a href="">Privacy </a></li>
+                        </ul>
+
+                    </div>
+                    <div class="col-md-2 col-sm-3 widget pt-10">
+                        <div class="footer2-text-cont">
+                            <!-- Social Links -->
+                            <ul class="links-list a-text-cont">
+                                <li><a href="">Facebook <i class="fa fa-facebook-square"></i></a></li>
+                                <li><a href="">Twitter <i class="fa  fa-twitter-square"></i></a></li>
+                                <li><a href="">Instagram <i class="fa fa-instagram"></i></a></li>
+                                <!-- <li><a href="">Privacy </a></li> -->
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-4   ">
+                        <div class="leaderboards">
+                            <table class="table table-dark">
+                                <thead>
+                                    <tr>
+                                        <th colspan="4" class="text-center"> Leaderboards</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Mark</td>
+                                        <td>2000</td>
+                                        <td>monkey bubble</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>Jacob</td>
+                                        <td>400</td>
+                                        <td>whack a mole</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>Larry</td>
+                                        <td>12</td>
+                                        <td>whack a mole</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Mark</td>
+                                        <td>2000</td>
+                                        <td>monkey bubble</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- SUB FOOTER -->
+                <div class=" copyright clearfix">
+                    <a class="#" href="" target="_blank">&copy; 2017 Gamezone Nig Ltd</a>
+
+                </div>
+
+            </div>
+            <p id="back-top">
+                <a href="#top" title="Back to Top"><span class="icon icon-arrows-up"><i class=" fa fa-arrow-up"></i></span></a>
+            </p>
+
+        </footer>
+
+    </main>
 </div>
+
+@section scripts{
+    <script type="text/javascript">
+        var _Title = "@ViewBag.Title";
+    </script>
+    <script src="~/Scripts/Home/Index.js"></script>
+}

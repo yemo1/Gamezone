@@ -9,18 +9,21 @@ using System.Web.Http;
 
 namespace GameZone.Controllers
 {
+    [RoutePrefix("api/Game")]
     public class GameController : ApiController
     {
         //Hosted web API REST Service base url  
         string Baseurl = " http://funmobilelive.html5games.net/";
 
         // GET: api/Game
+        [Route("SingleGame")]
         public IEnumerable<string> GetSingleGame()
         {
             return new string[] { "value1", "value2" };
         }
 
         // GET: api/Game/5
+        
         public ReturnMessage Get(string gameCategory, int gameCount)
         {
             ReturnMessage retVal;
@@ -45,6 +48,7 @@ namespace GameZone.Controllers
             return retVal;
         }
 
+        
         public IList<Game> GetGames(string URL)
         {
             CategoryGames CategoryGame = new CategoryGames();

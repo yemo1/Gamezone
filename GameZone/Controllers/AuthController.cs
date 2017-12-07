@@ -12,7 +12,7 @@ using GameZone.VIEWMODEL;
 
 namespace GameZone.Controllers
 {
-    
+    [RoutePrefix("api/Auth")]
     public class AuthController : ApiController
     {
         public void Post([FromBody]string value)
@@ -35,7 +35,7 @@ namespace GameZone.Controllers
             return Ok(new ResponseStatus() { status = HttpStatusCode.OK, message = "Valid User" });
         }
 
-        [Route("Auth/GetByTel?tell={tell}")]
+        [Route("ByTel")]
         public IHttpActionResult GetByTel(string tell)
         {
             var subscriber = new Subscriber();
@@ -47,6 +47,7 @@ namespace GameZone.Controllers
             return Ok(new ResponseStatus() { status = HttpStatusCode.OK, message = "Valid User" });
         }
 
+        [Route("Message")]
         public HttpResponseMessage GetMessage(string message, HttpStatusCode code,int val)
         {
             HttpError custom = new HttpError(message) { { "status", val } };

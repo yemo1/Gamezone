@@ -9,7 +9,9 @@ namespace GameZone.WEB
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Content/js/jquery.min.js"
+                        //"~/Scripts/jquery-{version}.js"
+                        ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -20,16 +22,42 @@ namespace GameZone.WEB
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
+                "~/Content/js/bootstrap.min.js"
+                ,
+                      //"~/Scripts/bootstrap.js",
+                      "~/Scripts/respond.js"
+                      ));
+
+            bundles.Add(new ScriptBundle("~/bundles/baseJS").Include(
+                "~/Content/js/magnific-popup.min.js",
+                      "~/Content/js/imagesloaded.pkgd.min.js",
+                      "~/Content/js/appear.js",
+                      "~/Content/js/base.js",
+                      "~/Content/js/smooth-scroll.js"
+                      ));
+
+            bundles.Add(new ScriptBundle("~/bundles/silteringJs").Include(
+                "~/Content/js/isotope.pkgd.min.js",
+                "~/Content/js/lightbox.min.js",
+                "~/Content/js/dofilter.js",
+                "~/Content/js/scrolla.jquery.min.js"
+                      ));
+
+            bundles.Add(new ScriptBundle("~/bundles/customjs").Include(
+                "~/Content/js/site.js"
+                      ));
 
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
                       "~/Scripts/angular.min.js",
                       "~/Scripts/global.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/css/bootstrap.min.css",
+                      "~/Content/css/animate.min.css",
+                      "~/Content/css/font-awesome.min.css",
+                      "~/Content/css/base-stylesheet.css",
+                      "~/Content/css/style.css"
+                      ));
         }
     }
 }
