@@ -43,6 +43,18 @@ namespace GameZone.WEB
                 "~/Content/js/scrolla.jquery.min.js"
                       ));
 
+            bundles.Add(new ScriptBundle("~/bundles/Home-IndexPageJs").Include(
+               "~/Content/js/notify.min.js",
+               "~/Scripts/Home/Index.js"
+                      ));
+
+            bundles.Add(new ScriptBundle("~/bundles/Games-GamePlayPageJs").Include(
+                "~/Content/js/jquery.sliderPro.min.js",
+                "~/Content/js/jquery.fancybox.pack.js",
+                "~/Content/js/games.js",
+                "~/Scripts/Games/GamePlay.js"
+                      ));
+
             bundles.Add(new ScriptBundle("~/bundles/customjs").Include(
                 "~/Content/js/site.js"
                       ));
@@ -54,6 +66,14 @@ namespace GameZone.WEB
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/css/bootstrap.min.css",
                       "~/Content/css/animate.min.css",
+                      "~/Content/css/font-awesome.min.css",
+                      "~/Content/css/base-stylesheet.css",
+                      "~/Content/css/style.css"
+                      ));
+
+            bundles.Add(new StyleBundle("~/Content/pageSpecificCss").Include(
+                      "~/Content/js/fancybox/jquery.fancybox.css",
+                      "~/Content/css/slider-pro.min.css",
                       "~/Content/css/font-awesome.min.css",
                       "~/Content/css/base-stylesheet.css",
                       "~/Content/css/style.css"

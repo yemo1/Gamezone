@@ -67,10 +67,10 @@ namespace GameZone.Repositories
 
             try
             {
-            //Update Last Access DateTime to Today
-            game.LastAccess = DateTime.Today;
-            
-            _NGSubscriptionsEntities.Entry(game).State = EntityState.Modified;
+                //Update Last Access DateTime to Today
+                game.LastAccess = DateTime.Today;
+
+                _NGSubscriptionsEntities.Entry(game).State = EntityState.Modified;
                 var retVal = _NGSubscriptionsEntities.SaveChanges();
                 return returnMessage = new ReturnMessage()
                 {
@@ -97,7 +97,53 @@ namespace GameZone.Repositories
             }
         }
 
-        private bool SubscriberExists(string tell)
+        /// <summary>
+        /// Method to add new Subscriber to DB
+        /// </summary>
+        /// <param name="t">User's Telephone Number</param>
+        /// <param name="sT">Users selected Subscription Type</param>
+        /// <returns></returns>
+        public ReturnMessage PostNewSubscriber(GameData.Game game)
+        {
+            ReturnMessage returnMessage;
+            try
+            {
+                //Check if User already exists in DB
+                if (SubscriberExists(game.MSISDN))
+                {
+                    _NGSubscriptionsEntities.Entry(game).State = EntityState.Modified;
+                }
+                else
+                {
+                    _NGSubscriptionsEntities.Games.Add(game);
+
+                }
+                var retVal = _NGSubscriptionsEntities.SaveChanges();
+                return returnMessage = new ReturnMessage()
+                {
+                    ID = retVal,
+                    Message = $"Subscription Successful. Valid till: {game.ExpDate.Value.ToShortDateString()}",
+                    Success = true
+                };
+
+            }
+            catch (Exception ex)
+            {
+                if (!SubscriberExists(game.MSISDN))
+                {
+                    return returnMessage = new ReturnMessage()
+                    {
+                        Message = ex.Message,
+                        Success = false
+                    };
+                }
+                else
+                {
+                    throw;
+                }
+            }
+        }
+        public bool SubscriberExists(string tell)
         {
             return _NGSubscriptionsEntities.Games.Count(e => e.MSISDN == tell) > 0;
         }

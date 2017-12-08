@@ -8,6 +8,10 @@
     background-position: 50%;
 } */
 
+.hiddenPara{
+    display:none;
+}
+
 @font-face {font-family: "Avenirlight";
   src:  url(avenir-light.ttf) format("truetype");
   font-weight:100; 
@@ -66,8 +70,8 @@ header {
     z-index: 13;
 }
 .sticky{
-    /* background: radial-gradient(circle at top,#fff 5%,#fafbfc 50%); */
-    background: rgba(0, 0, 0, 0.8);
+     background: radial-gradient(circle at top,#fff 5%,#fafbfc 50%); 
+    /*background: rgba(0, 0, 0, 0.8);*/
     position: fixed;
     box-shadow:0 1px 15px rgba(0,0,0,.15);
 }
@@ -478,7 +482,7 @@ main:before {
 }
 
 #games #main-menu .navbar .nav>li>a {
-    color: #797979;
+    /*color: #797979;*/
 }
 
 .light-blue-bg{
@@ -505,7 +509,7 @@ main:before {
 }
 
 #main-menu .navbar .nav>li>a{
-    color:#f1f1f1;
+    /*color:#f1f1f1;*/
 }
 
 .overlay.description p {

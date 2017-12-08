@@ -299,6 +299,7 @@
     <Content Include="Content\js\jquery1.12.min.js" />
     <Content Include="Content\js\lightbox.min.js" />
     <Content Include="Content\js\magnific-popup.min.js" />
+    <Content Include="Content\js\notify.min.js" />
     <Content Include="Content\js\scrolla.jquery.min.js" />
     <Content Include="Content\js\site.js" />
     <Content Include="Content\js\smooth-scroll.js" />
@@ -328,6 +329,7 @@
     <Content Include="Content\css\fonts\FontAwesome.otf" />
     <None Include="Properties\PublishProfiles\BernardOreva.pubxml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
+    <Content Include="Scripts\Games\GamePlay.js" />
     <Content Include="Scripts\Home\Index.js" />
     <Content Include="Scripts\Games\Index.js" />
     <Content Include="Scripts\global.js" />

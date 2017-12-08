@@ -62,7 +62,31 @@ namespace GameZone.WEB.Controllers
         }
         public ActionResult GamePlay()
         {
-            return View();
+            ////Validate User Session
+            //if (GameUserIdentity.LoggedInUser == null)
+            //{
+            //    return RedirectToAction("Index", "Home");
+            //}
+            //Entities.GameContext _context = new Entities.GameContext();
+            //NGSubscriptionsEntities _NGSubscriptionsEntities = new NGSubscriptionsEntities();
+            //var subscriber = new Subscriber(_context, _NGSubscriptionsEntities);
+
+            ////Check for subscription Expiry
+
+            ////Check for Wrong Date and Time
+            //string userTel = GameUserIdentity.LoggedInUser.MSISDN;
+            //var s = subscriber.GetUserByPhoneNo(userTel);
+            //if (s == null)
+            //{
+            //    return RedirectToAction("Index", "Home");
+            //}
+            //else
+            //{
+            //    //Keep Track of User Last Game Played
+            //    //GameUserIdentity.LoggedInUser = s.ToModel();
+            //    //subscriber.UpdateGameUserLastAccess(userTel, s);
+                return View();
+            //}
         }
     }
 }

@@ -4,5 +4,153 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>GamePlay</h2>
+@section style{
+    @*@Styles.Render("~/Content/pageSpecificCss")*@
+    <link href="../Content/js/fancybox/jquery.fancybox.css" rel="stylesheet" />
+    <link href="../Content/css/slider-pro.min.css" rel="stylesheet" />
+    <link href="../Content/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="../Content/css/base-stylesheet.css" rel="stylesheet" />
+    <link href="../Content/css/style.css" rel="stylesheet" />
+}
+<section class="page-section white-bg top_pad">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <h1 class="blue_c blue_line">{{Game.Title}}</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                @*<img src="~/Content/images/whack-a-mole-large.png" alt="">*@
+                <iframe style="min-width:100%; min-height:600px;" id="gamePlay" src=""></iframe>
+            </div>
+            <div class="col-md-4 ">
+                <div class="panel game_details">
+                    <div class="panel-body">
+                        <h3 class="text-left dark_c blue_line">{{Game.Category}}</h3>
+                        <div class="text-justify" id="longDesc"></div>
+                    </div>
+                    @*<div class="panel-body socials">
+                            <span class="pull-right">
+                                <a href=""> <i class="fa fa-facebook-square"></i></a>
+                                <a href=""> <i class="fa  fa-twitter-square"></i></a>
+                                <a href=""> <i class="fa fa-instagram"></i></a>
+                            </span>
+                            <h3 class="text-left blue_c">Share</h3>
+                        </div>
+                        <div class="leaderboards">
+                            <table class="table table-dark">
+                                <thead>
+                                    <tr>
+                                        <th colspan="3" class="text-left"> Leaderboards</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Mark</td>
+                                        <td>2000</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>Jacob</td>
+                                        <td>400</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>Larry</td>
+                                        <td>12</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="dark-bg page-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-10 col-xs-10 col-md-offset-0 col-sm-offset-1 col-xs-offset-1 home-section">
+                <h1 class="blue_c">
+                    Other Games in this Category
+                </h1>
+                <!-- <hr class="blue_line"> -->
+            </div>
+        </div>
+        <div class="row ">
+            <div id="example2" class="slider-pro">
+                <div class="sp-slides" id="otherCategoryGames">
+                    @*<div class="sp-slide">
+                            <a href="game1.html">
+                                <img class="sp-image" src="~/Content/css/images/blank.gif"
+                                     data-src="~/Content/images/monkeyshooter.png"
+                                     data-retina="~/Content/images/monkeyshooter.png" />
+                            </a>
+                            <p class="sp-caption">
+                                Monkey bubble Shooter
+                                <br>
+                                <span class="text-center small text-muted">Adventure</span>
+                            </p>
+                        </div>
+                        <div class="sp-slide">
+                            <a href="~/Content/images/candyland.jpg">
+                                <img class="sp-image" src="~/Content/css/images/blank.gif"
+                                     data-src="~/Content/images/candyland.jpg"
+                                     data-retina="~/Content/images/candyland.jpg" />
+                            </a>
+                            <p class="sp-caption">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                        <div class="sp-slide">
+                            <a href="http://bqworks.com/slider-pro/images2/image3_large.jpg">
+                                <img class="sp-image" src="~/Content/css/images/blank.gif"
+                                     data-src="http://bqworks.com/slider-pro/images2/image3_medium.jpg"
+                                     data-retina="http://bqworks.com/slider-pro/images2/image3_large.jpg" />
+                            </a>
+                            <p class="sp-caption">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
+                        </div>
+                        <div class="sp-slide">
+                            <a href="http://bqworks.com/slider-pro/images2/image4_large.jpg">
+                                <img class="sp-image" src="~/Content/css/images/blank.gif"
+                                     data-src="http://bqworks.com/slider-pro/images2/image4_medium.jpg"
+                                     data-retina="http://bqworks.com/slider-pro/images2/image4_large.jpg" />
+                            </a>
+                            <p class="sp-caption">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                        </div>
+                        <div class="sp-slide">
+                            <a href="http://bqworks.com/slider-pro/images2/image5_large.jpg">
+                                <img class="sp-image" src="~/Content/css/images/blank.gif"
+                                     data-src="http://bqworks.com/slider-pro/images2/image5_medium.jpg"
+                                     data-retina="http://bqworks.com/slider-pro/images2/image5_large.jpg" />
+                            </a>
+                            <p class="sp-caption">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        </div>
+                        <div class="sp-slide">
+                            <a href="http://bqworks.com/slider-pro/images2/image8_large.jpg">
+                                <img class="sp-image" src="~/Content/css/images/blank.gif"
+                                     data-src="http://bqworks.com/slider-pro/images2/image8_medium.jpg"
+                                     data-retina="http://bqworks.com/slider-pro/images2/image8_large.jpg" />
+                            </a>
+                            <p class="sp-caption">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni.</p>
+                        </div>
+                        <div class="sp-slide">
+                            <a href="http://bqworks.com/slider-pro/images2/image9_large.jpg">
+                                <img class="sp-image" src="~/Content/css/images/blank.gif"
+                                     data-src="http://bqworks.com/slider-pro/images2/image9_medium.jpg"
+                                     data-retina="http://bqworks.com/slider-pro/images2/image9_large.jpg" />
+                            </a>
+                            <p class="sp-caption">Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</p>
+                        </div>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
+@section scripts{
+    <script type="text/javascript">
+        var _Title = "@ViewBag.Title";
+    </script>
+    @Scripts.Render("~/bundles/Games-GamePlayPageJs")
+}

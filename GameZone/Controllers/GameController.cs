@@ -23,7 +23,7 @@ namespace GameZone.Controllers
         }
 
         // GET: api/Game/5
-        
+
         public ReturnMessage Get(string gameCategory, int gameCount)
         {
             ReturnMessage retVal;
@@ -48,7 +48,7 @@ namespace GameZone.Controllers
             return retVal;
         }
 
-        
+
         public IList<Game> GetGames(string URL)
         {
             CategoryGames CategoryGame = new CategoryGames();
@@ -61,16 +61,67 @@ namespace GameZone.Controllers
                 client.DefaultRequestHeaders.Clear();
                 //Define request data format  
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                
+
                 var json = client.GetAsync(URL).Result;
                 CategoryGame = JsonConvert.DeserializeObject<CategoryGames>(json.Content.ReadAsStringAsync().Result);
-                
+
                 string gameString = CategoryGame.data.games.ToString();
                 var gameDict = JsonConvert.DeserializeObject<IDictionary<string, Game>>(gameString);
                 var gameList = gameDict.Values.ToList();
-               
+
                 //returning the game list to view  
                 return gameList;
+            }
+        }
+
+        public class NewSubscriber
+        {
+            public string t { get; set; }
+            public int sT { get; set; }
+        }
+        public ReturnMessage PostNewSubscriber(NewSubscriber newSubscriber)
+        {
+            GameData.Game gameVW;
+            try
+            {
+                Entities.GameContext _context = new Entities.GameContext();
+                GameData.NGSubscriptionsEntities _NGSubscriptionsEntities = new GameData.NGSubscriptionsEntities();
+                var subscriber = new Repositories.Subscriber(_context, _NGSubscriptionsEntities);
+
+                var mobileUser = subscriber.GetUserByPhoneNo(newSubscriber.t);
+                //If user subscription is expired
+                if (mobileUser == null)
+                {
+                    gameVW = new GameData.Game()
+                    {
+                        MSISDN = newSubscriber.t,
+                        SubDate = DateTime.Now,
+                        ExpDate = (newSubscriber.sT == 0) ? DateTime.Today.AddDays(7) : DateTime.Today.AddDays(1),
+                        Timestamped = DateTime.Now,
+                        Token = Guid.NewGuid().ToString().Substring(0, 7).ToUpper()
+                    };
+                    return subscriber.PostNewSubscriber(gameVW);
+                }
+                else
+                {
+                    gameVW = new GameData.Game()
+                    {
+                        MSISDN = newSubscriber.t,
+                        SubDate = DateTime.Now,
+                        ExpDate = (newSubscriber.sT == 0) ? mobileUser.ExpDate.Value.AddDays(7) : mobileUser.ExpDate.Value.AddDays(1),
+                        Timestamped = DateTime.Now,
+                        Token = mobileUser.Token
+                    };
+                    return subscriber.PostNewSubscriber(gameVW);
+                }
+            }
+            catch (Exception ex)
+            {
+                return new ReturnMessage()
+                {
+                    Success = false,
+                    Message = ex.Message
+                };
             }
         }
     }
