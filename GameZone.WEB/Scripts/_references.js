@@ -28,6 +28,7 @@
 /// <reference path="bootstrap.js" />
 /// <reference path="games/gameplay.js" />
 /// <reference path="games/index.js" />
+/// <reference path="games/list.js" />
 /// <reference path="global.js" />
 /// <reference path="home/index.js" />
 /// <reference path="jquery.validate.js" />

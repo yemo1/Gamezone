@@ -55,6 +55,13 @@ namespace GameZone.WEB
                 "~/Scripts/Games/GamePlay.js"
                       ));
 
+            bundles.Add(new ScriptBundle("~/bundles/Games-ListPageJs").Include(
+                "~/Content/js/jquery.sliderPro.min.js",
+                "~/Content/js/jquery.fancybox.pack.js",
+                "~/Content/js/games.js",
+                "~/Scripts/Games/List.js"
+                      ));
+
             bundles.Add(new ScriptBundle("~/bundles/customjs").Include(
                 "~/Content/js/site.js"
                       ));

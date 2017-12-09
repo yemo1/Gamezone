@@ -35,30 +35,30 @@ namespace GameZone.WEB.Controllers
         public ActionResult List(string t)
         {
             //Validate User Session
-            if (GameUserIdentity.LoggedInUser == null)
-            {
-                return RedirectToAction("Index", "Home");
-            }
-            Entities.GameContext _context = new Entities.GameContext();
-            NGSubscriptionsEntities _NGSubscriptionsEntities = new NGSubscriptionsEntities();
-            var subscriber = new Subscriber(_context, _NGSubscriptionsEntities);
+            //if (GameUserIdentity.LoggedInUser == null)
+            //{
+            //    return RedirectToAction("Index", "Home");
+            //}
+            //Entities.GameContext _context = new Entities.GameContext();
+            //NGSubscriptionsEntities _NGSubscriptionsEntities = new NGSubscriptionsEntities();
+            //var subscriber = new Subscriber(_context, _NGSubscriptionsEntities);
 
-            //Check for subscription Expiry
+            ////Check for subscription Expiry
 
-            //Check for Wrong Date and Time
+            ////Check for Wrong Date and Time
 
-            var s = subscriber.GetUserByPhoneNo(t);
-            if (s == null)
-            {
-                return RedirectToAction("Index", "Home");
-            }
-            else // Access Granted
-            {
-                //Implement Caching of last game category selected
-                GameUserIdentity.LoggedInUser = s.ToModel();
-                subscriber.UpdateGameUserLastAccess(t, s);
-                return View();
-            }
+            //var s = subscriber.GetUserByPhoneNo(t);
+            //if (s == null)
+            //{
+            //    return RedirectToAction("Index", "Home");
+            //}
+            //else // Access Granted
+            //{
+            //    //Implement Caching of last game category selected
+            //    GameUserIdentity.LoggedInUser = s.ToModel();
+                //subscriber.UpdateGameUserLastAccess(t, s);
+            return View();
+            //}
         }
         public ActionResult GamePlay()
         {
