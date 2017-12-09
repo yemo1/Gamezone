@@ -2,6 +2,9 @@
 var formTitle = _Title;
 
 gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
+    //Make Games Page Menu Active
+    $("#topMenu li").removeClass("current");
+    $("#gameMenu").addClass("current");
 
     $scope.obj = {};
     $scope.basicObj = {};

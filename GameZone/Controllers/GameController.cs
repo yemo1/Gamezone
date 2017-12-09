@@ -14,16 +14,42 @@ namespace GameZone.Controllers
     {
         //Hosted web API REST Service base url  
         string Baseurl = " http://funmobilelive.html5games.net/";
-
-        // GET: api/Game
-        [Route("SingleGame")]
-        public IEnumerable<string> GetSingleGame()
+        
+        /// <summary>
+        /// Method to get games regardless of category
+        /// </summary>
+        /// <param name="gameCount"></param>
+        /// <returns></returns>
+        public ReturnMessage Get(int gameCount)
         {
-            return new string[] { "value1", "value2" };
+            ReturnMessage retVal;
+            try
+            {
+                retVal = new ReturnMessage()
+                {
+                    ID = 1,
+                    Success = true,
+                    Data = GetGames($"api/portal_game/list/json/{gameCount}"),
+                    Message = ""
+                };
+            }
+            catch (Exception ex)
+            {
+                retVal = new ReturnMessage()
+                {
+                    Success = false,
+                    Message = ex.Message
+                };
+            }
+            return retVal;
         }
 
-        // GET: api/Game/5
-
+        /// <summary>
+        /// Method to get games based on category
+        /// </summary>
+        /// <param name="gameCategory"></param>
+        /// <param name="gameCount"></param>
+        /// <returns></returns>
         public ReturnMessage Get(string gameCategory, int gameCount)
         {
             ReturnMessage retVal;

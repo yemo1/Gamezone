@@ -3,6 +3,10 @@ var formTitle = _Title;
 
 gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
 
+    //Make Games Page Menu Active
+    $("#topMenu li").removeClass("current");
+    $("#gameMenu").addClass("current");
+
     $scope.basicObj = {};
     $scope.Game = {};
 
@@ -42,10 +46,11 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
     $scope.getGameData = function (selectedCat) {
         $.ajax({
             type: "GET",
-            url: apiURL + "/api/Game?gameCategory=" + selectedCat + "&gameCount=12",
+            url: apiURL + "/api/Game?gameCategory=" + selectedCat + "&gameCount=2000",
             async: false,
             success: function (data) {
                 var gameContent = "";
+
                 //Empty Div
                 $("#isotopeContainer").empty();
 
@@ -93,7 +98,7 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
         };
         sessionStorage.setItem("selectedGame", JSON.stringify(selectedGame));
         e.preventDefault();
-        window.location = "games/gameplay";
+        window.location = "/games/gameplay";
     });
 });
 

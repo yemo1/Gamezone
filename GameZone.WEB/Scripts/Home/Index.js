@@ -9,7 +9,7 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
     $scope.getGameData = function (selectedCat) {
         $.ajax({
             type: "GET",
-            url: apiURL + "/api/Game?gameCategory=" + selectedCat + "&gameCount=12",
+            url: apiURL + "/api/Game?gameCategory=" + selectedCat + "&gameCount=9",
             async: false,
             success: function (data) {
                 var gameContent = "";
