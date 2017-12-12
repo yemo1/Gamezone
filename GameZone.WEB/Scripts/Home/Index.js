@@ -60,6 +60,7 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
         };
         sessionStorage.setItem("selectedGame", JSON.stringify(selectedGame));
         e.preventDefault();
+        e.preventDefault();
         window.location = "games/gameplay";
     });
     //if ((i + 1) < 3) {
