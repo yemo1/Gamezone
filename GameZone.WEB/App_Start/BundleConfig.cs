@@ -10,7 +10,6 @@ namespace GameZone.WEB
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Content/js/jquery.min.js"
-                        //"~/Scripts/jquery-{version}.js"
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
@@ -22,9 +21,7 @@ namespace GameZone.WEB
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                "~/Content/js/bootstrap.min.js"
-                ,
-                      //"~/Scripts/bootstrap.js",
+                "~/Content/js/bootstrap.min.js",
                       "~/Scripts/respond.js"
                       ));
 

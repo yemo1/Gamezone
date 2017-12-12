@@ -13,7 +13,7 @@ namespace GameZone.Controllers
     public class GameController : ApiController
     {
         //Hosted web API REST Service base url  
-        string Baseurl = " http://funmobilelive.html5games.net/";
+        string Baseurl = "http://funmobilelive.html5games.net/";
         
         /// <summary>
         /// Method to get games regardless of category
@@ -73,8 +73,7 @@ namespace GameZone.Controllers
             }
             return retVal;
         }
-
-
+        
         public IList<Game> GetGames(string URL)
         {
             CategoryGames CategoryGame = new CategoryGames();

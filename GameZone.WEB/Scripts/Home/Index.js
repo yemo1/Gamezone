@@ -4,7 +4,7 @@ var formTitle = _Title;
 gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
 
     $scope.basicObj = {};
-
+    $scope.basicObj.sT = 0;
     //Get ApplicationUser Data from DB
     $scope.getGameData = function (selectedCat) {
         $.ajax({
@@ -127,3 +127,10 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
     };
 });
 
+//Allow Only Numbers into Tel Textboxes
+$(document).on("keypress keyup blur", ".allownumericwithoutdecimal", function (event) {
+    $(this).val($(this).val().replace(/[^\d].+/, ""));
+    if ((event.which < 48 || event.which > 57)) {
+        event.preventDefault();
+    }
+});

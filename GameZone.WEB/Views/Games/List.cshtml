@@ -4,95 +4,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@*<section class="light-blue-bg">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 col-sm-10 col-xs-10 col-md-offset-0 col-sm-offset-1 col-xs-offset-1 home-section">
-                <h1 class="blue_c">
-                    Our Recently Played Games
-                </h1>
-                <!-- <hr class="blue_line"> -->
-            </div>
-        </div>
-    </div>
-</section>*@
-@*<section class="page-section  light-blue-bg">
-    <div class="container">
-        <div class="row ">
-            <div id="example2" class="slider-pro">
-                <div class="sp-slides">
-                    <div class="sp-slide">
-                        <a href="game1.html">
-                            <img class="sp-image" src="css/images/blank.gif"
-                                 data-src="images/monkeyshooter.png"
-                                 data-retina="images/monkeyshooter.png" />
-                        </a>
-                        <p class="sp-caption">
-                            Monkey bubble Shooter
-                            <br>
-                            <span class="text-center small text-muted">Adventure</span>
-                        </p>
-                    </div>
-
-                    <div class="sp-slide">
-                        <a href="images/candyland.jpg">
-                            <img class="sp-image" src="css/images/blank.gif"
-                                 data-src="images/candyland.jpg"
-                                 data-retina="images/candyland.jpg" />
-                        </a>
-                        <p class="sp-caption">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    </div>
-
-                    <div class="sp-slide">
-                        <a href="http://bqworks.com/slider-pro/images2/image3_large.jpg">
-                            <img class="sp-image" src="css/images/blank.gif"
-                                 data-src="http://bqworks.com/slider-pro/images2/image3_medium.jpg"
-                                 data-retina="http://bqworks.com/slider-pro/images2/image3_large.jpg" />
-                        </a>
-                        <p class="sp-caption">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
-                    </div>
-
-                    <div class="sp-slide">
-                        <a href="http://bqworks.com/slider-pro/images2/image4_large.jpg">
-                            <img class="sp-image" src="css/images/blank.gif"
-                                 data-src="http://bqworks.com/slider-pro/images2/image4_medium.jpg"
-                                 data-retina="http://bqworks.com/slider-pro/images2/image4_large.jpg" />
-                        </a>
-                        <p class="sp-caption">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                    </div>
-
-                    <div class="sp-slide">
-                        <a href="http://bqworks.com/slider-pro/images2/image5_large.jpg">
-                            <img class="sp-image" src="css/images/blank.gif"
-                                 data-src="http://bqworks.com/slider-pro/images2/image5_medium.jpg"
-                                 data-retina="http://bqworks.com/slider-pro/images2/image5_large.jpg" />
-                        </a>
-                        <p class="sp-caption">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    </div>
-                    <div class="sp-slide">
-                        <a href="http://bqworks.com/slider-pro/images2/image8_large.jpg">
-                            <img class="sp-image" src="css/images/blank.gif"
-                                 data-src="http://bqworks.com/slider-pro/images2/image8_medium.jpg"
-                                 data-retina="http://bqworks.com/slider-pro/images2/image8_large.jpg" />
-                        </a>
-                        <p class="sp-caption">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni.</p>
-                    </div>
-
-                    <div class="sp-slide">
-                        <a href="http://bqworks.com/slider-pro/images2/image9_large.jpg">
-                            <img class="sp-image" src="css/images/blank.gif"
-                                 data-src="http://bqworks.com/slider-pro/images2/image9_medium.jpg"
-                                 data-retina="http://bqworks.com/slider-pro/images2/image9_large.jpg" />
-                        </a>
-                        <p class="sp-caption">Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</p>
-                    </div>
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-</section>*@
 <section class="page-section " id="game-area" style="margin-top:200px;">
     <div class="game-filter">
         <div class="container">
@@ -123,5 +34,10 @@
     <script type="text/javascript">
         var _Title = "@ViewBag.Title";
     </script>
-    @Scripts.Render("~/bundles/Games-ListPageJs")
+<script src="~/Content/js/jquery.sliderPro.min.js"></script>
+<script src="~/Content/js/jquery.fancybox.pack.js"></script>
+<script src="~/Content/js/games.js"></script>
+<script src="~/Scripts/Games/List.js"></script>
+
+    @*@Scripts.Render("~/bundles/Games-ListPageJs")*@
 }
