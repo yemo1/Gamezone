@@ -261,6 +261,7 @@
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\mole.png" />
     <Content Include="Content\images\monkeyshooter.png" />
+    <Content Include="Content\images\Pacman.gif" />
     <Content Include="Content\images\placeit.png" />
     <Content Include="Content\images\playHeader.svg" />
     <Content Include="Content\images\strip.png" />

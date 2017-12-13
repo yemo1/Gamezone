@@ -3,7 +3,7 @@ var formTitle = _Title;
 
 gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
     //Make Games Page Menu Active
-    $("#topMenu li").removeClass("current");
+    $("#menuUL li").removeClass("current");
     $("#gameMenu").addClass("current");
 
     $scope.basicObj = {};
@@ -13,7 +13,7 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
     $scope.getOtherCategoryGames = function (selectedCat) {
         $.ajax({
             type: "GET",
-            url: apiURL + "/api/Game?gameCategory=" + selectedCat + "&gameCount=10",
+            url: apiURL + "/api/Game?gameCategory=" + selectedCat + "&gameCount=5",
             async: false,
             success: function (data) {
                 var gameContent = "";
@@ -64,7 +64,8 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
     });
 
     //Game CLick Event Handler
-    $("a.OtherCatGame-link").click(function (e) {
+    $(document).on("click", "a.OtherCatGame-link", function (e) {
+    //$("a.OtherCatGame-link").click(function (e) {
         var selGameURL = $(this).attr("href");
         var selGameLongDesc = $(this).find('div.longDescription').html();
         var selGameCat = $(this).find('p.game-category').text();

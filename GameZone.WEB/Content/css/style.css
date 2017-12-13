@@ -8,10 +8,10 @@
     background-position: 50%;
 } */
 
+/*Custom*/
 .hiddenPara{
     display:none;
 }
-
 @font-face {font-family: "Avenirlight";
   src:  url(avenir-light.ttf) format("truetype");
   font-weight:100; 
@@ -70,10 +70,10 @@ header {
     z-index: 13;
 }
 .sticky{
-     background: radial-gradient(circle at top,#fff 5%,#fafbfc 50%); 
+    /* background: radial-gradient(circle at top,#fff 5%,#fafbfc 50%); */
     /*background: rgba(0, 0, 0, 0.8);*/
     position: fixed;
-    box-shadow:0 1px 15px rgba(0,0,0,.15);
+    /*box-shadow:0 1px 15px rgba(0,0,0,.15);*/
 }
 
 @keyframes fadeInDown{
@@ -127,8 +127,8 @@ header {
 }
 
 .page-section{
-    /* padding:4% 0 2%; */
-    min-height: 560px;
+     /*padding:4% 0 2%;*/ 
+    /*min-height: 560px;*/
 }
 
 .page-section.home {
@@ -191,20 +191,32 @@ main:before {
  }
 
  .filter> li.active, .filter > li:hover{
-    background-image: url(../images/candy.png);
+    /* background-image: url(../images/candy.png);
     background-size: contain;
     background-position: left;
-    background-repeat: no-repeat;    
-    transform: scale(1.3);
-    /* transition: transform ease-in-out; */
- }
+    background-repeat: no-repeat;     */
+    transform: scale(1.2);
+}
+
+.filter i {
+    margin-right: 8px;
+}
+
+.filter li.active a, .filter > li:hover a {
+    color: #fff;
+}
+
+.filter a {
+    color: #d0e8f7;
+    font-weight: 400;
+}
 
  .navbar-toggler {
     margin: 25px 5px;
  }
 
  .home-text {
-    padding: 4.5% 0;    
+    /*padding: 4.5% 0;*/    
 }
 
 .home-text h1 {
@@ -299,7 +311,7 @@ main:before {
     opacity: 1;
 }
 .hovereffect {
-    width: 100%;
+    /*width: 100%;*/
     height: 100%;
     float: left;
     overflow: hidden;
@@ -417,6 +429,7 @@ main:before {
 
 .site-footer {
     background:#0a6fb2;
+    position:relative;
     color:rgba(255,255,255,.7);
     padding:4% 0 2%;
     background-color: transparent;
@@ -446,8 +459,8 @@ main:before {
 }
 
 .links-list i {
-    float: right;
-    margin: 3px 0 0;
+    float: left;
+    margin: 5px 10px;
 }
 
 .links-list a {
@@ -462,7 +475,7 @@ main:before {
 
 .pt-10 {
     padding-top: 20px;
-    border-right: 1px solid rgba(255,255,255,.7);
+    /* border-right: 1px solid rgba(255,255,255,.7); */
 }
 
 #main-menu .navbar {
@@ -482,11 +495,11 @@ main:before {
 }
 
 #games #main-menu .navbar .nav>li>a {
-    /*color: #797979;*/
+    color: #797979;
 }
 
 .light-blue-bg{
-    padding-top: 5%;
+    padding-top: 20%;
     background: #f0f8ffd6;
 }
 
@@ -508,9 +521,9 @@ main:before {
     padding: 10px 0 10px;
 }
 
-#main-menu .navbar .nav>li>a{
-    /*color:#f1f1f1;*/
-}
+/*#main-menu .navbar .nav>li>a{
+    color:#f1f1f1;
+}*/
 
 .overlay.description p {
     font-size: 85%;
@@ -612,12 +625,17 @@ ul.features_list {
     background: #0a6fb2;
     color: #f5f5f5;
 }
+
+
  
-footer:before {
-    content:'';
-    width:100%;
-    background: #273f5b;
-    height: 15px;
+#game-area.light-blue-bg + #footer4:before {
+    content: '';
+    height: 12%;
+    top: 0;
+    position: absolute;
+    width: 100%;
+    background: aliceblue;
+    z-index: 0;
 }
 
 .game_details h4{
@@ -689,7 +707,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .site-container#games {
-        /* background: #273f5b; */
+     /* background: #273f5b; */
 }
 
 .table>thead>tr>th {
@@ -703,7 +721,26 @@ body::-webkit-scrollbar-thumb {
     padding: 8px 15px;
 }
 
+.top-filter li i {
+    margin-right: 5px;
+}
+
+.top-filter li.active a {
+    color:#ff6a00 !important;
+}
+
+
+.affix .header-wrapper {
+    min-height:60px;
+}
+
+
 @media (min-width: 768px){
+
+    .light-blue-bg{
+        padding-top: 6%;
+    }
+
     .navbar-toggler {
         display: none;
     }
@@ -725,5 +762,12 @@ body::-webkit-scrollbar-thumb {
         background-position: 0 0,100% 0;
         background-repeat: no-repeat,no-repeat;
     }
-    
+
+    #main-menu .navbar .navbar-collapse{
+        width:68%;
+    }
+
+    .right-1024> ul:last-of-type {
+        float: right;
+    }
 }

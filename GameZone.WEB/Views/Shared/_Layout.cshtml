@@ -56,14 +56,15 @@
             <div id="loader3">Please enable JS</div>
         </div>
         <div class="site-container">
-            <header id="nav" class="header header-1 animated fadeInDown sticky ">
+            <div class="header-black-bg"></div>
+            <header id="nav" class="header header-1 header-black animated fadeInDown sticky ">
                 <div class="header-wrapper">
                     <div class="container-m-30 clearfix">
                         <div class="logo-row">
                             <div class="logo-container-2">
                                 <div class="logo-2">
                                     <a href="/Home" class="clearfix">
-                                        <img src="~/Content/images/logo.png" alt="Gamezone logo">
+                                        <img src="~/Content/images/logo.png" alt="Gamezone logo"/>
                                     </a>
                                 </div>
                             </div>
@@ -79,7 +80,18 @@
                             <div id="main-menu" class="">
                                 <div class="navbar navbar-default" role="navigation">
                                     <nav class="navbar-collapse right-1024 collapse" aria-expanded="false" style="height: 0px;">
-                                        <ul class="nav navbar-nav"  id="topMenu">
+                                        <div class="filter-container isotopeFilters">
+                                            <ul class="text-center nav navbar-nav top-filter">
+                                                <li class="gameMenu parent active all collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse" id="family"><a href="#" data-filter=".family"><i class="fa fa-universal-access"></i>Family</a></li>
+                                                <li class="gameMenu parent adv  collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse" id="strategy"><a href="#" data-filter=".strategy"> <i class="fa fa-delicious"></i>Strategy</a></li>
+                                                <li class="gameMenu parent arc  collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse" id="action"><a href="#" data-filter=".action"> <i class="fa fa-codiepie"></i>Action</a></li>
+                                                <li class="gameMenu parent spo  collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse" id="cards"><a href="#" data-filter=".cards"> <i class="fa fa-steam-square"></i>Cards</a></li>
+                                                <li class="gameMenu parent car  collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse" id="sports"><a href="#" data-filter=".sports"> <i class="fa fa-soccer-ball-o"></i>Sports</a></li>
+                                                <li class="gameMenu parent car  collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse" id="adventure"><a href="#" data-filter=".adventure"> <i class="fa fa-anchor"></i>Adventure</a></li>
+                                                <li class="gameMenu parent car  collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse" id="puzzle"><a href="#" data-filter=".puzzle"> <i class="fa fa-puzzle-piece"></i>Puzzle</a></li>
+                                            </ul>
+                                        </div>
+                                        <ul class="nav navbar-nav" id="menuUL">
                                             <li class="parent current" id="homeMenu">
                                                 <a href="/Home" class=""><div class="main-menu-title">Home</div></a>
                                             </li>
@@ -88,7 +100,6 @@
                                             </li>
                                         </ul>
                                     </nav>
-
                                 </div>
                             </div>
                         </div>

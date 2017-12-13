@@ -2,15 +2,21 @@
 var formTitle = _Title;
 
 gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
+    //Make Games Page Menu Active
+    $("#menuUL li").removeClass("current");
+    $("#homeMenu").addClass("current");
 
     $scope.basicObj = {};
     $scope.basicObj.sT = 0;
     //Get ApplicationUser Data from DB
     $scope.getGameData = function (selectedCat) {
+        //Show Loading Gif
+        $("#isotopeContainer").append($("#pacMan"));
+        
         $.ajax({
             type: "GET",
-            url: apiURL + "/api/Game?gameCategory=" + selectedCat + "&gameCount=9",
-            async: false,
+            url: apiURL + "/api/Game?gameCategory=" + selectedCat + "&gameCount=8",
+            async: true,
             success: function (data) {
                 var gameContent = "";
                 //Empty Div
@@ -18,12 +24,12 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
 
                 $.each(data.Data, function (i, rec) {
                     if (rec.title != "What's My Icon?") {
-                        gameContent = "<div class='col-xs-12 col-sm-8 col-md-4 isotopeSelector block " + selectedCat + "'>";
+                        gameContent = "<div class='col-xs-12 col-sm-8 col-md-3 col-lg-3 isotopeSelector block " + selectedCat + "'>";
                         gameContent = gameContent + "<div class='service-wrap hovereffect panel clearfix animate' data-animate='bounceIn' data-duration='1.0s' data-delay='0.2s'>";
                         gameContent = gameContent + "<a href='" + rec.url + "' class='game-link'>";
                         gameContent = gameContent + "<p class='game-category hiddenPara'>" + selectedCat + "</p>";
                         gameContent = gameContent + "<div class='longDescription hiddenPara'>" + rec.long_description + "</div>";
-                        gameContent = gameContent + "<img src='" + rec.banner_medium + "' alt='Sweet Candy Land' class='img-responsive'/>";
+                        gameContent = gameContent + "<img src='" + rec.banner_small + "' alt='Sweet Candy Land' class='img-responsive' width='180' height='120'/>";
                         gameContent = gameContent + "<div class='overlay description'>";
                         gameContent = gameContent + "<h3 class='game-title'>" + rec.title + "</h3>";
                         gameContent = gameContent + "<p class='text-justify'>" + rec.short_description + "</p>";
@@ -44,10 +50,13 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
     $(".gameMenu").click(function (e) {
         var selCat = $(this).attr("id");
         $scope.getGameData(selCat);
+        e.preventDefault();
+        e.preventDefault();
     });
 
     //Game CLick Event Handler
-    $("a.game-link").click(function (e) {
+    $(document).on("click", "a.game-link", function (e) {
+    //$("a.game-link").click(function (e) {
         var selGameURL = $(this).attr("href");
         var selGameLongDesc = $(this).find('div.longDescription').html();
         var selGameCat = $(this).find('p.game-category').text();
