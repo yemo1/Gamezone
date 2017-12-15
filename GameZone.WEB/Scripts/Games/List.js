@@ -28,12 +28,12 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
 
                 $.each(data.Data, function (i, rec) {
                     if (rec.title != "What's My Icon?") {
-                        gameContent = "<div class='col-xs-12 col-sm-8 col-md-3 isotopeSelector block " + selectedCat + "'>";
+                        gameContent = "<div class='col-xs-12 col-sm-8 col-md-4 isotopeSelector block " + selectedCat + "'>";
                         gameContent = gameContent + "<div class='service-wrap hovereffect panel clearfix animate' data-animate='bounceIn' data-duration='1.0s' data-delay='0.2s'>";
                         gameContent = gameContent + "<a href='" + rec.url + "' class='game-link'>";
                         gameContent = gameContent + "<p class='game-category hiddenPara'>" + selectedCat + "</p>";
                         gameContent = gameContent + "<div class='longDescription hiddenPara'>" + rec.long_description + "</div>";
-                        gameContent = gameContent + "<img src='" + rec.banner_small + "' alt='Sweet Candy Land' class='img-responsive' width='180' height='120'/>";
+                        gameContent = gameContent + "<img src='" + rec.banner_medium + "' alt='" + rec.title + "' class='img-responsive' width='100%' height='186.45' max-width='294.98' max-height='187.7'/>";
                         gameContent = gameContent + "<div class='overlay description'>";
                         gameContent = gameContent + "<h3 class='game-title'>" + rec.title + "</h3>";
                         gameContent = gameContent + "<p class='text-justify'>" + rec.short_description + "</p>";

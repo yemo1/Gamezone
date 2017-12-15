@@ -1,6 +1,6 @@
 ﻿var gamezoneApp = angular.module('gamezoneApp', []);
-var apiURL = "http://localhost:62101";
-
+//var apiURL = "http://localhost:62101";
+var apiURL = "http://localhost:17683";
 
 //Validate Form Controls
 function isFormValid(containerId) {
