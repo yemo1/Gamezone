@@ -79,26 +79,30 @@
                         <div class="container-m-30 clearfix">
                             <div id="main-menu" class="">
                                 <div class="navbar navbar-default" role="navigation">
-                                    <nav class="navbar-collapse right-1024 collapse" aria-expanded="false" style="height: 0px;">
-                                        <div class="filter-container isotopeFilters">
-                                            <ul class="text-center nav navbar-nav top-filter">
-                                                <li class="gameMenu parent active all collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse" id="family"><a href="#" data-filter=".family"><i class="fa fa-universal-access"></i>Family</a></li>
-                                                <li class="gameMenu parent adv  collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse" id="strategy"><a href="#" data-filter=".strategy"> <i class="fa fa-delicious"></i>Strategy</a></li>
-                                                <li class="gameMenu parent arc  collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse" id="action"><a href="#" data-filter=".action"> <i class="fa fa-codiepie"></i>Action</a></li>
-                                                <li class="gameMenu parent spo  collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse" id="cards"><a href="#" data-filter=".cards"> <i class="fa fa-steam-square"></i>Cards</a></li>
-                                                <li class="gameMenu parent car  collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse" id="sports"><a href="#" data-filter=".sports"> <i class="fa fa-soccer-ball-o"></i>Sports</a></li>
-                                                <li class="gameMenu parent car  collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse" id="adventure"><a href="#" data-filter=".adventure"> <i class="fa fa-anchor"></i>Adventure</a></li>
-                                                <li class="gameMenu parent car  collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse" id="puzzle"><a href="#" data-filter=".puzzle"> <i class="fa fa-puzzle-piece"></i>Puzzle</a></li>
+                                    <nav class="navbar-collapse  collapse row" aria-expanded="false" style="height: 0px;">
+                                        <div class="col-md-2 col-md-offset-3">
+                                            <ul class="nav navbar-nav" id="menuUL">
+                                                <li class="parent current" id="homeMenu">
+                                                    <a href="/Home" class=""><div class="main-menu-title">Home</div></a>
+                                                </li>
+                                                <li class="parent" id="gameMenu">
+                                                    <a href="/Games/List" class=""><div class="main-menu-title">Games </div></a>
+                                                </li>
                                             </ul>
                                         </div>
-                                        <ul class="nav navbar-nav" id="menuUL">
-                                            <li class="parent current" id="homeMenu">
-                                                <a href="/Home" class=""><div class="main-menu-title">Home</div></a>
-                                            </li>
-                                            <li class="parent" id="gameMenu">
-                                                <a href="/Games/List" class=""><div class="main-menu-title">Games </div></a>
-                                            </li>
-                                        </ul>
+                                        <div class="col-md-7">
+                                            <div class="filter-container isotopeFilters">
+                                                <ul class="text-center nav navbar-nav top-filter">
+                                                    <li class="gameMenu parent active all collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse" id="family"><a href="#" data-filter=".family"><i class="fa fa-universal-access"></i>Family</a></li>
+                                                    <li class="gameMenu parent adv  collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse" id="strategy"><a href="#" data-filter=".strategy"> <i class="fa fa-delicious"></i>Strategy</a></li>
+                                                    <li class="gameMenu parent arc  collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse" id="action"><a href="#" data-filter=".action"> <i class="fa fa-codiepie"></i>Action</a></li>
+                                                    <li class="gameMenu parent spo  collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse" id="cards"><a href="#" data-filter=".cards"> <i class="fa fa-steam-square"></i>Cards</a></li>
+                                                    <li class="gameMenu parent car  collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse" id="sports"><a href="#" data-filter=".sports"> <i class="fa fa-soccer-ball-o"></i>Sports</a></li>
+                                                    <li class="gameMenu parent car  collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse" id="adventure"><a href="#" data-filter=".adventure"> <i class="fa fa-anchor"></i>Adventure</a></li>
+                                                    <li class="gameMenu parent car  collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse" id="puzzle"><a href="#" data-filter=".puzzle"> <i class="fa fa-puzzle-piece"></i>Puzzle</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>                                       
                                     </nav>
                                 </div>
                             </div>

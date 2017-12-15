@@ -6,17 +6,10 @@
 
 @section style{
     <style>
-        .top-filter {
-            display: none;
-        }
-
-        .affix .top-filter {
-            display: block;
-        }
-
         .game-container {
             display: block;
-            height: 30em;
+            height: 30em;            
+            position: relative;
         }
 
         #play.play {
@@ -36,17 +29,20 @@
 
 
 
-<section class="page-section home">
+<section class="page-section pale-white home">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-5 col-md-5 col-xs-10 col-md-offset-1 col-xs-offset-1 col-sm-offset-1 home-text">
-                <h1 class="main-header">Suscribe for fun &  <strike>cool</strike> awesome games!</h1>
-                <h5 class="text-justify ">
-                    Play over 500 games on GameZone with just a single button click. Unleash over 500 fun, exciting and addictive games on GameZone.
+            <div class="col-sm-6 col-md-5 col-xs-12 col-md-offset-1  home-text">
+                <h1 class="main-header">Stay engaged with fun & <strike>cool</strike> awesome games!</h1>
+                <h5 class="text-justify "> 
+                    @*Play over 500 games on GameZone with just a single button click.
+    Unleash over 500 fun, exciting and addictive games on GameZone. Just one click away*@               
+                     Gamezone ng is great play here you can play awesome HTML5 games available. Our catalogue is often updated with new games to make sure you check back frequently!
                 </h5>
-                <a class="btn btn-lg  smooth-scroll scroll-down animate" data-animate="wobble" data-duration="1.0s" data-delay="0.4s" data-iteration="2" type="button" data-toggle="modal" data-target="#exampleModal">Subscribe for games</a>
+                <a class="btn btn-lg  smooth-scroll scroll-down animate" href="#game-area" data-animate="wobble" data-duration="1.0s" data-delay="0.4s" data-iteration="2" type="button">Play games <i class="fa fa-play-circle"></i></a>
+                @*data-toggle="modal" data-target="#exampleModal"*@
             </div>
-            <div class="col-sm-5 col-md-6 col-xs-12 ">
+            <div class="col-sm-6 col-md-6 col-xs-12  ">
                 <img src="~/Content/images/GameListHeroLeftLarge.png" alt="monkey bubble shooter characters">
                 <!-- GameListHeroLeftLarge.png -->
             </div>
@@ -56,20 +52,24 @@
 <section class="page-section pale-white trial">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-12  col-xs-12 col-md-offset-1 col-md-7">
+            @*<div class="col-sm-12 col-md-12 col-xs-12 hidden-md hidden-lg ">
+                <h1 class="main-header text-center">Enjoy Our free game!!</h1>                
+            </div>*@
+            <div class="col-sm-12  col-xs-12  col-md-7">
+                <div class="panel-heading orange-bg"  id="free-play">
+                    <h1 class="freegame-heading"> <i class="fa fa-play"></i>&nbsp; &nbsp; PLAY OUR FREE GAME</h1>
+                </div>
                 <div class="panel-body game-container">
                     <iframe width="100%" height="100%" id="bonusGame" src="http://funmobilelive.html5games.net/serve?portal_id=4774417016029184&game_id=6066710801022976&branding_id=5848139915329536&ad_id=5284106556407808&portal_localization_id=4539491968614400&clear_cache=yes"></iframe>
-                    @*<a href="" class="" data-toggle="modal" data-target="#exampleModal">
-                        <img src="~/Content/images/whack-a-mole-large.png" alt="" class="animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.2s">
-                                                </a>*@
                 </div>
             </div>
-            <div class="col-sm-5 col-md-3 col-xs-12">
-                <h2 class="main-header">Bonus Game!</h2>
+            <div class=" col-md-5 col-xs-12">
+                <h1 class="main-header top-space">Subcribe for More!</h1>
                 <h5 class="text-justify ">
-                    Try our FREE Game. We have over 500 other interesting games. To have it all, just click <a data-toggle="modal" data-target="#exampleModal">here</a> to subscribe.
+                    Get so much more by subscribing a token for loads of interesting games. We have the best Arcade, Sports, Family and Puzzle games! You are just one click away to having it all.
                 </h5>
-                <ul class="features_list">
+                <a class="btn btn-lg animate" data-animate="wobble" data-duration="1.0s" data-delay="0.4s" data-iteration="2" type="button" data-toggle="modal" data-target="#exampleModal">Subscribe for our games </a>
+                @*<ul class="features_list">
                     <li>
                         <span class="icons"><i class="fa fa-smile-o blue_c"></i></span>
                         <span class="text"> Easy and Fun</span>
@@ -78,7 +78,7 @@
                         <span class="icons"><i class="fa fa-star blue_c"></i></span>
                         <span class="text"> Ranks on Leaderboards </span>
                     </li>
-                </ul>
+                </ul>*@
             </div>
         </div>
         <!-- Modal -->
@@ -131,30 +131,31 @@
     </div>
 </section>
 <section class="page-section " id="game-area">
-    <div class="game-filter">
-        @* <div class="container">
-                <div class="row">
-                    <div class="col-md-10 col-md-offset-1">
-                        <div class="filter-container isotopeFilters">
-                            <ul class="list-inline filter text-center">
-                                <li class="active gameMenu" id="family"><a href="#" data-filter=".family">Family</a></li>
-                                <li class="gameMenu" id="strategy"><a href="#" data-filter=".strategy">Strategy</a></li>
-                                <li class="gameMenu" id="action"><a href="#" data-filter=".action">Action</a></li>
-                                <li class="gameMenu" id="cards"><a href="#" data-filter=".cards">Cards</a></li>
-                                <li class="gameMenu" id="sports"><a href="#" data-filter=".sports">Sports</a></li>
-                                <li class="gameMenu" id="adventure"><a href="#" data-filter=".adventure">Adventure</a></li>
-                                <li class="gameMenu" id="puzzle"><a href="#" data-filter=".puzzle">Puzzle</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>*@
-    </div>
+   @*  <div class="game-filter">
+            <div class="container">
+               <div class="row">
+                   <div class="col-md-10 col-md-offset-1">
+                       <div class="filter-container isotopeFilters">
+                           <ul class="list-inline filter text-center">
+                               <li class="active gameMenu" id="family"><a href="#" data-filter=".family">Family</a></li>
+                               <li class="gameMenu" id="strategy"><a href="#" data-filter=".strategy">Strategy</a></li>
+                               <li class="gameMenu" id="action"><a href="#" data-filter=".action">Action</a></li>
+                               <li class="gameMenu" id="cards"><a href="#" data-filter=".cards">Cards</a></li>
+                               <li class="gameMenu" id="sports"><a href="#" data-filter=".sports">Sports</a></li>
+                               <li class="gameMenu" id="adventure"><a href="#" data-filter=".adventure">Adventure</a></li>
+                               <li class="gameMenu" id="puzzle"><a href="#" data-filter=".puzzle">Puzzle</a></li>
+                           </ul>
+                       </div>
+                   </div>
+               </div>
+           </div>
+    </div>*@
     <div class="container">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <div class="row">
                     <div id="isotopeContainer" class="isotopeContainer" style="text-align:center;">
+                                
                     </div>
                 </div>
             </div>
