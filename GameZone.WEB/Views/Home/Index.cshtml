@@ -17,8 +17,9 @@
             height: 600px !important;
             left: 0 !important;
         }
-        .container{
-            width:100%;
+
+        #ajaxbar {
+            background:#b2d3e6;
         }
     </style>
 }
@@ -33,34 +34,45 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-6 col-md-5 col-xs-12 col-md-offset-1  home-text">
-                <h1 class="main-header">Stay engaged with fun & <strike>cool</strike> awesome games!</h1>
+                <h1 class="main-header">Play fun & <strike>cool</strike><br /> awesome games!</h1>
                 <h5 class="text-justify "> 
                     @*Play over 500 games on GameZone with just a single button click.
     Unleash over 500 fun, exciting and addictive games on GameZone. Just one click away*@               
-                     Gamezone ng is great play here you can play awesome HTML5 games available. Our catalogue is often updated with new games to make sure you check back frequently!
+                     Play awesome HTML5 games available on your smartphones, tablet or PC. Our catalogue is often updated with new games to keep you engaged!
                 </h5>
-                <a class="btn btn-lg  smooth-scroll scroll-down animate" href="#game-area" data-animate="wobble" data-duration="1.0s" data-delay="0.4s" data-iteration="2" type="button">Play games <i class="fa fa-play-circle"></i></a>
+                <a class="btn bitsumishi smooth-scroll scroll-down animate" href="http://funmobilelive.html5games.net/serve?portal_id=4774417016029184&game_id=6066710801022976&branding_id=5848139915329536&ad_id=5284106556407808&portal_localization_id=4539491968614400&clear_cache=yes" data-animate="wobble" data-duration="1.0s" data-delay="0.4s" data-iteration="2" type="button">try our games <i class="fa fa-play-circle"></i></a>
                 @*data-toggle="modal" data-target="#exampleModal"*@
             </div>
             <div class="col-sm-6 col-md-6 col-xs-12  ">
-                <img src="~/Content/images/GameListHeroLeftLarge.png" alt="monkey bubble shooter characters">
+                
                 <!-- GameListHeroLeftLarge.png -->
+                <div id="slideshow">
+                    <div>
+                        <img src="~/Content/images/GameListHeroLeftLarge.png" alt="monkey bubble shooter characters">
+                    </div>
+                    <div>
+                        <img src="~/Content/images/cards.png" alt="Cards">
+                    </div>
+                   <div>
+                       <img src="~/Content/images/frame_01_normal.png" alt=" Masked bomber" />
+                   </div>
+                </div>
             </div>
         </div>
     </div>
 </section>
-<section class="page-section pale-white trial">
+<section class="page-section pale-white trial hide">
     <div class="container-fluid">
         <div class="row">
             @*<div class="col-sm-12 col-md-12 col-xs-12 hidden-md hidden-lg ">
                 <h1 class="main-header text-center">Enjoy Our free game!!</h1>                
             </div>*@
-            <div class="col-sm-12  col-xs-12  col-md-7">
+            <div class="col-sm-12  col-xs-12  col-md-6 col-md-offset-1">
                 <div class="panel-heading orange-bg"  id="free-play">
-                    <h1 class="freegame-heading"> <i class="fa fa-play"></i>&nbsp; &nbsp; PLAY OUR FREE GAME</h1>
+                    <h3 class="freegame-heading"> <i class="fa fa-play"></i>&nbsp; &nbsp; PLAY OUR FREE GAME</h3>
                 </div>
                 <div class="panel-body game-container">
-                    <iframe width="100%" height="100%" id="bonusGame" src="http://funmobilelive.html5games.net/serve?portal_id=4774417016029184&game_id=6066710801022976&branding_id=5848139915329536&ad_id=5284106556407808&portal_localization_id=4539491968614400&clear_cache=yes"></iframe>
+                    <iframe width="100%" height="100%" style="background:#b2d3e6!important;" id="bonusGame" src="http://funmobilelive.html5games.net/serve?portal_id=4774417016029184&game_id=6066710801022976&branding_id=5848139915329536&ad_id=5284106556407808&portal_localization_id=4539491968614400&clear_cache=yes"></iframe>
                 </div>
             </div>
             <div class=" col-md-5 col-xs-12">
@@ -68,68 +80,59 @@
                 <h5 class="text-justify ">
                     Get so much more by subscribing a token for loads of interesting games. We have the best Arcade, Sports, Family and Puzzle games! You are just one click away to having it all.
                 </h5>
-                <a class="btn btn-lg animate" data-animate="wobble" data-duration="1.0s" data-delay="0.4s" data-iteration="2" type="button" data-toggle="modal" data-target="#exampleModal">Subscribe for our games </a>
-                @*<ul class="features_list">
-                    <li>
-                        <span class="icons"><i class="fa fa-smile-o blue_c"></i></span>
-                        <span class="text"> Easy and Fun</span>
-                    </li>
-                    <li>
-                        <span class="icons"><i class="fa fa-star blue_c"></i></span>
-                        <span class="text"> Ranks on Leaderboards </span>
-                    </li>
-                </ul>*@
+                <a class="btn animate" data-animate="wobble" data-duration="1.0s" data-delay="0.4s" data-iteration="2" type="button" data-toggle="modal" data-target="#exampleModal">Subscribe for our games </a>
+              
             </div>
-        </div>
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        <h3 class="modal-title text-center" id="exampleModalLabel">Subscribe for Games</h3>
+        </div>       
+    </div>
+</section>
+ <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="modal-title text-center" id="exampleModalLabel">Subscribe for Games</h3>
+            </div>
+            <div class="modal-body">
+                <form class="fomr-horizontal">
+                    <div class="form-group row">
+                        <div class="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
+                            <input type="text" class="form-control allownumericwithoutdecimal" id="recipient-name" placeholder="kindly enter your phone number" ng-model="basicObj.t">
+                        </div>
                     </div>
-                    <div class="modal-body">
-                        <form class="fomr-horizontal">
-                            <div class="form-group row">
-                                <div class="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
-                                    <input type="text" class="form-control allownumericwithoutdecimal" id="recipient-name" placeholder="kindly enter your phone number" ng-model="basicObj.t">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
-                                    <table>
-                                        <tr>
-                                            <td style="padding:10px;">
-                                                <span>N50 Weekly</span>
-                                            </td>
-                                            <td style="padding:10px;">
-                                                <input type="radio" name="subType" id="subType1" value="0" ng-model="basicObj.sT">
-                                            </td>
-                                            <td style="padding:10px;">
-                                                <span style="margin-right:10px;">N10 Daily</span>
-                                            </td>
-                                            <td style="padding:10px;">
-                                                <input type="radio" name="subType" id="subType2" value="1" ng-model="basicObj.sT">
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-6 col-sm-offset-3  col-xs-6 col-xs-offset-3">
-                                    <button class="btn btn-primary btn-block disabledCtrl" ng-click="SaveNewSubscriber()"> Subscribe</button>
-                                </div>
-                            </div>
-                        </form>
+                    <div class="form-group row">
+                        <div class="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
+                            <table>
+                                <tr>
+                                    <td style="padding:10px;">
+                                        <span>N50 Weekly</span>
+                                    </td>
+                                    <td style="padding:10px;">
+                                        <input type="radio" name="subType" id="subType1" value="0" ng-model="basicObj.sT">
+                                    </td>
+                                    <td style="padding:10px;">
+                                        <span style="margin-right:10px;">N10 Daily</span>
+                                    </td>
+                                    <td style="padding:10px;">
+                                        <input type="radio" name="subType" id="subType2" value="1" ng-model="basicObj.sT">
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
-                </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6 col-sm-offset-3  col-xs-6 col-xs-offset-3">
+                            <button class="btn btn-primary btn-block disabledCtrl" ng-click="SaveNewSubscriber()"> Subscribe</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-</section>
+</div>
 <section class="page-section " id="game-area">
    @*  <div class="game-filter">
             <div class="container">
@@ -152,17 +155,26 @@
     </div>*@
     <div class="container">
         <div class="row">
-            <div class="col-md-10 col-md-offset-1">
+            <div class="col-md-12 title">
+                <div class="panel-heading panel">
+                    <h3 class="bitsumishi blue_c"> <i class="fa fa-gift "></i>NEW GAMES</h3>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="game-loader text-center">
+                    <img src="~/Content/images/logo.png" alt="Gamezone logo" />
+                </div>  
+            </div>
+            <div class="col-md-12">
                 <div class="row">
-                    <div id="isotopeContainer" class="isotopeContainer" style="text-align:center;">
-                                
+                    <div id="isotopeContainer" class="isotopeContainer text-center">                          
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-5 col-md-5 col-xs-10 col-md-offset-1 col-xs-offset-1 col-sm-offset-1 home-text">
-                <a href="/Games/List" class="btn btn-lg smooth-scroll scroll-down animate" data-animate="wobble" data-duration="1.0s" data-delay="0.4s" data-iteration="2" type="button">View All</a>
+            <div class="col-md-12 text-center">
+                <a href="/Games/List" id="more-btn" class="btn  smooth-scroll scroll-down animate orange-btn" type="button">View All </a>
             </div>
         </div>
     </div>
@@ -174,8 +186,11 @@
     <script type="text/javascript">
         var _Title = "@ViewBag.Title";
     </script>
+
+    
     <script src="~/Content/js/notify.min.js"></script>
     <script src="~/Scripts/Home/Index.js"></script>
+    <script src="~/Content/js/jquery.lazyload.min.js"></script>
 
     @*@Scripts.Render("~/bundles/Home-IndexPageJs")*@
 }

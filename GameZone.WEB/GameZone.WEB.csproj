@@ -327,9 +327,6 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="ApplicationInsights.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Scripts\angular.min.js.map" />
     <Content Include="Content\css\45f795e2729c54a39bb096a0feb5c212.ttf" />
     <Content Include="Content\css\avenir-light.ttf" />
@@ -425,6 +422,9 @@
       <Project>{bc9b7218-01c0-42fd-be15-d30e21807093}</Project>
       <Name>GameZone.VIEWMODEL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
