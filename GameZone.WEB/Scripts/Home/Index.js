@@ -32,7 +32,7 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
                         gameContent = gameContent + "<div class='lazy'>";
                         gameContent = gameContent + "<img data-original='" + rec.banner_medium + "' alt='" + rec.title + "' class='img-responsive' width='100%' height='186.45' max-width='294.98' max-height='187.7'/>";
                         gameContent = gameContent + "</div><div class='game-description'>";
-                        gameContent = gameContent + "<a class='pull-right btn  bitsumishi' href'" + rec.url + "'>play</a><h5 class='game-title pull-left'>" + rec.title + "</h5>";
+                        gameContent = gameContent + "<a class='pull-right btn  bitsumishi' href'" + rec.url + "'>play</a><h5 class='game-title pull-left'>" + rec.title + "<br> <span class='text-muted small'>30 played</span></h5>";
                         //gameContent = gameContent + "<p class='text-justify'>" + rec.short_description + "</p>";
                         gameContent = gameContent + "</div></a></div></div>";
                         $("#isotopeContainer").append(gameContent);
