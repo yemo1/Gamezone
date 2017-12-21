@@ -11,8 +11,31 @@ $(document).ready(function(){
                }
     });
 
-    $(window).on('load',function(){
-      $('#exampleModal').modal('show');
+    $('body').on('click', '#free-play', function () {
+        console.log("fia!!");
+        $(this).hide().remove();
+    });
+
+    //$(window).on('load',function(){
+    //  $('#exampleModal').modal('show');
+    //});
+
+    $("#slideshow > div:gt(0)").hide();
+
+    setInterval(function () {
+        $('#slideshow > div:first')
+          .fadeOut(1000)
+          .next()
+          .fadeIn(1000)
+          .end()
+          .appendTo('#slideshow');
+    }, 3000);
+
+    $('body').find('.lazy .img-responsive').lazyload({});
+
+    $('body').on('click', '#free-play', function () {
+        $(this).hide().remove();
+        $('body').find('.game-container').addClass('play');
     });
 
     $('.animate').scrolla({

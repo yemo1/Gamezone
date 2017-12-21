@@ -11,8 +11,8 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
     //Get ApplicationUser Data from DB
     $scope.getGameData = function (selectedCat) {
         //Show Loading Gif
-        $("#isotopeContainer").append($("#pacMan"));
-        
+        $("body").find('.game-loader').addClass('show').removeClass('hide');
+
         $.ajax({
             type: "GET",
             url: apiURL + "/api/Game?gameCategory=" + selectedCat + "&gameCount=1000",
@@ -21,22 +21,23 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
                 var gameContent = "";
                 //Empty Div
                 $("#isotopeContainer").empty();
-
+                $("body").find('.game-loader').addClass('hide').removeClass('show');
                 $.each(data.Data, function (i, rec) {
                     if (rec.title != "What's My Icon?") {
-                        gameContent = "<div class='col-sm-2 isotopeSelector block " + selectedCat + "'>";
-                        gameContent = gameContent + "<div class='service-wrap hovereffect clearfix animate' data-animate='bounceIn' data-duration='1.0s' data-delay='0.2s'>";
+                        gameContent = "<div class='col-sm-2 col-xs-6 isotopeSelector block " + selectedCat + "'>";
+                        gameContent = gameContent + "<div class='service-wrap hovereffect panel clearfix animate' data-animate='bounceIn' data-duration='1.0s' data-delay='0.2s'>";
                         gameContent = gameContent + "<a href='" + rec.url + "' class='game-link'>";
-                        gameContent = gameContent + "<p class='game-category hiddenPara'>" + selectedCat + "</p>";
-                        //#region Don't take this line off, its for data transfer purposes
-                        //The hiddenPara class is meant to keep them hidden
-                            gameContent = gameContent + "<div class='longDescription hiddenPara'>" + rec.long_description + "</div>";
-                            gameContent = gameContent + "<img src='" + rec.banner_medium + "' alt='" + rec.title + "' class='img-responsive' width='100%' height='186.45' max-width='294.98' max-height='187.7'/>";
-                        //#end region
-                        gameContent = gameContent + "<h5 class='game-title'>" + rec.title + "</h5>";
-                        gameContent = gameContent + "</a></div></div>";
+                        //gameContent = gameContent + "<p class='game-category hiddenPara'>" + selectedCat + "</p>";
+                        //gameContent = gameContent + "<div class='longDescription hiddenPara'>" + rec.long_description + "</div>";
+                        gameContent = gameContent + "<div class='lazy'>";
+                        gameContent = gameContent + "<img data-original='" + rec.banner_medium + "' alt='" + rec.title + "' class='img-responsive' width='100%' height='186.45' max-width='294.98' max-height='187.7'/>";
+                        gameContent = gameContent + "</div><div class='game-description'>";
+                        gameContent = gameContent + "<a class='pull-right btn  bitsumishi' href'" + rec.url + "'>play</a><h5 class='game-title pull-left'>" + rec.title + "<br> <span class='text-muted small'>30 played</span></h5>";
+                        //gameContent = gameContent + "<p class='text-justify'>" + rec.short_description + "</p>";
+                        gameContent = gameContent + "</div></a></div></div>";
                         $("#isotopeContainer").append(gameContent);
-                        gameContent = "";
+                        //gameContent = "";
+                        $('body').find('.lazy .img-responsive').lazyload({});
                     }
                 });
             },

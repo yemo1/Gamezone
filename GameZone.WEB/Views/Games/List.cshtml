@@ -4,8 +4,8 @@
 }
 
 @section style{
-<link rel="stylesheet" type="text/css" href="~/Content/js/fancybox/jquery.fancybox.css" media="screen" />
-<link rel="stylesheet" href="~/Content/css/slider-pro.min.css" />
+
+    <link href="~/Content/css/slider-pro.min.css" rel="stylesheet" />
     <style>
         header {
             position: fixed;
@@ -16,106 +16,96 @@
     </style>
 }
 
-<section class="light-blue-bg">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 col-sm-10 col-xs-10 col-md-offset-0 col-sm-offset-1 col-xs-offset-1 home-section">
-                <h1 class="blue_c">
-                    Our Most Played Games
-                </h1>
-                <!-- <hr class="blue_line"> -->
-            </div>
-        </div>
-    </div>
-</section>
-<section class="page-section  light-blue-bg">
-    <div class="container">
-        <div class="row ">
-            <div id="example2" class="slider-pro">
-                <div class="sp-slides">
-                    <div class="sp-slide">
-                        <a href="game1.html">
-                            <img class="sp-image" src="~/Content/css/images/blank.gif"
-                                 data-src="~/Content/images/monkeyshooter.png"
-                                 data-retina="~/Content/images/monkeyshooter.png" />
-                        </a>
-                        <p class="sp-caption">
-                            Monkey bubble Shooter
-                            <br>
-                            <span class="text-center small text-muted">Adventure</span>
-                        </p>
+@*<header id="nav" class="header header-1 animated fadeInDown sticky ">
+        <div class="header-wrapper">
+            <div class="container-m-30 clearfix">
+                <div class="logo-row">
+                    <div class="logo-container-2">
+                        <div class="logo-2">
+                            <a href="index.html" class="clearfix">
+                                <img src="images/logo.png" alt="Gamezone logo">
+                            </a>
+                        </div>
                     </div>
-                    <div class="sp-slide">
-                        <a href="~/Content/images/candyland.jpg">
-                            <img class="sp-image" src="~/Content/css/images/blank.gif"
-                                 data-src="~/Content/images/candyland.jpg"
-                                 data-retina="~/Content/images/candyland.jpg" />
-                        </a>
-                        <p class="sp-caption">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    </div>
-
-                    <div class="sp-slide">
-                        <a href="http://bqworks.com/slider-pro/images2/image3_large.jpg">
-                            <img class="sp-image" src="~/Content/css/images/blank.gif"
-                                 data-src="http://bqworks.com/slider-pro/images2/image3_medium.jpg"
-                                 data-retina="http://bqworks.com/slider-pro/images2/image3_large.jpg" />
-                        </a>
-                        <p class="sp-caption">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
-                    </div>
-
-                    <div class="sp-slide">
-                        <a href="http://bqworks.com/slider-pro/images2/image4_large.jpg">
-                            <img class="sp-image" src="~/Content/css/images/blank.gif"
-                                 data-src="http://bqworks.com/slider-pro/images2/image4_medium.jpg"
-                                 data-retina="http://bqworks.com/slider-pro/images2/image4_large.jpg" />
-                        </a>
-                        <p class="sp-caption">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                    </div>
-
-                    <div class="sp-slide">
-                        <a href="http://bqworks.com/slider-pro/images2/image5_large.jpg">
-                            <img class="sp-image" src="~/Content/css/images/blank.gif"
-                                 data-src="http://bqworks.com/slider-pro/images2/image5_medium.jpg"
-                                 data-retina="http://bqworks.com/slider-pro/images2/image5_large.jpg" />
-                        </a>
-                        <p class="sp-caption">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    </div>
-                    <div class="sp-slide">
-                        <a href="http://bqworks.com/slider-pro/images2/image8_large.jpg">
-                            <img class="sp-image" src="~/Content/css/images/blank.gif"
-                                 data-src="http://bqworks.com/slider-pro/images2/image8_medium.jpg"
-                                 data-retina="http://bqworks.com/slider-pro/images2/image8_large.jpg" />
-                        </a>
-                        <p class="sp-caption">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni.</p>
-                    </div>
-                    <div class="sp-slide">
-                        <a href="http://bqworks.com/slider-pro/images2/image9_large.jpg">
-                            <img class="sp-image" src="~/Content/css/images/blank.gif"
-                                 data-src="http://bqworks.com/slider-pro/images2/image9_medium.jpg"
-                                 data-retina="http://bqworks.com/slider-pro/images2/image9_large.jpg" />
-                        </a>
-                        <p class="sp-caption">Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</p>
+                    <div class="menu-btn-respons-container">
+                        <button id="menu-btn" type="button" class="navbar-toggle btn-navbar collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse">
+                            <span aria-hidden="true" class="icon_menu hamb-mob-icon"><i class="fa fa-bars"></i></span>
+                        </button>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
+            <div class="main-menu-container">
+                <div class="container-m-30 clearfix">
+                    <div id="main-menu" class="">
+                        <div class="navbar navbar-default" role="navigation">
+                            <nav class="navbar-collapse right-1024 collapse" aria-expanded="false" style="height: 0px;">
+                                <div class="filter-container isotopeFilters">
+                                    <ul class=" text-center nav navbar-nav top-filter">
+                                        <li class="parent active all collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse"><a href="#" data-filter="*"><i class="fa fa-universal-access"></i>All games</a></li>
+                                        <li class="parent adv  collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse"><a href="#" data-filter=".adventure"> <i class="fa fa-puzzle-piece"></i>Adventure</a></li>
+                                        <li class="parent arc  collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse"><a href="#" data-filter=".arcade"> <i class="fa fa-codiepie"></i>Arcade</a></li>
+                                        <li class="parent spo  collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse"><a href="#" data-filter=".sports"> <i class="fa fa-soccer-ball-o"></i>Sports</a></li>
+                                        <li class="parent car  collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse"><a href="#" data-filter=".card"> <i class="fa fa-delicious"></i>Card</a></li>
+                                    </ul>
+                                </div>
+                                <ul class="nav navbar-nav ">
+                                    <li class="parent ">
+                                        <a href="index.html" class=""><div class="main-menu-title">Home</div></a>
+                                    </li>
+                                    <li class="parent current ">
+                                        <a href="games.html" class=""><div class="main-menu-title">Games </div></a>
 
+                                    </li>
+                                </ul>
+                            </nav>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </header>*@
 <section class="page-section " id="game-area" style="margin-top:100px;">
+    @* <div class="game-filter">
+            <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="filter-container isotopeFilters">
+                    <ul class="list-inline filter text-center">
+                        <li class="active gameMenu" id="family"><a href="#" data-filter=".family">Family</a></li>
+                        <li class="gameMenu" id="strategy"><a href="#" data-filter=".strategy">Strategy</a></li>
+                        <li class="gameMenu" id="action"><a href="#" data-filter=".action">Action</a></li>
+                        <li class="gameMenu" id="cards"><a href="#" data-filter=".cards">Cards</a></li>
+                        <li class="gameMenu" id="sports"><a href="#" data-filter=".sports">Sports</a></li>
+                        <li class="gameMenu" id="adventure"><a href="#" data-filter=".adventure">Adventure</a></li>
+                        <li class="gameMenu" id="puzzle"><a href="#" data-filter=".puzzle">Puzzle</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+            </div>
+        </div>*@
     <div class="container">
         <div class="row">
             <div id="isotopeContainer" class="isotopeContainer" style="text-align:center;">
             </div>
         </div>
+        @*<div class="row">
+            <div class="col-sm-5 col-md-5 col-xs-10 col-md-offset-1 col-xs-offset-1 col-sm-offset-1 home-text">
+                <a href="/Games/List" class="btn btn-lg smooth-scroll scroll-down animate" data-animate="wobble" data-duration="1.0s" data-delay="0.4s" data-iteration="2" type="button">View All</a>
+            </div>
+        </div>*@
     </div>
 </section>
 @section scripts{
     <script type="text/javascript">
         var _Title = "@ViewBag.Title";
     </script>
-    <script src="~/Content/js/jquery.sliderPro.min.js"></script>
+    @*<script src="~/Content/js/jquery.sliderPro.min.js"></script>
     <script src="~/Content/js/jquery.fancybox.pack.js"></script>
-    <script src="~/Content/js/games.js"></script>
+    <script src="~/Content/js/games.js"></script>*@
     <script src="~/Scripts/Games/List.js"></script>
+
+    @*@Scripts.Render("~/bundles/Games-ListPageJs")*@
 }
