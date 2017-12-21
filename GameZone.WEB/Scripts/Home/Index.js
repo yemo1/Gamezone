@@ -15,7 +15,7 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
         
         $.ajax({
             type: "GET",
-            url: apiURL + "/api/Game?gameCategory=" + selectedCat + "&gameCount=60",
+            url: apiURL + "/api/Game?gameCategory=" + selectedCat + "&gameCount=1000",
             async: true,
             success: function (data) {
                 var gameContent = "";
@@ -27,12 +27,13 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
                         gameContent = "<div class='col-sm-2 isotopeSelector block " + selectedCat + "'>";
                         gameContent = gameContent + "<div class='service-wrap hovereffect clearfix animate' data-animate='bounceIn' data-duration='1.0s' data-delay='0.2s'>";
                         gameContent = gameContent + "<a href='" + rec.url + "' class='game-link'>";
-                        //gameContent = gameContent + "<p class='game-category hiddenPara'>" + selectedCat + "</p>";
-                        //gameContent = gameContent + "<div class='longDescription hiddenPara'>" + rec.long_description + "</div>";
-                        gameContent = gameContent + "<img src='" + rec.banner_medium + "' alt='" + rec.title + "' class='img-responsive' width='100%' height='186.45' max-width='294.98' max-height='187.7'/>";
-                        //gameContent = gameContent + "<div class='overlay description'>";
+                        gameContent = gameContent + "<p class='game-category hiddenPara'>" + selectedCat + "</p>";
+                        //#region Don't take this line off, its for data transfer purposes
+                        //The hiddenPara class is meant to keep them hidden
+                            gameContent = gameContent + "<div class='longDescription hiddenPara'>" + rec.long_description + "</div>";
+                            gameContent = gameContent + "<img src='" + rec.banner_medium + "' alt='" + rec.title + "' class='img-responsive' width='100%' height='186.45' max-width='294.98' max-height='187.7'/>";
+                        //#end region
                         gameContent = gameContent + "<h5 class='game-title'>" + rec.title + "</h5>";
-                        //gameContent = gameContent + "<p class='text-justify'>" + rec.short_description + "</p>";
                         gameContent = gameContent + "</a></div></div>";
                         $("#isotopeContainer").append(gameContent);
                         gameContent = "";
@@ -56,7 +57,6 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
 
     //Game CLick Event Handler
     $(document).on("click", "a.game-link", function (e) {
-    //$("a.game-link").click(function (e) {
         var selGameURL = $(this).attr("href");
         var selGameLongDesc = $(this).find('div.longDescription').html();
         var selGameCat = $(this).find('p.game-category').text();
@@ -72,24 +72,7 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
         e.preventDefault();
         window.location = "games/gameplay";
     });
-    //if ((i + 1) < 3) {
-    //    gameImage = gameImage + "<div class='col-md-4'><img class='gameImg' src='" + rec.banner_medium + "' style='margin:10px;'/></div>";
-    //}
-    //else if ((i + 1) == data.Data.length) {
-    //    gameImage = gameImage + "<div class='col-md-4'><img class='gameImg' src='" + rec.banner_medium + "' style='margin:10px;'/></div>";
-    //    gameImage = gameImage + "</div>";
-    //    $("#gameDiv").append(gameImage);
-    //}
-    //else if ((i + 1) % 3 != 0) {
-    //    gameImage = gameImage + "<div class='col-md-4'><img class='gameImg' src='" + rec.banner_medium + "' style='margin:10px;'/></div>";
-    //}
-    //else {
-    //    gameImage = gameImage + "<div class='col-md-4'><img class='gameImg' src='" + rec.banner_medium + "' style='margin:10px;'/></div>";
-    //    gameImage = gameImage + "</div>";
-    //    $("#gameDiv").append(gameImage);
-    //    gameImage = "<div class='row'>";
-    //}
-
+   
     $scope.SaveNewSubscriber = function () {
         //Enable COntrols
         $(".disabledCtrl").attr("disabled", "disabled");
@@ -103,33 +86,7 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
                     $.notify(data.Message, 'success');
                     $('#exampleModal').modal('hide');
                 }
-
-                //if (data.Success) {
-                //    $.Notification.notify('success', 'right top', formTitle, data.message);
-                //    $scope.GetProductLocations();
-                //    //Hide Loading Gif
-                //    $scope.processing = 0;
-                //    $("#loadingGif").css("display", "none");
-                //    //Enable COntrols
-                //    $(".disabledCtrl").removeAttr("disabled");
-                //    $scope.ProductLocationObj = {};
-                //    $('#myModal').modal('hide');
-                //} else {
-                //    $.Notification.notify('error', 'right top', formTitle, "Error Encountered: " + data.message);
-                //    //Hide Loading Gif
-                //    $scope.processing = 0;
-                //    $("#loadingGif").css("display", "none");
-                //    //Enable COntrols
-                //    $(".disabledCtrl").removeAttr("disabled");
-                //}
-                //validator.resetForm();
             }, error: function (data) {
-                //$.Notification.notify('error', 'right top', formTitle, "Error Encountered: " + data.statusText);
-                ////Hide Loading Gif
-                //$scope.processing = 0;
-                //$("#loadingGif").css("display", "none");
-                ////Enable COntrols
-                //$(".disabledCtrl").removeAttr("disabled");
             }
         });
         $(".disabledCtrl").removeAttr("disabled");

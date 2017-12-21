@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "EchoTest";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    //JsonResult kjsdh = JsonConvert.SerializeObject( );
+    //var jsonString = (JsonResult)ViewBag.retVal;
+    //JavaScriptSerializer serializer = new JavaScriptSerializer();
+    //string jsonString = serializer.Serialize((object)ViewBag.retVal);
+    var jsonString = ViewBag.retVal;
+    Layout = "";
+}
+
+<div height="1000">
+<label>
+    @jsonString
+</label>
+</div>
+
+

@@ -1,6 +1,12 @@
 ﻿using GameData;
 using GameZone.Repositories;
+using GameZone.VIEWMODEL;
+using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace GameZone.WEB.Controllers
 {
@@ -82,6 +88,38 @@ namespace GameZone.WEB.Controllers
             //    //subscriber.UpdateGameUserLastAccess(userTel, s);
                 return View();
             //}
+        }
+
+        public ActionResult EchoTest()
+        {
+            var retVal = EchoTestResult();
+            ViewBag.retVal = retVal;
+            return View();
+        }
+
+        // POST: FileUploader/UploadUserImage
+        [HttpPost, Route("Games/EchoTestResult")]
+        public string EchoTestResult()
+        {
+            try
+            {
+                NameValueCollection nvc = new NameValueCollection();
+                nvc = Request.Headers;
+                Dictionary<string, string> ss = new Dictionary<string, string>();
+                foreach (var item in nvc.AllKeys)
+                {
+                    ss.Add(item, nvc[item]);
+                }             
+
+                JavaScriptSerializer serializer = new JavaScriptSerializer();
+                string jsonString = serializer.Serialize(ss);
+                
+                return jsonString;
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
     }
 }

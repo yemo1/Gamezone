@@ -31,8 +31,11 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
                         gameContent = "<div class='col-xs-12 col-sm-8 col-md-4 isotopeSelector block " + selectedCat + "'>";
                         gameContent = gameContent + "<div class='service-wrap hovereffect panel clearfix animate' data-animate='bounceIn' data-duration='1.0s' data-delay='0.2s'>";
                         gameContent = gameContent + "<a href='" + rec.url + "' class='game-link'>";
-                        gameContent = gameContent + "<p class='game-category hiddenPara'>" + selectedCat + "</p>";
-                        //gameContent = gameContent + "<div class='longDescription hiddenPara'>" + rec.long_description + "</div>";
+                        //#region Don't take this line off, its for data transfer purposes
+                        //The hiddenPara class is meant to keep them hidden
+                            gameContent = gameContent + "<p class='game-category hiddenPara'>" + selectedCat + "</p>";
+                            gameContent = gameContent + "<div class='longDescription hiddenPara'>" + rec.long_description + "</div>";
+                        //#end region
                         gameContent = gameContent + "<img src='" + rec.banner_medium + "' alt='" + rec.title + "' class='img-responsive' width='100%' height='186.45' max-width='294.98' max-height='187.7'/>";
                         //gameContent = gameContent + "<div class='overlay description'>";
                         gameContent = gameContent + "<h3 class='game-title'>" + rec.title + "</h3>";
