@@ -7,40 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Game Zone</title>
 
-    <!-- Bootstrap  CSS -->
-    @*<link href="~/Content/css/bootstrap.min.css" rel="stylesheet">
-        <!-- Animate  CSS -->
-        <link href="~/Content/css/animate.min.css" rel="stylesheet">
-        <link href="~/Content/css/font-awesome.min.css" rel="stylesheet">
-        <!-- base stylesheet  CSS -->
-        <link href="~/Content/css/base-stylesheet.css" rel="stylesheet">
-        <link href="~/Content/css/style.css" rel="stylesheet">*@
     <!-- Favicons -->
     <link rel="icon" href="/favicon.ico">
     <!-- Meta -->
     <meta name="description" content="The marketplace for HTML5 games">
     <meta name="author" content="Funmobile,Bernard Oreva, Aishat Mosuro">
 
-    @*@Styles.Render("~/Content/css")*@
-
     <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/css/animate.min.css" rel="stylesheet" />
     <link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />
     <link href="~/Content/css/base-stylesheet.css" rel="stylesheet" />
     <link href="~/Content/css/style.css" rel="stylesheet" />
-
-
-    @*"~/Content/css/bootstrap.min.css",
-    "~/Content/css/animate.min.css",
-    "~/Content/css/font-awesome.min.css",
-    "~/Content/css/base-stylesheet.css",
-    "~/Content/css/style.css"*@
-
-    @*<link href="../Content/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="../Content/css/animate.min.css" rel="stylesheet" />
-    <link href="../Content/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="../Content/css/base-stylesheet.css" rel="stylesheet" />
-    <link href="../Content/css/style.css" rel="stylesheet" />*@
 
     <style>
         #games #main-menu .navbar .nav > li > a {
@@ -189,15 +166,7 @@
 
     @*customjs*@
     <script src="~/Content/js/site.js"></script>
-
-
-
-    @*@Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/angular")
-    @Scripts.Render("~/bundles/baseJS")
-    @Scripts.Render("~/bundles/silteringJs")
-    @Scripts.Render("~/bundles/customjs")*@
+    
     @RenderSection("scripts", required: false)
 </body>
 </html>

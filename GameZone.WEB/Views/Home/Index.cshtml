@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "Home | Game Zone";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    bool IsMobile = (bool) ViewBag.IsMobile;
 }
 
 
@@ -21,14 +22,11 @@
         #ajaxbar {
             background:#b2d3e6;
         }
+        .isotopeSelector.block {
+            height: 156px;
+        }
     </style>
 }
-<!-- LOADER -->
-@*<div id="loader-overflow">
-        <div id="loader3">Please enable JS</div>
-    </div>*@
-
-
 
 <section class="page-section pale-white home">
     <div class="container-fluid">
@@ -40,7 +38,7 @@
     Unleash over 500 fun, exciting and addictive games on GameZone. Just one click away*@               
                      Play awesome HTML5 games available on your smartphones, tablet or PC. Our catalogue is often updated with new games to keep you engaged!
                 </h5>
-                <a class="btn bitsumishi smooth-scroll scroll-down animate" href="http://funmobilelive.html5games.net/serve?portal_id=4774417016029184&game_id=6066710801022976&branding_id=5848139915329536&ad_id=5284106556407808&portal_localization_id=4539491968614400&clear_cache=yes" data-animate="wobble" data-duration="1.0s" data-delay="0.4s" data-iteration="2" type="button">try our games <i class="fa fa-play-circle"></i></a>
+                <a class="btn bitsumishi smooth-scroll scroll-down animate" href="http://funmobilelive.html5games.net/serve?portal_id=4774417016029184&game_id=6066710801022976&branding_id=5848139915329536&ad_id=5284106556407808&portal_localization_id=4539491968614400&clear_cache=yes" data-animate="wobble" data-duration="1.0s" data-delay="0.4s" data-iteration="2" type="button">play free game <i class="fa fa-play-circle"></i></a>
                 @*data-toggle="modal" data-target="#exampleModal"*@
             </div>
             <div class="col-sm-6 col-md-6 col-xs-12  ">
@@ -54,7 +52,7 @@
                         <img src="~/Content/images/cards.png" alt="Cards">
                     </div>
                    <div>
-                       <img src="~/Content/images/frame_01_normal.png" alt=" Masked bomber" />
+                       <img src="~/Content/images/frame_01_normal.png" alt="Masked bomber" />
                    </div>
                 </div>
             </div>
@@ -64,9 +62,6 @@
 <section class="page-section pale-white trial hide">
     <div class="container-fluid">
         <div class="row">
-            @*<div class="col-sm-12 col-md-12 col-xs-12 hidden-md hidden-lg ">
-                <h1 class="main-header text-center">Enjoy Our free game!!</h1>                
-            </div>*@
             <div class="col-sm-12  col-xs-12  col-md-6 col-md-offset-1">
                 <div class="panel-heading orange-bg"  id="free-play">
                     <h3 class="freegame-heading"> <i class="fa fa-play"></i>&nbsp; &nbsp; PLAY OUR FREE GAME</h3>
@@ -134,25 +129,6 @@
     </div>
 </div>
 <section class="page-section " id="game-area">
-   @*  <div class="game-filter">
-            <div class="container">
-               <div class="row">
-                   <div class="col-md-10 col-md-offset-1">
-                       <div class="filter-container isotopeFilters">
-                           <ul class="list-inline filter text-center">
-                               <li class="active gameMenu" id="family"><a href="#" data-filter=".family">Family</a></li>
-                               <li class="gameMenu" id="strategy"><a href="#" data-filter=".strategy">Strategy</a></li>
-                               <li class="gameMenu" id="action"><a href="#" data-filter=".action">Action</a></li>
-                               <li class="gameMenu" id="cards"><a href="#" data-filter=".cards">Cards</a></li>
-                               <li class="gameMenu" id="sports"><a href="#" data-filter=".sports">Sports</a></li>
-                               <li class="gameMenu" id="adventure"><a href="#" data-filter=".adventure">Adventure</a></li>
-                               <li class="gameMenu" id="puzzle"><a href="#" data-filter=".puzzle">Puzzle</a></li>
-                           </ul>
-                       </div>
-                   </div>
-               </div>
-           </div>
-    </div>*@
     <div class="container">
         <div class="row">
             <div class="col-md-12 title">
@@ -180,11 +156,67 @@
     </div>
 </section>
 
+@* PC Subscription Modal *@
+<div class="modal fade" id="pcSubscriptionModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="modal-title text-center" id="exampleModalLabel">Subscribe for Games</h3>
+            </div>
+            <div class="modal-body">
+                <form class="fomr-horizontal">
+                    <div class="form-group row">
+                        <div class="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
+                            <input type="text" class="form-control allownumericwithoutdecimal" id="recipient-name" placeholder="kindly enter your phone number" ng-model="basicObj.t">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
+                            <select id="nOSelect" class="form-control">
+                                <option>-- select network operator --</option>
+                                <option value="mtn">mtn</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
+                            <table>
+                                <tr>
+                                    <td style="padding:10px;">
+                                        <span>N50 Weekly</span>
+                                    </td>
+                                    <td style="padding:10px;">
+                                        <input type="radio" name="subType" id="subType1" value="0" ng-model="basicObj.sT">
+                                    </td>
+                                    <td style="padding:10px;">
+                                        <span style="margin-right:10px;">N10 Daily</span>
+                                    </td>
+                                    <td style="padding:10px;">
+                                        <input type="radio" name="subType" id="subType2" value="1" ng-model="basicObj.sT">
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6 col-sm-offset-3  col-xs-6 col-xs-offset-3">
+                            <button class="btn btn-primary btn-block disabledCtrl" ng-click="SaveNewSubscriber()"> Subscribe</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 @section scripts{
     <script type="text/javascript">
         var _Title = "@ViewBag.Title";
+        var _IsMobile = "@IsMobile";
     </script>
 
     

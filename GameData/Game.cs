@@ -15,6 +15,7 @@ namespace GameData
     public partial class Game
     {
         public int Id { get; set; }
+        public string NetworkOperator { get; set; }
         public string MSISDN { get; set; }
         public Nullable<System.DateTime> SubDate { get; set; }
         public Nullable<System.DateTime> ExpDate { get; set; }

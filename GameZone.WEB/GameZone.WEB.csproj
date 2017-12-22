@@ -264,6 +264,7 @@
     <Content Include="Content\images\doodles.png" />
     <Content Include="Content\images\filter-bg-bottom.png" />
     <Content Include="Content\images\footer.svg" />
+    <Content Include="Content\images\frame_01_normal.png" />
     <Content Include="Content\images\game _characters.png" />
     <Content Include="Content\images\GameListHeroLeftLarge.png" />
     <Content Include="Content\images\gamepad-orange.png" />
@@ -272,10 +273,12 @@
     <Content Include="Content\images\header-fade-new.png" />
     <Content Include="Content\images\iBook.png" />
     <Content Include="Content\images\Image-2.png" />
+    <Content Include="Content\images\logo 1 flip.png" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\mole.png" />
     <Content Include="Content\images\monkeyshooter.png" />
     <Content Include="Content\images\Pacman.gif" />
+    <Content Include="Content\images\placeholder.png" />
     <Content Include="Content\images\placeit.png" />
     <Content Include="Content\images\playHeader.svg" />
     <Content Include="Content\images\strip.png" />
@@ -309,6 +312,8 @@
     <Content Include="Content\js\jquery-1.11.0.min.js" />
     <Content Include="Content\js\jquery-1.9.1.min.js" />
     <Content Include="Content\js\jquery.fancybox.pack.js" />
+    <Content Include="Content\js\jquery.lazy.min.js" />
+    <Content Include="Content\js\jquery.lazyload.min.js" />
     <Content Include="Content\js\jquery.min.js" />
     <Content Include="Content\js\jquery.sliderPro.min.js" />
     <Content Include="Content\js\jquery1.12.min.js" />
@@ -339,6 +344,7 @@
     <Content Include="Content\css\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\css\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\css\fonts\FontAwesome.otf" />
+    <Content Include="Content\css\BITSUMIS.TTF" />
     <None Include="Properties\PublishProfiles\BernardOreva.pubxml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\Games\List.js" />

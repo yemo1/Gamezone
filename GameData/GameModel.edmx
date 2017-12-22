@@ -10,6 +10,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NetworkOperator" Type="varchar" MaxLength="20" />
           <Property Name="MSISDN" Type="varchar" MaxLength="50" />
           <Property Name="SubDate" Type="datetime" />
           <Property Name="ExpDate" Type="datetime" />
@@ -32,6 +33,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NetworkOperator" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="MSISDN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="SubDate" Type="DateTime" Precision="3" />
           <Property Name="ExpDate" Type="DateTime" Precision="3" />
@@ -54,6 +56,7 @@
                 <ScalarProperty Name="ExpDate" ColumnName="ExpDate" />
                 <ScalarProperty Name="SubDate" ColumnName="SubDate" />
                 <ScalarProperty Name="MSISDN" ColumnName="MSISDN" />
+                <ScalarProperty Name="NetworkOperator" ColumnName="NetworkOperator" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

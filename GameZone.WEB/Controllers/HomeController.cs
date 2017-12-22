@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace GameZone.WEB.Controllers
 {
@@ -10,6 +6,19 @@ namespace GameZone.WEB.Controllers
     {
         public ActionResult Index()
         {
+            var request = ControllerContext.HttpContext.Request;
+
+            //if (request.Browser.IsMobileDevice)
+            if(Request.UserAgent.Contains("Mobi") == true)
+            {
+                //mobile
+                ViewBag.IsMobile = true;
+            }
+            else
+            {
+                //laptop or desktop
+                ViewBag.IsMobile = false;
+            }
             return View();
         }
 

@@ -50,6 +50,25 @@ namespace GameZone.Repositories
         /// <summary>
         /// This method returns records gotten from DB matching users phone number
         /// </summary>
+        /// <param name="phoneNo"></param>
+        /// <returns></returns>
+        public GameData.Game GetUserByPhoneNoWithoutExpDateCheck(string phoneNo)
+        {
+            try
+            {
+                //return _context.Games.Where(s => s.MSISDN == phoneNo && s.ExpDate > DateTime.Now).FirstOrDefault();
+                var retVal = _NGSubscriptionsEntities.Games.Where(s => s.MSISDN == phoneNo).FirstOrDefault();
+                return retVal;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        /// <summary>
+        /// This method returns records gotten from DB matching users phone number
+        /// </summary>
         /// <param name="tell"></param>
         /// <returns></returns>
         public ReturnMessage UpdateGameUserLastAccess(string tell, GameData.Game game)

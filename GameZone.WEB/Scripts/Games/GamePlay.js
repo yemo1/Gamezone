@@ -82,7 +82,5 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
         e.preventDefault();
         window.location = "/games/gameplay";
     });
-
-
 });
 

@@ -100,6 +100,7 @@ namespace GameZone.WEB.Controllers
 
         public class NewSubscriber
         {
+            public string nO { get; set; }
             public string t { get; set; }
             public int sT { get; set; }
         }
@@ -112,12 +113,13 @@ namespace GameZone.WEB.Controllers
                 GameData.NGSubscriptionsEntities _NGSubscriptionsEntities = new GameData.NGSubscriptionsEntities();
                 var subscriber = new Repositories.Subscriber(_context, _NGSubscriptionsEntities);
 
-                var mobileUser = subscriber.GetUserByPhoneNo(newSubscriber.t);
+                var mobileUser = subscriber.GetUserByPhoneNoWithoutExpDateCheck(newSubscriber.t);
                 //If user subscription is expired
                 if (mobileUser == null)
                 {
                     gameVW = new GameData.Game()
                     {
+                        NetworkOperator = newSubscriber.nO,
                         MSISDN = newSubscriber.t,
                         SubDate = DateTime.Now,
                         ExpDate = (newSubscriber.sT == 0) ? DateTime.Today.AddDays(7) : DateTime.Today.AddDays(1),
@@ -128,15 +130,16 @@ namespace GameZone.WEB.Controllers
                 }
                 else
                 {
-                    gameVW = new GameData.Game()
-                    {
-                        MSISDN = newSubscriber.t,
-                        SubDate = DateTime.Now,
-                        ExpDate = (newSubscriber.sT == 0) ? mobileUser.ExpDate.Value.AddDays(7) : mobileUser.ExpDate.Value.AddDays(1),
-                        Timestamped = DateTime.Now,
-                        Token = mobileUser.Token
-                    };
-                    return subscriber.PostNewSubscriber(gameVW);
+                    mobileUser.SubDate = DateTime.Now;
+                    mobileUser.ExpDate = (newSubscriber.sT == 0) ?
+                       (mobileUser.ExpDate < DateTime.Now) ?//if subscription is already expired
+                       DateTime.Now.AddDays(7) : // New Expiry Date is 7 days from today
+                       mobileUser.ExpDate.Value.AddDays(7) : //else New Expiry Date is 7 days from Old Expiry Date
+                       (mobileUser.ExpDate < DateTime.Now) ? //if subscription is already expired
+                       DateTime.Now.AddDays(1) :// New Expiry Date is 1 day from today
+                       mobileUser.ExpDate.Value.AddDays(1);//else New Expiry Date is 1 day from Old Expiry Date
+
+                    return subscriber.PostNewSubscriber(mobileUser);
                 }
             }
             catch (Exception ex)
