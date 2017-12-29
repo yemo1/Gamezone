@@ -405,6 +405,7 @@
     <Content Include="Views\Games\List.cshtml" />
     <Content Include="Views\Games\GamePlay.cshtml" />
     <Content Include="Views\Games\EchoTest.cshtml" />
+    <Content Include="Views\Games\GamePlayFull.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
