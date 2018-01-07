@@ -72,24 +72,28 @@ h1, h3,h3,h4,h5,h6 {
 }
 
 .game-title {
+    
     font-family: Avenirlight !important;
-    color: #2e8add;
-    font-size: 13px;
-    padding: 6px 6px 3px;
+    color: #333;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 5px 6px 5px;
     line-height: 1.3;
     text-align: left;
-    width: 60%;
+    font-variant-caps: titling-caps;
     text-overflow: ellipsis;
-    /* width: 250px; */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin:0;
+    margin: 0;
 }
 
 .game-description .btn {
     border-radius: 0;
-    padding: 5px 10px 4px;
+    padding: 5px 10px 4px;    
+    border: 1px;
+    border-top-left-radius: 5px;
+    border-bottom-right-radius: 5px;
     color: rgb(255, 255, 255);
     background: rgb(255, 106, 0);
     /*background:#2e8add;*/
@@ -317,8 +321,7 @@ main:before {
 
 .hovereffect img {
     display: block;
-    border-top-left-radius:4px;
-    border-top-right-radius:4px;
+    border-top-left-radius: 5px;
     position: relative;
 	-webkit-transition: -webkit-transform 0.35s;
 	transition: transform 0.35s;
@@ -333,7 +336,10 @@ main:before {
 }
 
 .hovereffect.panel{ 
-   border-radius:0;
+   border-radius: 0;
+    border-top-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 1px 4px 7px 1px rgba(0, 0, 0, 0.12);
 }
 
 .hovereffect:before {
@@ -879,6 +885,12 @@ body::-webkit-scrollbar-thumb {
     background:#dcedf7;
 }
 
+.game-description {
+    height: 46px;
+    background: #f2f8fbbd;
+    border-bottom-right-radius: 5px;
+}
+
 #slideshow {
     min-height: 300px;
 }
@@ -1006,11 +1018,19 @@ body::-webkit-scrollbar-thumb {
         width: 200px;        
         margin-left: 10px;
     }
+
+    .header {
+        background: rgb(95, 161, 205);
+    }
+
+    .header-black .hamb-mob-icon {
+        color: #ffffff;
+    }
 }
 
 @media(max-width:800px) {
     .game-title  {
-        width: 53%;
+        font-size: 11px;
     }
     .title h3 {
         font-size:21px;
