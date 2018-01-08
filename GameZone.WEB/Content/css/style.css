@@ -42,7 +42,7 @@ h1, h3,h3,h4,h5,h6 {
 
 .site-container {
     background: #f1f1f1;
-    background:url(../images/doodles.png),#ecf5fe;
+    background:url(../images/doodles1.jpg),#ecf5fe;
     display: table;
     table-layout: fixed;
     position: relative;
@@ -95,7 +95,7 @@ h1, h3,h3,h4,h5,h6 {
 
 .game-description .btn {
     border-radius: 0;
-    padding: 3px 10px 3px;    
+    padding: 3px 8px 3px;    
     border: 1px;
     border-top-left-radius: 5px;
     border-bottom-right-radius: 5px;
@@ -283,7 +283,7 @@ main:before {
 }
 
 .hovereffect {
-    /*width: 100%;*/
+    width: 100%;
     height: 100%;
     float: left;
     overflow: hidden;
@@ -330,6 +330,7 @@ main:before {
     position: relative;
 	-webkit-transition: -webkit-transform 0.35s;
 	transition: transform 0.35s;
+    max-height: 105px;
 }
 
 
@@ -1039,5 +1040,29 @@ body::-webkit-scrollbar-thumb {
     }
     .title h3 {
         font-size:21px;
+    }
+}
+
+@media(min-width:320px) {
+    .hovereffect img {
+        max-height: 76.03px;
+    }
+}
+
+@media(min-width:360px) {
+    .hovereffect img {
+        max-height: 82.41px;
+    }
+}
+
+@media(min-width:375px) {
+    .hovereffect img {
+        max-height: 87.17px;
+    }
+}
+
+@media(min-width:414px) {
+    .hovereffect img {
+        max-height: 99.58px;
     }
 }

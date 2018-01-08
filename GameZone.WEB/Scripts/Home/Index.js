@@ -9,10 +9,13 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
     $scope.basicObj = {};
     $scope.basicObj.sT = 0;
 
+    // Detect Device Type and Display Appropriate Subscription Modal
+   
+
     //Detect Device Type and Display Appropriate Subscription Modal
-    if (_IsMobile == "False") {
-        $("#pcSubscriptionModal").modal("show");
-    }
+    //if (_IsMobile == "False") {
+    //    $("#pcSubscriptionModal").modal("show");
+    //}
 
     //Get ApplicationUser Data from DB
     $scope.getGameData = function (selectedCat) {
@@ -49,6 +52,14 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
                         $("#isotopeContainer").append(gameContent);
                         //gameContent = "";
                         $('body').find('.lazy .img-responsive').lazyload({});
+                        $(window).scroll(function () {
+                            if ($(window).scrollTop() >= $('#game-area').height()) {
+                                $("#pcSubscriptionModal").show();
+                            }
+                            else {
+                                $("#pcSubscriptionModal").hide("");
+                            }
+                        });
                     }
                 });
             },
