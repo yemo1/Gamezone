@@ -41,7 +41,7 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
 
                         gameContent = gameContent + "<h3 class='game-title text-center '>" + rec.title + "</h3>";
                         gameContent = gameContent + "<a class='pull-right btn  bitsumishi game-link' href='" + rec.url + "'>play</a>";
-                        gameContent = gameContent + "<p class='game-category pull-left text-muted '>" + selectedCat + "</p>";
+                        gameContent = gameContent + "<small class='game-category pull-left text-muted '>" + selectedCat + "</small>";
                         gameContent = gameContent + "<div class='longDescription hiddenPara'>" + rec.long_description + "</div>";                        
                             
                         //gameContent = gameContent + "<p class='text-justify'>" + rec.short_description + "</p>";
