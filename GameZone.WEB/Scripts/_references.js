@@ -29,6 +29,7 @@
 /// <reference path="angular.min.js" />
 /// <reference path="bootstrap.js" />
 /// <reference path="games/gameplay.js" />
+/// <reference path="games/gameplayfull.js" />
 /// <reference path="games/index.js" />
 /// <reference path="games/list.js" />
 /// <reference path="global.js" />

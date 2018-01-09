@@ -47,9 +47,7 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
         var gameData = sessionStorage.getItem("selectedGame");
         gameData = JSON.parse(gameData);
         gameData.Category = gameData.Category.toUpperCase();
-
         $scope.Game = gameData;
-        //alert(gameData.Title);
         $("#gamePlay").attr("src", gameData.URL);
         $("#longDesc").html($.parseHTML(gameData.LongDescription));
         //Load Other Games in same category

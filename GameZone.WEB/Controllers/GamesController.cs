@@ -86,7 +86,14 @@ namespace GameZone.WEB.Controllers
             //    //Keep Track of User Last Game Played
             //    //GameUserIdentity.LoggedInUser = s.ToModel();
             //    //subscriber.UpdateGameUserLastAccess(userTel, s);
-                return View();
+            
+            //Make Game Appear Full Screen on Mobile Devices
+            if (Request.UserAgent.Contains("Mobi") == true)
+            {
+                //mobile
+                return RedirectToAction("GamePlayFull", "Games");
+            }
+            return View();
             //}
         }
 
