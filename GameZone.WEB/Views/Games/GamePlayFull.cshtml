@@ -1,88 +1,19 @@
 ﻿
 @{
-    ViewBag.Title = "GamePlayFull";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Game Play";
+    Layout = "";
 }
+    <iframe style="width:100%; height:100%;" id="gamePlay" src=""></iframe>
 
+ <!-- JS begin -->
+@*jquery*@
+<script src="~/Content/js/jquery.min.js"></script>
 
-@{
-    ViewBag.Title = "GamePlay";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+@*<script src="~/Scripts/global.js"></script>*@
 
-@section style{
-    @*@Styles.Render("~/Content/pageSpecificCss")*@
-
-    <link href="~/Content/js/fancybox/jquery.fancybox.css" rel="stylesheet" />
-    <link href="~/Content/css/slider-pro.min.css" rel="stylesheet" />
-    <link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="~/Content/css/base-stylesheet.css" rel="stylesheet" />
-    <link href="~/Content/css/style.css" rel="stylesheet" />
-    <style>
-        .top-filter {
-            display: none;
-        }
-
-        .header-black #main-menu .navbar .nav > li.current > a {
-            color: #2a2b2f;
-        }
-
-        .blue_c {
-            color: #0083ff;
-        }
-    </style>
-
-}
-@*<section class="page-section white-bg top_pad">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8">
-                <h1 class="blue_c blue_line">{{Game.Title}}</h1>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-8">*@
-<div class="row">
-    <iframe style="min-width:100%; min-height:100%;" id="gamePlay" src=""></iframe>
-</div>
-    @*</div>
-                    <div class="col-md-4 ">
-                        <div class="panel game_details">
-                            <div class="panel-body">
-                                <h3 class="text-left dark_c blue_line">{{Game.Category}}</h3>
-                                <div class="text-justify" id="longDesc"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>*@
-    @*<section class="dark-bg page-section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12 col-sm-10 col-xs-10 col-md-offset-0 col-sm-offset-1 col-xs-offset-1 home-section">
-                        <h1 class="blue_c">
-                            Some other Games in this Category
-                        </h1>
-                        <!-- <hr class="blue_line"> -->
-                    </div>
-                </div>
-                <div class="row ">
-                    <div id="example2" class="slider-pro">
-                        <div class="sp-slides" id="otherCategoryGames"></div>
-                    </div>
-                </div>
-            </div>
-        </section>*@
-
-    @section scripts{
-        <script type="text/javascript">
+@*customjs*@
+<script type="text/javascript">
             var _Title = "@ViewBag.Title";
-        </script>
-        <script src="~/Content/js/jquery.sliderPro.min.js"></script>
-        <script src="~/Content/js/jquery.fancybox.pack.js"></script>
-        <script src="~/Content/js/games.js"></script>
-        <script src="~/Scripts/Games/GamePlay.js"></script>
-        <script src="~/Content/js/jquery.lazyload.min.js"></script>
-    }
-
+</script>
+<script src="~/Content/js/jquery.fullscreen-min.js"></script>
+<script src="~/Scripts/Games/GamePlayFull.js"></script>
