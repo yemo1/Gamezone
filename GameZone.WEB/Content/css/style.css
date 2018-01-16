@@ -716,7 +716,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .dark-bg {
-    background:linear-gradient(to bottom,#273f5b 40%,#fffff354 );
+    background:transparent;
 }
 
 .dark-bg .sp-caption-container {

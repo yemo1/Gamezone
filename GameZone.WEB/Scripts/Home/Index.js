@@ -52,7 +52,7 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
                         gameContent = gameContent + "<div class='longDescription hiddenPara'>" + rec.long_description + "</div>";
                         gameContent = gameContent + "<h3 class='game-title hiddenPara'>" + rec.title + "</h3></a>";
 
-                        gameContent = gameContent + "<small class='pull-left text-muted '>" + selectedCat + "</small>";
+                        gameContent = gameContent + "<small class='game-category pull-left text-muted'>" + selectedCat + "</small>";
                         gameContent = gameContent + "</div></a></div></div>";
                         $("#isotopeContainer").append(gameContent);
                         //gameContent = "";

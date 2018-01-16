@@ -28,9 +28,9 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
                         gameContent = gameContent + "<div class='longDescription hiddenPara'>" + rec.long_description + "</div>";
                         gameContent = gameContent + "<img class='sp-image' src='" + rec.banner_medium + "'data-src='" + rec.banner_medium + "'data-retina='" + rec.banner_medium + "'/>";
                         gameContent = gameContent + "</a>";
-                        gameContent = gameContent + "<p class='sp-caption'><label id='game-title'>" + rec.title + "</label>";
+                        gameContent = gameContent + "<p class='sp-caption text-center'><label id='game-title' class='dark_c '>" + rec.title + "</label>";
                         gameContent = gameContent + "<br>";
-                        gameContent = gameContent + "<span class='text-center small text-muted'>" + selectedCat + "</span>";
+                        gameContent = gameContent + "<label class='text-center small text-muted game-category'>" + selectedCat + "</label>";
                         gameContent = gameContent + "</p></div>";
                         $("#otherCategoryGames").append(gameContent);
                         gameContent = "";
