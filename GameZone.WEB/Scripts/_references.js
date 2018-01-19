@@ -29,6 +29,7 @@
 /// <reference path="ai.0.22.9-build00167.min.js" />
 /// <reference path="angular.min.js" />
 /// <reference path="bootstrap.js" />
+/// <reference path="flwpbf-inline.js" />
 /// <reference path="games/gameplay.js" />
 /// <reference path="games/gameplayfull.js" />
 /// <reference path="games/index.js" />
