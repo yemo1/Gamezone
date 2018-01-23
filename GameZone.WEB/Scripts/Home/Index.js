@@ -131,3 +131,11 @@ $(document).on("keypress keyup blur", ".allownumericwithoutdecimal", function (e
         event.preventDefault();
     }
 });
+
+//$(document).on("click", ".flwpug_getpaid", function () {
+
+//});
+$("#pcSubscriptionModal").modal("show");
+$("a.flwpug_getpaid").find("button:button").addClass("btn btn-primary");
+//$("a.flwpug_getpaid button")
+//$(".flwpug_getpaid").click();

@@ -152,11 +152,7 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <a class="flwpug_getpaid" data-PBFPubKey="FLWPUBK-21d231c2eef47b545298eb299494af6c-X" data-txref="rave-checkout-1516369113" data-amount="" data-customer_email="user@example.com" data-currency="NGN" data-pay_button_text="Pay" data-country="NG" data-custom_title="Gamezone" data-custom_description="" data-redirect_url="" data-custom_logo="" data-payment_method="card" data-exclude_banks=""></a>                
-            </div>
-        </div>
+       
     </div>
 </section>
 
@@ -206,6 +202,11 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <div class="col-md-12">
+                            <a class="btn btn-primary btn-block flwpug_getpaid" data-PBFPubKey="FLWPUBK-21d231c2eef47b545298eb299494af6c-X" data-txref="rave-checkout-1516369113" data-amount="" data-customer_email="user@example.com" data-currency="NGN" data-pay_button_text="Subscribe" data-country="NG" data-custom_title="Gamezone" data-custom_description="" data-redirect_url="" data-custom_logo="" data-payment_method="card" data-exclude_banks=""></a>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <div class="col-sm-6 col-sm-offset-3  col-xs-6 col-xs-offset-3">
                             <button class="btn btn-primary btn-block disabledCtrl" ng-click="SaveNewSubscriber()"> Subscribe</button>
                         </div>
@@ -215,8 +216,6 @@
         </div>
     </div>
 </div>
-
-
 
 
 @section scripts{
@@ -229,7 +228,9 @@
     <script src="~/Content/js/notify.min.js"></script>
     <script src="~/Scripts/Home/Index.js"></script>
     <script src="~/Content/js/jquery.lazyload.min.js"></script>
-<script src="~/Scripts/flwpbf-inline.js"></script>
+@*<script src="~/Scripts/flwpbf-inline.js"></script>*@
 @*<script type="text/javascript" src="https://api.ravepay.co/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>*@
     @*@Scripts.Render("~/bundles/Home-IndexPageJs")*@
+
+<script type="text/javascript" src="http://flw-pms-dev.eu-west-1.elasticbeanstalk.com/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
 }
