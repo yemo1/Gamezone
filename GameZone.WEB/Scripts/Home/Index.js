@@ -136,6 +136,6 @@ $(document).on("keypress keyup blur", ".allownumericwithoutdecimal", function (e
 
 //});
 $("#pcSubscriptionModal").modal("show");
-$("a.flwpug_getpaid").find("button:button").addClass("btn btn-primary");
+$("a.flwpug_getpaid").find("button").addClass("btn btn-primary");
 //$("a.flwpug_getpaid button")
 //$(".flwpug_getpaid").click();
