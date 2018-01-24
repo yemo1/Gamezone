@@ -693,11 +693,6 @@ body::-webkit-scrollbar-thumb {
   outline: 1px solid slategrey;
 } 
 
-.modal-body {
-    position: relative;
-    padding: 8% 0;
-}
-
 .btn-primary {
     color: #fff;
     background-color: #0083ff;
@@ -944,6 +939,38 @@ body::-webkit-scrollbar-thumb {
     float: left;
     padding: 0 5px;
 }*/
+
+
+.modal-content {
+    background:url(../images/doodles1.jpg),#ecf5fe;
+    border:none;
+}
+
+.modal-header {   
+    background: rgba(10, 111, 178, 0.83);
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+
+
+.modal-body {
+    position: relative;
+    background:rgba(250, 252, 254, 0.97);
+    padding: 8% 0;
+}
+.modal-header h3 {
+    color: #fff;
+}
+
+.close {
+        color: #fafcfe;
+        opacity:1;
+}
+
+.modal-body table {
+    width: 100%;
+    border-bottom: 1px solid #cccccc;
+}
 
 @media(min-width:1023px) {
 

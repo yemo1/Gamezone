@@ -201,8 +201,8 @@
                             </table>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <div class="col-md-12">
+                    <div class="form-group row hide">
+                        <div class="col-sm-6 col-sm-offset-3  col-xs-6 col-xs-offset-3">
                             <a class="flwpug_getpaid" data-PBFPubKey="FLWPUBK-421b6ed86111a9c686cff34b983cee73-X" data-txref="rave-checkout-1516785905" data-amount="" data-customer_email="user@example.com" data-currency="NGN" data-pay_button_text="Subscribe" data-country="NG" data-custom_title="Gamezone" data-custom_description="" data-redirect_url="http://www.gamezone.ng/Games/List" data-custom_logo="" data-payment_method="both" data-exclude_banks=""></a>	
                             @*<a class="btn btn-primary btn-block flwpug_getpaid" data-PBFPubKey="FLWPUBK-421b6ed86111a9c686cff34b983cee73-X" data-txref="rave-checkout-1516369113" data-amount="" data-customer_email="user@example.com" data-currency="NGN" data-pay_button_text="Subscribe" data-country="NG" data-custom_title="Gamezone" data-custom_description="" data-redirect_url="" data-custom_logo="" data-payment_method="card" data-exclude_banks=""></a>*@
                         </div>
@@ -210,6 +210,39 @@
                     <div class="form-group row">
                         <div class="col-sm-6 col-sm-offset-3  col-xs-6 col-xs-offset-3">
                             <button class="btn btn-primary btn-block disabledCtrl" ng-click="SaveNewSubscriber()"> Subscribe</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* PC Login Modal *@
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="modal-title text-center" id="exampleModalLabel">Login</h3>
+            </div>
+            <div class="modal-body">
+                <form class="fomr-horizontal">
+                    <div class="form-group row">
+                        <div class="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
+                            <input type="text" class="form-control " placeholder="Username">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
+                            <input type="text" class="form-control " placeholder="password">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6 col-sm-offset-3  col-xs-6 col-xs-offset-3">
+                            <button class="btn btn-primary btn-block "> Login</button>
                         </div>
                     </div>
                 </form>
