@@ -116,6 +116,12 @@ header {
     left: 0;   
     z-index: 13;
 }
+
+{
+    padding: 26px 3px 5px;
+    margin: 0 12px 17px;
+}
+
 .sticky{
     /* background: radial-gradient(circle at top,#fff 5%,#fafbfc 50%); */
     /*background: rgba(0, 0, 0, 0.8);*/
@@ -958,8 +964,27 @@ body::-webkit-scrollbar-thumb {
     background:rgba(250, 252, 254, 0.97);
     padding: 8% 0;
 }
+
+.modal-footer {
+     background:rgba(250, 252, 254, 0.97);
+}
+
 .modal-header h3 {
     color: #fff;
+}
+
+.modal-content hr {
+    border-top: 1px solid #ccc;
+    margin: 0 0 12px 0;
+}
+
+.modal-content a {
+    color:#3387bf;
+}
+
+.dropdown button {
+    background: transparent;
+    color: #4f89af;
 }
 
 .close {

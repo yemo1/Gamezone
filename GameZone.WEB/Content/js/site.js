@@ -12,10 +12,32 @@ $(document).ready(function(){
     });
 
     $('body').on('click', '#free-play', function () {
-        console.log("fia!!");
         $(this).hide().remove();
     });
 
+    $('body').on('click', '#login-link', function (e) {
+        e.preventDefault();
+        $('#register-form').addClass('slideOutLeft');
+        $('#login-form').removeClass('hide').addClass('slideInRight');
+        $('#login-header').removeClass('hide').addClass('fadeIn');
+        $('#register-header').addClass('hide');       
+        setTimeout(function () {
+            $('#login-header').removeClass('fadeIn');            
+            $('#register-form').addClass('hide').removeClass('slideOutLeft');
+        }, 500);
+    });
+
+    $('body').on('click', '#register-link', function (e) {
+        e.preventDefault();
+        $('#login-form').addClass('slideOutLeft');
+        $('#register-form').removeClass('hide').addClass('slideInRight');
+        $('#login-header').addClass('hide ');
+        $('#register-header').removeClass('hide').addClass('fadeIn');
+        setTimeout(function () {
+            $('#register-header').removeClass('fadeIn');
+            $('#login-form').addClass('hide').removeClass('slideOutLeft');
+        }, 500);
+    });
     //$(window).on('load',function(){
     //  $('#exampleModal').modal('show');
     //});
