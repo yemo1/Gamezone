@@ -7,7 +7,6 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
     $("#homeMenu").addClass("current");
 
     $scope.basicObj;
-    $scope.basicObj.sT = 0;
 
     // Detect Device Type and Display Appropriate Subscription Modal
    
@@ -62,7 +61,7 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
                                 $("#pcSubscriptionModal").show();
                             }
                             else {
-                                $("#pcSubscriptionModal").hide("");
+                                //$("#pcSubscriptionModal").hide("");
                             }
                         });
                     }
