@@ -122,6 +122,10 @@ header {
     margin: 0 4px 0;
 }
 
+#main-menu .navbar .nav > li:hover > a, .dropdown button:hover {
+    color: rgb(255, 106, 0);
+}
+
 .sticky{
     /* background: radial-gradient(circle at top,#fff 5%,#fafbfc 50%); */
     /*background: rgba(0, 0, 0, 0.8);*/
