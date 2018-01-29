@@ -7,9 +7,6 @@
 
 @section style{
     <style>
-        /*.modal-body{
-            padding:0;
-        }*/
         .game-container {
             display: block;
             height: 30em;            
@@ -28,10 +25,6 @@
         .isotopeSelector.block {
             height: auto;
         }
-        .row, .form-horizontal .form-group{
-            margin-right:0;
-            margin-left:0;
-        }
     </style>
 }
 
@@ -46,22 +39,20 @@
                      Play awesome HTML5 games available on your smartphones, tablet or PC. Our catalogue is often updated with new games to keep you engaged!
                 </h5>
                 <a class="btn bitsumishi smooth-scroll scroll-down animate" href="http://funmobilelive.html5games.net/serve?portal_id=4774417016029184&game_id=6066710801022976&branding_id=5848139915329536&ad_id=5284106556407808&portal_localization_id=4539491968614400&clear_cache=yes" data-animate="wobble" data-duration="1.0s" data-delay="0.4s" data-iteration="2" type="button">play free game <i class="fa fa-play-circle"></i></a>
-
-                <a class="btn bitsumishi smooth-scroll scroll-down animate" href="" data-animate="wobble" data-duration="1.0s" data-delay="0.4s" data-iteration="2" type="button" ng-click="Subscribe()">subscribe<i class="fa fa-play-circle"></i></a>
                 @*data-toggle="modal" data-target="#exampleModal"*@
             </div>
-            <div class="col-sm-6 col-md-6 col-xs-12">
+            <div class="col-sm-6 col-md-6 col-xs-12  ">
                 
                 <!-- GameListHeroLeftLarge.png -->
                 <div id="slideshow">
                     <div>
-                        <img src="~/Content/images/GameListHeroLeftLarge.png" alt="monkey bubble shooter characters">
+                        <img src="~/Content/images/GameListHeroLeftLarge.png" alt="monkey bubble shooter characters" height="250">
                     </div>
                     <div>
-                        <img src="~/Content/images/cards.png" alt="Cards">
+                        <img src="~/Content/images/cards.png" alt="Cards" height="250">
                     </div>
                    <div>
-                       <img src="~/Content/images/frame_01_normal.png" alt="Masked bomber"/>
+                       <img src="~/Content/images/frame_01_normal.png" alt="Masked bomber"  height="250"/>
                    </div>
                 </div>
             </div>
@@ -164,7 +155,7 @@
        
     </div>
 </section>
- @*style="width:25%;"*@
+
 @* PC Subscription Modal *@
 <div class="modal fade" id="pcSubscriptionModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -176,144 +167,57 @@
                 <h3 class="modal-title text-center" id="exampleModalLabel">Subscribe for Games</h3>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal">
+                <form class="fomr-horizontal">
                     <div class="form-group row">
-                        <div class="col-sm-12 col-xs-12">
+                        <div class="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
                             <input type="text" class="form-control allownumericwithoutdecimal" id="recipient-name" placeholder="kindly enter your phone number" ng-model="basicObj.t">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col-sm-12 col-xs-12">
+                        <div class="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
                             <select id="nOSelect" class="form-control">
-                                <option value="airtime">Pay with Airtime (MTN Only)</option>
-                                <option value="card">Pay with Card</option>
+                                <option>-- select network operator --</option>
+                                <option value="mtn">mtn</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col-sm-12 col-xs-12">
+                        <div class="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
                             <table>
                                 <tr>
                                     <td style="padding:10px;">
-                                        <span>N200 Monthly</span>
+                                        <span>N50 Weekly</span>
                                     </td>
                                     <td style="padding:10px;">
-                                        <input type="radio" name="subType" id="subType1" ng-true-value="0" ng-model="basicObj.sT" checked="checked">
+                                        <input type="radio" name="subType" id="subType1" value="0" ng-model="basicObj.sT">
                                     </td>
                                     <td style="padding:10px;">
-                                        <span>N100 Weekly</span>
+                                        <span style="margin-right:10px;">N10 Daily</span>
                                     </td>
                                     <td style="padding:10px;">
-                                        <input type="radio" name="subType" id="subType1" ng-true-value="1" ng-model="basicObj.sT">
-                                    </td>
-                                    <td style="padding:10px;">
-                                        <span style="margin-right:10px;">N20 Daily</span>
-                                    </td>
-                                    <td style="padding:10px;">
-                                        <input type="radio" name="subType" id="subType2" ng-true-value="2" ng-model="basicObj.sT">
+                                        <input type="radio" name="subType" id="subType2" value="1" ng-model="basicObj.sT">
                                     </td>
                                 </tr>
                             </table>
                         </div>
-                    </div>                 
+                    </div>
+                    <div class="form-group row hide">
+                        <div class="col-sm-6 col-sm-offset-3  col-xs-6 col-xs-offset-3">
+                            <a class="flwpug_getpaid" data-PBFPubKey="FLWPUBK-421b6ed86111a9c686cff34b983cee73-X" data-txref="rave-checkout-1516785905" data-amount="" data-customer_email="user@example.com" data-currency="NGN" data-pay_button_text="Subscribe" data-country="NG" data-custom_title="Gamezone" data-custom_description="" data-redirect_url="http://www.gamezone.ng/Games/List" data-custom_logo="" data-payment_method="both" data-exclude_banks=""></a>	
+                            @*<a class="btn btn-primary btn-block flwpug_getpaid" data-PBFPubKey="FLWPUBK-421b6ed86111a9c686cff34b983cee73-X" data-txref="rave-checkout-1516369113" data-amount="" data-customer_email="user@example.com" data-currency="NGN" data-pay_button_text="Subscribe" data-country="NG" data-custom_title="Gamezone" data-custom_description="" data-redirect_url="" data-custom_logo="" data-payment_method="card" data-exclude_banks=""></a>*@
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6 col-sm-offset-3  col-xs-6 col-xs-offset-3">
+                            <button class="btn btn-primary btn-block disabledCtrl" ng-click="SaveNewSubscriber()"> Subscribe</button>
+                        </div>
+                    </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <div class="form-group row">
-                    <div class="col-md-12">
-                        <a id="monthlyBtn" class="flwpug_getpaid btn btn-block disabledCtrlbtn-block disabledCtrl" data-PBFPubKey="FLWPUBK-421b6ed86111a9c686cff34b983cee73-X" data-txref="rave-checkout-1516785905" data-amount="200" data-customer_email="user@example.com" data-currency="NGN" data-pay_button_text="Subscribe" data-country="NG" data-custom_title="Gamezone" data-custom_description="" data-redirect_url="http://www.gamezone.ng/Games/List" data-custom_logo="" data-payment_method="both" data-exclude_banks=""></a>	
-                       
-                        
-                         @*<a class="btn btn-primary btn-block flwpug_getpaid" data-PBFPubKey="FLWPUBK-421b6ed86111a9c686cff34b983cee73-X" data-txref="rave-checkout-1516369113" data-amount="" data-customer_email="user@example.com" data-currency="NGN" data-pay_button_text="Subscribe" data-country="NG" data-custom_title="Gamezone" data-custom_description="" data-redirect_url="" data-custom_logo="" data-payment_method="card" data-exclude_banks=""></a>*@
-                    </div>
-                </div>   
-                <div class="form-group row">
-                    <div class="col-md-12">
-                        @*<a id="weeklyBtn" class="flwpug_getpaid" data-PBFPubKey="FLWPUBK-9411cbc7a557821e9db0123590fd6bbe-X" data-txref="rave-checkout-1516877456" data-amount="100" data-customer_email="user@example.com" data-currency="NGN" data-pay_button_text="Subscribe" data-country="NG" data-custom_title="Gamezone" data-custom_description="" data-redirect_url="http://www.gamezone.ng/Games/List" data-custom_logo="" data-payment_method="both" data-exclude_banks=""></a>*@	                        
-                    </div>
-                </div>
-                @*<div class="form-group row">
-                    <div class="col-md-12">
-                        <a id="dailyBtn" class="flwpug_getpaid btn btn-block disabledCtrlbtn-block disabledCtrl" data-PBFPubKey="FLWPUBK-421b6ed86111a9c686cff34b983cee73-X" data-txref="rave-checkout-1516785905" data-amount="20" data-customer_email="user@example.com" data-currency="NGN" data-pay_button_text="Subscribe" data-country="NG" data-custom_title="Gamezone" data-custom_description="" data-redirect_url="http://www.gamezone.ng/Games/List" data-custom_logo="" data-payment_method="both" data-exclude_banks=""></a>	
-                    </div>
-                </div>*@
-                
-                @*<a class="flwpug_getpaid btn btn-block disabledCtrlbtn-block disabledCtrl" data-PBFPubKey="FLWPUBK-421b6ed86111a9c686cff34b983cee73-X" data-txref="rave-checkout-1516785905" data-amount="100" data-customer_email="user@example.com" data-currency="NGN" data-pay_button_text="Subscribe" data-country="NG" data-custom_title="Gamezone" data-custom_description="" data-redirect_url="http://www.gamezone.ng/Games/List" data-custom_logo="" data-payment_method="both" data-exclude_banks=""></a>*@	
-                
-                
             </div>
         </div>
     </div>
 </div>
 
-@* PC Login/Registration Modal *@
-<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h3 class="modal-title text-center animated hide" id="login-header"> Login</h3>
-                    <h3 class="modal-title text-center animated" id="register-header" >Create Account</h3>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal hide animated" id="login-form">
-                    <div class="form-group row">
-                        <div class="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
-                            <input type="text" class="form-control " placeholder="Username">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
-                            <input type="text" class="form-control " placeholder="password">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-6 col-sm-offset-3  col-xs-6 col-xs-offset-3">
-                            <button class="btn btn-primary btn-block "> Login</button>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6 col-sm-offset-3">
-                            <hr />
-                            <p class="text-center">Don't have an account?  <a id="register-link">Register</a></p>
-                        </div>
-                    </div>
-                </form>
-                <form class="form-horizontal animated" id="register-form">
-                    <div class="form-group row">
-                        <div class="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
-                            <input type="text" class="form-control " placeholder="Email address">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
-                            <input type="text" class="form-control " placeholder="password">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
-                            <input type="text" class="form-control " placeholder="Confirm password">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-6 col-sm-offset-3  col-xs-6 col-xs-offset-3">
-                            <button class="btn btn-primary btn-block "> Register</button>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6 col-sm-offset-3">
-                            <hr />
-                            <p class="text-center">Already have an account? <a id="login-link">Login</a></p>
-                        </div>
-                    </div>
-                    
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
 @*Original Public Key*@
 @*data-PBFPubKey="FLWPUBK-21d231c2eef47b545298eb299494af6c-X"*@

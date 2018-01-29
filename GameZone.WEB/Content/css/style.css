@@ -117,9 +117,13 @@ header {
     z-index: 13;
 }
 
-{
-    padding: 26px 3px 5px;
-    margin: 0 12px 17px;
+.dropdown button{
+    padding: 23px 0px 5px;
+    margin: 0 4px 0;
+}
+
+#main-menu .navbar .nav > li:hover > a, .dropdown button:hover {
+    color: rgb(255, 106, 0);
 }
 
 .sticky{
@@ -958,15 +962,12 @@ body::-webkit-scrollbar-thumb {
     border-top-right-radius: 6px;
 }
 
-.modal-footer {
-    background:rgba(250, 252, 254, 0.97);
-}
-
 
 .modal-body {
     position: relative;
     background:rgba(250, 252, 254, 0.97);
-    padding: 8% 0;
+    padding: 4% 0;
+    min-height: 301px;
 }
 
 .modal-footer {
@@ -974,7 +975,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .modal-header h3 {
-    color: #fff !important;
+    color: #fff;
 }
 
 .modal-content hr {
