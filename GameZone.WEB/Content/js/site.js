@@ -38,6 +38,21 @@ $(document).ready(function(){
             $('#login-form').addClass('hide').removeClass('slideOutLeft');
         }, 250);
     });
+
+    $('body').on('click', 'register-target', function (e) {
+        $('#register-form').removeClass('hide');
+        $('#login-header').addClass('hide');
+        $('#register-header').removeClass('hide');
+        $('#login-form').addClass('hide')
+    });
+
+    $('body').on('click', 'login-target', function (e) {
+        $('#register-form').addClass('hide');
+        $('#login-header').removeClass('hide');
+        $('#register-header').addClass('hide');
+        $('#login-form').removeClass('hide')
+    });
+
     //$(window).on('load',function(){
     //  $('#exampleModal').modal('show');
     //});
