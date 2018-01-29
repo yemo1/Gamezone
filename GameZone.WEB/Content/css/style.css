@@ -958,10 +958,6 @@ body::-webkit-scrollbar-thumb {
     border-top-right-radius: 6px;
 }
 
-.modal-footer {
-    background:rgba(250, 252, 254, 0.97);
-}
-
 
 .modal-body {
     position: relative;
@@ -974,7 +970,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .modal-header h3 {
-    color: #fff !important;
+    color: #fff;
 }
 
 .modal-content hr {

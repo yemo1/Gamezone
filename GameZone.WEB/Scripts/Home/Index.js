@@ -6,7 +6,8 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
     $("#menuUL li").removeClass("current");
     $("#homeMenu").addClass("current");
 
-    $scope.basicObj;
+    $scope.basicObj = {};
+    $scope.basicObj.sT = 0;
 
     // Detect Device Type and Display Appropriate Subscription Modal
    
@@ -61,7 +62,7 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
                                 $("#pcSubscriptionModal").show();
                             }
                             else {
-                                //$("#pcSubscriptionModal").hide("");
+                                $("#pcSubscriptionModal").hide("");
                             }
                         });
                     }
@@ -102,8 +103,6 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
    
     $scope.SaveNewSubscriber = function () {
         
-        $("a.flwpug_getpaid").click();
-        return;
         $scope.basicObj.nO = $('select#nOSelect option:selected').val();
 
         //Enable COntrols
@@ -123,10 +122,6 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
         });
         $(".disabledCtrl").removeAttr("disabled");
     };
-
-    $scope.Subscribe = function () {
-        $("#pcSubscriptionModal").modal("show");
-    };
 });
 
 //Allow Only Numbers into Tel Textbox
@@ -141,10 +136,6 @@ $(document).on("keypress keyup blur", ".allownumericwithoutdecimal", function (e
 
 //});
 $("#pcSubscriptionModal").modal("show");
-//$(document).find("a.flwpug_getpaid").addClass("btn btn-primary");
+$("a.flwpug_getpaid").find("button").addClass("btn btn-primary");
 //$("a.flwpug_getpaid button")
 //$(".flwpug_getpaid").click();
-
-$(document).on("click", "a.flwpug_getpaid", function () {
-    //$("#pcSubscriptionModal").modal("hide");
-});

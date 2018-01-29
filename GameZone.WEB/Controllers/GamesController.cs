@@ -33,18 +33,8 @@ namespace GameZone.WEB.Controllers
         /// </summary>
         /// <param name="t">This is the Telephone Number Passed</param>
         /// <returns></returns>
-        /// 
-        public ActionResult List(string t = null)
+        public ActionResult List(string t)
         {
-
-            NameValueCollection nvc = new NameValueCollection();
-            nvc = Request.Headers;
-            Dictionary<string, string> ss = new Dictionary<string, string>();
-            foreach (var item in nvc.AllKeys)
-            {
-                ss.Add(item, nvc[item]);
-            }
-
             //Validate User Session
             //if (GameUserIdentity.LoggedInUser == null)
             //{
@@ -67,7 +57,7 @@ namespace GameZone.WEB.Controllers
             //{
             //    //Implement Caching of last game category selected
             //    GameUserIdentity.LoggedInUser = s.ToModel();
-            //subscriber.UpdateGameUserLastAccess(t, s);
+                //subscriber.UpdateGameUserLastAccess(t, s);
             return View();
             //}
         }
