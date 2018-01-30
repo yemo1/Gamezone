@@ -1,4 +1,5 @@
-﻿using GameZone.VIEWMODEL;
+﻿using GameZone.Repositories;
+using GameZone.VIEWMODEL;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,19 @@ namespace GameZone.Controllers
     {
         //Hosted web API REST Service base url  
         string Baseurl = "http://funmobilelive.html5games.net/";
-        
+
+        Entities.GameContext _context;
+        GameData.NGSubscriptionsEntities _NGSubscriptionsEntities;
+        ISubscriberRepository _ISubscriberRepository;
+        IAppUserRepository _IAppUserRepository;
+        public GameController(ISubscriberRepository iSubscriberRepository, IAppUserRepository iAppUserRepository, GameData.NGSubscriptionsEntities nGSubscriptionsEntities, Entities.GameContext context)
+        {
+            _context = context;
+            _NGSubscriptionsEntities = nGSubscriptionsEntities;
+            _ISubscriberRepository = iSubscriberRepository;
+            _IAppUserRepository = iAppUserRepository;
+        }
+
         /// <summary>
         /// Method to get games regardless of category
         /// </summary>
@@ -102,43 +115,55 @@ namespace GameZone.Controllers
 
         public class NewSubscriber
         {
+            public string nO { get; set; }
             public string t { get; set; }
             public int sT { get; set; }
         }
+
         public ReturnMessage PostNewSubscriber(NewSubscriber newSubscriber)
         {
             GameData.Game gameVW;
             try
             {
-                Entities.GameContext _context = new Entities.GameContext();
-                GameData.NGSubscriptionsEntities _NGSubscriptionsEntities = new GameData.NGSubscriptionsEntities();
-                var subscriber = new Repositories.Subscriber(_context, _NGSubscriptionsEntities);
+                //var subscriber = new SubscriberRepository(_context, _NGSubscriptionsEntities);
 
-                var mobileUser = subscriber.GetUserByPhoneNo(newSubscriber.t);
+                var mobileUser = _ISubscriberRepository.GetUserByPhoneNoWithoutExpDateCheck(newSubscriber.t);
                 //If user subscription is expired
                 if (mobileUser == null)
                 {
                     gameVW = new GameData.Game()
                     {
+                        NetworkOperator = newSubscriber.nO,
                         MSISDN = newSubscriber.t,
                         SubDate = DateTime.Now,
                         ExpDate = (newSubscriber.sT == 0) ? DateTime.Today.AddDays(7) : DateTime.Today.AddDays(1),
                         Timestamped = DateTime.Now,
                         Token = Guid.NewGuid().ToString().Substring(0, 7).ToUpper()
                     };
-                    return subscriber.PostNewSubscriber(gameVW);
+                    return new ReturnMessage()
+                    {
+                        ID = _ISubscriberRepository.PostNewSubscriber(gameVW),
+                        Message = $"Subscription Successful. Valid till: {gameVW.ExpDate.Value.ToShortDateString()}",
+                        Success = true
+                    };
                 }
                 else
                 {
-                    gameVW = new GameData.Game()
+                    mobileUser.SubDate = DateTime.Now;
+                    mobileUser.ExpDate = (newSubscriber.sT == 0) ?
+                       (mobileUser.ExpDate < DateTime.Now) ?//if subscription is already expired
+                       DateTime.Now.AddDays(7) : // New Expiry Date is 7 days from today
+                       mobileUser.ExpDate.Value.AddDays(7) : //else New Expiry Date is 7 days from Old Expiry Date
+                       (mobileUser.ExpDate < DateTime.Now) ? //if subscription is already expired
+                       DateTime.Now.AddDays(1) :// New Expiry Date is 1 day from today
+                       mobileUser.ExpDate.Value.AddDays(1);//else New Expiry Date is 1 day from Old Expiry Date
+
+                    return new ReturnMessage()
                     {
-                        MSISDN = newSubscriber.t,
-                        SubDate = DateTime.Now,
-                        ExpDate = (newSubscriber.sT == 0) ? mobileUser.ExpDate.Value.AddDays(7) : mobileUser.ExpDate.Value.AddDays(1),
-                        Timestamped = DateTime.Now,
-                        Token = mobileUser.Token
+                        ID = _ISubscriberRepository.PostNewSubscriber(mobileUser),
+                        Message = $"Subscription Successful. Valid till: {mobileUser.ExpDate.Value.ToShortDateString()}",
+                        Success = true
                     };
-                    return subscriber.PostNewSubscriber(gameVW);
                 }
             }
             catch (Exception ex)

@@ -5,6 +5,20 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="NGSubscriptionsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AppUser">
+          <Key>
+            <PropertyRef Name="AppUserId" />
+          </Key>
+          <Property Name="AppUserId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="szImgURL" Type="varchar" MaxLength="1000" />
+          <Property Name="szUsername" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="szPassword" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="szPasswordSalt" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="iStatus" Type="int" Nullable="false" />
+          <Property Name="dCreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="iChangePW" Type="bit" Nullable="false" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="Games">
           <Key>
             <PropertyRef Name="Id" />
@@ -18,7 +32,22 @@
           <Property Name="Timestamped" Type="datetime" />
           <Property Name="LastAccess" Type="datetime" />
         </EntityType>
+        <Function Name="AddAppUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="szImgURL" Type="varchar" Mode="In" />
+          <Parameter Name="szUsername" Type="varchar" Mode="In" />
+          <Parameter Name="szPassword" Type="varchar" Mode="In" />
+          <Parameter Name="szPasswordSalt" Type="varchar" Mode="In" />
+          <Parameter Name="iStatus" Type="int" Mode="In" />
+          <Parameter Name="dCreatedOn" Type="datetime" Mode="In" />
+          <Parameter Name="iChangePW" Type="bit" Mode="In" />
+          <Parameter Name="isDeleted" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="GetAppUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AppUserId" Type="bigint" Mode="In" />
+          <Parameter Name="szUsername" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="NGSubscriptionsModelStoreContainer">
+          <EntitySet Name="AppUser" EntityType="Self.AppUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Games" EntityType="Self.Games" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -27,6 +56,21 @@
       <Schema Namespace="NGSubscriptionsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="NGSubscriptionsEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Games" EntityType="NGSubscriptionsModel.Game" />
+          <EntitySet Name="AppUsers" EntityType="NGSubscriptionsModel.AppUser" />
+          <FunctionImport Name="AddAppUser" ReturnType="Collection(NGSubscriptionsModel.AddAppUser_Result)">
+            <Parameter Name="szImgURL" Mode="In" Type="String" />
+            <Parameter Name="szUsername" Mode="In" Type="String" />
+            <Parameter Name="szPassword" Mode="In" Type="String" />
+            <Parameter Name="szPasswordSalt" Mode="In" Type="String" />
+            <Parameter Name="iStatus" Mode="In" Type="Int32" />
+            <Parameter Name="dCreatedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="iChangePW" Mode="In" Type="Boolean" />
+            <Parameter Name="isDeleted" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="GetAppUser" ReturnType="Collection(NGSubscriptionsModel.GetAppUser_Result)">
+            <Parameter Name="AppUserId" Mode="In" Type="Int64" />
+            <Parameter Name="szUsername" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Game">
           <Key>
@@ -41,6 +85,36 @@
           <Property Name="Timestamped" Type="DateTime" Precision="3" />
           <Property Name="LastAccess" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="AppUser">
+          <Key>
+            <PropertyRef Name="AppUserId" />
+          </Key>
+          <Property Name="AppUserId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="szImgURL" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="szUsername" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="szPassword" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="szPasswordSalt" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="iStatus" Type="Int32" Nullable="false" />
+          <Property Name="dCreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="iChangePW" Type="Boolean" Nullable="false" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <ComplexType Name="AddAppUser_Result">
+          <Property Type="Boolean" Name="isSuccess" Nullable="false" />
+          <Property Type="String" Name="id" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="message" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetAppUser_Result">
+          <Property Type="Int64" Name="AppUserId" Nullable="false" />
+          <Property Type="String" Name="szImgURL" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="szUsername" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="szPassword" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="szPasswordSalt" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="iStatus" Nullable="false" />
+          <Property Type="DateTime" Name="dCreatedOn" Nullable="false" Precision="23" />
+          <Property Type="Boolean" Name="iChangePW" Nullable="false" />
+          <Property Type="Boolean" Name="isDeleted" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -61,6 +135,45 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="AppUsers">
+            <EntityTypeMapping TypeName="NGSubscriptionsModel.AppUser">
+              <MappingFragment StoreEntitySet="AppUser">
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="iChangePW" ColumnName="iChangePW" />
+                <ScalarProperty Name="dCreatedOn" ColumnName="dCreatedOn" />
+                <ScalarProperty Name="iStatus" ColumnName="iStatus" />
+                <ScalarProperty Name="szPasswordSalt" ColumnName="szPasswordSalt" />
+                <ScalarProperty Name="szPassword" ColumnName="szPassword" />
+                <ScalarProperty Name="szUsername" ColumnName="szUsername" />
+                <ScalarProperty Name="szImgURL" ColumnName="szImgURL" />
+                <ScalarProperty Name="AppUserId" ColumnName="AppUserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="AddAppUser" FunctionName="NGSubscriptionsModel.Store.AddAppUser">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NGSubscriptionsModel.AddAppUser_Result">
+                <ScalarProperty Name="isSuccess" ColumnName="isSuccess" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="message" ColumnName="message" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAppUser" FunctionName="NGSubscriptionsModel.Store.GetAppUser">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NGSubscriptionsModel.GetAppUser_Result">
+                <ScalarProperty Name="AppUserId" ColumnName="AppUserId" />
+                <ScalarProperty Name="szImgURL" ColumnName="szImgURL" />
+                <ScalarProperty Name="szUsername" ColumnName="szUsername" />
+                <ScalarProperty Name="szPassword" ColumnName="szPassword" />
+                <ScalarProperty Name="szPasswordSalt" ColumnName="szPasswordSalt" />
+                <ScalarProperty Name="iStatus" ColumnName="iStatus" />
+                <ScalarProperty Name="dCreatedOn" ColumnName="dCreatedOn" />
+                <ScalarProperty Name="iChangePW" ColumnName="iChangePW" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

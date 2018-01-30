@@ -22,7 +22,7 @@ namespace GameZone.Controllers
         [Route("Auth/{token}")]
         public IHttpActionResult Get(string token)
         {
-            var subscriber = new Subscriber();
+            var subscriber = new SubscriberRepository();
             var s = subscriber.GetUser(token);
             if (s == null)
             {
@@ -38,7 +38,7 @@ namespace GameZone.Controllers
         [Route("ByTel")]
         public IHttpActionResult GetByTel(string tell)
         {
-            var subscriber = new Subscriber();
+            var subscriber = new SubscriberRepository();
             var s = subscriber.GetUserByPhoneNo(tell);
             if (s == null)
             {

@@ -7,10 +7,12 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
     $("#homeMenu").addClass("current");
 
     $scope.basicObj = {};
+    $scope.registerObj = {};
+    $scope.loginObj = {};
     $scope.basicObj.sT = 0;
 
     // Detect Device Type and Display Appropriate Subscription Modal
-   
+
 
     //Detect Device Type and Display Appropriate Subscription Modal
     //if (_IsMobile == "False") {
@@ -35,7 +37,7 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
                     if (rec.title != "What's My Icon?") {
                         gameContent = "<div class='col-sm-2 col-xs-6 isotopeSelector block " + selectedCat + "'>";
                         gameContent = gameContent + "<div class='service-wrap hovereffect panel clearfix animate' data-animate='bounceIn' data-duration='1.0s' data-delay='0.2s'>";
-                        gameContent = gameContent + "<a href='" + rec.url + "' class='game-link'>";                       
+                        gameContent = gameContent + "<a href='" + rec.url + "' class='game-link'>";
 
                         gameContent = gameContent + "<h3 class='game-title hiddenPara'>" + rec.title + "</h3>";
                         gameContent = gameContent + "<p class='game-category hiddenPara'>" + selectedCat + "</p>";
@@ -44,9 +46,9 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
                         gameContent = gameContent + "<div class='lazy'>";
                         gameContent = gameContent + "<img data-original='" + rec.banner_medium + "' alt='" + rec.title + "' class='img-responsive' width='100%' height='186.45' max-width='294.98' max-height='187.7'/>";
                         gameContent = gameContent + "</div><div class='game-description'>";
-                        
+
                         gameContent = gameContent + "<h3 class='game-title text-center '>" + rec.title + "</h3>";
-                        
+
                         gameContent = gameContent + "<a class='pull-right btn  bitsumishi game-link' href='" + rec.url + "'>play";
                         gameContent = gameContent + "<p class='game-category hiddenPara'>" + selectedCat + "</p>";
                         gameContent = gameContent + "<div class='longDescription hiddenPara'>" + rec.long_description + "</div>";
@@ -100,9 +102,9 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
         e.preventDefault();
         window.location = "games/gameplay";
     });
-   
+
     $scope.SaveNewSubscriber = function () {
-        
+
         $scope.basicObj.nO = $('select#nOSelect option:selected').val();
 
         //Enable COntrols
@@ -122,20 +124,121 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
         });
         $(".disabledCtrl").removeAttr("disabled");
     };
+
+    $scope.RegisterNewUser = function () {
+        //if (!validateEmail(userName)) {
+        //    alert("Please enter a valid email address");
+        //    return;
+        //}
+        //Enable COntrols
+        $(".disabledCtrl").attr("disabled", "disabled");
+        $scope.registerObj.AppUserId = 0;
+        $scope.registerObj.szImgURL = "";
+        $scope.registerObj.szPasswordSalt = "";
+        $scope.registerObj.iStatus = 0;
+        $scope.registerObj.dCreatedOn = "2018-01-01";
+        $scope.registerObj.iChangePW = false;
+        $scope.registerObj.isDeleted = false;
+
+        $.ajax({
+            type: "POST",
+            data: $scope.registerObj,
+            url: apiURL + "/api/AppUser",
+            async: false,
+            success: function (data) {
+                if (data.Success) {
+                    $.notify(data.Message, 'success');
+                    $('#loginModal').modal('hide');
+                }
+            }, error: function (data) {
+            }
+        });
+        $(".disabledCtrl").removeAttr("disabled");
+    };
+
+    //Login Handler
+    $scope.userLogin = function () {
+        if ($scope.loginObj.szUsername == "") {
+            $.notify("Please enter your username.", 'error');
+            return;
+        }
+        if ($scope.loginObj.szPassword == "") {
+            $.notify("Please enter your password.", 'error');
+            return;
+        }
+        //show loader
+        $("#loadingGif").css("display", "block");
+        //Disable COntrols
+        $(".disabledCtrl").attr("disabled", "disabled");
+
+        setTimeout(function () {
+            $.get(apiURL + "/api/AppUser/AuthenticateUser?szUsername=" + $scope.loginObj.szUsername + "&szPassword=" + $scope.loginObj.szPassword)
+                .success(function (data) {
+                    if (!data.Success) {
+                        $.notify(data.Message, 'error');
+                        //Hide Loading Gif
+                        $("#loadingGif").css("display", "none");
+                        //Enable COntrols
+                        $(".disabledCtrl").removeAttr("disabled");
+                        $scope.loginObj.szPassword = "";
+                        $("#txtPassword").val("");
+                        $("#txtUsername").focus();
+                    } else {
+                        $scope.StartValidUserSession(data.Data);
+                    }
+                }).error(function (data) {
+                    $.notify(data.statusText, 'error');
+                    //Hide Loading Gif
+                    $("#loadingGif").css("display", "none");
+                    //Enable COntrols
+                    $(".disabledCtrl").removeAttr("disabled");
+                });
+        }, 1000);
+    };
+
+    //Get Application Roles Data for Dropdown
+    $scope.StartValidUserSession = function (LoginAppUserVM) {
+        $.post("/Account/StartValidUserSession", {
+            loginAppUserVM: LoginAppUserVM
+        }).success(function (data) {
+            if (data != "") {
+                window.location = data;
+            }
+        }).error(function (data) {
+            $.notify(data.statusText, 'error');
+            //Hide Loading Gif
+            $("#loadingGif").css("display", "none");
+            //Enable COntrols
+            $(".disabledCtrl").removeAttr("disabled");
+        });
+    };
 });
 
 //Allow Only Numbers into Tel Textbox
-$(document).on("keypress keyup blur", ".allownumericwithoutdecimal", function (event) {
-    $(this).val($(this).val().replace(/[^\d].+/, ""));
-    if ((event.which < 48 || event.which > 57)) {
-        event.preventDefault();
-    }
-});
-
-//$(document).on("click", ".flwpug_getpaid", function () {
-
+//$(document).on("keypress keyup blur", ".allownumericwithoutdecimal", function (event) {
+//    $(this).val($(this).val().replace(/[^\d].+/, ""));
+//    if ((event.which < 48 || event.which > 57)) {
+//        event.preventDefault();
+//    }
 //});
+
 $("#pcSubscriptionModal").modal("show");
 $("a.flwpug_getpaid").find("button").addClass("btn btn-primary");
-//$("a.flwpug_getpaid button")
-//$(".flwpug_getpaid").click();
+
+//Allow Only Numbers into Tel Textboxes
+$(document).on("keypress keyup blur", ".allownumericwithoutdecimal", function (event) {
+    ////If entry contains alphabet, validate email address format
+    //var userName = $(this).val();
+    //if (!/[a-z]/i.test(userName)) {
+    //     $(this).val(userName.replace(/[^\d].+/, ""));
+    //    if ((event.which < 48 || event.which > 57)) {
+    //        event.preventDefault();
+    //    }
+    //}
+});
+
+//Function to Validate Email address format
+function validateEmail(Email) {
+    var pattern = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+    return $.trim(Email).match(pattern) ? true : false;
+}

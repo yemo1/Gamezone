@@ -8,17 +8,17 @@ using System.Data.Entity.Infrastructure;
 
 namespace GameZone.Repositories
 {
-    public class Subscriber : ISubscriber
+    public class SubscriberRepository : ISubscriberRepository
     {
         private GameContext _context;
         private NGSubscriptionsEntities _NGSubscriptionsEntities;
-        public Subscriber(GameContext context, NGSubscriptionsEntities nGSubscriptionsEntities)
+        public SubscriberRepository(GameContext context, NGSubscriptionsEntities nGSubscriptionsEntities)
         {
             _context = context;
             _NGSubscriptionsEntities = nGSubscriptionsEntities;
         }
 
-        public Subscriber()
+        public SubscriberRepository()
         {
             _context = new GameContext();
         }
@@ -122,9 +122,8 @@ namespace GameZone.Repositories
         /// <param name="t">User's Telephone Number</param>
         /// <param name="sT">Users selected Subscription Type</param>
         /// <returns></returns>
-        public ReturnMessage PostNewSubscriber(GameData.Game game)
+        public int PostNewSubscriber(GameData.Game game)
         {
-            ReturnMessage returnMessage;
             try
             {
                 //Check if User already exists in DB
@@ -138,28 +137,11 @@ namespace GameZone.Repositories
 
                 }
                 var retVal = _NGSubscriptionsEntities.SaveChanges();
-                return returnMessage = new ReturnMessage()
-                {
-                    ID = retVal,
-                    Message = $"Subscription Successful. Valid till: {game.ExpDate.Value.ToShortDateString()}",
-                    Success = true
-                };
-
+                return retVal;
             }
             catch (Exception ex)
             {
-                if (!SubscriberExists(game.MSISDN))
-                {
-                    return returnMessage = new ReturnMessage()
-                    {
-                        Message = ex.Message,
-                        Success = false
-                    };
-                }
-                else
-                {
-                    throw;
-                }
+                    throw ex;
             }
         }
         public bool SubscriberExists(string tell)

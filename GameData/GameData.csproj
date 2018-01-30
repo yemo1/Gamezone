@@ -62,6 +62,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddAppUser_Result.cs">
+      <DependentUpon>GameModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppUser.cs">
+      <DependentUpon>GameModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\GameContext.cs" />
     <Compile Include="Game.cs">
       <DependentUpon>GameModel.tt</DependentUpon>
@@ -81,9 +87,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GameModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="GetAppUser_Result.cs">
+      <DependentUpon>GameModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\ISubscriber.cs" />
-    <Compile Include="Repositories\Subscriber.cs" />
+    <Compile Include="Repositories\IAppUserRepository.cs" />
+    <Compile Include="Repositories\ISubscriberRepository.cs" />
+    <Compile Include="Repositories\AppUserRepository.cs" />
+    <Compile Include="Repositories\SubscriberRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="GameModel.edmx">
@@ -117,6 +128,10 @@
     <Folder Include="HBMFile\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GameZone.TOOLS\GameZone.TOOLS.csproj">
+      <Project>{98c4a542-b769-47d8-938c-28b51a82ca24}</Project>
+      <Name>GameZone.TOOLS</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GameZone.VIEWMODEL\GameZone.VIEWMODEL.csproj">
       <Project>{bc9b7218-01c0-42fd-be15-d30e21807093}</Project>
       <Name>GameZone.VIEWMODEL</Name>
