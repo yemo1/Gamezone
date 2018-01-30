@@ -1087,6 +1087,17 @@ body::-webkit-scrollbar-thumb {
     .header-black .hamb-mob-icon {
         color: #ffffff;
     }
+
+    #main-menu .navbar .nav>li.dropdown> button {
+        font-weight: 400;
+        margin: 0!important;
+        padding: 16px 9px 16px 17px!important;
+        text-decoration: none;
+        width: 100%;
+        text-align: left;
+        color: #d3d3d3!important;
+        border: none!important;
+    }
 }
 
 @media(max-width:800px) {

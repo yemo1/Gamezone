@@ -57,27 +57,17 @@
                             <div id="main-menu" class="">
                                 <div class="navbar navbar-default" role="navigation">
                                     <nav class="navbar-collapse  collapse row" aria-expanded="false" style="height: 0px;">
-                                        <div class="col-md-2 col-md-offset-3 no-pad">
+                                        <div class="col-md-2 col-md-offset-3 ">
                                             <ul class="nav navbar-nav" id="menuUL">
                                                 <li class="parent current" id="homeMenu">
                                                     <a href="/Home" class=""><div class="main-menu-title">Home</div></a>
                                                 </li>
                                                <li class="parent " id="gameMenu">
                                                     <a href="/Games/List" class=""><div class="main-menu-title">Games </div></a>
-                                                </li>
-                                                <li class="dropdown">
-                                                    <button class="main-menu-title" id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            Account 
-                                                            <span class="caret"></span>
-                                                        </button>
-                                                        <ul class="dropdown-menu" aria-labelledby="dLabel">
-                                                            <li><a data-toggle="modal" id="login-target" data-target="#loginModal">Login </a></li>
-                                                            <li><a data-toggle="modal" id="register-target"  data-target="#loginModal">Register </a></li>
-                                                        </ul>
-                                                </li>                                               
+                                                </li>                                       
                                             </ul>
                                         </div>
-                                        <div class="col-md-6 no-pad col-md-offset-1 ">
+                                        <div class="col-md-7  ">
                                             <div class="filter-container isotopeFilters">
                                                 <ul class="text-center nav navbar-nav top-filter">
                                                     <li class="gameMenu parent active all collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse" id="family"><a href="#" data-filter=".family"><i class="fa fa-universal-access"></i>Family</a></li>
@@ -87,6 +77,16 @@
                                                     <li class="gameMenu parent car  collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse" id="sports"><a href="#" data-filter=".sports"> <i class="fa fa-soccer-ball-o"></i>Sports</a></li>
                                                     <li class="gameMenu parent car  collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse" id="adventure"><a href="#" data-filter=".adventure"> <i class="fa fa-anchor"></i>Adventure</a></li>
                                                     <li class="gameMenu parent car  collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse" id="puzzle"><a href="#" data-filter=".puzzle"> <i class="fa fa-puzzle-piece"></i>Puzzle</a></li>
+                                                    <li class="dropdown parent   collapsed"  data-toggle="collapse" data-target="#main-menu .navbar-collapse">
+                                                        <button class="main-menu-title" id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            Account
+                                                            <span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dLabel">
+                                                            <li><a data-toggle="modal" id="login-target" data-target="#loginModal">Login </a></li>
+                                                            <li><a data-toggle="modal" id="register-target" data-target="#loginModal">Register </a></li>
+                                                        </ul>
+                                                    </li> 
                                                 </ul>
                                             </div>
                                         </div>                                       
@@ -128,7 +128,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-6 col-sm-offset-3">
+                                    <div class="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
                                         <hr />
                                         <p class="text-center">Don't have an account?  <a id="register-link">Register</a></p>
                                     </div>
@@ -156,7 +156,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-6 col-sm-offset-3">
+                                    <div class="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
                                         <hr />
                                         <p class="text-center">Already have an account? <a id="login-link">Login</a></p>
                                     </div>
