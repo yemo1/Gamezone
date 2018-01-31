@@ -14,18 +14,18 @@ namespace GameZone.WEB.Controllers
     {
         public ActionResult Index(string phoneNo)
         {
-            Entities.GameContext _context = new Entities.GameContext();
-            NGSubscriptionsEntities _NGSubscriptionsEntities = new NGSubscriptionsEntities();
-            var subscriber = new Subscriber(_context, _NGSubscriptionsEntities);
-            var s = subscriber.GetUserByPhoneNo(phoneNo);
-            if (s == null)
-            {
-                return RedirectToAction("Index", "Home");
-            }
-            else
-            {
+            //Entities.GameContext _context = new Entities.GameContext();
+            //NGSubscriptionsEntities _NGSubscriptionsEntities = new NGSubscriptionsEntities();
+            //var subscriber = new SubscriberRepository(_context, _NGSubscriptionsEntities);
+            //var s = subscriber.GetUserByPhoneNo(phoneNo);
+            //if (s == null)
+            //{
+            //    return RedirectToAction("Index", "Home");
+            //}
+            //else
+            //{
                 return View();
-            }
+            //}
         }
         /// <summary>
         /// This is the view to display complete list of games

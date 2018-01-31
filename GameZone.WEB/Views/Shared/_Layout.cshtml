@@ -41,7 +41,7 @@
                             <div class="logo-container-2">
                                 <div class="logo-2">
                                     <a href="/Home" class="clearfix">
-                                        <img src="~/Content/images/logo.png" alt="Gamezone logo"/>
+                                        <img src="~/Content/images/logo.png" alt="Gamezone logo" />
                                     </a>
                                 </div>
                             </div>
@@ -62,7 +62,7 @@
                                                 <li class="parent current" id="homeMenu">
                                                     <a href="/Home" class=""><div class="main-menu-title">Home</div></a>
                                                 </li>
-                                               <li class="parent " id="gameMenu">
+                                                <li class="parent " id="gameMenu">
                                                     <a href="/Games/List" class=""><div class="main-menu-title">Games </div></a>
                                                 </li>
                                                 <li class="dropdown">
@@ -99,84 +99,14 @@
                 </div>
             </header>
             <main class="main-content">
-           
-            @* PC Login/Registration Modal *@
-            <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <h3 class="modal-title text-center animated hide" id="login-header"> Login</h3>
-                                <h3 class="modal-title text-center animated" id="register-header" >Create Account</h3>
-                        </div>
-                        <div class="modal-body">
-                            <form class="form-horizontal hide animated" id="login-form">
-                                <div class="form-group row">
-                                    <div class="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
-                                        <input type="text" class="form-control " placeholder="Username">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
-                                        <input type="text" class="form-control " placeholder="password">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 col-sm-offset-3  col-xs-6 col-xs-offset-3">
-                                        <button class="btn btn-primary btn-block "> Login</button>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
-                                        <hr />
-                                        <p class="text-center">Don't have an account?  <a id="register-link">Register</a></p>
-                                    </div>
-                                </div>
-                            </form>
-                            <form class="form-horizontal animated" id="register-form">
-                                <div class="form-group row">
-                                    <div class="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
-                                        <input type="text" class="form-control " placeholder="Email address">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
-                                        <input type="text" class="form-control " placeholder="password">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
-                                        <input type="text" class="form-control " placeholder="Confirm password">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 col-sm-offset-3  col-xs-6 col-xs-offset-3">
-                                        <button class="btn btn-primary btn-block "> Register</button>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
-                                        <hr />
-                                        <p class="text-center">Already have an account? <a id="login-link">Login</a></p>
-                                    </div>
-                                </div>
-                    
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
                 @RenderBody()
                 <footer id="footer4" class="footer2-black site-footer">
                     <div class="container">
                         <div class="row">
                             <div class="col-md-5 widget pt-10 ">
                                 <div class="footer2-text-cont contact">
-                                    <img  class="footer-logo" src="~/Content/images/logo 1 flip.png" alt="Gamezone" />
-                                   <p>Get so much more by subscribing a token for loads of interesting Arcade, Sports, Family and Puzzle games!</p>
+                                    <img class="footer-logo" src="~/Content/images/logo 1 flip.png" alt="Gamezone" />
+                                    <p>Get so much more by subscribing a token for loads of interesting Arcade, Sports, Family and Puzzle games!</p>
                                 </div>
                             </div>
                             <div class="col-md-2 widget pt-10 col-md-offset-2">
@@ -209,8 +139,8 @@
                                 </div>
                             </div>
                         </div>
-                        
-                       
+
+
                     </div>
                     <p id="back-top">
                         <a href="#top" title="Back to Top"><span class="icon icon-arrows-up"><i class="fa fa-arrow-up"></i></span></a>
@@ -246,7 +176,7 @@
 
     @*customjs*@
     <script src="~/Content/js/site.js"></script>
-    
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

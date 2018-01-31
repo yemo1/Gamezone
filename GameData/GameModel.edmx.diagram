@@ -6,6 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="213ce2a3714e4999bd1b4c4a95fc14bc" Name="Diagram1">
         <EntityTypeShape EntityType="NGSubscriptionsModel.Game" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="NGSubscriptionsModel.AppUser" Width="1.5" PointX="3.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
