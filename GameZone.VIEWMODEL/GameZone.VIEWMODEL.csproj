@@ -41,8 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LoginAppUserVM.cs" />
-    <Compile Include="AppUserVM.cs" />
     <Compile Include="GameVM.cs" />
     <Compile Include="ResponseStatus.cs" />
     <Compile Include="ReturnMessage.cs" />

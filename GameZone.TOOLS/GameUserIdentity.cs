@@ -5,9 +5,9 @@ namespace GameZone.TOOLS
 {
     public class GameUserIdentity
     {
-        public static LoginAppUserVM LoggedInUser
+        public static GameVM LoggedInUser
         {
-            get { return ((LoginAppUserVM)HttpContext.Current.Session["GameUser"]) ?? null; }
+            get { return ((GameVM)HttpContext.Current.Session["GameUser"]) ?? null; }
             set { HttpContext.Current.Session["GameUser"] = value; }
         }
     }
