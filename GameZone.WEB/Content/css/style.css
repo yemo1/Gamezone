@@ -122,6 +122,10 @@ header {
     margin: 0 4px 0;
 }
 
+.affix.header .dropdown button {
+    padding:18px 0px 5px;
+}
+
 #main-menu .navbar .nav > li:hover > a, .dropdown button:hover {
     color: rgb(255, 106, 0);
 }
@@ -208,20 +212,29 @@ main:before {
     background-position: 100% 0;
 }
 .game-filter {
-    background-color: #ff6a00;
-    position: relative;
+    background-color: #6d9cbc;
     margin-bottom: 35px;
+    z-index: 10;
+    box-shadow: 1px 4px 7px 1px rgba(0, 0, 0, 0.12);
 }
 
- .game-filter:after{
+.filter-fixed {    
+    height: 50px;
+    width: 100%;
+    top: 60px;
+    position: fixed;
+    
+}
+
+ /*.game-filter:after{
     content: '';
     display: table;
     background: url(../images/filter-bg-bottom.png) no-repeat center bottom;
     width: 100%;
     height: 28px;
-    bottom: -28px;
-    position: relative;
- }
+    bottom: -26px;
+    position: absolute;
+ }*/
  
  .filter {
     margin: 0;
@@ -750,6 +763,18 @@ body::-webkit-scrollbar-thumb {
     margin-right: 5px;
 }
 
+.top-filter li a{
+    color:#fafcfe;
+}
+
+.top-filter li a:hover{
+    color: #6d9cbc;
+}
+
+.top-filter li.active {
+    background:#f5fafc;
+}
+
 .top-filter li.active a {
     color:#ff6a00 !important;
 }
@@ -1113,6 +1138,13 @@ body::-webkit-scrollbar-thumb {
     .hovereffect img {
         max-height: 76.03px;
     }
+}
+
+@media(min-width:1024px){
+    .top-filter li {
+        float: left;
+    }
+
 }
 
 @media(min-width:360px) {
