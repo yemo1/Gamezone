@@ -19,7 +19,7 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
     
     
     // Detect Device Type and Display Appropriate Subscription Modal
-
+   
 
     //Detect Device Type and Display Appropriate Subscription Modal
     //if (_IsMobile == "False") {
@@ -44,7 +44,7 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
                     if (rec.title != "What's My Icon?") {
                         gameContent = "<div class='col-sm-2 col-xs-6 isotopeSelector block " + selectedCat + "'>";
                         gameContent = gameContent + "<div class='service-wrap hovereffect panel clearfix animate' data-animate='bounceIn' data-duration='1.0s' data-delay='0.2s'>";
-                        gameContent = gameContent + "<a href='" + rec.url + "' class='game-link'>";
+                        gameContent = gameContent + "<a href='" + rec.url + "' class='game-link'>";                       
 
                         gameContent = gameContent + "<h3 class='game-title hiddenPara'>" + rec.title + "</h3>";
                         gameContent = gameContent + "<p class='game-category hiddenPara'>" + selectedCat + "</p>";
@@ -53,9 +53,9 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
                         gameContent = gameContent + "<div class='lazy'>";
                         gameContent = gameContent + "<img data-original='" + rec.banner_medium + "' alt='" + rec.title + "' class='img-responsive' width='100%' height='186.45' max-width='294.98' max-height='187.7'/>";
                         gameContent = gameContent + "</div><div class='game-description'>";
-
+                        
                         gameContent = gameContent + "<h3 class='game-title text-center '>" + rec.title + "</h3>";
-
+                        
                         gameContent = gameContent + "<a class='pull-right btn  bitsumishi game-link' href='" + rec.url + "'>play";
                         gameContent = gameContent + "<p class='game-category hiddenPara'>" + selectedCat + "</p>";
                         gameContent = gameContent + "<div class='longDescription hiddenPara'>" + rec.long_description + "</div>";
@@ -109,7 +109,7 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
         e.preventDefault();
         window.location = "games/gameplay";
     });
-
+   
     $scope.SaveNewSubscriber = function () {
 
         alert($scope.basicObj.sT);
@@ -283,12 +283,6 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
     });
 });
 
-//Allow Only Numbers into Tel Textbox
-//$(document).on("keypress keyup blur", ".allownumericwithoutdecimal", function (event) {
-//    $(this).val($(this).val().replace(/[^\d].+/, ""));
-//    if ((event.which < 48 || event.which > 57)) {
-//        event.preventDefault();
-//    }
 //});
 
 //$("#pcSubscriptionModal").modal("show");

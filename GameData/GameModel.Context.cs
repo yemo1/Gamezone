@@ -12,8 +12,6 @@ namespace GameData
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.Data.Entity.Core.Objects;
-    using System.Linq;
     
     public partial class NGSubscriptionsEntities : DbContext
     {
@@ -28,56 +26,5 @@ namespace GameData
         }
     
         public virtual DbSet<Game> Games { get; set; }
-        public virtual DbSet<AppUser> AppUsers { get; set; }
-    
-        public virtual ObjectResult<AddAppUser_Result> AddAppUser(string szImgURL, string szUsername, string szPassword, string szPasswordSalt, Nullable<int> iStatus, Nullable<System.DateTime> dCreatedOn, Nullable<bool> iChangePW, Nullable<bool> isDeleted)
-        {
-            var szImgURLParameter = szImgURL != null ?
-                new ObjectParameter("szImgURL", szImgURL) :
-                new ObjectParameter("szImgURL", typeof(string));
-    
-            var szUsernameParameter = szUsername != null ?
-                new ObjectParameter("szUsername", szUsername) :
-                new ObjectParameter("szUsername", typeof(string));
-    
-            var szPasswordParameter = szPassword != null ?
-                new ObjectParameter("szPassword", szPassword) :
-                new ObjectParameter("szPassword", typeof(string));
-    
-            var szPasswordSaltParameter = szPasswordSalt != null ?
-                new ObjectParameter("szPasswordSalt", szPasswordSalt) :
-                new ObjectParameter("szPasswordSalt", typeof(string));
-    
-            var iStatusParameter = iStatus.HasValue ?
-                new ObjectParameter("iStatus", iStatus) :
-                new ObjectParameter("iStatus", typeof(int));
-    
-            var dCreatedOnParameter = dCreatedOn.HasValue ?
-                new ObjectParameter("dCreatedOn", dCreatedOn) :
-                new ObjectParameter("dCreatedOn", typeof(System.DateTime));
-    
-            var iChangePWParameter = iChangePW.HasValue ?
-                new ObjectParameter("iChangePW", iChangePW) :
-                new ObjectParameter("iChangePW", typeof(bool));
-    
-            var isDeletedParameter = isDeleted.HasValue ?
-                new ObjectParameter("isDeleted", isDeleted) :
-                new ObjectParameter("isDeleted", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AddAppUser_Result>("AddAppUser", szImgURLParameter, szUsernameParameter, szPasswordParameter, szPasswordSaltParameter, iStatusParameter, dCreatedOnParameter, iChangePWParameter, isDeletedParameter);
-        }
-    
-        public virtual ObjectResult<GetAppUser_Result> GetAppUser(Nullable<long> appUserId, string szUsername)
-        {
-            var appUserIdParameter = appUserId.HasValue ?
-                new ObjectParameter("AppUserId", appUserId) :
-                new ObjectParameter("AppUserId", typeof(long));
-    
-            var szUsernameParameter = szUsername != null ?
-                new ObjectParameter("szUsername", szUsername) :
-                new ObjectParameter("szUsername", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAppUser_Result>("GetAppUser", appUserIdParameter, szUsernameParameter);
-        }
     }
 }

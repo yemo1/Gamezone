@@ -3,7 +3,7 @@
 namespace GameZone.WEB.Controllers
 {
     public class HomeController : Controller
-    {        
+    {
         public ActionResult Index()
         {
             var request = ControllerContext.HttpContext.Request;
