@@ -1,16 +1,23 @@
 ﻿
 var formTitle = _Title;
-
+if (loggedInUsername == "") {
+    $('#loginModal').modal('show');
+}
+//alert(loggedInUsername);
 gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
     //Make Games Page Menu Active
     $("#menuUL li").removeClass("current");
     $("#homeMenu").addClass("current");
 
+    //Hide Loaders by default
+    $("#logLoda, #regLoda").css("display", "none");
+
+
     $scope.basicObj = {};
     $scope.registerObj = {};
     $scope.loginObj = {};
-    $scope.basicObj.sT = 0;
-
+    
+    
     // Detect Device Type and Display Appropriate Subscription Modal
 
 
@@ -105,6 +112,8 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
 
     $scope.SaveNewSubscriber = function () {
 
+        alert($scope.basicObj.sT);
+        return;
         $scope.basicObj.nO = $('select#nOSelect option:selected').val();
 
         //Enable COntrols
@@ -126,11 +135,39 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
     };
 
     $scope.RegisterNewUser = function () {
-        //if (!validateEmail(userName)) {
-        //    alert("Please enter a valid email address");
-        //    return;
-        //}
-        //Enable COntrols
+        var szUsername = $scope.registerObj.szUsername;
+        var containsAlphabet = /[a-z]/i.test(szUsername);
+        if (containsAlphabet) {
+            if (!validateEmail(szUsername)) {
+                $.notify("Please enter a valid email address.", 'error');
+                return;
+            }
+        }
+
+        if ($scope.registerObj.szUsername == undefined || $scope.registerObj.szUsername.trim() == "") {
+            $.notify("Please enter your username.", 'error');
+            $("#txtRegUsername").focus();
+            return;
+        }
+        if ($scope.registerObj.szPassword == undefined || $scope.registerObj.szPassword.trim() == "") {
+            $.notify("Please enter your password.", 'error');
+            $("#txtRegPassword").focus();
+            return;
+        }
+        if ($scope.registerObj.szConfirmPassword == undefined || $scope.registerObj.szConfirmPassword.trim() == "") {
+            $.notify("Please confirm your password.", 'error');
+            $("#txtRegPasswordConfirm").focus();
+            return;
+        }
+        if ($scope.registerObj.szConfirmPassword.trim() != $scope.registerObj.szPassword.trim()) {
+            $.notify("Passwords mismatch. Please confirm your password again.", 'error');
+            $("#txtRegPasswordConfirm").focus();
+            return;
+        }
+
+        //show loader
+        $("#regLoda").css("display", "block");
+        //Disable COntrols
         $(".disabledCtrl").attr("disabled", "disabled");
         $scope.registerObj.AppUserId = 0;
         $scope.registerObj.szImgURL = "";
@@ -140,34 +177,47 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
         $scope.registerObj.iChangePW = false;
         $scope.registerObj.isDeleted = false;
 
-        $.ajax({
-            type: "POST",
-            data: $scope.registerObj,
-            url: apiURL + "/api/AppUser",
-            async: false,
-            success: function (data) {
-                if (data.Success) {
-                    $.notify(data.Message, 'success');
-                    $('#loginModal').modal('hide');
+        setTimeout(function () {
+            $.ajax({
+                type: "POST",
+                data: $scope.registerObj,
+                url: apiURL + "/api/AppUser",
+                async: false,
+                success: function (data) {
+                    if (data.Success) {
+                        $scope.registerObj = {};
+                        $.notify(data.Message, 'success');
+                        $('#loginModal').modal('hide');
+                    } else {
+                        $.notify(data.Message, 'error');
+                    }
+                    //Hide Loading Gif
+                    $("#regLoda").css("display", "none");
+                    $(".disabledCtrl").removeAttr("disabled");
+                }, error: function (data) {
+                    //Hide Loading Gif
+                    $("#regLoda").css("display", "none");
+                    $(".disabledCtrl").removeAttr("disabled");
                 }
-            }, error: function (data) {
-            }
-        });
-        $(".disabledCtrl").removeAttr("disabled");
+            });
+        }, 1000);
     };
 
     //Login Handler
     $scope.userLogin = function () {
-        if ($scope.loginObj.szUsername == "") {
+        if ($scope.loginObj.szUsername == undefined || $scope.loginObj.szUsername.trim() == "") {
             $.notify("Please enter your username.", 'error');
+            $("#txtUsername").focus();
             return;
         }
-        if ($scope.loginObj.szPassword == "") {
+        if ($scope.loginObj.szPassword == undefined || $scope.loginObj.szPassword.trim() == "") {
             $.notify("Please enter your password.", 'error');
+            $("#txtPassword").focus();
             return;
         }
+        return;
         //show loader
-        $("#loadingGif").css("display", "block");
+        $("#logLoda").css("display", "block");
         //Disable COntrols
         $(".disabledCtrl").attr("disabled", "disabled");
 
@@ -177,7 +227,7 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
                     if (!data.Success) {
                         $.notify(data.Message, 'error');
                         //Hide Loading Gif
-                        $("#loadingGif").css("display", "none");
+                        $("#logLoda").css("display", "none");
                         //Enable COntrols
                         $(".disabledCtrl").removeAttr("disabled");
                         $scope.loginObj.szPassword = "";
@@ -185,11 +235,13 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
                         $("#txtUsername").focus();
                     } else {
                         $scope.StartValidUserSession(data.Data);
+                        //$('#loginModal').modal('hide');
                     }
                 }).error(function (data) {
                     $.notify(data.statusText, 'error');
+
                     //Hide Loading Gif
-                    $("#loadingGif").css("display", "none");
+                    $("#logLoda").css("display", "none");
                     //Enable COntrols
                     $(".disabledCtrl").removeAttr("disabled");
                 });
@@ -212,6 +264,23 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
             $(".disabledCtrl").removeAttr("disabled");
         });
     };
+    
+    //Logout Handler
+    $(document).on("click", "#logout-target", function (event) {
+        $.post("/Account/LogOff").success(function (data) {
+            if (data != "") {
+                window.location = data;
+            }
+        }).error(function (data) {
+            $.notify(data.statusText, 'error');
+        });
+    });
+
+    //Logout Handler
+    $(document).on("click", ".subType", function (event) {
+        var amntSelected = ($(this).attr("id") == "subType1") ? 200 : ($(this).attr("id") == "subType2")? 100: 20;
+        $(".flwpug_getpaid").attr("data-amount", amntSelected);
+    });
 });
 
 //Allow Only Numbers into Tel Textbox
@@ -222,12 +291,13 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
 //    }
 //});
 
-$("#pcSubscriptionModal").modal("show");
+//$("#pcSubscriptionModal").modal("show");
+
 $("a.flwpug_getpaid").find("button").addClass("btn btn-primary");
 
 //Allow Only Numbers into Tel Textboxes
 $(document).on("keypress keyup blur", ".allownumericwithoutdecimal", function (event) {
-    ////If entry contains alphabet, validate email address format
+    //If entry contains alphabet, validate email address format
     //var userName = $(this).val();
     //if (!/[a-z]/i.test(userName)) {
     //     $(this).val(userName.replace(/[^\d].+/, ""));

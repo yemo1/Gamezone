@@ -1,7 +1,7 @@
 ﻿@{
     ViewBag.Title = "Home | Game Zone";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    bool IsMobile = (bool) ViewBag.IsMobile;
+    bool IsMobile = (bool)ViewBag.IsMobile;
 }
 
 
@@ -9,7 +9,7 @@
     <style>
         .game-container {
             display: block;
-            height: 30em;            
+            height: 30em;
             position: relative;
         }
 
@@ -20,8 +20,9 @@
         }
 
         #ajaxbar {
-            background:#b2d3e6;
+            background: #b2d3e6;
         }
+
         .isotopeSelector.block {
             height: auto;
         }
@@ -33,16 +34,17 @@
         <div class="row">
             <div class="col-sm-6 col-md-5 col-xs-12 col-md-offset-1  home-text">
                 <h1 class="main-header">Play fun & <strike>cool</strike><br /> awesome games!</h1>
-                <h5 class="text-justify "> 
+                <h5 class="text-justify ">
                     @*Play over 500 games on GameZone with just a single button click.
-    Unleash over 500 fun, exciting and addictive games on GameZone. Just one click away*@               
-                     Play awesome HTML5 games available on your smartphones, tablet or PC. Our catalogue is often updated with new games to keep you engaged!
+                        Unleash over 500 fun, exciting and addictive games on GameZone. Just one click away*@
+                    Play awesome HTML5 games available on your smartphones, tablet or PC. Our catalogue is often updated with new games to keep you engaged!
                 </h5>
                 <a class="btn bitsumishi smooth-scroll scroll-down animate" href="http://funmobilelive.html5games.net/serve?portal_id=4774417016029184&game_id=6066710801022976&branding_id=5848139915329536&ad_id=5284106556407808&portal_localization_id=4539491968614400&clear_cache=yes" data-animate="wobble" data-duration="1.0s" data-delay="0.4s" data-iteration="2" type="button">play free game <i class="fa fa-play-circle"></i></a>
+                <a class="btn bitsumishi smooth-scroll scroll-down animate" href="" data-animate="wobble" data-duration="1.0s" data-delay="0.4s" data-iteration="2" data-toggle="modal" data-target="#pcSubscriptionModal" type="button">Subscribe <i class="fa fa-play-circle"></i></a>
                 @*data-toggle="modal" data-target="#exampleModal"*@
             </div>
             <div class="col-sm-6 col-md-6 col-xs-12  ">
-                
+
                 <!-- GameListHeroLeftLarge.png -->
                 <div id="slideshow">
                     <div>
@@ -51,9 +53,9 @@
                     <div>
                         <img src="~/Content/images/cards.png" alt="Cards" height="250">
                     </div>
-                   <div>
-                       <img src="~/Content/images/frame_01_normal.png" alt="Masked bomber"  height="250"/>
-                   </div>
+                    <div>
+                        <img src="~/Content/images/frame_01_normal.png" alt="Masked bomber" height="250" />
+                    </div>
                 </div>
             </div>
         </div>
@@ -63,25 +65,25 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12  col-xs-12  col-md-6 col-md-offset-1">
-                <div class="panel-heading orange-bg"  id="free-play">
+                <div class="panel-heading orange-bg" id="free-play">
                     <h3 class="freegame-heading"> <i class="fa fa-play"></i>&nbsp; &nbsp; PLAY OUR FREE GAME</h3>
                 </div>
                 <div class="panel-body game-container">
                     <iframe width="100%" height="100%" style="background:#b2d3e6!important;" id="bonusGame" src="http://funmobilelive.html5games.net/serve?portal_id=4774417016029184&game_id=6066710801022976&branding_id=5848139915329536&ad_id=5284106556407808&portal_localization_id=4539491968614400&clear_cache=yes"></iframe>
                 </div>
             </div>
-            <div class=" col-md-5 col-xs-12">
+            <div class="col-md-5 col-xs-12">
                 <h1 class="main-header top-space">Subcribe for More!</h1>
                 <h5 class="text-justify ">
                     Get so much more by subscribing a token for loads of interesting games. We have the best Arcade, Sports, Family and Puzzle games! You are just one click away to having it all.
                 </h5>
                 <a class="btn animate" data-animate="wobble" data-duration="1.0s" data-delay="0.4s" data-iteration="2" type="button" data-toggle="modal" data-target="#exampleModal">Subscribe for our games </a>
-              
+
             </div>
-        </div>       
+        </div>
     </div>
 </section>
- <!-- Modal -->
+<!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -137,11 +139,11 @@
             <div class="col-md-12">
                 <div class="game-loader text-center">
                     <img src="~/Content/images/logo.png" alt="Gamezone logo" />
-                </div>  
+                </div>
             </div>
             <div class="col-md-12">
                 <div class="row">
-                    <div id="isotopeContainer" class="isotopeContainer text-center">                          
+                    <div id="isotopeContainer" class="isotopeContainer text-center">
                     </div>
                 </div>
             </div>
@@ -152,7 +154,7 @@
             </div>
         </div>
 
-       
+
     </div>
 </section>
 
@@ -186,24 +188,33 @@
                             <table>
                                 <tr>
                                     <td style="padding:10px;">
-                                        <span>N50 Weekly</span>
+                                        <span>N 200 Monthly</span>
                                     </td>
                                     <td style="padding:10px;">
-                                        <input type="radio" name="subType" id="subType1" value="0" ng-model="basicObj.sT">
+                                        <input type="radio" class="subType" name="subType" id="subType1" value="0" ng-model="basicObj.sT">
                                     </td>
                                     <td style="padding:10px;">
-                                        <span style="margin-right:10px;">N10 Daily</span>
+                                        <span>N 100 Weekly</span>
                                     </td>
                                     <td style="padding:10px;">
-                                        <input type="radio" name="subType" id="subType2" value="1" ng-model="basicObj.sT">
+                                        <input type="radio" class="subType" name="subType" id="subType2" value="1" ng-model="basicObj.sT">
+                                    </td>
+                                    <td style="padding:10px;">
+                                        <span style="margin-right:10px;">N 20 Daily</span>
+                                    </td>
+                                    <td style="padding:10px;">
+                                        <input type="radio" class="subType" name="subType" id="subType3" value="2" ng-model="basicObj.sT">
                                     </td>
                                 </tr>
                             </table>
                         </div>
                     </div>
-                    <div class="form-group row hide">
+                    <div class="form-group row">
                         <div class="col-sm-6 col-sm-offset-3  col-xs-6 col-xs-offset-3">
-                            <a class="flwpug_getpaid" data-PBFPubKey="FLWPUBK-421b6ed86111a9c686cff34b983cee73-X" data-txref="rave-checkout-1516785905" data-amount="" data-customer_email="user@example.com" data-currency="NGN" data-pay_button_text="Subscribe" data-country="NG" data-custom_title="Gamezone" data-custom_description="" data-redirect_url="http://www.gamezone.ng/Games/List" data-custom_logo="" data-payment_method="both" data-exclude_banks=""></a>	
+                            <a class="flwpug_getpaid" data-PBFPubKey="FLWPUBK-21d231c2eef47b545298eb299494af6c-X" data-txref="rave-checkout-1517414809" data-amount="150" data-customer_email="user@example.com" data-currency="NGN" data-pay_button_text="Pay" data-country="NG" data-custom_title="Gamezone" data-custom_description="" data-redirect_url="http://www.gamezone.ng/Games/List" data-custom_logo="" data-payment_method="card" data-exclude_banks=""></a>
+
+
+                            @*<a class="flwpug_getpaid" data-PBFPubKey="FLWPUBK-421b6ed86111a9c686cff34b983cee73-X" data-txref="rave-checkout-1516785905" data-amount="" data-customer_email="user@example.com" data-currency="NGN" data-pay_button_text="Subscribe" data-country="NG" data-custom_title="Gamezone" data-custom_description="" data-redirect_url="http://www.gamezone.ng/Games/List" data-custom_logo="" data-payment_method="both" data-exclude_banks=""></a>*@
                             @*<a class="btn btn-primary btn-block flwpug_getpaid" data-PBFPubKey="FLWPUBK-421b6ed86111a9c686cff34b983cee73-X" data-txref="rave-checkout-1516369113" data-amount="" data-customer_email="user@example.com" data-currency="NGN" data-pay_button_text="Subscribe" data-country="NG" data-custom_title="Gamezone" data-custom_description="" data-redirect_url="" data-custom_logo="" data-payment_method="card" data-exclude_banks=""></a>*@
                         </div>
                     </div>
@@ -233,12 +244,17 @@
                 <form class="form-horizontal hide animated" id="login-form">
                     <div class="form-group row">
                         <div class="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
-                            <input id="txtUsername" type="text" class="form-control " placeholder="Username" ng-model="loginObj.szUsername">
+                            <input id="txtUsername" type="text" class="form-control" placeholder="Username" ng-model="loginObj.szUsername" aria-describedby="sizing-addon1">
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
-                            <input id="txtPassword" type="text" class="form-control " placeholder="password" ng-model="loginObj.szPassword">
+                            <input id="txtPassword" type="password" class="form-control" placeholder="Password" ng-model="loginObj.szPassword">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6 col-sm-offset-3  col-xs-6 col-xs-offset-3">
+                            <img src="~/Content/images/loadingGif.gif" id="logLoda" style="display: block; margin-left: auto; margin-right: auto;" />
                         </div>
                     </div>
                     <div class="form-group row">
@@ -249,24 +265,29 @@
                     <div class="row">
                         <div class="col-sm-6 col-sm-offset-3">
                             <hr />
-                            <p class="text-center">Don't have an account?  <a id="register-link">Register</a></p>
+                            <p class="text-center">Don't have an account?  <a id="register-link" class="disabledCtrl">Register</a></p>
                         </div>
                     </div>
                 </form>
                 <form class="form-horizontal animated" id="register-form">
                     <div class="form-group row">
                         <div class="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
-                            <input type="text" class="form-control allownumericwithoutdecimal" placeholder="Email address / Phone #" ng-model="registerObj.szUsername">
+                            <input type="text" id="txtRegUsername" class="form-control allownumericwithoutdecimal" placeholder="Email address / Phone No" ng-model="registerObj.szUsername">
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
-                            <input type="password" class="form-control " placeholder="Password" ng-model="registerObj.szPassword">
+                            <input type="password" id="txtRegPassword" class="form-control " placeholder="Password" ng-model="registerObj.szPassword">
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
-                            <input type="password" class="form-control " placeholder="Confirm password" ng-model="registerObj.szConfirmPassword">
+                            <input type="password" id="txtRegPasswordConfirm" class="form-control " placeholder="Confirm password" ng-model="registerObj.szConfirmPassword">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6 col-sm-offset-3  col-xs-6 col-xs-offset-3">
+                            <img src="~/Content/images/loadingGif.gif" id="regLoda" style="display: block; margin-left: auto; margin-right: auto;" />
                         </div>
                     </div>
                     <div class="form-group row">
@@ -277,10 +298,9 @@
                     <div class="row">
                         <div class="col-sm-6 col-sm-offset-3">
                             <hr />
-                            <p class="text-center">Already have an account? <a id="login-link">Login</a></p>
+                            <p class="text-center">Already have an account? <a id="login-link" class="disabledCtrl">Login</a></p>
                         </div>
                     </div>
-
                 </form>
             </div>
         </div>
@@ -297,13 +317,15 @@
         var _IsMobile = "@IsMobile";
     </script>
 
-    
+    <script type="text/javascript" src="https://api.ravepay.co/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
     <script src="~/Content/js/notify.min.js"></script>
     <script src="~/Scripts/Home/Index.js"></script>
     <script src="~/Content/js/jquery.lazyload.min.js"></script>
-@*<script src="~/Scripts/flwpbf-inline.js"></script>*@
-@*<script type="text/javascript" src="https://api.ravepay.co/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>*@
+    @*<script src="~/Scripts/flwpbf-inline.js"></script>*@
+    @*<script type="text/javascript" src="https://api.ravepay.co/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>*@
     @*@Scripts.Render("~/bundles/Home-IndexPageJs")*@
 
-<script type="text/javascript" src="http://flw-pms-dev.eu-west-1.elasticbeanstalk.com/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
+    @*<script type="text/javascript" src="http://flw-pms-dev.eu-west-1.elasticbeanstalk.com/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>*@
+
+
 }

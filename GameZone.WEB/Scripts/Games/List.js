@@ -63,6 +63,16 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
     //Populate Page with Games
     $scope.getGameData("family");
 
+    //Logout Handler
+    $(document).on("click", "#logout-target", function (event) {
+        $.post("/Account/LogOff").success(function (data) {
+            if (data != "") {
+                window.location = data;
+            }
+        }).error(function (data) {
+            $.notify(data.statusText, 'error');
+        });
+    });
 
     //CLick handler of Menu Items
     $(".gameMenu").click(function (e) {

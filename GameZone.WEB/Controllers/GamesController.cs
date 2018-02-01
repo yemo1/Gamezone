@@ -1,5 +1,6 @@
 ﻿using GameData;
 using GameZone.Repositories;
+using GameZone.TOOLS;
 using GameZone.VIEWMODEL;
 using System;
 using System.Collections.Generic;
@@ -12,20 +13,34 @@ namespace GameZone.WEB.Controllers
 {
     public class GamesController : Controller
     {
+        SubscriberRepository subscriberRepository;
+
+        public GamesController()
+        {
+            Entities.GameContext _context = new Entities.GameContext();
+            NGSubscriptionsEntities _NGSubscriptionsEntities = new NGSubscriptionsEntities();
+            subscriberRepository = new SubscriberRepository(_context, _NGSubscriptionsEntities);
+        }
         public ActionResult Index(string phoneNo)
         {
-            //Entities.GameContext _context = new Entities.GameContext();
-            //NGSubscriptionsEntities _NGSubscriptionsEntities = new NGSubscriptionsEntities();
-            //var subscriber = new SubscriberRepository(_context, _NGSubscriptionsEntities);
-            //var s = subscriber.GetUserByPhoneNo(phoneNo);
-            //if (s == null)
-            //{
-            //    return RedirectToAction("Index", "Home");
-            //}
-            //else
-            //{
+            //Validate Login Credentials
+            var loggedInUser = GameUserIdentity.LoggedInUser;
+            if (loggedInUser == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            //Validate User Subscription
+            var s = subscriberRepository.GetUserByPhoneNo(phoneNo);
+
+            if (s == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
                 return View();
-            //}
+            }
         }
         /// <summary>
         /// This is the view to display complete list of games
@@ -36,19 +51,15 @@ namespace GameZone.WEB.Controllers
         public ActionResult List(string t)
         {
             //Validate User Session
-            //if (GameUserIdentity.LoggedInUser == null)
-            //{
-            //    return RedirectToAction("Index", "Home");
-            //}
-            //Entities.GameContext _context = new Entities.GameContext();
-            //NGSubscriptionsEntities _NGSubscriptionsEntities = new NGSubscriptionsEntities();
-            //var subscriber = new Subscriber(_context, _NGSubscriptionsEntities);
+            if (GameUserIdentity.LoggedInUser == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            //Check for subscription Expiry
 
-            ////Check for subscription Expiry
+            //Check for Wrong Date and Time
 
-            ////Check for Wrong Date and Time
-
-            //var s = subscriber.GetUserByPhoneNo(t);
+            //var s = subscriberRepository.GetUserByPhoneNo(t);
             //if (s == null)
             //{
             //    return RedirectToAction("Index", "Home");
@@ -56,8 +67,8 @@ namespace GameZone.WEB.Controllers
             //else // Access Granted
             //{
             //    //Implement Caching of last game category selected
-            //    GameUserIdentity.LoggedInUser = s.ToModel();
-                //subscriber.UpdateGameUserLastAccess(t, s);
+            //    //GameUserIdentity.LoggedInUser = s.ToModel();
+            //    subscriberRepository.UpdateGameUserLastAccess(t, s);
             return View();
             //}
         }
@@ -86,7 +97,7 @@ namespace GameZone.WEB.Controllers
             //    //Keep Track of User Last Game Played
             //    //GameUserIdentity.LoggedInUser = s.ToModel();
             //    //subscriber.UpdateGameUserLastAccess(userTel, s);
-            
+
             //Make Game Appear Full Screen on Mobile Devices
             if (Request.UserAgent.Contains("Mobi") == true)
             {
@@ -145,11 +156,11 @@ namespace GameZone.WEB.Controllers
                 foreach (var item in nvc.AllKeys)
                 {
                     ss.Add(item, nvc[item]);
-                }             
+                }
 
                 JavaScriptSerializer serializer = new JavaScriptSerializer();
                 string jsonString = serializer.Serialize(ss);
-                
+
                 return jsonString;
             }
             catch (Exception ex)

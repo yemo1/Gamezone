@@ -24,11 +24,11 @@ namespace GameZone.WEB.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
-        {
-            UserManager = userManager;
-            SignInManager = signInManager;
-        }
+        //public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        //{
+        //    UserManager = userManager;
+        //    SignInManager = signInManager;
+        //}
 
         [HttpPost]
         [AllowAnonymous]
@@ -37,16 +37,25 @@ namespace GameZone.WEB.Controllers
             if (loginAppUserVM != null)
             {
                 //Put Valid Login User Data in Session
-                GameUserIdentity.LoggedInUser = loginAppUserVM;               
-               
+                GameUserIdentity.LoggedInUser = loginAppUserVM;
                 return "/Games/List";
             }
             else
             {
-                return "/Home";
+                return "/Home/Index";
             }
         }
 
+        // POST: /Account/LogOff
+        [HttpPost]
+        [AllowAnonymous]
+        public string LogOff()
+        {
+            //AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            //Clear Login User Data from Session
+            GameUserIdentity.LoggedInUser = null;
+            return "/Home";
+        }
         public ApplicationSignInManager SignInManager
         {
             get
@@ -405,14 +414,7 @@ namespace GameZone.WEB.Controllers
         }
 
         //
-        // POST: /Account/LogOff
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult LogOff()
-        {
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
-        }
+        
 
         //
         // GET: /Account/ExternalLoginFailure
