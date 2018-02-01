@@ -12,15 +12,11 @@ namespace GameZone.WEB.Controllers
         Entities.GameContext _context;
         GameData.NGSubscriptionsEntities _NGSubscriptionsEntities;
         IAppUserRepository _IAppUserRepository;
-        Notification _Notification;
-        RegexUtilities _RegexUtilities;
-        public AppUserController(IAppUserRepository iAppUserRepository, GameData.NGSubscriptionsEntities nGSubscriptionsEntities, Entities.GameContext context, Notification notification, RegexUtilities regexUtilities)
+        public AppUserController(IAppUserRepository iAppUserRepository, GameData.NGSubscriptionsEntities nGSubscriptionsEntities, Entities.GameContext context)
         {
             _context = context;
             _NGSubscriptionsEntities = nGSubscriptionsEntities;
             _IAppUserRepository = iAppUserRepository;
-            _Notification = notification;
-            _RegexUtilities = regexUtilities;
         }
 
         public ReturnMessage Post(AppUserVM appUserVM)
@@ -46,16 +42,9 @@ namespace GameZone.WEB.Controllers
                 appUserVM.iStatus = 0;
 
                 var retVal = _IAppUserRepository.AddAppUser(appUserVM.ToEntity());
-                //Successful
+
                 if (retVal.isSuccess)
                 {
-                    //Check if username is email address
-                    if (_RegexUtilities.ContainsAlphabet(appUserVM.szUsername.Trim()))
-                    {
-                        //Send Email Notification
-                        _Notification.SendEMail(appUserVM.szUsername.Trim(),"Welcome to GameZone.", "Thank you for joining <b>GameZone</b>. <br/> Your account has been successfully created.<br/> <br/><a style='background:#ff6a00; color: #ffffff; font-family:bitsumishi !important; padding:6px 12px; font-weight:400;text-align:center; vertical-align: middle; cursor: pointer; border:1px solid transparent; border-radius:4px; text-decoration: none;' href='http://www.gamezone.ng/'> Login </a>");
-                    }
-                    
                     return new ReturnMessage
                     {
                         ID = long.Parse(retVal.id),
@@ -145,7 +134,7 @@ namespace GameZone.WEB.Controllers
                         return new ReturnMessage
                         {
                             Success = false,
-                            Message = "Password Incorrect. Forgotten your password?. You can reset it."
+                            Message = "Password Incorrect. Forgotten your password?. Reset it."
                         };
                     }
                 }
