@@ -29,7 +29,7 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
         $('#loginModal').modal('show');
     }
 
-    $.notify("Thank you.", { position: "left" });
+    //$.notify("Thank you.", { position: "left" });
 
     //$('#subscriptionDetailsModal').modal('show');
 
@@ -173,9 +173,7 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
         }
         return returnURL;
     };
-
-
-
+    
     //CLick handler of Menu Items
     $(".gameMenu").click(function (e) {
         var selCat = $(this).attr("id");
@@ -519,6 +517,8 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
             UID = JSON.parse(localStorage.getItem("UID"));
             $scope.redirectURL = flutterWaveRedirectURL + UID.AppUserId;
 
+            $scope.GetSubData();
+
             $.post("/Account/StartValidUserSession", {
                 loginAppUserVM: UID
             }).success(function (data) {
@@ -528,6 +528,42 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
             });
         }
     };
+
+    $scope.GetSubData = function () {
+        var userOBJ = localStorage.getItem("UID");
+        var UID = null;
+        if (userOBJ) {
+            UID = JSON.parse(localStorage.getItem("UID"));
+
+                $.ajax({
+                    type: "GET",
+                    url: apiURL + "/api/AppUser/SubscriptionDetails?UID=" + UID.AppUserId +"&svcName=" + svcName,
+                    async: false,
+                    success: function (data) {
+                        console.log(data);
+                        //if (data.Success) {
+                            $scope.subDetailOBJ = data.Data;
+
+                            $scope.subDetailOBJ.PeriodStart = $scope.formatDate(data.Data.PeriodStart);
+                            $scope.subDetailOBJ.PeriodEnd = $scope.formatDate(data.Data.PeriodEnd);
+                            //$scope.subDetailOBJ.Period = data.Data.Period;
+                            //$scope.subDetailOBJ.Amount = data.Data.Amount;
+                            $("#txtIsActive").html(getRecordStatus(data.Data.IsActive));
+//$scope.subDetailOBJ.IsActive =
+                        //} else {
+                        //    $scope.subDetailOBJ.PeriodStart = "-";
+                        //    $scope.subDetailOBJ.PeriodEnd = "-";
+                        //    $scope.subDetailOBJ.Period = "-";
+                        //    $scope.subDetailOBJ.Amount = "-";
+                        //    $scope.subDetailOBJ.IsActive = "-";
+                        //}
+                    }, error: function (data) {
+                    }
+                });
+        }
+        
+    };
+
     //Function to Log User Out
     //$scope.LogUserOut = function (delay) {
     //    $.post("/Account/LogOff").success(function (data) {
@@ -549,6 +585,21 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
         var amntSelected = ($(this).attr("id") == "subType1") ? 200 : ($(this).attr("id") == "subType2") ? 100 : 20;
         $(".flwpug_getpaid").attr("data-amount", amntSelected);
     });
+
+    //Method to Format Date to format (DD/MM/YYYY)
+    $scope.formatDate = function (dDate) {
+        if (dDate != "" && dDate != null) {
+            var dDate = new Date(dDate),
+            month = dDate.getMonth() + 1,
+            day = dDate.getDate(),
+            year = dDate.getFullYear();
+            day = (day < 10) ? '0' + day.toString() : day;
+            month = (month < 10) ? '0' + month.toString() : month;
+            return day + "/" + month + "/" + year;
+        } else {
+            return "";
+        }
+    }
 });
 
 //Allow Only Numbers into Tel Textbox
@@ -596,4 +647,8 @@ function addHeader() {
             "appUserId": appUserId
         }
     });
+}
+
+function getRecordStatus(status) {
+    return (status) ? "<span class='btn-custom btn-success btn-xs'>True</span>" : "<span class='btn-custom btn-warning btn-xs'>False</span>";
 }

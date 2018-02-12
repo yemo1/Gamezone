@@ -202,6 +202,19 @@ namespace GameZone.Repositories
             }
         }
 
+        public GetAppUserSubscriptionDetails_Result GetUserSubscriptionDetails(long AppUserID, string ServiceName)
+        {
+            try
+            {
+                var retVal = _NGSubscriptionsEntities.GetAppUserSubscriptionDetails(AppUserID, ServiceName).FirstOrDefault();
+                return retVal;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public bool SubscriberExists(string tell)
         {
             return _NGSubscriptionsEntities.Games.Count(e => e.MSISDN == tell) > 0;

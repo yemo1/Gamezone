@@ -91,6 +91,10 @@
           <Parameter Name="AppUserId" Type="bigint" Mode="In" />
           <Parameter Name="szUsername" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="GetAppUserSubscriptionDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AppUserId" Type="bigint" Mode="In" />
+          <Parameter Name="ServiceName" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="GetIDSeriesNextValue" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Description" Type="varchar" Mode="In" />
         </Function>
@@ -166,6 +170,10 @@
             <Parameter Name="LoginToken" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="ConfirmAppUserSubscription" ReturnType="Collection(NGSubscriptionsModel.ConfirmAppUserSubscription_Result)">
+            <Parameter Name="AppUserId" Mode="In" Type="Int64" />
+            <Parameter Name="ServiceName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetAppUserSubscriptionDetails" ReturnType="Collection(NGSubscriptionsModel.GetAppUserSubscriptionDetails_Result)">
             <Parameter Name="AppUserId" Mode="In" Type="Int64" />
             <Parameter Name="ServiceName" Mode="In" Type="String" />
           </FunctionImport>
@@ -265,6 +273,17 @@
           <Property Type="Boolean" Name="isSuccess" Nullable="false" />
           <Property Type="String" Name="id" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="message" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetAppUserSubscriptionDetails_Result">
+          <Property Type="Int64" Name="AppUserId" Nullable="false" />
+          <Property Type="String" Name="ServiceName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Period" Nullable="false" MaxLength="10" />
+          <Property Type="DateTime" Name="PeriodStart" Nullable="false" />
+          <Property Type="DateTime" Name="PeriodEnd" Nullable="false" />
+          <Property Type="Double" Name="Amount" Nullable="false" />
+          <Property Type="Boolean" Name="PaySuccess" Nullable="false" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="DateTime" Name="DateCreated" Nullable="false" Precision="23" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -404,6 +423,21 @@
                 <ScalarProperty Name="isSuccess" ColumnName="isSuccess" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="message" ColumnName="message" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAppUserSubscriptionDetails" FunctionName="NGSubscriptionsModel.Store.GetAppUserSubscriptionDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NGSubscriptionsModel.GetAppUserSubscriptionDetails_Result">
+                <ScalarProperty Name="AppUserId" ColumnName="AppUserId" />
+                <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+                <ScalarProperty Name="Period" ColumnName="Period" />
+                <ScalarProperty Name="PeriodStart" ColumnName="PeriodStart" />
+                <ScalarProperty Name="PeriodEnd" ColumnName="PeriodEnd" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="PaySuccess" ColumnName="PaySuccess" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

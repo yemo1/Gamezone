@@ -287,5 +287,50 @@ namespace GameZone.WEB.Controllers
                 };
             }
         }
+
+        [ResponseType(typeof(ReturnMessage)), Route("api/AppUser/SubscriptionDetails")]
+        public ReturnMessage GetSubscriptionDetails(long UID, string svcName)
+        {
+            try
+            {
+                if (UID <1 || string.IsNullOrEmpty(svcName.Trim()))
+                {
+                    return new ReturnMessage
+                    {
+                        ID = 0,
+                        Success = false,
+                        Message = "Please enter valid entries."
+                    };
+                }
+
+                var retVal = _IAppUserRepository.GetUserSubscriptionDetails(UID, svcName.Trim());
+                //Successful
+                if (retVal != null)
+                {
+                    return new ReturnMessage
+                    {
+                        ID = retVal.AppUserId,
+                        Success = true,
+                        Data = retVal
+                    };
+                }
+                else
+                {
+                    return new ReturnMessage
+                    {
+                        Success = false,
+                        Message = "Record Not Found"
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                return new ReturnMessage
+                {
+                    Success = false,
+                    Message = ex.Message
+                };
+            }
+        }
     }
 }

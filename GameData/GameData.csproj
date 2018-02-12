@@ -99,6 +99,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GameModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="GetAppUserSubscriptionDetails_Result.cs">
+      <DependentUpon>GameModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetAppUser_Result.cs">
       <DependentUpon>GameModel.tt</DependentUpon>
     </Compile>

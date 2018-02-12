@@ -219,5 +219,18 @@ namespace GameData
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConfirmAppUserSubscription_Result>("ConfirmAppUserSubscription", appUserIdParameter, serviceNameParameter);
         }
+    
+        public virtual ObjectResult<GetAppUserSubscriptionDetails_Result> GetAppUserSubscriptionDetails(Nullable<long> appUserId, string serviceName)
+        {
+            var appUserIdParameter = appUserId.HasValue ?
+                new ObjectParameter("AppUserId", appUserId) :
+                new ObjectParameter("AppUserId", typeof(long));
+    
+            var serviceNameParameter = serviceName != null ?
+                new ObjectParameter("ServiceName", serviceName) :
+                new ObjectParameter("ServiceName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAppUserSubscriptionDetails_Result>("GetAppUserSubscriptionDetails", appUserIdParameter, serviceNameParameter);
+        }
     }
 }

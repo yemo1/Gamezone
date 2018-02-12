@@ -86,6 +86,7 @@ namespace GameZone.WEB.Controllers
             return retVal.isSuccess;
         }
 
+        
         // POST: /Account/LogOff
         [HttpPost]
         [AllowAnonymous]

@@ -1,14 +1,25 @@
-$(document).ready(function(){
-    
+$(document).ready(function () {
+
     $(window).scroll(function () {
-             if ($(window).scrollTop() >= $('.page-section:first-of-type').height()) {
-               // page-section:first
-               $('header').addClass('sticky')
-             }
-               else
-               {
-                 $('header').removeClass('sticky');
-               }
+        if ($(window).scrollTop() >= $('.page-section:first-of-type').height()) {
+            // page-section:first
+            $('header').addClass('sticky')
+        }
+        else {
+            $('header').removeClass('sticky');
+        }
+    });
+
+    // making game-filter fixed when it scrolls
+    $(window).on('scroll', function (e) {
+        //var filter_pos = $('.game-filter').offset().top;
+        if ($(window).scrollTop() >= $('.page-section:first-of-type').height()) {
+            // page-section:first
+            $('.game-filter').addClass('filter-fixed');
+        }
+        else {
+            $('.game-filter').removeClass('filter-fixed');
+        }
     });
 
     $('body').on('click', '#free-play', function () {
@@ -20,41 +31,11 @@ $(document).ready(function(){
         $('#register-form').addClass('slideOutLeft');
         $('#login-header').removeClass('hide').addClass('fadeIn');
         $('#register-header').addClass('hide');
-        $('#forgotpw-header').addClass('hide');
-        $('#forgotpw-form').addClass('slideOutLeft');
         setTimeout(function () {
             $('#login-form').addClass('slideInRight').removeClass('hide');
-            $('#login-header').removeClass('fadeIn');            
+            $('#login-header').removeClass('fadeIn');
             $('#register-form').addClass('hide').removeClass('slideOutLeft');
-            $('#forgotpw-form').addClass('hide').removeClass('slideOutLeft');
         }, 250);
-    });
-
-    $('body').on('click', '#login-target', function (e) {
-        $('#register-form').addClass('hide');
-        $('#login-header').removeClass('hide');
-        $('#register-header').addClass('hide');
-        $('#login-form').removeClass('hide');
-    });
-
-    $('body').on('click', '#forgotpw-link', function (e) {
-        e.preventDefault();
-        $('#login-form').addClass('slideOutLeft');
-        $('#forgotpw-header').removeClass('hide').addClass('fadeIn');
-        $('#login-header').addClass('hide');
-        setTimeout(function () {
-            $('#forgotpw-form').addClass('slideInRight').removeClass('hide');
-            $('#forgotpw-header').removeClass('fadeIn');
-            $('#login-form').addClass('hide').removeClass('slideOutLeft');
-        }, 250);
-    });
-
-
-    $('body').on('click', '#login-target', function (e) {
-        $('#register-form').addClass('hide');
-        $('#login-header').removeClass('hide');
-        $('#register-header').addClass('hide');
-        $('#login-form').removeClass('hide');
     });
 
     $('body').on('click', '#register-link', function (e) {
@@ -74,6 +55,13 @@ $(document).ready(function(){
         $('#login-header').addClass('hide');
         $('#register-header').removeClass('hide');
         $('#login-form').addClass('hide');
+    });
+
+    $('body').on('click', '#login-target', function (e) {
+        $('#register-form').addClass('hide');
+        $('#login-header').removeClass('hide');
+        $('#register-header').addClass('hide');
+        $('#login-form').removeClass('hide');
     });
 
     //$(window).on('load',function(){
@@ -99,9 +87,9 @@ $(document).ready(function(){
     });
 
     $('.animate').scrolla({
-      mobile: true,
-      once: false
-	});
+        mobile: true,
+        once: false
+    });
 
 
-});        
+});

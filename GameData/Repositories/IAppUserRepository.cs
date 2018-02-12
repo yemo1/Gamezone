@@ -17,5 +17,6 @@ namespace GameZone.Repositories
         LoginAppUser_Result LoginAppUser(string szUsername, bool isLogin, string loginToken);
         ConfirmAppUserLoginToken_Result ConfirmAppUserToken(string loginToken, long AppUserID = 0, string szUsername = null);
         ConfirmAppUserSubscription_Result ConfirmUserSubscription(long AppUserID, string ServiceName);
+        GetAppUserSubscriptionDetails_Result GetUserSubscriptionDetails(long AppUserID, string ServiceName);
     }
 }
