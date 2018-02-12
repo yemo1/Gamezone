@@ -1,4 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@using GameZone.TOOLS;
+@{
+    string svcName = System.Configuration.ConfigurationManager.AppSettings["SERVICE_NAME"].ToString();
+    string rls_vsn = System.Configuration.ConfigurationManager.AppSettings["RELEASE_VERSION"].ToString();
+}
+
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -13,11 +20,11 @@
     <meta name="description" content="The marketplace for HTML5 games">
     <meta name="author" content="Funmobile,Bernard Oreva, Aishat Mosuro">
 
-    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/css/animate.min.css" rel="stylesheet" />
-    <link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="~/Content/css/base-stylesheet.css" rel="stylesheet" />
-    <link href="~/Content/css/style.css" rel="stylesheet" />
+    <link href="~/Content/css/bootstrap.min.css?v=@rls_vsn" rel="stylesheet" />
+    <link href="~/Content/css/animate.min.css?v=@rls_vsn" rel="stylesheet" />
+    <link href="~/Content/css/font-awesome.min.css?v=@rls_vsn" rel="stylesheet" />
+    <link href="~/Content/css/base-stylesheet.css?v=@rls_vsn" rel="stylesheet" />
+    <link href="~/Content/css/style.css?v=@rls_vsn" rel="stylesheet" />
 
     <style>
         #games #main-menu .navbar .nav > li > a {
@@ -60,7 +67,7 @@
                                         <div class="col-md-2 col-md-offset-3 ">
                                             <ul class="nav navbar-nav" id="menuUL">
                                                 <li class="parent current" id="homeMenu">
-                                                    <a href="/Home" class=""><div class="main-menu-title">Home</div></a>
+                                                    <a href="/Home" class="authMenuItem"><div class="main-menu-title">Home</div></a>
                                                 </li>
                                                 <li class="parent " id="gameMenu">
                                                     <a href="/Games/List" class=""><div class="main-menu-title">Games </div></a>
@@ -77,16 +84,19 @@
                                                     <li class="gameMenu parent car  collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse" id="sports"><a href="#" data-filter=".sports"> <i class="fa fa-soccer-ball-o"></i>Sports</a></li>
                                                     <li class="gameMenu parent car  collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse" id="adventure"><a href="#" data-filter=".adventure"> <i class="fa fa-anchor"></i>Adventure</a></li>
                                                     <li class="gameMenu parent car  collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse" id="puzzle"><a href="#" data-filter=".puzzle"> <i class="fa fa-puzzle-piece"></i>Puzzle</a></li>
-                                                    <li class="dropdown parent   collapsed"  data-toggle="collapse" data-target="#main-menu .navbar-collapse">
+                                                    <li class="dropdown parent   collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse">
                                                         <button class="main-menu-title" id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            Account
+                                                            <span id="userIDSpan"></span>
                                                             <span class="caret"></span>
                                                         </button>
                                                         <ul class="dropdown-menu" aria-labelledby="dLabel">
-                                                            <li><a data-toggle="modal" id="login-target" data-target="#loginModal">Login </a></li>
-                                                            <li><a data-toggle="modal" id="register-target" data-target="#loginModal">Register </a></li>
+                                                            
+                                                                    <li class="loginReg"><a data-toggle="modal" id="login-target" data-target="#loginModal">Login </a></li>
+                                                                    <li class="loginReg"><a data-toggle="modal" id="register-target" data-target="#loginModal">Register </a></li>
+                                                               
+                                                                    <li class="logout"><a id="logout-target">Logout </a></li>
                                                         </ul>
-                                                    </li> 
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -151,31 +161,36 @@
 
     <!-- JS begin -->
     @*jquery*@
-    <script src="~/Content/js/jquery.min.js"></script>
-    <script src="~/Content/js/bootstrap.min.js"></script>
-    <script src="~/Scripts/respond.js"></script>
+    <script src="~/Content/js/jquery.min.js?v=@rls_vsn"></script>
+    <script src="~/Content/js/bootstrap.min.js?v=@rls_vsn"></script>
+    <script src="~/Scripts/respond.js?v=@rls_vsn"></script>
 
     @*angular*@
-    <script src="~/Scripts/angular.min.js"></script>
-    <script src="~/Scripts/global.js"></script>
+    <script src="~/Scripts/angular.min.js?v=@rls_vsn"></script>
+    <script src="~/Scripts/global.js?v=@rls_vsn"></script>
 
     @*baseJS*@
 
-    <script src="~/Content/js/magnific-popup.min.js"></script>
-    <script src="~/Content/js/imagesloaded.pkgd.min.js"></script>
-    <script src="~/Content/js/appear.js"></script>
-    <script src="~/Content/js/base.js"></script>
-    <script src="~/Content/js/smooth-scroll.js"></script>
+    <script src="~/Content/js/magnific-popup.min.js?v=@rls_vsn"></script>
+    <script src="~/Content/js/imagesloaded.pkgd.min.js?v=@rls_vsn"></script>
+    <script src="~/Content/js/appear.js?v=@rls_vsn"></script>
+    <script src="~/Content/js/base.js?v=@rls_vsn"></script>
+    <script src="~/Content/js/smooth-scroll.js?v=@rls_vsn"></script>
 
     @*silteringJs*@
-    <script src="~/Content/js/isotope.pkgd.min.js"></script>
-    <script src="~/Content/js/lightbox.min.js"></script>
-    <script src="~/Content/js/dofilter.js"></script>
-    <script src="~/Content/js/scrolla.jquery.min.js"></script>
+    <script src="~/Content/js/isotope.pkgd.min.js?v=@rls_vsn"></script>
+    <script src="~/Content/js/lightbox.min.js?v=@rls_vsn"></script>
+    <script src="~/Content/js/dofilter.js?v=@rls_vsn"></script>
+    <script src="~/Content/js/scrolla.jquery.min.js?v=@rls_vsn"></script>
 
     @*customjs*@
-    <script src="~/Content/js/site.js"></script>
+    <script src="~/Content/js/site.js?v=@rls_vsn"></script>
 
+    <script src="~/Content/js/notify.min.js?v=@rls_vsn"></script>
+    <script>
+        var svcName = "@svcName";
+    </script>
+    <script src="~/Scripts/layout.js?v=@rls_vsn"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

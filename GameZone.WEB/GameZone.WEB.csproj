@@ -341,6 +341,7 @@
     <Content Include="Content\images\header-fade-new.png" />
     <Content Include="Content\images\iBook.png" />
     <Content Include="Content\images\Image-2.png" />
+    <Content Include="Content\images\loadingGif.gif" />
     <Content Include="Content\images\logo 1 flip.png" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\mole.png" />
@@ -431,6 +432,7 @@
     <Content Include="Scripts\Games\GamePlayFull.js" />
     <Content Include="Scripts\Games\List.js" />
     <Content Include="Scripts\Games\GamePlay.js" />
+    <Content Include="Scripts\layout.js" />
     <Content Include="Scripts\Home\Index.js" />
     <Content Include="Scripts\Games\Index.js" />
     <Content Include="Scripts\global.js" />
@@ -450,7 +452,9 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\Shared\SubscriptionReport.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

@@ -3,7 +3,6 @@ using System.Linq;
 using GameData;
 using GameZone.Entities;
 using GameZone.VIEWMODEL;
-using GameZone.TOOLS;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Collections.Generic;
@@ -142,7 +141,59 @@ namespace GameZone.Repositories
         {
             try
             {      
-                var retVal = _NGSubscriptionsEntities.AddAppUser(appUser.szImgURL, appUser.szUsername, appUser.szPassword, appUser.szPasswordSalt, appUser.iStatus, appUser.dCreatedOn, appUser.iChangePW, appUser.isDeleted).FirstOrDefault();
+                var retVal = _NGSubscriptionsEntities.AddAppUser(appUser.szImgURL, appUser.szUsername, appUser.szPassword, appUser.szPasswordSalt, appUser.iStatus, appUser.dCreatedOn, appUser.iChangePW, appUser.isLogin, appUser.isMobile, appUser.isDeleted).FirstOrDefault();
+                return retVal;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public ChangeAppUserPassword_Result ResetAppUserPassword(string szUsername, string szPassword, string szPasswordSalt, int iStatus,bool iChangePW)
+        {
+            try
+            {
+                var retVal = _NGSubscriptionsEntities.ChangeAppUserPassword(szUsername, szPassword, szPasswordSalt, iStatus, iChangePW).FirstOrDefault();
+                return retVal;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public LoginAppUser_Result LoginAppUser(string szUsername, bool isLogin, string loginToken)
+        {
+            try
+            {
+                var retVal = _NGSubscriptionsEntities.LoginAppUser(szUsername, isLogin, loginToken).FirstOrDefault();
+                return retVal;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public ConfirmAppUserLoginToken_Result ConfirmAppUserToken(string loginToken, long AppUserID = 0,string szUsername = null)
+        {
+            try
+            {
+                var retVal = _NGSubscriptionsEntities.ConfirmAppUserLoginToken(AppUserID, szUsername, loginToken).FirstOrDefault();
+                return retVal;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public ConfirmAppUserSubscription_Result ConfirmUserSubscription(long AppUserID, string ServiceName)
+        {
+            try
+            {
+                var retVal = _NGSubscriptionsEntities.ConfirmAppUserSubscription(AppUserID, ServiceName).FirstOrDefault();
                 return retVal;
             }
             catch (Exception ex)
@@ -154,15 +205,6 @@ namespace GameZone.Repositories
         public bool SubscriberExists(string tell)
         {
             return _NGSubscriptionsEntities.Games.Count(e => e.MSISDN == tell) > 0;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="appUser"></param>
-        /// <returns></returns>
-        public AppUserRepository ChangeAppUserPassword(AppUserRepository appUser) {
-            return null;
-        }
+        }        
     }
 }

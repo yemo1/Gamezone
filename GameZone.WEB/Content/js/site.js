@@ -19,12 +19,42 @@ $(document).ready(function(){
         e.preventDefault();
         $('#register-form').addClass('slideOutLeft');
         $('#login-header').removeClass('hide').addClass('fadeIn');
-        $('#register-header').addClass('hide');       
+        $('#register-header').addClass('hide');
+        $('#forgotpw-header').addClass('hide');
+        $('#forgotpw-form').addClass('slideOutLeft');
         setTimeout(function () {
             $('#login-form').addClass('slideInRight').removeClass('hide');
             $('#login-header').removeClass('fadeIn');            
             $('#register-form').addClass('hide').removeClass('slideOutLeft');
+            $('#forgotpw-form').addClass('hide').removeClass('slideOutLeft');
         }, 250);
+    });
+
+    $('body').on('click', '#login-target', function (e) {
+        $('#register-form').addClass('hide');
+        $('#login-header').removeClass('hide');
+        $('#register-header').addClass('hide');
+        $('#login-form').removeClass('hide');
+    });
+
+    $('body').on('click', '#forgotpw-link', function (e) {
+        e.preventDefault();
+        $('#login-form').addClass('slideOutLeft');
+        $('#forgotpw-header').removeClass('hide').addClass('fadeIn');
+        $('#login-header').addClass('hide');
+        setTimeout(function () {
+            $('#forgotpw-form').addClass('slideInRight').removeClass('hide');
+            $('#forgotpw-header').removeClass('fadeIn');
+            $('#login-form').addClass('hide').removeClass('slideOutLeft');
+        }, 250);
+    });
+
+
+    $('body').on('click', '#login-target', function (e) {
+        $('#register-form').addClass('hide');
+        $('#login-header').removeClass('hide');
+        $('#register-header').addClass('hide');
+        $('#login-form').removeClass('hide');
     });
 
     $('body').on('click', '#register-link', function (e) {
@@ -44,13 +74,6 @@ $(document).ready(function(){
         $('#login-header').addClass('hide');
         $('#register-header').removeClass('hide');
         $('#login-form').addClass('hide');
-    });
-
-    $('body').on('click', '#login-target', function (e) {
-        $('#register-form').addClass('hide');
-        $('#login-header').removeClass('hide');
-        $('#register-header').addClass('hide');
-        $('#login-form').removeClass('hide');
     });
 
     //$(window).on('load',function(){

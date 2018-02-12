@@ -1,11 +1,12 @@
 ﻿@{
     ViewBag.Title = "GameList";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    string rls_vsn = System.Configuration.ConfigurationManager.AppSettings["RELEASE_VERSION"].ToString();
 }
 
 @section style{
 
-    <link href="~/Content/css/slider-pro.min.css" rel="stylesheet" />
+    <link href="~/Content/css/slider-pro.min.css?v=@rls_vsn" rel="stylesheet" />
     <style>
         header {
             position: fixed;
@@ -22,7 +23,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="game-loader text-center">
-                    <img src="~/Content/images/logo.png" alt="Gamezone logo" />
+                    <img src="~/Content/images/logo.png?v=@rls_vsn" alt="Gamezone logo" />
                 </div>
             </div>
             <div id="isotopeContainer" class="isotopeContainer" style="text-align:center;">
@@ -34,9 +35,8 @@
     <script type="text/javascript">
         var _Title = "@ViewBag.Title";
     </script>
-    @*<script src="~/Content/js/jquery.sliderPro.min.js"></script>
-        <script src="~/Content/js/jquery.fancybox.pack.js"></script>
-        <script src="~/Content/js/games.js"></script>*@
-    <script src="~/Scripts/Games/List.js"></script>
-    <script src="~/Content/js/jquery.lazyload.min.js"></script>
+
+<script src="~/Content/js/notify.min.js?v=@rls_vsn"></script>
+    <script src="~/Scripts/Games/List.js?v=@rls_vsn"></script>
+    <script src="~/Content/js/jquery.lazyload.min.js?v=@rls_vsn"></script>
 }

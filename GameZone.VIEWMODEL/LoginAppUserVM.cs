@@ -9,5 +9,6 @@ namespace GameZone.VIEWMODEL
         public string szUsername { get; set; }
         public int iStatus { get; set; }
         public bool iChangePW { get; set; }
+        public string userLoginToken { get; set; }
     }
 }

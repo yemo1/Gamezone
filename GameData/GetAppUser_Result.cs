@@ -21,6 +21,8 @@ namespace GameData
         public int iStatus { get; set; }
         public System.DateTime dCreatedOn { get; set; }
         public bool iChangePW { get; set; }
+        public Nullable<bool> isLogin { get; set; }
+        public Nullable<bool> isMobile { get; set; }
         public bool isDeleted { get; set; }
     }
 }

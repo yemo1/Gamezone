@@ -1,7 +1,7 @@
 ﻿var gamezoneApp = angular.module('gamezoneApp', []);
 //var apiURL = "http://localhost:62101";
 var apiURL = "http://localhost:17683";
-
+var flutterWaveRedirectURL = apiURL + "/Games/SubResponse?uid=";
 //Validate Form Controls
 function isFormValid(containerId) {
     var isInValid = 0;

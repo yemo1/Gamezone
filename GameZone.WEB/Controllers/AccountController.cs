@@ -11,6 +11,7 @@ using Microsoft.Owin.Security;
 using GameZone.WEB.Models;
 using GameZone.VIEWMODEL;
 using GameZone.TOOLS;
+using GameZone.Repositories;
 
 namespace GameZone.WEB.Controllers
 {
@@ -19,34 +20,80 @@ namespace GameZone.WEB.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
-        public AccountController()
+        IAppUserRepository _IAppUserRepository;
+        public AccountController(IAppUserRepository iAppUserRepository)
         {
+            _IAppUserRepository = iAppUserRepository;
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
-        {
-            UserManager = userManager;
-            SignInManager = signInManager;
-        }
+        //public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        //{
+        //    UserManager = userManager;
+        //    SignInManager = signInManager;
+        //}
 
         [HttpPost]
         [AllowAnonymous]
-        public string StartValidUserSession(LoginAppUserVM loginAppUserVM)
+        public void StartValidUserSession(LoginAppUserVM loginAppUserVM)
         {
             if (loginAppUserVM != null)
             {
                 //Put Valid Login User Data in Session
-                GameUserIdentity.LoggedInUser = loginAppUserVM;               
-               
-                return "/Games/List";
-            }
-            else
-            {
-                return "/Home";
+                GameUserIdentity.LoggedInUser = loginAppUserVM;
             }
         }
 
+        [HttpPost]
+        [AllowAnonymous]
+        public string AuthUserToken(string redirectURL = null)
+        {
+            System.Collections.Specialized.NameValueCollection nvc = new System.Collections.Specialized.NameValueCollection();
+            nvc = Request.Headers;
+            System.Collections.Generic.Dictionary<string, string> ss = new System.Collections.Generic.Dictionary<string, string>();
+            foreach (var item in nvc.AllKeys)
+            {
+                ss.Add(item, nvc[item]);
+            }
+
+            //Check for Authentication Token in Request Header
+            if (ss.ContainsKey("authToken") && !string.IsNullOrEmpty(ss["authToken"].ToString()))
+            {
+                string headerToken = ss["authToken"].ToString();
+                //Validate User and Token
+                string appUserID = headerToken.Split(';')[0], userToken = headerToken.Split(';')[1];
+                var retVal = _IAppUserRepository.ConfirmAppUserToken(userToken, long.Parse(appUserID));
+                //User and Token Match
+                if (retVal.isSuccess)
+                {
+                    return redirectURL;
+                }
+                else
+                {
+                    return "/Home/Index;Access Denied";
+                }
+            }
+            else
+            {
+                return "/Home/Index;Access Denied";
+            }
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public bool ValidSubscription(long UID, string svcName)
+        {
+            var retVal = _IAppUserRepository.ConfirmUserSubscription(UID, svcName);
+            return retVal.isSuccess;
+        }
+
+        // POST: /Account/LogOff
+        [HttpPost]
+        [AllowAnonymous]
+        public string LogOff(string UID)
+        {
+            _IAppUserRepository.LoginAppUser(UID, false, null);
+            return "/Home";
+        }
         public ApplicationSignInManager SignInManager
         {
             get
@@ -405,14 +452,7 @@ namespace GameZone.WEB.Controllers
         }
 
         //
-        // POST: /Account/LogOff
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult LogOff()
-        {
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
-        }
+
 
         //
         // GET: /Account/ExternalLoginFailure

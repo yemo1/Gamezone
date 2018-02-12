@@ -13,6 +13,9 @@ namespace GameZone.Repositories
         IList<GetAppUser_Result> GetAppUsers();
         GetAppUser_Result GetAppUser(long? AppUserID, string Username);
         AddAppUser_Result AddAppUser(GameData.AppUser appUser);
-        AppUserRepository ChangeAppUserPassword(AppUserRepository appUser);
+        ChangeAppUserPassword_Result ResetAppUserPassword(string szUsername, string szPassword, string szPasswordSalt, int iStatus, bool iChangePW);
+        LoginAppUser_Result LoginAppUser(string szUsername, bool isLogin, string loginToken);
+        ConfirmAppUserLoginToken_Result ConfirmAppUserToken(string loginToken, long AppUserID = 0, string szUsername = null);
+        ConfirmAppUserSubscription_Result ConfirmUserSubscription(long AppUserID, string ServiceName);
     }
 }

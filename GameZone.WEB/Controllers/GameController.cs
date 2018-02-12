@@ -5,9 +5,11 @@ using GameZone.WEB.Mappings;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Results;
 
@@ -223,6 +225,19 @@ namespace GameZone.WEB.Controllers
                     Message = ex.Message
                 };
             }
+        }
+        
+        public ReturnMessage PostSubResponse(string resp = null)
+        {
+            NameValueCollection nvc = new NameValueCollection();
+            nvc = HttpContext.Current.Request.Headers;
+            Dictionary<string, string> ss = new Dictionary<string, string>();
+            foreach (var item in nvc.AllKeys)
+            {
+                ss.Add(item, nvc[item]);
+            }
+
+            return null;
         }
     }
 }
