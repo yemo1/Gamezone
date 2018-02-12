@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GameZone.TOOLS</RootNamespace>
     <AssemblyName>GameZone.TOOLS</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -73,10 +74,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GameData\GameData.csproj">
-      <Project>{83FA95EB-B918-4002-A27C-F3C6ED770A3F}</Project>
-      <Name>GameData</Name>
-    </ProjectReference>
     <ProjectReference Include="..\GameZone.VIEWMODEL\GameZone.VIEWMODEL.csproj">
       <Project>{BC9B7218-01C0-42FD-BE15-D30E21807093}</Project>
       <Name>GameZone.VIEWMODEL</Name>

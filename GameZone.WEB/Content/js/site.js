@@ -11,18 +11,6 @@ $(document).ready(function(){
                }
     });
 
-    // making game-filter fixed when it scrolls
-    $(window).on('scroll',function (e) {
-        var filter_pos = $('.game-filter').offset().top;
-        if ($(window).scrollTop() >= $('.page-section:first-of-type').height()) {
-            // page-section:first
-            $('.game-filter').addClass('filter-fixed');
-        }
-        else {
-            $('.game-filter').removeClass('filter-fixed');
-        }
-    });
-
     $('body').on('click', '#free-play', function () {
         $(this).hide().remove();
     });
