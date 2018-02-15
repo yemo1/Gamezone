@@ -1,7 +1,4 @@
-﻿
-var formTitle = _Title;
-
-gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
+﻿gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
     //Make Games Page Menu Active
     $("#menuUL li").removeClass("current");
     $("#gameMenu").addClass("current");
@@ -94,13 +91,10 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
                 success: function (data) {
                     if (data != "") {
                         if (data.includes(";")) {
-                            $.notify("Access Denied", 'error');
-                            setTimeout(function () {
                                 window.location = data.split(';')[0];
-                            }, 5000);
                         } else {
                             if ($scope.validateSubscription(userData.AppUserId) == "False") {
-                                $.notify("Subscription Expired", 'error');
+                                $.notify("Please Subscription to play our games.", 'error');
                                 localStorage.removeItem("selectedGame");
                                 setTimeout(function () {
                                     window.location = "/Home/Index";
@@ -108,19 +102,13 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
                             }
                         }
                     } else {
-                        $.notify("Access Denied", 'error');
-                        setTimeout(function () {
-                            window.location = "/Home/Index";
-                        }, 5000);                        
+                            window.location = "/Home/Index";          
                     }
                 }, error: function (data) {
                 }
             });
         } else {
-            $.notify("Access Denied", 'error');
-            setTimeout(function () {
                 window.location = "/Home/Index";
-            }, 5000);
         }
     };
 

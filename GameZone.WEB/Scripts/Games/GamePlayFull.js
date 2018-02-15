@@ -36,13 +36,10 @@ function authHandler(retURL) {
             success: function (data) {
                 if (data != "") {
                     if (data.includes(";")) {
-                        $.notify("Access Denied", 'error');
-                        setTimeout(function () {
                             window.location = data.split(';')[0];
-                        }, 5000);
                     } else {
                         if (validateSubscription(userData.AppUserId) == "False") {
-                            $.notify("Subscription Expired", 'error');
+                            $.notify("Please Subscription to play our games.", 'error');
                             localStorage.removeItem("selectedGame");
                             setTimeout(function () {
                                 window.location = "/Home/Index";
@@ -50,19 +47,13 @@ function authHandler(retURL) {
                         }
                     }
                 } else {
-                    $.notify("Access Denied", 'error');
-                    setTimeout(function () {
                         window.location = "/Home/Index";
-                    }, 5000);
                 }
             }, error: function (data) {
             }
         });
     } else {
-        $.notify("Access Denied", 'error');
-        setTimeout(function () {
             window.location = "/Home/Index";
-        }, 5000);
     }
 };
 
@@ -73,6 +64,7 @@ function InstantiateGame() {
     var gameData = localStorage.getItem("selectedGame");
     if (gameData) {
         gameData = JSON.parse(gameData);
+        //loadGameContent(gameData.URL);
         $("#gamePlay").attr("src", gameData.URL);
     } else {
         window.location = "/Home/Index";
@@ -80,3 +72,17 @@ function InstantiateGame() {
 };
 InstantiateGame();
 $("#gamePlay").fullScreen(true);
+
+function loadGameContent() {
+    $.ajax({
+        type: "GET",
+        url: gameURL,
+        async: false,
+        success: function (data) {
+            //$("html head").append("<meta name='viewport' content='width=device-width, initial-scale=1'>");
+            //console.log(data);
+        }, error: function (data) {
+        }
+    });
+}
+loadGameContent();

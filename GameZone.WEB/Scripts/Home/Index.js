@@ -1,14 +1,4 @@
-﻿//$(document).ready(function () {
-//    //Subscription Successful
-//    if (_subscriptionSuccessful != "") {
-//        if (_subscriptionSuccessful == "true") {
-//            $.notify("Subscription Successful.", 'success');
-//        } else {
-//            $.notify("Subscription Failed.", 'error');
-//        }
-//    }
-//});
-gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
+﻿gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
 
     //Make Games Page Menu Active
     $("#menuUL li").removeClass("current");
@@ -26,29 +16,17 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
         UID = JSON.parse(localStorage.getItem("UID"));
         $scope.redirectURL = flutterWaveRedirectURL + UID.AppUserId;
     } else {
+        $('.subscribeBTN').css("display", "none");
         $('#loginModal').modal('show');
     }
-
-    //$.notify("Thank you.", { position: "left" });
-
-    //$('#subscriptionDetailsModal').modal('show');
-
     
     $scope.basicObj = {};
     $scope.registerObj = {};
     $scope.loginObj = {};
     $scope.forgotpwObj = {};
     $scope.changepwObj = {};
-    //100 N Weekly
+    $scope.subDetailOBJ = {};
     $scope.basicObj.sT = 1;
-
-    // Detect Device Type and Display Appropriate Subscription Modal
-
-
-    //Detect Device Type and Display Appropriate Subscription Modal
-    //if (_IsMobile == "False") {
-    //    $("#pcSubscriptionModal").modal("show");
-    //}
 
     //Get ApplicationUser Data from DB
     $scope.getGameData = function (selectedCat) {
@@ -108,7 +86,46 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
     };
     $scope.getGameData("family");
 
-    //Authentication Handler
+
+    $scope.GetSubData = function () {
+        var userOBJ = localStorage.getItem("UID");
+        var UID = null;
+        if (userOBJ) {
+            UID = JSON.parse(localStorage.getItem("UID"));
+
+            $.ajax({
+                type: "GET",
+                url: apiURL + "/api/AppUser/SubscriptionDetails?UID=" + UID.AppUserId + "&svcName=" + svcName,
+                async: false,
+                success: function (data) {
+                    //$scope.subDetailOBJ = {};
+
+                    if (data.Success) {
+                        //$scope.$apply(function () {
+                        $scope.subDetailOBJ = data.Data;
+
+                        $scope.subDetailOBJ.PeriodStart = $scope.formatDate(data.Data.PeriodStart);
+                        $scope.subDetailOBJ.PeriodEnd = $scope.formatDate(data.Data.PeriodEnd);
+                        //});
+                        $("#txtIsActive").html(getRecordStatus(data.Data.IsActive));
+                    } else {
+                        //$scope.$apply(function () {
+                        $scope.subDetailOBJ.PeriodStart = "-";
+                        $scope.subDetailOBJ.PeriodEnd = "-";
+                        $scope.subDetailOBJ.Period = "-";
+                        $scope.subDetailOBJ.Amount = "-";
+                        $scope.subDetailOBJ.IsActive = "-";
+                        //});
+                        $("#txtIsActive").html("-");
+                    }
+                }, error: function (data) {
+                }
+            });
+        }
+    };
+
+
+    //Subscription Authentication Handler
     $scope.validateSubscription = function (AppUserId) {
         var retVal = false;
         $.ajax({
@@ -130,7 +147,7 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
         var userOBJ = localStorage.getItem("UID");
         var userLoginToken = null;
         if (userOBJ) {
-            var userData = JSON.parse(localStorage.getItem("UID"));
+            var userData = JSON.parse(localStorage.getItem("UID")),
             userLoginToken = userData.AppUserId + ";" + userData.userLoginToken;
 
             $.ajax({
@@ -144,36 +161,34 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
                 success: function (data) {
                     if (data != "") {
                         if (data.includes(";")) {
-                            $.notify("Access Denied", 'error');
-                            setTimeout(function () {
-                                $('#loginModal').modal('show');
-                            }, 5000);
+                            localStorage.removeItem("UID");
+                            localStorage.removeItem("selectedGame");
+                            //Clear Username Display
+                            ResetUsernameToAccount();
+                            $('#loginModal').modal('show');
                         } else {
-                            if ($scope.validateSubscription(userData.AppUserId) == "False") {
-                                $.notify("Subscription Expired", 'error');
-                                localStorage.removeItem("selectedGame");
-                                setTimeout(function () {
-                                    $scope.keepUserData(userData);
-                                    $('#pcSubscriptionModal').modal('show');
-                                }, 5000);
-                            } else {
-                                returnURL = data;
-                            }
+                            returnURL = data;
                         }
                     } else {
-                        $.notify("Access Denied", 'error');
+                        localStorage.removeItem("UID");
+                        localStorage.removeItem("selectedGame");
+                        //Clear Username Display
+                        ResetUsernameToAccount();
                         $('#loginModal').modal('show');
                     }
                 }, error: function (data) {
                 }
             });
         } else {
-            $.notify("Access Denied", 'error');
+            localStorage.removeItem("UID");
+            localStorage.removeItem("selectedGame");
+            //Clear Username Display
+            ResetUsernameToAccount();
             $('#loginModal').modal('show');
         }
         return returnURL;
     };
-    
+
     //CLick handler of Menu Items
     $(".gameMenu").click(function (e) {
         var selCat = $(this).attr("id");
@@ -190,48 +205,39 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
         //Authentication
         var retVal = $scope.authHandler("/games/gameplay");
         if (retVal != null) {
-            var selGameURL = $(this).attr("href");
-            var selGameLongDesc = $(this).find('div.longDescription').html();
-            var selGameCat = $(this).find('p.game-category').text();
-            var selGameTitle = $(this).find('h3.game-title').text();
-            var selectedGame = {
-                "URL": selGameURL,
-                "Category": selGameCat,
-                "Title": selGameTitle,
-                "LongDescription": selGameLongDesc
-            };
-            localStorage.setItem("selectedGame", JSON.stringify(selectedGame));
-            e.preventDefault();
-            e.preventDefault();
-
-            window.location = retVal;
+            var userData = JSON.parse(localStorage.getItem("UID"));
+            if ($scope.validateSubscription(userData.AppUserId) == "False") {
+                $.notify("Please Subscribe to play our games.", 'error');
+                localStorage.removeItem("selectedGame");
+                $scope.$apply(function () {
+                    $scope.GetSubData();
+                });
+                $scope.keepUserData(userData);
+                setTimeout(function () {
+                    $('#pcSubscriptionModal').modal('show');
+                }, 5000);
+            } else {
+                var selGameURL = $(this).attr("href");
+                var selGameLongDesc = $(this).find('div.longDescription').html();
+                var selGameCat = $(this).find('p.game-category').text();
+                var selGameTitle = $(this).find('h3.game-title').text();
+                var selectedGame = {
+                    "URL": selGameURL,
+                    "Category": selGameCat,
+                    "Title": selGameTitle,
+                    "LongDescription": selGameLongDesc
+                };
+                localStorage.setItem("selectedGame", JSON.stringify(selectedGame));
+                e.preventDefault();
+                e.preventDefault();
+                //console.log(retVal + "?URL=" + selGameURL);
+                //window.location = retVal + "?URL=" + selGameURL;
+                window.location = selGameURL;
+            }
         }
     });
 
-    $scope.SaveNewSubscriber = function () {
-
-        alert($scope.basicObj.sT);
-        return;
-        $scope.basicObj.nO = $('select#nOSelect option:selected').val();
-
-        //Enable COntrols
-        $(".disabledCtrl").attr("disabled", "disabled");
-        $.ajax({
-            type: "POST",
-            data: $scope.basicObj,
-            url: apiURL + "/api/Game?NewSubscriber",
-            async: false,
-            success: function (data) {
-                if (data.Success) {
-                    $.notify(data.Message, 'success');
-                    $('#pcSubscriptionModal').modal('hide');
-                }
-            }, error: function (data) {
-            }
-        });
-        $(".disabledCtrl").removeAttr("disabled");
-    };
-
+    //Function to handle creation of new users
     $scope.RegisterNewUser = function () {
         var szUsername = $scope.registerObj.szUsername;
         var containsAlphabet = /[a-z]/i.test(szUsername);
@@ -284,15 +290,11 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
                 success: function (data) {
                     if (data.Success) {
                         $.notify(data.Message, 'success');
-                        //$scope.$apply(function () {
-                        //    $scope.productRowCollection = resultData;
-                        //});
                         $scope.loginObj.szUsername = $scope.registerObj.szUsername;
                         $scope.loginObj.szPassword = $scope.registerObj.szPassword;
                         $scope.userLogin();
 
                         $scope.registerObj = {};
-                        //$('#loginModal').modal('hide');
                     } else {
                         $.notify(data.Message, 'error');
                     }
@@ -308,6 +310,7 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
         }, 1000);
     };
 
+    //Function to handle Reset of user's password
     $scope.ResetUserPW = function () {
         var szUsername = $scope.forgotpwObj.szUsername;
         var containsAlphabet = /[a-z]/i.test(szUsername);
@@ -367,6 +370,7 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
         }, 1000);
     };
 
+    //Function to handle Change of user's password
     $scope.ChangeUserPW = function () {
         var szUsername = $scope.changepwObj.szUsername;
         var containsAlphabet = /[a-z]/i.test(szUsername);
@@ -510,14 +514,13 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
         });
     };
 
+    //Hold User Data for Subscription Purpose
     $scope.keepUserData = function (LoginAppUserVM) {
         var userOBJ = localStorage.getItem("UID");
         var UID = null;
         if (userOBJ) {
             UID = JSON.parse(localStorage.getItem("UID"));
             $scope.redirectURL = flutterWaveRedirectURL + UID.AppUserId;
-
-            $scope.GetSubData();
 
             $.post("/Account/StartValidUserSession", {
                 loginAppUserVM: UID
@@ -529,57 +532,18 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
         }
     };
 
-    $scope.GetSubData = function () {
-        var userOBJ = localStorage.getItem("UID");
-        var UID = null;
-        if (userOBJ) {
-            UID = JSON.parse(localStorage.getItem("UID"));
-
-                $.ajax({
-                    type: "GET",
-                    url: apiURL + "/api/AppUser/SubscriptionDetails?UID=" + UID.AppUserId +"&svcName=" + svcName,
-                    async: false,
-                    success: function (data) {
-                        console.log(data);
-                        //if (data.Success) {
-                            $scope.subDetailOBJ = data.Data;
-
-                            $scope.subDetailOBJ.PeriodStart = $scope.formatDate(data.Data.PeriodStart);
-                            $scope.subDetailOBJ.PeriodEnd = $scope.formatDate(data.Data.PeriodEnd);
-                            //$scope.subDetailOBJ.Period = data.Data.Period;
-                            //$scope.subDetailOBJ.Amount = data.Data.Amount;
-                            $("#txtIsActive").html(getRecordStatus(data.Data.IsActive));
-//$scope.subDetailOBJ.IsActive =
-                        //} else {
-                        //    $scope.subDetailOBJ.PeriodStart = "-";
-                        //    $scope.subDetailOBJ.PeriodEnd = "-";
-                        //    $scope.subDetailOBJ.Period = "-";
-                        //    $scope.subDetailOBJ.Amount = "-";
-                        //    $scope.subDetailOBJ.IsActive = "-";
-                        //}
-                    }, error: function (data) {
-                    }
-                });
+    $scope.subscriptionBtnClickEventHandler = function () {
+        var userData = JSON.parse(localStorage.getItem("UID"));
+        if (userData) {
+            $scope.GetSubData();
+            $scope.keepUserData(userData);
         }
-        
-    };
 
-    //Function to Log User Out
-    //$scope.LogUserOut = function (delay) {
-    //    $.post("/Account/LogOff").success(function (data) {
-    //        if (data != "") {
-    //            setTimeout(function () {
-    //                window.location = data;
-    //            }, delay);
-    //        }
-    //    }).error(function (data) {
-    //        $.notify(data.statusText, 'error');
-    //    });
-    //};
-    ////Logout Handler
-    //$(document).on("click", "#logout-target", function (event) {
-    //    $scope.LogUserOut(1000);
-    //});
+        //$scope.$apply(function () {
+        //    $scope.GetSubData();
+        //});
+        //$scope.keepUserData();
+    };
 
     $(document).on("click", ".subType", function (event) {
         var amntSelected = ($(this).attr("id") == "subType1") ? 200 : ($(this).attr("id") == "subType2") ? 100 : 20;
@@ -601,16 +565,6 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
         }
     }
 });
-
-//Allow Only Numbers into Tel Textbox
-//$(document).on("keypress keyup blur", ".allownumericwithoutdecimal", function (event) {
-//    $(this).val($(this).val().replace(/[^\d].+/, ""));
-//    if ((event.which < 48 || event.which > 57)) {
-//        event.preventDefault();
-//    }
-//});
-
-//$("#pcSubscriptionModal").modal("show");
 
 $("a.flwpug_getpaid").find("button").addClass("btn btn-primary");
 
@@ -650,5 +604,5 @@ function addHeader() {
 }
 
 function getRecordStatus(status) {
-    return (status) ? "<span class='btn-custom btn-success btn-xs'>True</span>" : "<span class='btn-custom btn-warning btn-xs'>False</span>";
+    return (status == true) ? "<span class='btn-custom btn-success btn-xs'>True</span>" : (status == false) ? "<span class='btn-custom btn-warning btn-xs'>False</span>" : "";
 }

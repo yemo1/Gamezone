@@ -48,6 +48,52 @@
           <Property Name="Suffix" Type="varchar" MaxLength="10" />
           <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="ServiceHeaders">
+          <Key>
+            <PropertyRef Name="HeaderId" />
+          </Key>
+          <Property Name="HeaderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ServiceName" Type="nvarchar" MaxLength="100" />
+          <Property Name="ServiceLabel" Type="nvarchar" MaxLength="100" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="MenuCategory" Type="nvarchar" MaxLength="100" />
+          <Property Name="MenuCategoryLabel" Type="nvarchar" MaxLength="100" />
+          <Property Name="Category" Type="nvarchar" MaxLength="100" />
+          <Property Name="CategoryLabel" Type="nvarchar" MaxLength="100" />
+          <Property Name="ProductCode" Type="nvarchar" MaxLength="100" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="ServiceUrl" Type="nvarchar" MaxLength="100" />
+          <Property Name="ServiceParams" Type="nvarchar" MaxLength="500" />
+          <Property Name="ParamsType" Type="int" />
+          <Property Name="ImageUrl" Type="nvarchar" MaxLength="100" />
+          <Property Name="HomeCategory" Type="nvarchar" MaxLength="100" />
+          <Property Name="HomeCategoryLabel" Type="nvarchar" MaxLength="100" />
+          <Property Name="TimeFormat" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ServiceRequests">
+          <Key>
+            <PropertyRef Name="RequestId" />
+          </Key>
+          <Property Name="RequestId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MSISDN" Type="nvarchar" MaxLength="50" />
+          <Property Name="TransactionId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ClientIp" Type="nvarchar" MaxLength="100" />
+          <Property Name="SourceChannel" Type="nvarchar" MaxLength="100" />
+          <Property Name="HeaderEnabled" Type="bit" Nullable="false" />
+          <Property Name="ServiceHeaderId" Type="int" Nullable="false" />
+          <Property Name="Timestamped" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ServiceResponses">
+          <Key>
+            <PropertyRef Name="ResponseId" />
+          </Key>
+          <Property Name="ResponseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RequestId" Type="int" Nullable="false" />
+          <Property Name="StatusCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Timestamped" Type="datetime" Nullable="false" />
+        </EntityType>
         <Function Name="AddAppUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="szImgURL" Type="varchar" Mode="In" />
           <Parameter Name="szUsername" Type="varchar" Mode="In" />
@@ -110,6 +156,9 @@
           <EntitySet Name="AppUser" EntityType="Self.AppUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Games" EntityType="Self.Games" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IDSeries" EntityType="Self.IDSeries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceHeaders" EntityType="Self.ServiceHeaders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceRequests" EntityType="Self.ServiceRequests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceResponses" EntityType="Self.ServiceResponses" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -177,6 +226,9 @@
             <Parameter Name="AppUserId" Mode="In" Type="Int64" />
             <Parameter Name="ServiceName" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="ServiceHeaders" EntityType="NGSubscriptionsModel.ServiceHeaders" />
+          <EntitySet Name="ServiceRequests" EntityType="NGSubscriptionsModel.ServiceRequests" />
+          <EntitySet Name="ServiceResponses" EntityType="NGSubscriptionsModel.ServiceResponses" />
         </EntityContainer>
         <EntityType Name="Game">
           <Key>
@@ -285,6 +337,52 @@
           <Property Type="Boolean" Name="IsActive" Nullable="false" />
           <Property Type="DateTime" Name="DateCreated" Nullable="false" Precision="23" />
         </ComplexType>
+        <EntityType Name="ServiceHeaders">
+          <Key>
+            <PropertyRef Name="HeaderId" />
+          </Key>
+          <Property Name="HeaderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ServiceName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ServiceLabel" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ProductName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MenuCategory" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MenuCategoryLabel" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Category" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryLabel" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ProductCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="ServiceUrl" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ServiceParams" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ParamsType" Type="Int32" />
+          <Property Name="ImageUrl" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="HomeCategory" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="HomeCategoryLabel" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TimeFormat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ServiceRequests">
+          <Key>
+            <PropertyRef Name="RequestId" />
+          </Key>
+          <Property Name="RequestId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MSISDN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TransactionId" Type="Guid" Nullable="false" />
+          <Property Name="ClientIp" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SourceChannel" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="HeaderEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="ServiceHeaderId" Type="Int32" Nullable="false" />
+          <Property Name="Timestamped" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="ServiceResponses">
+          <Key>
+            <PropertyRef Name="ResponseId" />
+          </Key>
+          <Property Name="ResponseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RequestId" Type="Int32" Nullable="false" />
+          <Property Name="StatusCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Timestamped" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -441,6 +539,55 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="ServiceHeaders">
+            <EntityTypeMapping TypeName="NGSubscriptionsModel.ServiceHeaders">
+              <MappingFragment StoreEntitySet="ServiceHeaders">
+                <ScalarProperty Name="TimeFormat" ColumnName="TimeFormat" />
+                <ScalarProperty Name="HomeCategoryLabel" ColumnName="HomeCategoryLabel" />
+                <ScalarProperty Name="HomeCategory" ColumnName="HomeCategory" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="ParamsType" ColumnName="ParamsType" />
+                <ScalarProperty Name="ServiceParams" ColumnName="ServiceParams" />
+                <ScalarProperty Name="ServiceUrl" ColumnName="ServiceUrl" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+                <ScalarProperty Name="CategoryLabel" ColumnName="CategoryLabel" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="MenuCategoryLabel" ColumnName="MenuCategoryLabel" />
+                <ScalarProperty Name="MenuCategory" ColumnName="MenuCategory" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ServiceLabel" ColumnName="ServiceLabel" />
+                <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+                <ScalarProperty Name="HeaderId" ColumnName="HeaderId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceRequests">
+            <EntityTypeMapping TypeName="NGSubscriptionsModel.ServiceRequests">
+              <MappingFragment StoreEntitySet="ServiceRequests">
+                <ScalarProperty Name="Timestamped" ColumnName="Timestamped" />
+                <ScalarProperty Name="ServiceHeaderId" ColumnName="ServiceHeaderId" />
+                <ScalarProperty Name="HeaderEnabled" ColumnName="HeaderEnabled" />
+                <ScalarProperty Name="SourceChannel" ColumnName="SourceChannel" />
+                <ScalarProperty Name="ClientIp" ColumnName="ClientIp" />
+                <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+                <ScalarProperty Name="MSISDN" ColumnName="MSISDN" />
+                <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceResponses">
+            <EntityTypeMapping TypeName="NGSubscriptionsModel.ServiceResponses">
+              <MappingFragment StoreEntitySet="ServiceResponses">
+                <ScalarProperty Name="Timestamped" ColumnName="Timestamped" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="StatusCode" ColumnName="StatusCode" />
+                <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+                <ScalarProperty Name="ResponseId" ColumnName="ResponseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

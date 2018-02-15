@@ -73,6 +73,7 @@ namespace GameZone.WEB.Controllers
                 //laptop or desktop
                 ViewBag.IsMobile = false;
             }
+            Response.Write($"<script language='javascript' type='text/javascript'>alert('{retVal}');</script>");
             return View();
         }
 

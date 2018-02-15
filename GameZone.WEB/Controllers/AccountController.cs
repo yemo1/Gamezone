@@ -65,7 +65,7 @@ namespace GameZone.WEB.Controllers
                 //User and Token Match
                 if (retVal.isSuccess)
                 {
-                    return redirectURL;
+                    return redirectURL ?? "/Home/Index";
                 }
                 else
                 {

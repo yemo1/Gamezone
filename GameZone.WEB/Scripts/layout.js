@@ -7,9 +7,7 @@ if (userOBJ) {
     $('.loginReg').css("display", "none");
     $('.logout').css("display", "block");
 } else {
-    $('#userIDSpan').text("Account");
-    $('.logout').css("display", "none");
-    $('.loginReg').css("display", "block");
+    ResetUsernameToAccount();
 }
 
 //Function to Log User Out
@@ -36,3 +34,10 @@ $(document).on("click", "#logout-target", function (event) {
         LogUserOut(1000, UID.szUsername);
     }
 });
+
+//Function to Reset Username Display to Display Account
+function ResetUsernameToAccount() {
+    $('#userIDSpan').text("Account");
+    $('.logout').css("display", "none");
+    $('.loginReg').css("display", "block");
+}

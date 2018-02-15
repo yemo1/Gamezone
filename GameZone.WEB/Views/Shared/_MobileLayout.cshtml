@@ -1,0 +1,9 @@
+﻿@using GameZone.TOOLS;
+@{
+    string svcName = System.Configuration.ConfigurationManager.AppSettings["SERVICE_NAME"].ToString();
+    string rls_vsn = System.Configuration.ConfigurationManager.AppSettings["RELEASE_VERSION"].ToString();
+}
+
+
+<!DOCTYPE html>
+@RenderBody()

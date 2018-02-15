@@ -30,6 +30,9 @@ namespace GameData
         public virtual DbSet<Game> Games { get; set; }
         public virtual DbSet<IDSeries> IDSeries { get; set; }
         public virtual DbSet<AppUser> AppUser { get; set; }
+        public virtual DbSet<ServiceHeaders> ServiceHeaders { get; set; }
+        public virtual DbSet<ServiceRequests> ServiceRequests { get; set; }
+        public virtual DbSet<ServiceResponses> ServiceResponses { get; set; }
     
         public virtual ObjectResult<ChangeAppUserPassword_Result> ChangeAppUserPassword(string szUsername, string szPassword, string szPasswordSalt, Nullable<int> iStatus, Nullable<bool> iChangePW)
         {

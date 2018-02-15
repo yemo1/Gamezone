@@ -10,7 +10,7 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
     $scope.basicObj = {};
     $scope.Game = {};
     $scope.CategoryGameList = [];
-
+    
 
     //Get ApplicationUser Data from DB
     $scope.getGameData = function (selectedCat) {
@@ -95,10 +95,7 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
                 success: function (data) {
                     if (data != "") {
                         if (data.includes(";")) {
-                            $.notify("Access Denied", 'error');
-                            setTimeout(function () {
-                                window.location = data.split(';')[0];
-                            }, 5000);
+                            window.location = data.split(';')[0];
                         } else {
                             if ($scope.validateSubscription(userData.AppUserId) == "False") {
                                 $.notify("Subscription Expired", 'error');
@@ -111,19 +108,13 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
                             }
                         }
                     } else {
-                        $.notify("Access Denied", 'error');
-                        setTimeout(function () {
-                            window.location = "/Home/Index";
-                        }, 5000);
+                        window.location = "/Home/Index";
                     }
                 }, error: function (data) {
                 }
             });
         } else {
-            $.notify("Access Denied", 'error');
-            setTimeout(function () {
-                window.location = "/Home/Index";
-            }, 5000);
+            window.location = "/Home/Index";
         }
         return returnURL;
     };
@@ -180,6 +171,4 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
 });
 
 function GoPlay(e) {
-    //alert("YES");
-
 }
