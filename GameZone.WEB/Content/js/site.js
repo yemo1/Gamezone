@@ -1,19 +1,18 @@
-$(document).ready(function(){
-    
+$(document).ready(function () {
+
     $(window).scroll(function () {
-             if ($(window).scrollTop() >= $('.page-section:first-of-type').height()) {
-               // page-section:first
-               $('header').addClass('sticky')
-             }
-               else
-               {
-                 $('header').removeClass('sticky');
-               }
+        if ($(window).scrollTop() >= $('.page-section:first-of-type').height()) {
+            // page-section:first
+            $('header').addClass('sticky')
+        }
+        else {
+            $('header').removeClass('sticky');
+        }
     });
 
     // making game-filter fixed when it scrolls
-    $(window).on('scroll',function (e) {
-        var filter_pos = $('.game-filter').offset().top;
+    $(window).on('scroll', function (e) {
+        //var filter_pos = $('.game-filter').offset().top;
         if ($(window).scrollTop() >= $('.page-section:first-of-type').height()) {
             // page-section:first
             $('.game-filter').addClass('filter-fixed');
@@ -31,10 +30,10 @@ $(document).ready(function(){
         e.preventDefault();
         $('#register-form').addClass('slideOutLeft');
         $('#login-header').removeClass('hide').addClass('fadeIn');
-        $('#register-header').addClass('hide');       
+        $('#register-header').addClass('hide');
         setTimeout(function () {
             $('#login-form').addClass('slideInRight').removeClass('hide');
-            $('#login-header').removeClass('fadeIn');            
+            $('#login-header').removeClass('fadeIn');
             $('#register-form').addClass('hide').removeClass('slideOutLeft');
         }, 250);
     });
@@ -88,9 +87,9 @@ $(document).ready(function(){
     });
 
     $('.animate').scrolla({
-      mobile: true,
-      once: false
-	});
+        mobile: true,
+        once: false
+    });
 
 
-});        
+});

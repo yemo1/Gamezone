@@ -1,4 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@using GameZone.TOOLS;
+@{
+    string svcName = System.Configuration.ConfigurationManager.AppSettings["SERVICE_NAME"].ToString();
+    string rls_vsn = System.Configuration.ConfigurationManager.AppSettings["RELEASE_VERSION"].ToString();
+}
+
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -13,11 +20,11 @@
     <meta name="description" content="The marketplace for HTML5 games">
     <meta name="author" content="Funmobile,Bernard Oreva, Aishat Mosuro">
 
-    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/css/animate.min.css" rel="stylesheet" />
-    <link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="~/Content/css/base-stylesheet.css" rel="stylesheet" />
-    <link href="~/Content/css/style.css" rel="stylesheet" />
+    <link href="~/Content/css/bootstrap.min.css?v=@rls_vsn" rel="stylesheet" />
+    <link href="~/Content/css/animate.min.css?v=@rls_vsn" rel="stylesheet" />
+    <link href="~/Content/css/font-awesome.min.css?v=@rls_vsn" rel="stylesheet" />
+    <link href="~/Content/css/base-stylesheet.css?v=@rls_vsn" rel="stylesheet" />
+    <link href="~/Content/css/style.css?v=@rls_vsn" rel="stylesheet" />
 
     <style>
         #games #main-menu .navbar .nav > li > a {
@@ -41,7 +48,7 @@
                             <div class="logo-container-2">
                                 <div class="logo-2">
                                     <a href="/Home" class="clearfix">
-                                        <img src="~/Content/images/logo.png" alt="Gamezone logo"/>
+                                        <img src="~/Content/images/logo.png" alt="Gamezone logo" />
                                     </a>
                                 </div>
                             </div>
@@ -67,12 +74,14 @@
                                                 </li>
                                                 <li class="dropdown">
                                                     <button class="main-menu-title" id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        Account
+                                                        <span id="userIDSpan"></span>
                                                         <span class="caret"></span>
                                                     </button>
                                                     <ul class="dropdown-menu" aria-labelledby="dLabel">
-                                                        <li><a data-toggle="modal" id="login-target" data-target="#loginModal">Login </a></li>
-                                                        <li><a data-toggle="modal" id="register-target" data-target="#loginModal">Register </a></li>
+                                                        <li class="loginReg"><a data-toggle="modal" id="login-target" data-target="#loginModal">Login </a></li>
+                                                        <li class="loginReg"><a data-toggle="modal" id="register-target" data-target="#loginModal">Register </a></li>
+                                                        <li class="logout subscribeBTN"><a data-toggle="modal" id="subDetails-target" data-target="#pcSubscriptionModal" ng-click="subscriptionBtnClickEventHandler()">Subscription </a></li>
+                                                        <li class="logout"><a id="logout-target">Logout </a></li>
                                                     </ul>
                                                 </li>                                        
                                             </ul>
@@ -98,91 +107,20 @@
                 </div>
             </header>
             <main class="main-content">
-           
-            @* PC Login/Registration Modal *@
-            <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <h3 class="modal-title text-center animated hide" id="login-header"> Login</h3>
-                                <h3 class="modal-title text-center animated" id="register-header" >Create Account</h3>
-                        </div>
-                        <div class="modal-body">
-                            <form class="form-horizontal hide animated" id="login-form">
-                                <div class="form-group row">
-                                    <div class="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
-                                        <input type="text" class="form-control " placeholder="Username">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
-                                        <input type="text" class="form-control " placeholder="password">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 col-sm-offset-3  col-xs-6 col-xs-offset-3">
-                                        <button class="btn btn-primary btn-block "> Login</button>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
-                                        <hr />
-                                        <p class="text-center">Don't have an account?  <a id="register-link">Register</a></p>
-                                    </div>
-                                </div>
-                            </form>
-                            <form class="form-horizontal animated" id="register-form">
-                                <div class="form-group row">
-                                    <div class="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
-                                        <input type="text" class="form-control " placeholder="Email address">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
-                                        <input type="text" class="form-control " placeholder="password">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
-                                        <input type="text" class="form-control " placeholder="Confirm password">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 col-sm-offset-3  col-xs-6 col-xs-offset-3">
-                                        <button class="btn btn-primary btn-block "> Register</button>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
-                                        <hr />
-                                        <p class="text-center">Already have an account? <a id="login-link">Login</a></p>
-                                    </div>
-                                </div>
-                    
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
                 @RenderBody()
                 <footer id="footer4" class="footer2-black site-footer">
                     <div class="container">
                         <div class="row">
                             <div class="col-md-5 widget pt-10 ">
                                 <div class="footer2-text-cont contact">
-                                    <img  class="footer-logo" src="~/Content/images/logo 1 flip.png" alt="Gamezone" />
-                                   <p>Get so much more by subscribing a token for loads of interesting Arcade, Sports, Family and Puzzle games!</p>
+                                    <img class="footer-logo" src="~/Content/images/logo 1 flip.png" alt="Gamezone" />
+                                    <p>Get so much more by subscribing a token for loads of interesting Arcade, Sports, Family and Puzzle games!</p>
                                 </div>
                             </div>
                             <div class="col-md-2 widget pt-10 col-md-offset-2">
                                 <ul class="links-list a-text-cont">
                                     <li class="white_c">INFO</li>
-                                    <li><a data-toggle="modal" data-target="#exampleModal">Subscribe </a></li>
-                                    <li><a href="">Games </a></li>
+                                    <li><a href="/Games/List">Games </a></li>
                                     <!-- <li><a href="">About</a></li> -->
                                     <li><a href="">Terms & Conditions</a></li>
                                     <li><a href="">Privacy </a></li>
@@ -208,8 +146,8 @@
                                 </div>
                             </div>
                         </div>
-                        
-                       
+
+
                     </div>
                     <p id="back-top">
                         <a href="#top" title="Back to Top"><span class="icon icon-arrows-up"><i class="fa fa-arrow-up"></i></span></a>
@@ -221,31 +159,36 @@
 
     <!-- JS begin -->
     @*jquery*@
-    <script src="~/Content/js/jquery.min.js"></script>
-    <script src="~/Content/js/bootstrap.min.js"></script>
-    <script src="~/Scripts/respond.js"></script>
+    <script src="~/Content/js/jquery.min.js?v=@rls_vsn"></script>
+    <script src="~/Content/js/bootstrap.min.js?v=@rls_vsn"></script>
+    <script src="~/Scripts/respond.js?v=@rls_vsn"></script>
 
     @*angular*@
-    <script src="~/Scripts/angular.min.js"></script>
-    <script src="~/Scripts/global.js"></script>
+    <script src="~/Scripts/angular.min.js?v=@rls_vsn"></script>
+    <script src="~/Scripts/global.js?v=@rls_vsn"></script>
 
     @*baseJS*@
 
-    <script src="~/Content/js/magnific-popup.min.js"></script>
-    <script src="~/Content/js/imagesloaded.pkgd.min.js"></script>
-    <script src="~/Content/js/appear.js"></script>
-    <script src="~/Content/js/base.js"></script>
-    <script src="~/Content/js/smooth-scroll.js"></script>
+    <script src="~/Content/js/magnific-popup.min.js?v=@rls_vsn"></script>
+    <script src="~/Content/js/imagesloaded.pkgd.min.js?v=@rls_vsn"></script>
+    <script src="~/Content/js/appear.js?v=@rls_vsn"></script>
+    <script src="~/Content/js/base.js?v=@rls_vsn"></script>
+    <script src="~/Content/js/smooth-scroll.js?v=@rls_vsn"></script>
 
     @*silteringJs*@
-    <script src="~/Content/js/isotope.pkgd.min.js"></script>
-    <script src="~/Content/js/lightbox.min.js"></script>
-    <script src="~/Content/js/dofilter.js"></script>
-    <script src="~/Content/js/scrolla.jquery.min.js"></script>
+    <script src="~/Content/js/isotope.pkgd.min.js?v=@rls_vsn"></script>
+    <script src="~/Content/js/lightbox.min.js?v=@rls_vsn"></script>
+    <script src="~/Content/js/dofilter.js?v=@rls_vsn"></script>
+    <script src="~/Content/js/scrolla.jquery.min.js?v=@rls_vsn"></script>
 
     @*customjs*@
-    <script src="~/Content/js/site.js"></script>
-    
+    <script src="~/Content/js/site.js?v=@rls_vsn"></script>
+
+    <script src="~/Content/js/notify.min.js?v=@rls_vsn"></script>
+    <script>
+        var svcName = "@svcName";
+    </script>
+    <script src="~/Scripts/layout.js?v=@rls_vsn"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

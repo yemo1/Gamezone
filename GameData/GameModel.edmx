@@ -5,6 +5,23 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="NGSubscriptionsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AppUser">
+          <Key>
+            <PropertyRef Name="AppUserId" />
+          </Key>
+          <Property Name="AppUserId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="szImgURL" Type="varchar" MaxLength="1000" />
+          <Property Name="szUsername" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="szPassword" Type="varchar" MaxLength="200" />
+          <Property Name="szPasswordSalt" Type="varchar" MaxLength="200" />
+          <Property Name="iStatus" Type="int" Nullable="false" />
+          <Property Name="dCreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="iChangePW" Type="bit" Nullable="false" />
+          <Property Name="isLogin" Type="bit" />
+          <Property Name="LoginToken" Type="varchar" MaxLength="500" />
+          <Property Name="isMobile" Type="bit" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="Games">
           <Key>
             <PropertyRef Name="Id" />
@@ -18,8 +35,130 @@
           <Property Name="Timestamped" Type="datetime" />
           <Property Name="LastAccess" Type="datetime" />
         </EntityType>
+        <EntityType Name="IDSeries">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Prefix" Type="varchar" MaxLength="10" />
+          <Property Name="MinValue" Type="bigint" />
+          <Property Name="Increment" Type="int" Nullable="false" />
+          <Property Name="NextValue" Type="bigint" Nullable="false" />
+          <Property Name="MaxValue" Type="bigint" />
+          <Property Name="Suffix" Type="varchar" MaxLength="10" />
+          <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ServiceHeaders">
+          <Key>
+            <PropertyRef Name="HeaderId" />
+          </Key>
+          <Property Name="HeaderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ServiceName" Type="nvarchar" MaxLength="100" />
+          <Property Name="ServiceLabel" Type="nvarchar" MaxLength="100" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="MenuCategory" Type="nvarchar" MaxLength="100" />
+          <Property Name="MenuCategoryLabel" Type="nvarchar" MaxLength="100" />
+          <Property Name="Category" Type="nvarchar" MaxLength="100" />
+          <Property Name="CategoryLabel" Type="nvarchar" MaxLength="100" />
+          <Property Name="ProductCode" Type="nvarchar" MaxLength="100" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="ServiceUrl" Type="nvarchar" MaxLength="100" />
+          <Property Name="ServiceParams" Type="nvarchar" MaxLength="500" />
+          <Property Name="ParamsType" Type="int" />
+          <Property Name="ImageUrl" Type="nvarchar" MaxLength="100" />
+          <Property Name="HomeCategory" Type="nvarchar" MaxLength="100" />
+          <Property Name="HomeCategoryLabel" Type="nvarchar" MaxLength="100" />
+          <Property Name="TimeFormat" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ServiceRequests">
+          <Key>
+            <PropertyRef Name="RequestId" />
+          </Key>
+          <Property Name="RequestId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MSISDN" Type="nvarchar" MaxLength="50" />
+          <Property Name="TransactionId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ClientIp" Type="nvarchar" MaxLength="100" />
+          <Property Name="SourceChannel" Type="nvarchar" MaxLength="100" />
+          <Property Name="HeaderEnabled" Type="bit" Nullable="false" />
+          <Property Name="ServiceHeaderId" Type="int" Nullable="false" />
+          <Property Name="Timestamped" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ServiceResponses">
+          <Key>
+            <PropertyRef Name="ResponseId" />
+          </Key>
+          <Property Name="ResponseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RequestId" Type="int" Nullable="false" />
+          <Property Name="StatusCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Timestamped" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Function Name="AddAppUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="szImgURL" Type="varchar" Mode="In" />
+          <Parameter Name="szUsername" Type="varchar" Mode="In" />
+          <Parameter Name="szPassword" Type="varchar" Mode="In" />
+          <Parameter Name="szPasswordSalt" Type="varchar" Mode="In" />
+          <Parameter Name="iStatus" Type="int" Mode="In" />
+          <Parameter Name="dCreatedOn" Type="datetime" Mode="In" />
+          <Parameter Name="iChangePW" Type="bit" Mode="In" />
+          <Parameter Name="isLogin" Type="bit" Mode="In" />
+          <Parameter Name="isMobile" Type="bit" Mode="In" />
+          <Parameter Name="isDeleted" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="AddServiceSubscription" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AppUserId" Type="bigint" Mode="In" />
+          <Parameter Name="ServiceName" Type="varchar" Mode="In" />
+          <Parameter Name="Period" Type="varchar" Mode="In" />
+          <Parameter Name="PeriodStart" Type="date" Mode="In" />
+          <Parameter Name="PeriodEnd" Type="date" Mode="In" />
+          <Parameter Name="Amount" Type="float" Mode="In" />
+          <Parameter Name="PaySuccess" Type="bit" Mode="In" />
+          <Parameter Name="IsActive" Type="bit" Mode="In" />
+          <Parameter Name="DateCreated" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="ChangeAppUserPassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="szUsername" Type="varchar" Mode="In" />
+          <Parameter Name="szPassword" Type="varchar" Mode="In" />
+          <Parameter Name="szPasswordSalt" Type="varchar" Mode="In" />
+          <Parameter Name="iStatus" Type="int" Mode="In" />
+          <Parameter Name="iChangePW" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="ConfirmAppUserLoginToken" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AppUserId" Type="bigint" Mode="In" />
+          <Parameter Name="szUsername" Type="varchar" Mode="In" />
+          <Parameter Name="LoginToken" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ConfirmAppUserSubscription" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AppUserId" Type="bigint" Mode="In" />
+          <Parameter Name="ServiceName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetAppUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AppUserId" Type="bigint" Mode="In" />
+          <Parameter Name="szUsername" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetAppUserSubscriptionDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AppUserId" Type="bigint" Mode="In" />
+          <Parameter Name="ServiceName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetIDSeriesNextValue" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Description" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="LoginAppUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="szUsername" Type="varchar" Mode="In" />
+          <Parameter Name="isLogin" Type="bit" Mode="In" />
+          <Parameter Name="LoginToken" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="UpdateIDSeries" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Description" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="NGSubscriptionsModelStoreContainer">
+          <EntitySet Name="AppUser" EntityType="Self.AppUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Games" EntityType="Self.Games" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IDSeries" EntityType="Self.IDSeries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceHeaders" EntityType="Self.ServiceHeaders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceRequests" EntityType="Self.ServiceRequests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceResponses" EntityType="Self.ServiceResponses" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -27,6 +166,69 @@
       <Schema Namespace="NGSubscriptionsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="NGSubscriptionsEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Games" EntityType="NGSubscriptionsModel.Game" />
+          <FunctionImport Name="ChangeAppUserPassword" ReturnType="Collection(NGSubscriptionsModel.ChangeAppUserPassword_Result)">
+            <Parameter Name="szUsername" Mode="In" Type="String" />
+            <Parameter Name="szPassword" Mode="In" Type="String" />
+            <Parameter Name="szPasswordSalt" Mode="In" Type="String" />
+            <Parameter Name="iStatus" Mode="In" Type="Int32" />
+            <Parameter Name="iChangePW" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <EntitySet Name="IDSeries" EntityType="NGSubscriptionsModel.IDSeries" />
+          <FunctionImport Name="GetIDSeriesNextValue" ReturnType="Collection(NGSubscriptionsModel.GetIDSeriesNextValue_Result)">
+          <Parameter Name="Description" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateIDSeries" ReturnType="Collection(NGSubscriptionsModel.UpdateIDSeries_Result)">
+          <Parameter Name="Description" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AddServiceSubscription" ReturnType="Collection(NGSubscriptionsModel.AddServiceSubscription_Result)">
+            <Parameter Name="AppUserId" Mode="In" Type="Int64" />
+            <Parameter Name="ServiceName" Mode="In" Type="String" />
+            <Parameter Name="Period" Mode="In" Type="String" />
+            <Parameter Name="PeriodStart" Mode="In" Type="DateTime" />
+            <Parameter Name="PeriodEnd" Mode="In" Type="DateTime" />
+            <Parameter Name="Amount" Mode="In" Type="Double" />
+            <Parameter Name="PaySuccess" Mode="In" Type="Boolean" />
+            <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="DateCreated" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <EntitySet Name="AppUser" EntityType="NGSubscriptionsModel.AppUser" />
+          <FunctionImport Name="AddAppUser" ReturnType="Collection(NGSubscriptionsModel.AddAppUser_Result)">
+            <Parameter Name="szImgURL" Mode="In" Type="String" />
+            <Parameter Name="szUsername" Mode="In" Type="String" />
+            <Parameter Name="szPassword" Mode="In" Type="String" />
+            <Parameter Name="szPasswordSalt" Mode="In" Type="String" />
+            <Parameter Name="iStatus" Mode="In" Type="Int32" />
+            <Parameter Name="dCreatedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="iChangePW" Mode="In" Type="Boolean" />
+            <Parameter Name="isLogin" Mode="In" Type="Boolean" />
+            <Parameter Name="isMobile" Mode="In" Type="Boolean" />
+            <Parameter Name="isDeleted" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="ConfirmAppUserLoginToken" ReturnType="Collection(NGSubscriptionsModel.ConfirmAppUserLoginToken_Result)">
+            <Parameter Name="AppUserId" Mode="In" Type="Int64" />
+            <Parameter Name="szUsername" Mode="In" Type="String" />
+            <Parameter Name="LoginToken" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetAppUser" ReturnType="Collection(NGSubscriptionsModel.GetAppUser_Result)">
+            <Parameter Name="AppUserId" Mode="In" Type="Int64" />
+            <Parameter Name="szUsername" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="LoginAppUser" ReturnType="Collection(NGSubscriptionsModel.LoginAppUser_Result)">
+            <Parameter Name="szUsername" Mode="In" Type="String" />
+            <Parameter Name="isLogin" Mode="In" Type="Boolean" />
+            <Parameter Name="LoginToken" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ConfirmAppUserSubscription" ReturnType="Collection(NGSubscriptionsModel.ConfirmAppUserSubscription_Result)">
+            <Parameter Name="AppUserId" Mode="In" Type="Int64" />
+            <Parameter Name="ServiceName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetAppUserSubscriptionDetails" ReturnType="Collection(NGSubscriptionsModel.GetAppUserSubscriptionDetails_Result)">
+            <Parameter Name="AppUserId" Mode="In" Type="Int64" />
+            <Parameter Name="ServiceName" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="ServiceHeaders" EntityType="NGSubscriptionsModel.ServiceHeaders" />
+          <EntitySet Name="ServiceRequests" EntityType="NGSubscriptionsModel.ServiceRequests" />
+          <EntitySet Name="ServiceResponses" EntityType="NGSubscriptionsModel.ServiceResponses" />
         </EntityContainer>
         <EntityType Name="Game">
           <Key>
@@ -40,6 +242,146 @@
           <Property Name="Token" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Timestamped" Type="DateTime" Precision="3" />
           <Property Name="LastAccess" Type="DateTime" Precision="3" />
+        </EntityType>
+        <ComplexType Name="ChangeAppUserPassword_Result">
+          <Property Type="Boolean" Name="isSuccess" Nullable="false" />
+          <Property Type="String" Name="id" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="message" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="IDSeries">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Prefix" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MinValue" Type="Int64" />
+          <Property Name="NextValue" Type="Int64" Nullable="false" />
+          <Property Name="MaxValue" Type="Int64" />
+          <Property Name="Suffix" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Increment" Type="Int32" Nullable="false" />
+        </EntityType>
+        <ComplexType Name="GetIDSeriesNextValue_Result">
+          <Property Type="Boolean" Name="isSuccess" Nullable="false" />
+          <Property Type="String" Name="id" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="message" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="UpdateIDSeries_Result">
+          <Property Type="Boolean" Name="isSuccess" Nullable="false" />
+          <Property Type="String" Name="id" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="message" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="AddServiceSubscription_Result">
+          <Property Type="Boolean" Name="isSuccess" Nullable="false" />
+          <Property Type="String" Name="id" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="message" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="AppUser">
+          <Key>
+            <PropertyRef Name="AppUserId" />
+          </Key>
+          <Property Name="AppUserId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="szImgURL" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="szUsername" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="szPassword" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="szPasswordSalt" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="iStatus" Type="Int32" Nullable="false" />
+          <Property Name="dCreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="iChangePW" Type="Boolean" Nullable="false" />
+          <Property Name="isLogin" Type="Boolean" />
+          <Property Name="LoginToken" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="isMobile" Type="Boolean" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <ComplexType Name="AddAppUser_Result">
+          <Property Type="Boolean" Name="isSuccess" Nullable="false" />
+          <Property Type="String" Name="id" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="message" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="ConfirmAppUserLoginToken_Result">
+          <Property Type="Boolean" Name="isSuccess" Nullable="false" />
+          <Property Type="String" Name="id" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="message" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetAppUser_Result">
+          <Property Type="Int64" Name="AppUserId" Nullable="false" />
+          <Property Type="String" Name="szImgURL" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="szUsername" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="szPassword" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="szPasswordSalt" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="iStatus" Nullable="false" />
+          <Property Type="DateTime" Name="dCreatedOn" Nullable="false" Precision="23" />
+          <Property Type="Boolean" Name="iChangePW" Nullable="false" />
+          <Property Type="Boolean" Name="isLogin" Nullable="true" />
+          <Property Type="Boolean" Name="isMobile" Nullable="true" />
+          <Property Type="Boolean" Name="isDeleted" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="LoginAppUser_Result">
+          <Property Type="Boolean" Name="isSuccess" Nullable="false" />
+          <Property Type="String" Name="id" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="message" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="ConfirmAppUserSubscription_Result">
+          <Property Type="Boolean" Name="isSuccess" Nullable="false" />
+          <Property Type="String" Name="id" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="message" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetAppUserSubscriptionDetails_Result">
+          <Property Type="Int64" Name="AppUserId" Nullable="false" />
+          <Property Type="String" Name="ServiceName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Period" Nullable="false" MaxLength="10" />
+          <Property Type="DateTime" Name="PeriodStart" Nullable="false" />
+          <Property Type="DateTime" Name="PeriodEnd" Nullable="false" />
+          <Property Type="Double" Name="Amount" Nullable="false" />
+          <Property Type="Boolean" Name="PaySuccess" Nullable="false" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="DateTime" Name="DateCreated" Nullable="false" Precision="23" />
+        </ComplexType>
+        <EntityType Name="ServiceHeaders">
+          <Key>
+            <PropertyRef Name="HeaderId" />
+          </Key>
+          <Property Name="HeaderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ServiceName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ServiceLabel" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ProductName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MenuCategory" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MenuCategoryLabel" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Category" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryLabel" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ProductCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="ServiceUrl" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ServiceParams" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ParamsType" Type="Int32" />
+          <Property Name="ImageUrl" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="HomeCategory" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="HomeCategoryLabel" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TimeFormat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ServiceRequests">
+          <Key>
+            <PropertyRef Name="RequestId" />
+          </Key>
+          <Property Name="RequestId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MSISDN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TransactionId" Type="Guid" Nullable="false" />
+          <Property Name="ClientIp" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SourceChannel" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="HeaderEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="ServiceHeaderId" Type="Int32" Nullable="false" />
+          <Property Name="Timestamped" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="ServiceResponses">
+          <Key>
+            <PropertyRef Name="ResponseId" />
+          </Key>
+          <Property Name="ResponseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RequestId" Type="Int32" Nullable="false" />
+          <Property Name="StatusCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Timestamped" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -61,6 +403,191 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ChangeAppUserPassword" FunctionName="NGSubscriptionsModel.Store.ChangeAppUserPassword">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NGSubscriptionsModel.ChangeAppUserPassword_Result">
+                <ScalarProperty Name="isSuccess" ColumnName="isSuccess" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="message" ColumnName="message" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="IDSeries">
+            <EntityTypeMapping TypeName="NGSubscriptionsModel.IDSeries">
+              <MappingFragment StoreEntitySet="IDSeries">
+                <ScalarProperty Name="Increment" ColumnName="Increment" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Suffix" ColumnName="Suffix" />
+                <ScalarProperty Name="MaxValue" ColumnName="MaxValue" />
+                <ScalarProperty Name="NextValue" ColumnName="NextValue" />
+                <ScalarProperty Name="MinValue" ColumnName="MinValue" />
+                <ScalarProperty Name="Prefix" ColumnName="Prefix" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetIDSeriesNextValue" FunctionName="NGSubscriptionsModel.Store.GetIDSeriesNextValue">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NGSubscriptionsModel.GetIDSeriesNextValue_Result">
+                <ScalarProperty Name="isSuccess" ColumnName="isSuccess" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="message" ColumnName="message" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdateIDSeries" FunctionName="NGSubscriptionsModel.Store.UpdateIDSeries">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NGSubscriptionsModel.UpdateIDSeries_Result">
+                <ScalarProperty Name="isSuccess" ColumnName="isSuccess" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="message" ColumnName="message" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AddServiceSubscription" FunctionName="NGSubscriptionsModel.Store.AddServiceSubscription">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NGSubscriptionsModel.AddServiceSubscription_Result">
+                <ScalarProperty Name="isSuccess" ColumnName="isSuccess" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="message" ColumnName="message" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="AppUser">
+            <EntityTypeMapping TypeName="NGSubscriptionsModel.AppUser">
+              <MappingFragment StoreEntitySet="AppUser">
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="isMobile" ColumnName="isMobile" />
+                <ScalarProperty Name="LoginToken" ColumnName="LoginToken" />
+                <ScalarProperty Name="isLogin" ColumnName="isLogin" />
+                <ScalarProperty Name="iChangePW" ColumnName="iChangePW" />
+                <ScalarProperty Name="dCreatedOn" ColumnName="dCreatedOn" />
+                <ScalarProperty Name="iStatus" ColumnName="iStatus" />
+                <ScalarProperty Name="szPasswordSalt" ColumnName="szPasswordSalt" />
+                <ScalarProperty Name="szPassword" ColumnName="szPassword" />
+                <ScalarProperty Name="szUsername" ColumnName="szUsername" />
+                <ScalarProperty Name="szImgURL" ColumnName="szImgURL" />
+                <ScalarProperty Name="AppUserId" ColumnName="AppUserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="AddAppUser" FunctionName="NGSubscriptionsModel.Store.AddAppUser">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NGSubscriptionsModel.AddAppUser_Result">
+                <ScalarProperty Name="isSuccess" ColumnName="isSuccess" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="message" ColumnName="message" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ConfirmAppUserLoginToken" FunctionName="NGSubscriptionsModel.Store.ConfirmAppUserLoginToken">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NGSubscriptionsModel.ConfirmAppUserLoginToken_Result">
+                <ScalarProperty Name="isSuccess" ColumnName="isSuccess" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="message" ColumnName="message" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAppUser" FunctionName="NGSubscriptionsModel.Store.GetAppUser">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NGSubscriptionsModel.GetAppUser_Result">
+                <ScalarProperty Name="AppUserId" ColumnName="AppUserId" />
+                <ScalarProperty Name="szImgURL" ColumnName="szImgURL" />
+                <ScalarProperty Name="szUsername" ColumnName="szUsername" />
+                <ScalarProperty Name="szPassword" ColumnName="szPassword" />
+                <ScalarProperty Name="szPasswordSalt" ColumnName="szPasswordSalt" />
+                <ScalarProperty Name="iStatus" ColumnName="iStatus" />
+                <ScalarProperty Name="dCreatedOn" ColumnName="dCreatedOn" />
+                <ScalarProperty Name="iChangePW" ColumnName="iChangePW" />
+                <ScalarProperty Name="isLogin" ColumnName="isLogin" />
+                <ScalarProperty Name="isMobile" ColumnName="isMobile" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="LoginAppUser" FunctionName="NGSubscriptionsModel.Store.LoginAppUser">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NGSubscriptionsModel.LoginAppUser_Result">
+                <ScalarProperty Name="isSuccess" ColumnName="isSuccess" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="message" ColumnName="message" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ConfirmAppUserSubscription" FunctionName="NGSubscriptionsModel.Store.ConfirmAppUserSubscription">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NGSubscriptionsModel.ConfirmAppUserSubscription_Result">
+                <ScalarProperty Name="isSuccess" ColumnName="isSuccess" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="message" ColumnName="message" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAppUserSubscriptionDetails" FunctionName="NGSubscriptionsModel.Store.GetAppUserSubscriptionDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NGSubscriptionsModel.GetAppUserSubscriptionDetails_Result">
+                <ScalarProperty Name="AppUserId" ColumnName="AppUserId" />
+                <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+                <ScalarProperty Name="Period" ColumnName="Period" />
+                <ScalarProperty Name="PeriodStart" ColumnName="PeriodStart" />
+                <ScalarProperty Name="PeriodEnd" ColumnName="PeriodEnd" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="PaySuccess" ColumnName="PaySuccess" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="ServiceHeaders">
+            <EntityTypeMapping TypeName="NGSubscriptionsModel.ServiceHeaders">
+              <MappingFragment StoreEntitySet="ServiceHeaders">
+                <ScalarProperty Name="TimeFormat" ColumnName="TimeFormat" />
+                <ScalarProperty Name="HomeCategoryLabel" ColumnName="HomeCategoryLabel" />
+                <ScalarProperty Name="HomeCategory" ColumnName="HomeCategory" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="ParamsType" ColumnName="ParamsType" />
+                <ScalarProperty Name="ServiceParams" ColumnName="ServiceParams" />
+                <ScalarProperty Name="ServiceUrl" ColumnName="ServiceUrl" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+                <ScalarProperty Name="CategoryLabel" ColumnName="CategoryLabel" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="MenuCategoryLabel" ColumnName="MenuCategoryLabel" />
+                <ScalarProperty Name="MenuCategory" ColumnName="MenuCategory" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ServiceLabel" ColumnName="ServiceLabel" />
+                <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+                <ScalarProperty Name="HeaderId" ColumnName="HeaderId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceRequests">
+            <EntityTypeMapping TypeName="NGSubscriptionsModel.ServiceRequests">
+              <MappingFragment StoreEntitySet="ServiceRequests">
+                <ScalarProperty Name="Timestamped" ColumnName="Timestamped" />
+                <ScalarProperty Name="ServiceHeaderId" ColumnName="ServiceHeaderId" />
+                <ScalarProperty Name="HeaderEnabled" ColumnName="HeaderEnabled" />
+                <ScalarProperty Name="SourceChannel" ColumnName="SourceChannel" />
+                <ScalarProperty Name="ClientIp" ColumnName="ClientIp" />
+                <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+                <ScalarProperty Name="MSISDN" ColumnName="MSISDN" />
+                <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceResponses">
+            <EntityTypeMapping TypeName="NGSubscriptionsModel.ServiceResponses">
+              <MappingFragment StoreEntitySet="ServiceResponses">
+                <ScalarProperty Name="Timestamped" ColumnName="Timestamped" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="StatusCode" ColumnName="StatusCode" />
+                <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+                <ScalarProperty Name="ResponseId" ColumnName="ResponseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -75,7 +602,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

@@ -12,6 +12,8 @@ namespace GameData
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class NGSubscriptionsEntities : DbContext
     {
@@ -26,5 +28,212 @@ namespace GameData
         }
     
         public virtual DbSet<Game> Games { get; set; }
+        public virtual DbSet<IDSeries> IDSeries { get; set; }
+        public virtual DbSet<AppUser> AppUser { get; set; }
+        public virtual DbSet<ServiceHeaders> ServiceHeaders { get; set; }
+        public virtual DbSet<ServiceRequests> ServiceRequests { get; set; }
+        public virtual DbSet<ServiceResponses> ServiceResponses { get; set; }
+    
+        public virtual ObjectResult<ChangeAppUserPassword_Result> ChangeAppUserPassword(string szUsername, string szPassword, string szPasswordSalt, Nullable<int> iStatus, Nullable<bool> iChangePW)
+        {
+            var szUsernameParameter = szUsername != null ?
+                new ObjectParameter("szUsername", szUsername) :
+                new ObjectParameter("szUsername", typeof(string));
+    
+            var szPasswordParameter = szPassword != null ?
+                new ObjectParameter("szPassword", szPassword) :
+                new ObjectParameter("szPassword", typeof(string));
+    
+            var szPasswordSaltParameter = szPasswordSalt != null ?
+                new ObjectParameter("szPasswordSalt", szPasswordSalt) :
+                new ObjectParameter("szPasswordSalt", typeof(string));
+    
+            var iStatusParameter = iStatus.HasValue ?
+                new ObjectParameter("iStatus", iStatus) :
+                new ObjectParameter("iStatus", typeof(int));
+    
+            var iChangePWParameter = iChangePW.HasValue ?
+                new ObjectParameter("iChangePW", iChangePW) :
+                new ObjectParameter("iChangePW", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ChangeAppUserPassword_Result>("ChangeAppUserPassword", szUsernameParameter, szPasswordParameter, szPasswordSaltParameter, iStatusParameter, iChangePWParameter);
+        }
+    
+        public virtual ObjectResult<GetIDSeriesNextValue_Result> GetIDSeriesNextValue(string description)
+        {
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetIDSeriesNextValue_Result>("GetIDSeriesNextValue", descriptionParameter);
+        }
+    
+        public virtual ObjectResult<UpdateIDSeries_Result> UpdateIDSeries(string description)
+        {
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UpdateIDSeries_Result>("UpdateIDSeries", descriptionParameter);
+        }
+    
+        public virtual ObjectResult<AddServiceSubscription_Result> AddServiceSubscription(Nullable<long> appUserId, string serviceName, string period, Nullable<System.DateTime> periodStart, Nullable<System.DateTime> periodEnd, Nullable<double> amount, Nullable<bool> paySuccess, Nullable<bool> isActive, Nullable<System.DateTime> dateCreated)
+        {
+            var appUserIdParameter = appUserId.HasValue ?
+                new ObjectParameter("AppUserId", appUserId) :
+                new ObjectParameter("AppUserId", typeof(long));
+    
+            var serviceNameParameter = serviceName != null ?
+                new ObjectParameter("ServiceName", serviceName) :
+                new ObjectParameter("ServiceName", typeof(string));
+    
+            var periodParameter = period != null ?
+                new ObjectParameter("Period", period) :
+                new ObjectParameter("Period", typeof(string));
+    
+            var periodStartParameter = periodStart.HasValue ?
+                new ObjectParameter("PeriodStart", periodStart) :
+                new ObjectParameter("PeriodStart", typeof(System.DateTime));
+    
+            var periodEndParameter = periodEnd.HasValue ?
+                new ObjectParameter("PeriodEnd", periodEnd) :
+                new ObjectParameter("PeriodEnd", typeof(System.DateTime));
+    
+            var amountParameter = amount.HasValue ?
+                new ObjectParameter("Amount", amount) :
+                new ObjectParameter("Amount", typeof(double));
+    
+            var paySuccessParameter = paySuccess.HasValue ?
+                new ObjectParameter("PaySuccess", paySuccess) :
+                new ObjectParameter("PaySuccess", typeof(bool));
+    
+            var isActiveParameter = isActive.HasValue ?
+                new ObjectParameter("IsActive", isActive) :
+                new ObjectParameter("IsActive", typeof(bool));
+    
+            var dateCreatedParameter = dateCreated.HasValue ?
+                new ObjectParameter("DateCreated", dateCreated) :
+                new ObjectParameter("DateCreated", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AddServiceSubscription_Result>("AddServiceSubscription", appUserIdParameter, serviceNameParameter, periodParameter, periodStartParameter, periodEndParameter, amountParameter, paySuccessParameter, isActiveParameter, dateCreatedParameter);
+        }
+    
+        public virtual ObjectResult<AddAppUser_Result> AddAppUser(string szImgURL, string szUsername, string szPassword, string szPasswordSalt, Nullable<int> iStatus, Nullable<System.DateTime> dCreatedOn, Nullable<bool> iChangePW, Nullable<bool> isLogin, Nullable<bool> isMobile, Nullable<bool> isDeleted)
+        {
+            var szImgURLParameter = szImgURL != null ?
+                new ObjectParameter("szImgURL", szImgURL) :
+                new ObjectParameter("szImgURL", typeof(string));
+    
+            var szUsernameParameter = szUsername != null ?
+                new ObjectParameter("szUsername", szUsername) :
+                new ObjectParameter("szUsername", typeof(string));
+    
+            var szPasswordParameter = szPassword != null ?
+                new ObjectParameter("szPassword", szPassword) :
+                new ObjectParameter("szPassword", typeof(string));
+    
+            var szPasswordSaltParameter = szPasswordSalt != null ?
+                new ObjectParameter("szPasswordSalt", szPasswordSalt) :
+                new ObjectParameter("szPasswordSalt", typeof(string));
+    
+            var iStatusParameter = iStatus.HasValue ?
+                new ObjectParameter("iStatus", iStatus) :
+                new ObjectParameter("iStatus", typeof(int));
+    
+            var dCreatedOnParameter = dCreatedOn.HasValue ?
+                new ObjectParameter("dCreatedOn", dCreatedOn) :
+                new ObjectParameter("dCreatedOn", typeof(System.DateTime));
+    
+            var iChangePWParameter = iChangePW.HasValue ?
+                new ObjectParameter("iChangePW", iChangePW) :
+                new ObjectParameter("iChangePW", typeof(bool));
+    
+            var isLoginParameter = isLogin.HasValue ?
+                new ObjectParameter("isLogin", isLogin) :
+                new ObjectParameter("isLogin", typeof(bool));
+    
+            var isMobileParameter = isMobile.HasValue ?
+                new ObjectParameter("isMobile", isMobile) :
+                new ObjectParameter("isMobile", typeof(bool));
+    
+            var isDeletedParameter = isDeleted.HasValue ?
+                new ObjectParameter("isDeleted", isDeleted) :
+                new ObjectParameter("isDeleted", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AddAppUser_Result>("AddAppUser", szImgURLParameter, szUsernameParameter, szPasswordParameter, szPasswordSaltParameter, iStatusParameter, dCreatedOnParameter, iChangePWParameter, isLoginParameter, isMobileParameter, isDeletedParameter);
+        }
+    
+        public virtual ObjectResult<ConfirmAppUserLoginToken_Result> ConfirmAppUserLoginToken(Nullable<long> appUserId, string szUsername, string loginToken)
+        {
+            var appUserIdParameter = appUserId.HasValue ?
+                new ObjectParameter("AppUserId", appUserId) :
+                new ObjectParameter("AppUserId", typeof(long));
+    
+            var szUsernameParameter = szUsername != null ?
+                new ObjectParameter("szUsername", szUsername) :
+                new ObjectParameter("szUsername", typeof(string));
+    
+            var loginTokenParameter = loginToken != null ?
+                new ObjectParameter("LoginToken", loginToken) :
+                new ObjectParameter("LoginToken", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConfirmAppUserLoginToken_Result>("ConfirmAppUserLoginToken", appUserIdParameter, szUsernameParameter, loginTokenParameter);
+        }
+    
+        public virtual ObjectResult<GetAppUser_Result> GetAppUser(Nullable<long> appUserId, string szUsername)
+        {
+            var appUserIdParameter = appUserId.HasValue ?
+                new ObjectParameter("AppUserId", appUserId) :
+                new ObjectParameter("AppUserId", typeof(long));
+    
+            var szUsernameParameter = szUsername != null ?
+                new ObjectParameter("szUsername", szUsername) :
+                new ObjectParameter("szUsername", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAppUser_Result>("GetAppUser", appUserIdParameter, szUsernameParameter);
+        }
+    
+        public virtual ObjectResult<LoginAppUser_Result> LoginAppUser(string szUsername, Nullable<bool> isLogin, string loginToken)
+        {
+            var szUsernameParameter = szUsername != null ?
+                new ObjectParameter("szUsername", szUsername) :
+                new ObjectParameter("szUsername", typeof(string));
+    
+            var isLoginParameter = isLogin.HasValue ?
+                new ObjectParameter("isLogin", isLogin) :
+                new ObjectParameter("isLogin", typeof(bool));
+    
+            var loginTokenParameter = loginToken != null ?
+                new ObjectParameter("LoginToken", loginToken) :
+                new ObjectParameter("LoginToken", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<LoginAppUser_Result>("LoginAppUser", szUsernameParameter, isLoginParameter, loginTokenParameter);
+        }
+    
+        public virtual ObjectResult<ConfirmAppUserSubscription_Result> ConfirmAppUserSubscription(Nullable<long> appUserId, string serviceName)
+        {
+            var appUserIdParameter = appUserId.HasValue ?
+                new ObjectParameter("AppUserId", appUserId) :
+                new ObjectParameter("AppUserId", typeof(long));
+    
+            var serviceNameParameter = serviceName != null ?
+                new ObjectParameter("ServiceName", serviceName) :
+                new ObjectParameter("ServiceName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConfirmAppUserSubscription_Result>("ConfirmAppUserSubscription", appUserIdParameter, serviceNameParameter);
+        }
+    
+        public virtual ObjectResult<GetAppUserSubscriptionDetails_Result> GetAppUserSubscriptionDetails(Nullable<long> appUserId, string serviceName)
+        {
+            var appUserIdParameter = appUserId.HasValue ?
+                new ObjectParameter("AppUserId", appUserId) :
+                new ObjectParameter("AppUserId", typeof(long));
+    
+            var serviceNameParameter = serviceName != null ?
+                new ObjectParameter("ServiceName", serviceName) :
+                new ObjectParameter("ServiceName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAppUserSubscriptionDetails_Result>("GetAppUserSubscriptionDetails", appUserIdParameter, serviceNameParameter);
+        }
     }
 }

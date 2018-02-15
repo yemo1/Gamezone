@@ -9,6 +9,9 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using GameZone.WEB.Models;
+using GameZone.VIEWMODEL;
+using GameZone.TOOLS;
+using GameZone.Repositories;
 
 namespace GameZone.WEB.Controllers
 {
@@ -17,26 +20,90 @@ namespace GameZone.WEB.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
-        public AccountController()
+        IAppUserRepository _IAppUserRepository;
+        public AccountController(IAppUserRepository iAppUserRepository)
         {
+            _IAppUserRepository = iAppUserRepository;
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        //public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        //{
+        //    UserManager = userManager;
+        //    SignInManager = signInManager;
+        //}
+
+        [HttpPost]
+        [AllowAnonymous]
+        public void StartValidUserSession(LoginAppUserVM loginAppUserVM)
         {
-            UserManager = userManager;
-            SignInManager = signInManager;
+            if (loginAppUserVM != null)
+            {
+                //Put Valid Login User Data in Session
+                GameUserIdentity.LoggedInUser = loginAppUserVM;
+            }
         }
 
+        [HttpPost]
+        [AllowAnonymous]
+        public string AuthUserToken(string redirectURL = null)
+        {
+            System.Collections.Specialized.NameValueCollection nvc = new System.Collections.Specialized.NameValueCollection();
+            nvc = Request.Headers;
+            System.Collections.Generic.Dictionary<string, string> ss = new System.Collections.Generic.Dictionary<string, string>();
+            foreach (var item in nvc.AllKeys)
+            {
+                ss.Add(item, nvc[item]);
+            }
+
+            //Check for Authentication Token in Request Header
+            if (ss.ContainsKey("authToken") && !string.IsNullOrEmpty(ss["authToken"].ToString()))
+            {
+                string headerToken = ss["authToken"].ToString();
+                //Validate User and Token
+                string appUserID = headerToken.Split(';')[0], userToken = headerToken.Split(';')[1];
+                var retVal = _IAppUserRepository.ConfirmAppUserToken(userToken, long.Parse(appUserID));
+                //User and Token Match
+                if (retVal.isSuccess)
+                {
+                    return redirectURL ?? "/Home/Index";
+                }
+                else
+                {
+                    return "/Home/Index;Access Denied";
+                }
+            }
+            else
+            {
+                return "/Home/Index;Access Denied";
+            }
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public bool ValidSubscription(long UID, string svcName)
+        {
+            var retVal = _IAppUserRepository.ConfirmUserSubscription(UID, svcName);
+            return retVal.isSuccess;
+        }
+
+        
+        // POST: /Account/LogOff
+        [HttpPost]
+        [AllowAnonymous]
+        public string LogOff(string UID)
+        {
+            _IAppUserRepository.LoginAppUser(UID, false, null);
+            return "/Home";
+        }
         public ApplicationSignInManager SignInManager
         {
             get
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -120,7 +187,7 @@ namespace GameZone.WEB.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -155,8 +222,8 @@ namespace GameZone.WEB.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -386,14 +453,7 @@ namespace GameZone.WEB.Controllers
         }
 
         //
-        // POST: /Account/LogOff
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult LogOff()
-        {
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
-        }
+
 
         //
         // GET: /Account/ExternalLoginFailure

@@ -2,16 +2,17 @@
 @{
     ViewBag.Title = "GamePlay";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    string rls_vsn = System.Configuration.ConfigurationManager.AppSettings["RELEASE_VERSION"].ToString();
 }
 
 @section style{
     @*@Styles.Render("~/Content/pageSpecificCss")*@
 
-    <link href="~/Content/js/fancybox/jquery.fancybox.css" rel="stylesheet" />
-    <link href="~/Content/css/slider-pro.min.css" rel="stylesheet" />
-    <link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="~/Content/css/base-stylesheet.css" rel="stylesheet" />
-    <link href="~/Content/css/style.css" rel="stylesheet" />
+    <link href="~/Content/js/fancybox/jquery.fancybox.css?v=@rls_vsn" rel="stylesheet" />
+    <link href="~/Content/css/slider-pro.min.css?v=@rls_vsn" rel="stylesheet" />
+    <link href="~/Content/css/font-awesome.min.css?v=@rls_vsn" rel="stylesheet" />
+    <link href="~/Content/css/base-stylesheet.css?v=@rls_vsn" rel="stylesheet" />
+    <link href="~/Content/css/style.css?v=@rls_vsn" rel="stylesheet" />
     <style>
         .top-filter {
             display: none;
@@ -69,9 +70,10 @@
     <script type="text/javascript">
         var _Title = "@ViewBag.Title";
     </script>
-    <script src="~/Content/js/jquery.sliderPro.min.js"></script>
-    <script src="~/Content/js/jquery.fancybox.pack.js"></script>
-    <script src="~/Content/js/games.js"></script>
-    <script src="~/Scripts/Games/GamePlay.js"></script>
-<script src="~/Content/js/jquery.lazyload.min.js"></script>
+    <script src="~/Content/js/jquery.sliderPro.min.js?v=@rls_vsn"></script>
+    <script src="~/Content/js/jquery.fancybox.pack.js?v=@rls_vsn"></script>
+    <script src="~/Content/js/games.js?v=@rls_vsn"></script>
+<script src="~/Content/js/notify.min.js?v=@rls_vsn"></script>
+    <script src="~/Scripts/Games/GamePlay.js?v=@rls_vsn"></script>
+<script src="~/Content/js/jquery.lazyload.min.js?v=@rls_vsn"></script>
 }

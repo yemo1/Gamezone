@@ -41,8 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FlutterWavePayVerifyJSONVM.cs" />
+    <Compile Include="FlutterWaveJSONVM.cs" />
+    <Compile Include="LoginAppUserVM.cs" />
+    <Compile Include="AppUserVM.cs" />
     <Compile Include="GameVM.cs" />
     <Compile Include="ResponseStatus.cs" />
+    <Compile Include="LogVM.cs" />
     <Compile Include="ReturnMessage.cs" />
     <Compile Include="CategoryGames.cs" />
     <Compile Include="AllGames.cs" />
