@@ -64,6 +64,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LocalLogger.cs" />
+    <Compile Include="WapHeaderUtil.cs" />
     <Compile Include="Enums\GameZonePrice.cs" />
     <Compile Include="Enums\AppUserStatus.cs" />
     <Compile Include="RegexUtilities.cs" />

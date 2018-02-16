@@ -1,19 +1,17 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using GameData;
-using GameZone.Entities;
-using GameZone.VIEWMODEL;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Collections.Generic;
 
 namespace GameZone.Repositories
 {
-    public class ServiceResponseRepository : IServiceResponse
+    public class ServiceResponseRepository : IServiceResponseRepository
     {
         private readonly NGSubscriptionsEntities context;
         //private readonly EFDbContext context = new EFDbContext();
-
+        public ServiceResponseRepository(NGSubscriptionsEntities nGSubscriptionsEntities)
+        {
+            context = nGSubscriptionsEntities;
+        }
         public IEnumerable<ServiceResponses> ServiceResponses
         {
             get

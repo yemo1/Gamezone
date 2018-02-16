@@ -3,6 +3,12 @@
     ViewBag.Title = "Home | Game Zone";
     Layout = "~/Views/Shared/_Layout.cshtml";
     bool IsMobile = (bool)ViewBag.IsMobile;
+    string mtnNumber = null;
+    int HeaderId = ViewBag.HeaderId;
+    if (IsMobile)
+    {
+        mtnNumber = ViewBag.mtnNumber;
+    }
     string redirectURL = System.Configuration.ConfigurationManager.AppSettings["FLTAWAVE_REDIRECT_URL"].ToString();
     var subscriptionSuccessful = ViewBag.subscriptionSuccessful;
     string rls_vsn = System.Configuration.ConfigurationManager.AppSettings["RELEASE_VERSION"].ToString();
@@ -164,8 +170,19 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col-sm-8 col-sm-offset-3 col-xs-8 col-xs-offset-3">                           
+                        <div class="col-sm-8 col-sm-offset-3 col-xs-8 col-xs-offset-3">
                             <table style="width:100%;">
+                                @if (IsMobile && mtnNumber != null)
+                                {
+                                    <tr>
+                                        <td>
+                                            <span>Phone Number</span>
+                                        </td>
+                                        <td colspan="2">
+                                            <label>@mtnNumber.ToString()</label>
+                                        </td>
+                                    </tr>
+                                }                                
                                 <tr>
                                     <td>
                                         <span>Begin Date</span>
@@ -228,10 +245,21 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col-sm-6 col-sm-offset-3  col-xs-6 col-xs-offset-3">
-                            <a class="btn btn-block flwpug_getpaid" data-PBFPubKey="FLWPUBK-421b6ed86111a9c686cff34b983cee73-X" data-txref="rave-checkout-1517414809" data-amount="50" data-customer_email="user@example.com" data-currency="NGN" data-pay_button_text="Subscribe" data-country="NG" data-custom_title="Gamezone" data-custom_description="" data-redirect_url="@redirectURL" onclick="addHeader()" data-custom_logo="" data-payment_method="card" data-exclude_banks=""></a>
-                            @*<button class="btn btn-primary btn-block disabledCtrl" ng-click="SaveNewSubscriber()"> Subscribe</button>*@
-                        </div>
+                        @{
+                            if (!IsMobile)
+                            {
+                                <div id="ePayment" class="col-sm-6 col-sm-offset-3  col-xs-6 col-xs-offset-3">
+                                    <a class="btn btn-block flwpug_getpaid" data-PBFPubKey="FLWPUBK-421b6ed86111a9c686cff34b983cee73-X" data-txref="rave-checkout-1517414809" data-amount="50" data-customer_email="user@example.com" data-currency="NGN" data-pay_button_text="Subscribe" data-country="NG" data-custom_title="Gamezone" data-custom_description="" data-redirect_url="@redirectURL" onclick="addHeader()" data-custom_logo="" data-payment_method="card" data-exclude_banks=""></a>
+                                    @*<button class="btn btn-primary btn-block disabledCtrl" ng-click="SaveNewSubscriber()"> Subscribe</button>*@
+                                </div>
+                            }
+                            else
+                            {
+                                <div id="ussd" class="col-sm-6 col-sm-offset-3  col-xs-6 col-xs-offset-3">                                    
+                                    <button class="btn btn-primary btn-block disabledCtrl" ng-click="USSDSubscription()"> Subscribe</button>
+                                </div>
+                            }
+                        }
                     </div>
                 </form>
             </div>
@@ -304,7 +332,7 @@
                         </div>
                     </div>
                 </form>
-                <form class="form-horizontal animated" id="register-form">
+                <form class="form-horizontal animated" id="register-form">                    
                     <div class="form-group row">
                         <div class="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
                             <input type="text" id="txtRegUsername" class="form-control allownumericwithoutdecimal" placeholder="Email address / Phone No" ng-model="registerObj.szUsername">
@@ -385,6 +413,9 @@
     </div>
 </div>
 
+
+<a class="btn bitsumishi smooth-scroll scroll-down animate" href="" data-animate="wobble" data-duration="1.0s" data-delay="0.4s" ng-click="testUSSDSubscription()" data-iteration="2" type="button">Subscribe <i class="fa fa-certificate"></i></a>
+
 @*Original Public Key*@
 @*data-PBFPubKey="FLWPUBK-21d231c2eef47b545298eb299494af6c-X"*@
 
@@ -392,7 +423,9 @@
     <script type="text/javascript">
         var _Title = "@ViewBag.Title";
         var _IsMobile = "@IsMobile";
+        var _mtnNumber = "@mtnNumber";
         var _RedirectURL = "@redirectURL";
+        var _HeaderId = "@HeaderId";
         var _subscriptionSuccessful = "@subscriptionSuccessful";
     </script>
 

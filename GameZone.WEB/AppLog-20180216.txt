@@ -1,0 +1,56 @@
+2/16/2018 1:04:21 PM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+2/16/2018 1:05:17 PM ==> Object reference not set to an instance of an object.
+2/16/2018 2:32:42 PM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+2/16/2018 2:33:08 PM ==> Object reference not set to an instance of an object.
+2/16/2018 2:57:04 PM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+2/16/2018 3:22:17 PM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+2/16/2018 3:25:09 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400W
+2/16/2018 3:27:10 PM ==> "Your subscription request has been sent"
+2/16/2018 3:30:48 PM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+2/16/2018 3:33:19 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400W
+2/16/2018 3:34:23 PM ==> "Your subscription request has been sent"
+2/16/2018 3:37:23 PM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+2/16/2018 3:37:23 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400W
+2/16/2018 3:37:25 PM ==> "Your subscription request has been sent"

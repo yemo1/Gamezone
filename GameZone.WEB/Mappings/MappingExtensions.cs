@@ -23,5 +23,24 @@ namespace GameZone.WEB.Mappings
         }
 
         #endregion        
+
+        #region ServiceHeader
+
+        public static ServiceHeaderVM ToModel(this GameData.ServiceHeaders entity)
+        {
+            return Mapper.Map<GameData.ServiceHeaders, ServiceHeaderVM>(entity);
+        }
+
+        public static GameData.ServiceHeaders ToEntity(this ServiceHeaderVM model)
+        {
+            return Mapper.Map<ServiceHeaderVM, GameData.ServiceHeaders>(model);
+        }
+
+        public static GameData.ServiceHeaders ToEntity(this ServiceHeaderVM model, GameData.ServiceHeaders destination)
+        {
+            return Mapper.Map(model, destination);
+        }
+
+        #endregion        
     }
 }

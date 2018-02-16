@@ -21,8 +21,7 @@ namespace GameZone.WEB.Controllers
         string testFlutterwaveSecKey = "FLWSECK-62c555ca07f7a21adc144f757778a729-X";
         NGSubscriptionsEntities _NGSubscriptionsEntities;
         public static readonly log4net.ILog _Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
-        LogVM _LogVM;
+        
         string logObj;
         public GamesController()
         {

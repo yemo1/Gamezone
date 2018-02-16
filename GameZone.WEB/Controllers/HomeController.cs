@@ -1,5 +1,10 @@
 ﻿using GameData;
+using GameZone.Repositories;
+using GameZone.TOOLS;
+using GameZone.TOOLS.Enums;
 using GameZone.VIEWMODEL;
+using GameZone.WEB.Mappings;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -11,14 +16,27 @@ namespace GameZone.WEB.Controllers
     public class HomeController : Controller
     {
         GameData.NGSubscriptionsEntities _NGSubscriptionsEntities;
-
-        public HomeController()
+        MSISDNRepository _MSISDNRepository;
+        HeaderController _HeaderController;
+        private readonly IServiceRequestRepository _IServiceRequestRepository;
+        private readonly IServiceHeaderRepository _IServiceHeaderRpository;
+        static TOOLS.WapHeaderUtil _WapHeaderUtil;
+        public static readonly log4net.ILog _Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        string svcName = System.Configuration.ConfigurationManager.AppSettings["SERVICE_NAME"].ToString();
+        public HomeController(IServiceHeaderRepository ServiceHeader, MSISDNRepository mSISDNRepository, HeaderController headerController, IServiceRequestRepository serviceRequestRepository, TOOLS.WapHeaderUtil wapHeaderUtil)
         {
+            _IServiceHeaderRpository = ServiceHeader;
+            _IServiceRequestRepository = serviceRequestRepository;
+            _HeaderController = headerController;
+            _MSISDNRepository = mSISDNRepository;
             _NGSubscriptionsEntities = new GameData.NGSubscriptionsEntities();
+            _WapHeaderUtil = wapHeaderUtil;
         }
         public ActionResult Index(string retVal = "")
         {
-            //#region WEB DOI Implementation
+            //Get Service Header ID
+           var serviceHeda = _IServiceHeaderRpository.GetServiceHeader(svcName);
+            #region WEB DOI Implementation
             //ReturnMessage returnMessage;
             //NameValueCollection nvc = new NameValueCollection();
             //nvc = Request.Headers;
@@ -58,22 +76,49 @@ namespace GameZone.WEB.Controllers
             //    //Not Mtn
             //    ViewBag.IsMTN = false;
             //}
-            //#endregion
+            #endregion
 
             var request = ControllerContext.HttpContext.Request;
-
+            if (serviceHeda!=null)
+            {
+                ViewBag.HeaderId = serviceHeda.HeaderId;
+            }
             //if (request.Browser.IsMobileDevice)
             if (Request.UserAgent.Contains("Mobi") == true)
             {
                 //mobile
                 ViewBag.IsMobile = true;
+
+                //Get Number from Header
+                NameValueCollection nvc = new NameValueCollection();
+                nvc = Request.Headers;
+                Dictionary<string, string> ss = new Dictionary<string, string>();
+                foreach (var item in nvc.AllKeys)
+                {
+                    ss.Add(item, nvc[item]);
+                }
+                if (!ss.ContainsKey("MSISDN"))
+                {
+                    //Not Mtn
+                    ViewBag.mtnNumber = null;
+                }
+                else
+                {
+                    //Not Mtn
+                    ViewBag.mtnNumber = nvc.GetValues("MSISDN").ToString();
+                }
             }
             else
             {
                 //laptop or desktop
                 ViewBag.IsMobile = false;
             }
-            Response.Write($"<script language='javascript' type='text/javascript'>alert('{retVal}');</script>");
+
+            if (!string.IsNullOrEmpty(retVal))
+            {
+                Response.Write($"<script language='javascript' type='text/javascript'>alert('{retVal}');</script>");
+            }
+
             return View();
         }
 
@@ -223,6 +268,129 @@ namespace GameZone.WEB.Controllers
                 return RedirectToAction("Index", "Home");
             }
             return View();
+        }
+
+        [HttpPost]
+        public string MTNUSSDSubscription(string category = "", string headerId = "")
+        {
+            MSISDNRepository msisdn;
+            //Get User ID
+            //Put Valid Login User Data in Session
+            var userData = (LoginAppUserVM)GameUserIdentity.LoggedInUser;
+
+            if ((MSISDNRepository)Session["XMSISDN"] != null)
+            {
+                msisdn = (MSISDNRepository)Session["XMSISDN"];
+            }
+            else
+            {
+                msisdn = _HeaderController.FillMSISDN();
+            }
+
+            try
+            {
+                //msisdn.Lines.FirstOrDefault().IsHeader)
+                //msisdn.Lines.FirstOrDefault().Phone = "2348147911707";
+                //msisdn.Lines.FirstOrDefault().IsHeader = true;
+                //msisdn.Lines.FirstOrDefault().IpAddress = "192.168.10.212";
+                if (msisdn != null && msisdn.Lines.Count() > 0 && msisdn.Lines.FirstOrDefault().Phone != "XXX-XXXXXXXX")
+                {
+                   var subResault = _IServiceRequestRepository.Subscribe(Convert.ToInt32(headerId), msisdn.Lines.FirstOrDefault().IpAddress, msisdn.Lines.FirstOrDefault().Phone, msisdn.Lines.FirstOrDefault().IsHeader);
+                    ServiceHeaders serviceHeaders = new ServiceHeaders();
+                    if (subResault.Success)
+                    {
+                        serviceHeaders =  (ServiceHeaders) subResault.Data;
+                    }
+                    string szPeriod = serviceHeaders.ServiceLabel.Split(' ')[1].Trim();
+                    
+                    DateTime periodEnd = (szPeriod.ToUpper() == "DAILY") ? DateTime.Now.AddDays(1) :
+                                            (szPeriod.ToUpper() == "WEEKLY") ? DateTime.Now.AddDays(7) :
+                                            DateTime.Now.AddDays(30);
+
+                    int amountPaid = (szPeriod.ToUpper() == "DAILY") ? (int)GameZonePrice.Daily :
+                                            (szPeriod.ToUpper() == "WEEKLY") ? (int)GameZonePrice.Weekly :
+                                            (int)GameZonePrice.Monthly;
+
+                    //Save Subscription Data in DB
+                    var rezolt = _NGSubscriptionsEntities.AddServiceSubscription(userData.AppUserId, svcName, szPeriod.Trim(), DateTime.Now, periodEnd, amountPaid, true, true, DateTime.Now).FirstOrDefault();
+                    return JsonConvert.SerializeObject(new ReturnMessage() {
+                        Success = true,
+                         Message = $"Your subscription was successful. Valid until: {periodEnd.ToShortDateString()}"
+                    });
+                }
+                else
+                {
+                    var header = _IServiceHeaderRpository.GetServiceHeader(Convert.ToInt32(headerId));
+                    header.Category = category;
+                    var model = new HeaderVM();
+                    model.header = header.ToModel();
+                    //return View(model);
+                    return JsonConvert.SerializeObject(new ReturnMessage()
+                    {
+                        Success = false,
+                        Message = "Subscription failed. \n Could not validate your phone number."
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                LocalLogger.LogFileWrite(ex.Message);
+                return JsonConvert.SerializeObject(new ReturnMessage()
+                {
+                    Success = false,
+                    Message = ex.Message
+                });
+            }
+        }
+
+        public ActionResult AddSubscription(string textPhone, string category, string headerId)
+        {
+            if (!string.IsNullOrEmpty(textPhone))
+            {
+                if (textPhone.StartsWith("0"))
+                    textPhone = "234" + textPhone.TrimStart('0');
+                var msisdn = new MSISDNRepository();
+                msisdn = (MSISDNRepository)Session["XMSISDN"];
+                //if (msisdn == null)
+                //    msisdn = FillMSISDN();
+                //13/02/2017
+
+                if ((MSISDNRepository)Session["XMSISDN"] != null)
+                {
+                    msisdn = (MSISDNRepository)Session["XMSISDN"];
+                }
+                else
+                {
+                    msisdn = _HeaderController.FillMSISDN();
+                }
+
+                var ipthis = msisdn.Lines.FirstOrDefault().IpAddress;
+                msisdn.Clear();
+                msisdn.AddItem(textPhone, ipthis, false);
+                var newmsisdn = (MSISDNRepository)Session["XMSISDN"];
+                HttpContext.Session["XMSISDN"] = msisdn;
+
+                try
+                {
+                    if (msisdn != null && msisdn.Lines.Count() > 0 && msisdn.Lines.FirstOrDefault().Phone != "XXX-XXXXXXXX")
+
+                        _IServiceRequestRepository.Subscribe(Convert.ToInt32(headerId), msisdn.Lines.FirstOrDefault().IpAddress, msisdn.Lines.FirstOrDefault().Phone, msisdn.Lines.FirstOrDefault().IsHeader);
+
+                    //to return manual numbers here
+                    else
+                        return Redirect(Url.Action("Fill", new { category = category, headerId = headerId }));
+
+                    var newmsisdn1 = (MSISDNRepository)Session["XMSISDN"];
+
+                }
+                catch (Exception ex)
+                {
+                    LocalLogger.LogFileWrite(ex.Message);
+                }
+                if (string.IsNullOrEmpty(category)) category = "Home";
+                return Redirect(Url.Action("Index", new { controller = category, action = "Index" }));
+            }
+            return Redirect(Request.Url.PathAndQuery);
         }
     }
 }

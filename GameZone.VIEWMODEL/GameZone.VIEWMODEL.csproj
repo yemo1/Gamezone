@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ServiceHeaderVM.cs" />
+    <Compile Include="HeaderVM.cs" />
+    <Compile Include="MSISDNLine.cs" />
     <Compile Include="FlutterWavePayVerifyJSONVM.cs" />
     <Compile Include="FlutterWaveJSONVM.cs" />
     <Compile Include="LoginAppUserVM.cs" />

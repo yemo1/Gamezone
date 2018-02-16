@@ -27,6 +27,14 @@
     $scope.changepwObj = {};
     $scope.subDetailOBJ = {};
     $scope.basicObj.sT = 1;
+    //Initialize Phone Number gotten from wap header
+    if (_IsMobile) {
+        if (_mtnNumber != null) {
+            $scope.registerObj.szUsername = _mtnNumber;
+            $scope.registerObj.isMobile = true;
+            $("#txtRegUsername").attr("disabled", "disabled");
+        }
+    }
 
     //Get ApplicationUser Data from DB
     $scope.getGameData = function (selectedCat) {
@@ -239,40 +247,47 @@
 
     //Function to handle creation of new users
     $scope.RegisterNewUser = function () {
-        var szUsername = $scope.registerObj.szUsername;
-        var containsAlphabet = /[a-z]/i.test(szUsername);
-        if (containsAlphabet) {
-            if (!validateEmail(szUsername)) {
-                $.notify("Please enter a valid email address.", 'error');
-                return;
+        if (_IsMobile) {
+            if (_mtnNumber != null) {
+                $scope.registerObj.szUsername = _mtnNumber;
+                $scope.registerObj.isMobile = true;
             }
         }
+            var szUsername = $scope.registerObj.szUsername;
+            var containsAlphabet = /[a-z]/i.test(szUsername);
+            if (containsAlphabet) {
+                if (!validateEmail(szUsername)) {
+                    $.notify("Please enter a valid email address.", 'error');
+                    return;
+                }
+            }
 
-        if ($scope.registerObj.szUsername == undefined || $scope.registerObj.szUsername.trim() == "") {
-            $.notify("Please enter your username.", 'error');
-            $("#txtRegUsername").focus();
-            return;
-        }
-        if ($scope.registerObj.szPassword == undefined || $scope.registerObj.szPassword.trim() == "") {
-            $.notify("Please enter your password.", 'error');
-            $("#txtRegPassword").focus();
-            return;
-        }
-        if ($scope.registerObj.szConfirmPassword == undefined || $scope.registerObj.szConfirmPassword.trim() == "") {
-            $.notify("Please confirm your password.", 'error');
-            $("#txtRegPasswordConfirm").focus();
-            return;
-        }
-        if ($scope.registerObj.szConfirmPassword.trim() != $scope.registerObj.szPassword.trim()) {
-            $.notify("Passwords mismatch. Please confirm your password again.", 'error');
-            $("#txtRegPasswordConfirm").focus();
-            return;
-        }
+            if ($scope.registerObj.szUsername == undefined || $scope.registerObj.szUsername.trim() == "") {
+                $.notify("Please enter your username.", 'error');
+                $("#txtRegUsername").focus();
+                return;
+            }
+            if ($scope.registerObj.szPassword == undefined || $scope.registerObj.szPassword.trim() == "") {
+                $.notify("Please enter your password.", 'error');
+                $("#txtRegPassword").focus();
+                return;
+            }
+            if ($scope.registerObj.szConfirmPassword == undefined || $scope.registerObj.szConfirmPassword.trim() == "") {
+                $.notify("Please confirm your password.", 'error');
+                $("#txtRegPasswordConfirm").focus();
+                return;
+            }
+            if ($scope.registerObj.szConfirmPassword.trim() != $scope.registerObj.szPassword.trim()) {
+                $.notify("Passwords mismatch. Please confirm your password again.", 'error');
+                $("#txtRegPasswordConfirm").focus();
+                return;
+            }
 
-        //show loader
-        $("#regLoda").css("display", "block");
-        //Disable COntrols
-        $(".disabledCtrl").attr("disabled", "disabled");
+            //show loader
+            $("#regLoda").css("display", "block");
+            //Disable COntrols
+            $(".disabledCtrl").attr("disabled", "disabled");
+        
         $scope.registerObj.AppUserId = 0;
         $scope.registerObj.szImgURL = "";
         $scope.registerObj.szPasswordSalt = "";
@@ -544,6 +559,22 @@
         //});
         //$scope.keepUserData();
     };
+
+    $scope.USSDSubscription = function () {
+        $.post("/Home/MTNUSSDSubscription", {
+            category: svcName, headerId: _HeaderId
+        }).success(function (data) {
+            var retVal = JSON.parse(data);
+            if (!retVal.Success) {
+                $.notify(retVal.Message, 'error');
+            } else {
+                $.notify(retVal.Message, 'success');
+            }
+        }).error(function (data) {
+
+        });
+    }
+    
 
     $(document).on("click", ".subType", function (event) {
         var amntSelected = ($(this).attr("id") == "subType1") ? 200 : ($(this).attr("id") == "subType2") ? 100 : 20;

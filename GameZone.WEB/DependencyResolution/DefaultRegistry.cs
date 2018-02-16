@@ -31,6 +31,9 @@ namespace GameZone.WEB.DependencyResolution
                 });
             For<IAppUserRepository>().Use<AppUserRepository>();
             For<ISubscriberRepository>().Use<SubscriberRepository>();
+            For<IServiceHeaderRepository>().Use<ServiceHeaderRepository>();
+            For<IServiceRequestRepository>().Use<ServiceRequestRepository>();
+            For<IServiceResponseRepository>().Use<ServiceResponseRepository>();
         }
 
         #endregion

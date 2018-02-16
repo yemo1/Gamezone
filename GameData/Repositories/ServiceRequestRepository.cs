@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Linq;
 using GameData;
-using GameZone.Entities;
-using GameZone.VIEWMODEL;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Collections.Generic;
 using System.Web;
 using System.Net;
@@ -12,14 +9,21 @@ using System.IO;
 using System.Text;
 using System.Configuration;
 using System.Web.UI;
+using GameZone.TOOLS;
+using GameZone.VIEWMODEL;
 
 namespace GameZone.Repositories
 {
-    public class ServiceRequestRepository : IServiceRequest
+    public class ServiceRequestRepository : IServiceRequestRepository
     {
         private readonly NGSubscriptionsEntities context;
         //private readonly EFDbContext context = new EFDbContext();
-
+        IServiceResponseRepository _IServiceResponseRepository;
+        public ServiceRequestRepository(NGSubscriptionsEntities nGSubscriptionsEntities, IServiceResponseRepository ServiceResponseRepository)
+        {
+            context = nGSubscriptionsEntities;
+            _IServiceResponseRepository = ServiceResponseRepository;
+        }
         public IEnumerable<ServiceRequests> ServiceRequests
         {
             get
@@ -85,7 +89,7 @@ namespace GameZone.Repositories
         //mns(pid, phone, tid, descr)
         //Voice(msisdn, packid, requestimestamp(timeformat),trasactionid)
 
-        public void Subscribe(int headerId, string ipAddress, string msisdn, bool IsHeaderEnabled = true, string sourceChannel = "Standard")
+        public ReturnMessage Subscribe(int headerId, string ipAddress, string msisdn, bool IsHeaderEnabled = true, string sourceChannel = "Standard")
         {
             ServiceHeaders serv = context.ServiceHeaders.FirstOrDefault(f => f.HeaderId == headerId);
             if (serv != null)
@@ -123,33 +127,50 @@ namespace GameZone.Repositories
                     {
                         HttpContext.Current.Session["Param3"] = null;
                         HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ServiceUrlFill(serv, req));
-
                         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-
-
                         using (Stream stream = response.GetResponseStream())
                         {
                             StreamReader reader = new StreamReader(stream, Encoding.UTF8);
                             String responseString = reader.ReadToEnd();
                             reply = responseString;
                         }
-
                     }
-
-                    ServiceResponseRepository repo = new ServiceResponseRepository();
+                    
                     ServiceResponses rep = new ServiceResponses();
-                    LogFileWrite(reply);
+                    LocalLogger.LogFileWrite(reply);
                     rep.Description = reply;
-                    //LogFileWrite("Description: "+ reply.ToString());
                     rep.RequestId = req.RequestId;
                     var statCode = string.Concat(reply.Take(50));
                     rep.StatusCode = statCode;
-                    //LogFileWrite("StatusCode: " + string.Concat(reply.Take(50)));
-
                     rep.Timestamped = DateTime.Now;
 
-                    repo.SaveServiceResponse(rep);
+                    _IServiceResponseRepository.SaveServiceResponse(rep);
+
+                    return new ReturnMessage()
+                    {
+                        Message = $"Subscription Successful.",
+                        Success = true,
+                        Data = serv
+                    };
                 }
+                else
+                {
+                    return new ReturnMessage()
+                    {
+                        Message = "This service does not exist on this platform.",
+                        Success = true,
+                        Data = serv
+                    };
+                }
+            }
+            else
+            {
+                return new ReturnMessage()
+                {
+                    Message = $"Subscription Successful.",
+                    Success = true,
+                    Data = serv
+                };
             }
         }
 
@@ -174,7 +195,7 @@ namespace GameZone.Repositories
                     val += ServiceUrlFill(s.ServiceParams, s.ProductCode);
                     break;
             }
-            LogFileWrite(val);
+            LocalLogger.LogFileWrite(val);
             return val;
         }
         //?phone={0}&pID={1}
@@ -203,8 +224,7 @@ namespace GameZone.Repositories
         {
             return string.Format(_params, code);
         }
-
-
+        
         public enum ServiceUrlFiller
         {
             basic,
@@ -213,51 +233,7 @@ namespace GameZone.Repositories
             nil,
             lone
         }
-
-        private static string FileLog = ConfigurationManager.AppSettings["FileLog"] + "\\";
-
-        public static void LogFileWrite(string message)
-        {
-            FileStream fileStream = null;
-            StreamWriter streamWriter = null;
-            try
-            {
-                string text = AppDomain.CurrentDomain.BaseDirectory + FileLog;
-                text = text + "AppLog-" + DateTime.Today.ToString("yyyyMMdd") + ".txt";
-                string str = DateTime.Now.ToShortDateString().ToString() + " " + DateTime.Now.ToLongTimeString().ToString() + " ==> ";
-                if (!text.Equals(""))
-                {
-                    FileInfo fileInfo = new FileInfo(text);
-                    DirectoryInfo directoryInfo = new DirectoryInfo(fileInfo.DirectoryName);
-                    if (!directoryInfo.Exists)
-                    {
-                        directoryInfo.Create();
-                    }
-                    if (!fileInfo.Exists)
-                    {
-                        fileStream = fileInfo.Create();
-                    }
-                    else
-                    {
-                        fileStream = new FileStream(text, FileMode.Append);
-                    }
-                    streamWriter = new StreamWriter(fileStream);
-                    streamWriter.WriteLine(str + message);
-                }
-            }
-            finally
-            {
-                if (streamWriter != null)
-                {
-                    streamWriter.Close();
-                }
-                if (fileStream != null)
-                {
-                    fileStream.Close();
-                }
-            }
-        }
-
+        
         public void Pop(string url)
         {
             var page = HttpContext.Current.CurrentHandler as Page;

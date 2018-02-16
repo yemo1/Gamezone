@@ -118,11 +118,15 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IAppUserRepository.cs" />
-    <Compile Include="Repositories\IServiceRequest.cs" />
-    <Compile Include="Repositories\IServiceResponse.cs" />
+    <Compile Include="Repositories\IMSISDN.cs" />
+    <Compile Include="Repositories\IServiceHeaderRepository.cs" />
+    <Compile Include="Repositories\IServiceRequestRepository.cs" />
+    <Compile Include="Repositories\IServiceResponseRepository.cs" />
     <Compile Include="Repositories\ISubscriberRepository.cs" />
     <Compile Include="Repositories\AppUserRepository.cs" />
-    <Compile Include="Repositories\SubscriberRepository.cs" />
+    <Compile Include="Repositories\ServiceHeaderRepository.cs" />
+    <Compile Include="Repositories\SubscriberRepository - Copy.cs" />
+    <Compile Include="Repositories\MSISDNRepository.cs" />
     <Compile Include="Repositories\ServiceResponseRepository.cs" />
     <Compile Include="Repositories\ServiceRequestRepository.cs" />
     <Compile Include="ServiceHeaders.cs">

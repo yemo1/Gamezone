@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GameData;
+using GameZone.VIEWMODEL;
 
 namespace GameZone.Repositories
 {
-    public interface IServiceRequest
+    public interface IServiceRequestRepository
     {
         IEnumerable<ServiceRequests> ServiceRequests { get; }
 
@@ -21,6 +22,6 @@ namespace GameZone.Repositories
 
         ServiceRequests GetServiceRequest(int requestId, string msisdn, string transactionId);
 
-        void Subscribe(int headerId, string ipAddress, string msisdn, bool IsHeaderEnabled = true, string sourceChannel = "Standard");
+        ReturnMessage Subscribe(int headerId, string ipAddress, string msisdn, bool IsHeaderEnabled = true, string sourceChannel = "Standard");
     }
 }

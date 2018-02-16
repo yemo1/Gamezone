@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using GameData;
 
 namespace GameZone.Repositories
 {
-    public interface IServiceResponse
+    public interface IServiceResponseRepository
     {
         IEnumerable<ServiceResponses> ServiceResponses { get; }
 
