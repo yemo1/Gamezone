@@ -26,6 +26,13 @@ $(document).ready(function () {
         $(this).hide().remove();
     });
 
+    // menu filtering to scroll to game area on mobile screens
+    $('body').on('click', '.top-filter li a', function () {
+        $('html, body').animate({
+            scrollTop: ($('#game-area').offset().top)
+        }, 1000);
+    });
+
     $('body').on('click', '#login-link', function (e) {
         e.preventDefault();
         $('#register-form').addClass('slideOutLeft');
