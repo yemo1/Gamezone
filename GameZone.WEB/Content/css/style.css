@@ -104,6 +104,10 @@ h1, h3,h3,h4,h5,h6 {
     /*background:#2e8add;*/
 }
 
+.game-link:active + .game-description > .btn, .game-link:hover + .game-description > .btn, .game-description .btn:active, .game-description .btn:hover, .game-link:active + .btn{
+    animation:1s infinite alternate floating;
+}
+
 .navbar{
     margin-bottom: 0;
 }
@@ -1103,6 +1107,10 @@ body::-webkit-scrollbar-thumb {
     .logo-container-2 {
         width: 200px;        
         margin-left: 10px;
+    }
+
+    .header-black.transparent-fix {
+        background: rgb(95, 161, 205);
     }
 
     .header {
