@@ -58,7 +58,7 @@ namespace GameZone.WEB.Controllers
             }
             catch (Exception ex)
             {
-                //WapHeaderUtil.LogFileWrite(ex.ToString());
+                _WapHeaderUtil.LogFileWrite(ex.ToString());
             }
             if (string.IsNullOrEmpty(category)) category = "Home";
 

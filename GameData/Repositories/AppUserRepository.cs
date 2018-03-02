@@ -189,11 +189,11 @@ namespace GameZone.Repositories
             }
         }
 
-        public ConfirmAppUserSubscription_Result ConfirmUserSubscription(long AppUserID, string ServiceName)
+        public ConfirmAppUserSubscription_Result ConfirmUserSubscription(long AppUserID, string MSISDN, string ServiceName, string Shortcode, string Productcode, bool IsMtn)
         {
             try
             {
-                var retVal = _NGSubscriptionsEntities.ConfirmAppUserSubscription(AppUserID, ServiceName).FirstOrDefault();
+                var retVal = _NGSubscriptionsEntities.ConfirmAppUserSubscription(AppUserID, MSISDN, ServiceName,Shortcode, Productcode, IsMtn).FirstOrDefault();
                 return retVal;
             }
             catch (Exception ex)
@@ -207,6 +207,19 @@ namespace GameZone.Repositories
             try
             {
                 var retVal = _NGSubscriptionsEntities.GetAppUserSubscriptionDetails(AppUserID, ServiceName).FirstOrDefault();
+                return retVal;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public GetMTNUserSubscriptionDetails_Result GetMTNUserSubscriptionDetails(string MSISDN, string Shortcode)
+        {
+            try
+            {
+                var retVal = _NGSubscriptionsEntities.GetMTNUserSubscriptionDetails(MSISDN, Shortcode).FirstOrDefault();
                 return retVal;
             }
             catch (Exception ex)

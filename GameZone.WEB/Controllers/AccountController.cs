@@ -80,9 +80,9 @@ namespace GameZone.WEB.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public bool ValidSubscription(long UID, string svcName)
+        public bool ValidSubscription(long UID, string MSISDN, string svcName, string Shortcode, bool IsMtn, string Productcode = null)
         {
-            var retVal = _IAppUserRepository.ConfirmUserSubscription(UID, svcName);
+            var retVal = _IAppUserRepository.ConfirmUserSubscription(UID, MSISDN, svcName, Shortcode, Productcode, IsMtn);
             return retVal.isSuccess;
         }
 
@@ -92,6 +92,10 @@ namespace GameZone.WEB.Controllers
         [AllowAnonymous]
         public string LogOff(string UID)
         {
+            if (string.IsNullOrEmpty(UID))
+            {
+                return "";
+            }
             _IAppUserRepository.LoginAppUser(UID, false, null);
             return "/Home";
         }

@@ -21,10 +21,13 @@ namespace GameZone.WEB.Controllers
         string testFlutterwaveSecKey = "FLWSECK-62c555ca07f7a21adc144f757778a729-X";
         NGSubscriptionsEntities _NGSubscriptionsEntities;
         public static readonly log4net.ILog _Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        
+        static string svcName = System.Configuration.ConfigurationManager.AppSettings["SERVICE_NAME"].ToString();
         string logObj;
-        public GamesController()
+
+        HeaderController _HeaderController;
+        public GamesController(HeaderController headerController)
         {
+            _HeaderController = headerController;
             Entities.GameContext _context = new Entities.GameContext();
             _NGSubscriptionsEntities = new NGSubscriptionsEntities();
             subscriberRepository = new SubscriberRepository(_context, _NGSubscriptionsEntities);
@@ -58,37 +61,60 @@ namespace GameZone.WEB.Controllers
         /// <returns></returns>
         public ActionResult List(string t = null)
         {
-            //NameValueCollection nvc = new NameValueCollection();
-            //nvc = Request.Headers;
-            //Dictionary<string, string> ss = new Dictionary<string, string>();
-            //foreach (var item in nvc.AllKeys)
-            //{
-            //    ss.Add(item, nvc[item]);
-            //}
+            if (Request.UserAgent.Contains("Mobi") == true)
+            {
+                //mobile
+                ViewBag.IsMobile = true;
 
-            ////Validate User Session
-            //if (GameUserIdentity.LoggedInUser == null)
-            //{
-            //    return RedirectToAction("Index", "Home");
-            //}
+                //Get Number from Header
+                //NameValueCollection nvc = new NameValueCollection();
+                //nvc = Request.Headers;
+                //Dictionary<string, string> ss = new Dictionary<string, string>();
+                //foreach (var item in nvc.AllKeys)
+                //{
+                //    ss.Add(item, nvc[item]);
+                //}
+                var headerData = _HeaderController.FillMSISDN();
+                //if (!ss.ContainsKey("MSISDN"))
+                if (headerData == null)
+                {
+                    //Not Mtn
+                    ViewBag.mtnNumber = null;
+                }
+                else
+                {
+                    //Not Mtn
+                    //ViewBag.mtnNumber = nvc.GetValues("MSISDN");
+                    var mtnNumber = headerData.Lines.FirstOrDefault().Phone;
+                    ViewBag.mtnNumber = (mtnNumber.Trim() == "XXX-XXXXXXXX") ? null : mtnNumber.Trim();
+                    new Thread(() =>
+                    {
+                        LocalLogger.LogFileWrite(
+                            JsonConvert.SerializeObject(new LogVM()
+                            {
+                                Message = "Recognised MTN Number",
+                                LogData = mtnNumber
+                            }));
+                    }).Start();
+                }
+            }
+            else
+            {
+                //laptop or desktop
+                ViewBag.IsMobile = false;
+                ViewBag.mtnNumber = null;
+            }
+            if (Session["fltwvSubscription"] != null)
+            {
+                ViewBag.fltwvSubscription = Session["fltwvSubscription"].ToString();
+                //Response.Write($"<script language='javascript' type='text/javascript'>alert('{Session["fltwvSubscription"].ToString()}');</script>");
+            }
+            Session["fltwvSubscription"] = null;
 
-            //Check for subscription Expiry
-
-            //Check for Wrong Date and Time
-
-            //var s = subscriberRepository.GetUserByPhoneNo(t);
-            //if (s == null)
-            //{
-            //    return RedirectToAction("Index", "Home");
-            //}
-            //else // Access Granted
-            //{
-            //    //Implement Caching of last game category selected
-            //    //GameUserIdentity.LoggedInUser = s.ToModel();
-            //    subscriberRepository.UpdateGameUserLastAccess(t, s);
-            
+            //Just for test of Auto Registration
+            //ViewBag.IsMobile = true;
+            ViewBag.mtnNumber = "2348168423222";
             return View();
-            //}
         }
 
         [HttpGet]
@@ -101,9 +127,17 @@ namespace GameZone.WEB.Controllers
                 var userData = (LoginAppUserVM)GameUserIdentity.LoggedInUser;
                 if (userData == null)
                 {
-                    return new HttpStatusCodeResult(401);
+                    Session["fltwvSubscription"] = "Session timed out. Please try again.";
+                    return RedirectToAction("Index", "Home");
                 }
-
+                //Check for valid Exisiting Subscription
+                var subscriptionConfirm = _NGSubscriptionsEntities.ConfirmAppUserSubscription(userData.AppUserId, null, svcName, null,null, false).FirstOrDefault();
+                //Valid Subscription Exists
+                if (subscriptionConfirm.isSuccess)
+                {
+                    Session["fltwvSubscription"] = "You already have an active Subscription.";
+                    return RedirectToAction("Index", "Home");
+                }
                 logObj = JsonConvert.SerializeObject(new LogVM()
                 {
                     Message = "User Making Payment",
@@ -141,8 +175,8 @@ namespace GameZone.WEB.Controllers
                 if (verifyRspJSON.data.status.ToLower() != "successful" && verifyRspJSON.data.flwMeta.chargeResponse != "00" || verifyRspJSON.data.status.ToLower() != "successful" && verifyRspJSON.data.flwMeta.chargeResponse != "0")
                 {
                     //Transaction Failed
-                    ViewBag.subscriptionSuccessful = false;
-                    return RedirectToAction("Index", "Home", new { retVal = "Sorry. Your subscription failed. Please try again later." });
+                    Session["fltwvSubscription"] = "Sorry. Your subscription failed. Please try again later.";
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
@@ -162,16 +196,15 @@ namespace GameZone.WEB.Controllers
                     {
                         subscriptionPeriod = (int)GameZonePrice.Monthly;
                     }
-                    string svcName = System.Configuration.ConfigurationManager.AppSettings["SERVICE_NAME"].ToString();
                     DateTime periodEnd = (subscriptionPeriod == (int)GameZonePrice.Daily) ? DateTime.Now.AddDays(1) :
                                             (subscriptionPeriod == (int)GameZonePrice.Weekly) ? DateTime.Now.AddDays(7) :
                                             DateTime.Now.AddDays(30);
                     
                     //Save Subscription Data in DB
                     var rezolt = _NGSubscriptionsEntities.AddServiceSubscription(userData.AppUserId, svcName, Enum.GetName(typeof(GameZonePrice), subscriptionPeriod), DateTime.Now, periodEnd, verifyRspJSON.data.amount, true, true, DateTime.Now).FirstOrDefault();
-                    
-                    ViewBag.subscriptionSuccessful = true;
-                    return RedirectToAction("Index", "Home", new { retVal = "Your subscription was successful." });
+                    Session["fltwvSubscription"] = "Your subscription was successful.";
+                    //ViewBag.subscriptionSuccessful = "Your subscription was successful.";
+                    return RedirectToAction("Index", "Home");
                 }
                 #endregion
                 #endregion

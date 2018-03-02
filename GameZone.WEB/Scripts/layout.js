@@ -1,4 +1,4 @@
-﻿//Get User Object
+﻿/*Get User Object*/
 var userOBJ = localStorage.getItem("UID");
 var UID = null;
 if (userOBJ) {
@@ -10,7 +10,7 @@ if (userOBJ) {
     ResetUsernameToAccount();
 }
 
-//Function to Log User Out
+/*Function to Log User Out*/
 function LogUserOut(delay, UID) {
     $.post("/Account/LogOff", { "UID": UID }).success(function (data) {
         localStorage.removeItem("UID");
@@ -25,7 +25,7 @@ function LogUserOut(delay, UID) {
     });
 }
 
-//Logout Handler
+/*Logout Handler*/
 $(document).on("click", "#logout-target", function (event) {
     var userOBJ = localStorage.getItem("UID");
     var UID = null;
@@ -35,7 +35,7 @@ $(document).on("click", "#logout-target", function (event) {
     }
 });
 
-//Function to Reset Username Display to Display Account
+/*Function to Reset Username Display to Display Account*/
 function ResetUsernameToAccount() {
     $('#userIDSpan').text("Account");
     $('.logout').css("display", "none");

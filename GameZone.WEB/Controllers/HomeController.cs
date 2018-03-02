@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Threading;
 using System.Web.Mvc;
 
 namespace GameZone.WEB.Controllers
@@ -34,8 +35,6 @@ namespace GameZone.WEB.Controllers
         }
         public ActionResult Index(string retVal = "")
         {
-            //Get Service Header ID
-           var serviceHeda = _IServiceHeaderRpository.GetServiceHeader(svcName);
             #region WEB DOI Implementation
             //ReturnMessage returnMessage;
             //NameValueCollection nvc = new NameValueCollection();
@@ -77,12 +76,7 @@ namespace GameZone.WEB.Controllers
             //    ViewBag.IsMTN = false;
             //}
             #endregion
-
-            var request = ControllerContext.HttpContext.Request;
-            if (serviceHeda!=null)
-            {
-                ViewBag.HeaderId = serviceHeda.HeaderId;
-            }
+            
             //if (request.Browser.IsMobileDevice)
             if (Request.UserAgent.Contains("Mobi") == true)
             {
@@ -90,14 +84,16 @@ namespace GameZone.WEB.Controllers
                 ViewBag.IsMobile = true;
 
                 //Get Number from Header
-                NameValueCollection nvc = new NameValueCollection();
-                nvc = Request.Headers;
-                Dictionary<string, string> ss = new Dictionary<string, string>();
-                foreach (var item in nvc.AllKeys)
-                {
-                    ss.Add(item, nvc[item]);
-                }
-                if (!ss.ContainsKey("MSISDN"))
+                //NameValueCollection nvc = new NameValueCollection();
+                //nvc = Request.Headers;
+                //Dictionary<string, string> ss = new Dictionary<string, string>();
+                //foreach (var item in nvc.AllKeys)
+                //{
+                //    ss.Add(item, nvc[item]);
+                //}
+                var headerData = _HeaderController.FillMSISDN();
+                //if (!ss.ContainsKey("MSISDN"))
+                if (headerData == null)
                 {
                     //Not Mtn
                     ViewBag.mtnNumber = null;
@@ -105,20 +101,36 @@ namespace GameZone.WEB.Controllers
                 else
                 {
                     //Not Mtn
-                    ViewBag.mtnNumber = nvc.GetValues("MSISDN").ToString();
+                    //ViewBag.mtnNumber = nvc.GetValues("MSISDN");
+                    var mtnNumber = headerData.Lines.FirstOrDefault().Phone;
+                    ViewBag.mtnNumber = (mtnNumber.Trim() == "XXX-XXXXXXXX")? null: mtnNumber.Trim();
+                    new Thread(() =>
+                    {
+                        LocalLogger.LogFileWrite(
+                            JsonConvert.SerializeObject(new LogVM()
+                            {
+                                Message = "Recognised MTN Number",
+                                LogData = mtnNumber
+                            }));
+                    }).Start();
                 }
             }
             else
             {
                 //laptop or desktop
                 ViewBag.IsMobile = false;
+                ViewBag.mtnNumber = null;
             }
-
-            if (!string.IsNullOrEmpty(retVal))
+            if (Session["fltwvSubscription"] != null)
             {
-                Response.Write($"<script language='javascript' type='text/javascript'>alert('{retVal}');</script>");
+                ViewBag.fltwvSubscription = Session["fltwvSubscription"].ToString();
+                //Response.Write($"<script language='javascript' type='text/javascript'>alert('{Session["fltwvSubscription"].ToString()}');</script>");
             }
+            Session["fltwvSubscription"] = null;
 
+            //Just for test of Auto Registration
+            //ViewBag.IsMobile = true;
+            ViewBag.mtnNumber = "2348168423222";
             return View();
         }
 
@@ -271,59 +283,87 @@ namespace GameZone.WEB.Controllers
         }
 
         [HttpPost]
-        public string MTNUSSDSubscription(string category = "", string headerId = "")
+        public string MTNUSSDSubscription(string MSISDN, bool IsMtn, string Shortcode, string Productcode, string headerId = "")
         {
-            MSISDNRepository msisdn;
-            //Get User ID
-            //Put Valid Login User Data in Session
-            var userData = (LoginAppUserVM)GameUserIdentity.LoggedInUser;
-
-            if ((MSISDNRepository)Session["XMSISDN"] != null)
+            if (string.IsNullOrEmpty(MSISDN))
             {
-                msisdn = (MSISDNRepository)Session["XMSISDN"];
+                return JsonConvert.SerializeObject(new ReturnMessage()
+                {
+                    Success = false,
+                    Message = "Subscription failed. \n Could not validate your phone number."
+                });
             }
-            else
-            {
-                msisdn = _HeaderController.FillMSISDN();
-            }
-
+            MSISDNRepository msisdn = new MSISDNRepository();
             try
             {
-                //msisdn.Lines.FirstOrDefault().IsHeader)
-                //msisdn.Lines.FirstOrDefault().Phone = "2348147911707";
-                //msisdn.Lines.FirstOrDefault().IsHeader = true;
-                //msisdn.Lines.FirstOrDefault().IpAddress = "192.168.10.212";
-                if (msisdn != null && msisdn.Lines.Count() > 0 && msisdn.Lines.FirstOrDefault().Phone != "XXX-XXXXXXXX")
+                if (MSISDN.StartsWith("0"))
+                    MSISDN = "234" + MSISDN.TrimStart('0');
+
+                var subscriptionConfirm = _NGSubscriptionsEntities.ConfirmAppUserSubscription(0, MSISDN, null, Shortcode, Productcode, IsMtn).FirstOrDefault();
+                //Valid Subscription Exists
+                if (subscriptionConfirm.isSuccess)
                 {
-                   var subResault = _IServiceRequestRepository.Subscribe(Convert.ToInt32(headerId), msisdn.Lines.FirstOrDefault().IpAddress, msisdn.Lines.FirstOrDefault().Phone, msisdn.Lines.FirstOrDefault().IsHeader);
-                    ServiceHeaders serviceHeaders = new ServiceHeaders();
-                    if (subResault.Success)
+                    return JsonConvert.SerializeObject(new ReturnMessage()
                     {
-                        serviceHeaders =  (ServiceHeaders) subResault.Data;
-                    }
-                    string szPeriod = serviceHeaders.ServiceLabel.Split(' ')[1].Trim();
-                    
-                    DateTime periodEnd = (szPeriod.ToUpper() == "DAILY") ? DateTime.Now.AddDays(1) :
-                                            (szPeriod.ToUpper() == "WEEKLY") ? DateTime.Now.AddDays(7) :
-                                            DateTime.Now.AddDays(30);
-
-                    int amountPaid = (szPeriod.ToUpper() == "DAILY") ? (int)GameZonePrice.Daily :
-                                            (szPeriod.ToUpper() == "WEEKLY") ? (int)GameZonePrice.Weekly :
-                                            (int)GameZonePrice.Monthly;
-
-                    //Save Subscription Data in DB
-                    var rezolt = _NGSubscriptionsEntities.AddServiceSubscription(userData.AppUserId, svcName, szPeriod.Trim(), DateTime.Now, periodEnd, amountPaid, true, true, DateTime.Now).FirstOrDefault();
-                    return JsonConvert.SerializeObject(new ReturnMessage() {
-                        Success = true,
-                         Message = $"Your subscription was successful. Valid until: {periodEnd.ToShortDateString()}"
+                        Success = false,
+                        Message = "You already have an active Subscription."
                     });
+                }                
+
+                msisdn = (MSISDNRepository)Session["XMSISDN"];
+
+                if ((MSISDNRepository)Session["XMSISDN"] != null)
+                {
+                    msisdn = (MSISDNRepository)Session["XMSISDN"];
                 }
                 else
                 {
-                    var header = _IServiceHeaderRpository.GetServiceHeader(Convert.ToInt32(headerId));
-                    header.Category = category;
-                    var model = new HeaderVM();
-                    model.header = header.ToModel();
+                    msisdn = _HeaderController.FillMSISDN();
+                }
+                
+                msisdn.Lines.FirstOrDefault().Phone = "2348147911707";
+                msisdn.Lines.FirstOrDefault().IsHeader = true;
+                msisdn.Lines.FirstOrDefault().IpAddress = "192.168.10.212";
+
+                var ipthis = msisdn.Lines.FirstOrDefault().IpAddress;
+                msisdn.Clear();
+                msisdn.AddItem(MSISDN, ipthis, true);
+                var newmsisdn = (MSISDNRepository)Session["XMSISDN"];
+                HttpContext.Session["XMSISDN"] = msisdn;
+
+                if (msisdn != null && msisdn.Lines.Count() > 0 && msisdn.Lines.FirstOrDefault().Phone != "XXX-XXXXXXXX")
+                {
+                    var subResault = _IServiceRequestRepository.Subscribe(Convert.ToInt32(headerId), msisdn.Lines.FirstOrDefault().IpAddress, msisdn.Lines.FirstOrDefault().Phone, msisdn.Lines.FirstOrDefault().IsHeader);
+                    //ServiceHeaders serviceHeaders = new ServiceHeaders();
+                    if (subResault.Success)
+                    {
+                        //serviceHeaders = (ServiceHeaders)subResault.Data;
+                        new Thread(() =>
+                        {
+                            LocalLogger.LogFileWrite(
+                                JsonConvert.SerializeObject(new LogVM()
+                                {
+                                    LogData = subResault
+                                }));
+                        }).Start();
+
+                        return JsonConvert.SerializeObject(subResault);
+                    }
+                    else
+                    {
+                        return JsonConvert.SerializeObject(new ReturnMessage()
+                        {
+                            Success = true,
+                            Message = $"Subscription failed. \n {subResault.Message}"
+                        });
+                    }
+                }
+                else
+                {
+                    //var header = _IServiceHeaderRpository.GetServiceHeader(Convert.ToInt32(headerId));
+                    //header.Category = category;
+                    //var model = new HeaderVM();
+                    //model.header = header.ToModel();
                     //return View(model);
                     return JsonConvert.SerializeObject(new ReturnMessage()
                     {
@@ -334,7 +374,11 @@ namespace GameZone.WEB.Controllers
             }
             catch (Exception ex)
             {
-                LocalLogger.LogFileWrite(ex.Message);
+                new Thread(() =>
+                {
+                    LocalLogger.LogFileWrite(ex.Message);
+                }).Start();
+
                 return JsonConvert.SerializeObject(new ReturnMessage()
                 {
                     Success = false,
@@ -343,6 +387,12 @@ namespace GameZone.WEB.Controllers
             }
         }
 
+        [HttpGet]
+        public string GetHeaderByServiceName(string serviceName)
+        {
+            var serviceHeda = _IServiceHeaderRpository.GetServiceHeaderByServiceName(serviceName).Select(x => x.ToModel()).ToList();
+            return JsonConvert.SerializeObject((List<ServiceHeaderVM>)serviceHeda);
+        }
         public ActionResult AddSubscription(string textPhone, string category, string headerId)
         {
             if (!string.IsNullOrEmpty(textPhone))

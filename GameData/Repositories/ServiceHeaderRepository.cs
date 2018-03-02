@@ -16,6 +16,11 @@ namespace GameZone.Repositories
             }
         }
 
+        public IList<ServiceHeaders> GetServiceHeaderByServiceName(string servicename)
+        {
+            return context.ServiceHeaders.Where(s => s.ServiceName == servicename).ToList();
+        }
+
         public ServiceHeaders DeleteServiceHeader(int headerId)
         {
             ServiceHeaders dbentry = context.ServiceHeaders.Find(headerId);

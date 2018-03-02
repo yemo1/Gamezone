@@ -110,6 +110,9 @@
     <Compile Include="GetIDSeriesNextValue_Result.cs">
       <DependentUpon>GameModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetMTNUserSubscriptionDetails_Result.cs">
+      <DependentUpon>GameModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="IDSeries.cs">
       <DependentUpon>GameModel.tt</DependentUpon>
     </Compile>

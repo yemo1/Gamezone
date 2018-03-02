@@ -1,25 +1,17 @@
 ﻿gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
+    if (_fltwvSubscription != "") {
+        $.notify(_fltwvSubscription, 'info');
+    }
 
-    //Make Games Page Menu Active
+    /*Make Games Page Menu Active*/
     $("#menuUL li").removeClass("current");
     $("#homeMenu").addClass("current");
 
-    //Hide Loaders by default
-    $("#logLoda, #regLoda, #forgotLoda, #ChangeLoda").css("display", "none");
+    /*Hide Loaders by default*/
+    $("#logLoda, #regLoda, #forgotLoda, #ChangeLoda, #subscribeLoda").css("display", "none");
 
     ("#subType2").checked = true;
 
-    //Get User Object
-    var userOBJ = localStorage.getItem("UID");
-    var UID = null;
-    if (userOBJ) {
-        UID = JSON.parse(localStorage.getItem("UID"));
-        $scope.redirectURL = flutterWaveRedirectURL + UID.AppUserId;
-    } else {
-        $('.subscribeBTN').css("display", "none");
-        $('#loginModal').modal('show');
-    }
-    
     $scope.basicObj = {};
     $scope.registerObj = {};
     $scope.loginObj = {};
@@ -27,18 +19,147 @@
     $scope.changepwObj = {};
     $scope.subDetailOBJ = {};
     $scope.basicObj.sT = 1;
-    //Initialize Phone Number gotten from wap header
-    if (_IsMobile) {
-        if (_mtnNumber != null) {
+    $scope.payType = {};
+    $scope.mtnMSISDN;
+    $scope.headerData;
+    $scope.HeaderId;
+
+    /*Login Handler*/
+    $scope.userLogin = function () {
+        if ($scope.loginObj.szUsername == undefined || $scope.loginObj.szUsername.trim() == "") {
+            $.notify("Please enter your username.", 'error');
+            $("#txtUsername").focus();
+            return;
+        }
+        if ($scope.loginObj.szPassword == undefined || $scope.loginObj.szPassword.trim() == "") {
+            $.notify("Please enter your password.", 'error');
+            $("#txtPassword").focus();
+            return;
+        }
+
+        /*show loader*/
+        $("#logLoda").css("display", "block");
+        /*Disable COntrols*/
+        $(".disabledCtrl").attr("disabled", "disabled");
+
+        setTimeout(function () {
+            $.get(apiURL + "/api/AppUser/AuthenticateUser?szUsername=" + $scope.loginObj.szUsername + "&szPassword=" + $scope.loginObj.szPassword)
+                .success(function (data) {
+                    if (!data.Success) {
+                        $.notify(data.Message, 'error');
+                        /*Hide Loading Gif*/
+                        $("#logLoda").css("display", "none");
+                        /*Enable Controls*/
+                        $(".disabledCtrl").removeAttr("disabled");
+                        $scope.loginObj.szPassword = "";
+                        $("#txtPassword").val("");
+                        $("#txtUsername").focus();
+                    } else {
+                        if (data.Data.iChangePW) {
+                            $('#loginModal').modal('hide');
+                            $('#passwordChangeModal').modal('show');
+                        } else {
+                            localStorage.setItem("UID", JSON.stringify(data.Data));
+                            window.location = "/Home";
+                            $('#loginModal').modal('hide');
+                        }
+                    }
+                }).error(function (data) {
+                    $.notify(data.statusText, 'error');
+
+                    /*Hide Loading Gif*/
+                    $("#logLoda").css("display", "none");
+                    /*Enable COntrols*/
+                    $(".disabledCtrl").removeAttr("disabled");
+                });
+        }, 1000);
+    };
+    
+    /*Function to handle creation of new users*/
+    $scope.AutoRegisterNewUser = function () {
+        if (_IsMobile) {
+            if (_mtnNumber != "") {
+                $scope.registerObj.szUsername = _mtnNumber;
+                $scope.registerObj.szPassword = "password";
+                $scope.registerObj.isMobile = true;
+            }
+
+            $scope.registerObj.AppUserId = 0;
+            $scope.registerObj.szImgURL = "";
+            $scope.registerObj.szPasswordSalt = "";
+            $scope.registerObj.iStatus = 0;
+            $scope.registerObj.dCreatedOn = "2018-01-01";
+            $scope.registerObj.iChangePW = false;
+            $scope.registerObj.isDeleted = false;
+
+            $.ajax({
+                type: "POST",
+                data: $scope.registerObj,
+                url: apiURL + "/api/AppUser",
+                async: false,
+                success: function (data) {
+                    if (data.Success) {
+                        $scope.loginObj.szUsername = $scope.registerObj.szUsername;
+                        $scope.loginObj.szPassword = $scope.registerObj.szPassword;
+                        $scope.userLogin();
+
+                        $scope.registerObj = {};
+                    } else {
+                        if (data.ID == "101") {/*MTN Number*/
+                            $scope.loginObj.szUsername = data.Data.szUsername;
+                            $scope.loginObj.szPassword = data.Data.szPassword;
+
+                            localStorage.setItem("UID", JSON.stringify(data.Data));
+                            $scope.registerObj = {};
+                            window.location = "/Home";
+                        } else {
+                            $.notify(data.Message, 'error');
+                        }
+                    }
+                }, error: function (data) {
+                }
+            });
+        }
+    };
+
+    /*Function to Log User Out*/
+    $scope.LogUserOut = function (UID, delay) {
+        $.post("/Account/LogOff", { "UID": UID }).success(function (data) {
+            localStorage.removeItem("UID");
+            localStorage.removeItem("selectedGame");
+            console.log(data);
+            if (data != "") {
+                setTimeout(function () {
+                    window.location = "/Home";
+                }, delay);
+            }
+        }).error(function (data) {
+            $.notify(data.statusText, 'error');
+        });
+    };
+
+    /*Initialize Phone Number gotten from wap header*/
+    if (_IsMobile == "True") {
+        if (_mtnNumber != "") {
+            $("#txtUsername").val(_mtnNumber);
+            $scope.loginObj.szUsername = _mtnNumber;
+            $("#txtRegUsername").val(_mtnNumber);
             $scope.registerObj.szUsername = _mtnNumber;
             $scope.registerObj.isMobile = true;
-            $("#txtRegUsername").attr("disabled", "disabled");
+            $scope.mtnMSISDN = _mtnNumber;
+            $scope.payType = 'airtime';
+            $('#logout-target').css("display", "none");/*Hide Logout Button*/
+        } else {
+            $scope.payType = 'card';
         }
+    } else {
+        $scope.payType = 'card';
     }
 
-    //Get ApplicationUser Data from DB
+    /*Get ApplicationUser Data from DB*/
     $scope.getGameData = function (selectedCat) {
-        //Show Loading Gif
+        $("#isotopeContainer").empty();
+        /*Show Loading Gif*/
         $("body").find('.game-loader').addClass('show').removeClass('hide');
 
         $.ajax({
@@ -47,7 +168,7 @@
             async: true,
             success: function (data) {
                 var gameContent = "";
-                //Empty Div
+                /*Empty Div*/
                 $("#isotopeContainer").empty();
                 $("body").find('.game-loader').addClass('hide').removeClass('show');
                 $.each(data.Data, function (i, rec) {
@@ -74,27 +195,16 @@
                         gameContent = gameContent + "<small class='game-category pull-left text-muted'>" + selectedCat + "</small>";
                         gameContent = gameContent + "</div></a></div></div>";
                         $("#isotopeContainer").append(gameContent);
-                        //gameContent = "";
                         $('body').find('.lazy .img-responsive').lazyload({});
-                        //$(window).scroll(function () {
-                        //    if ($(window).scrollTop() >= $('#game-area').height()) {
-                        //        //$("#pcSubscriptionModal").show();
-                        //    }
-                        //    else {
-                        //        //$("#pcSubscriptionModal").hide("");
-                        //    }
-                        //});
                     }
                 });
             },
-            error: function (data) {
-                //$.notify("Error Encountered: " + data.statusText, 'error');
-            }
+            error: function (data) {}
         });
     };
     $scope.getGameData("family");
 
-
+    /*EPayment Subscriber*/
     $scope.GetSubData = function () {
         var userOBJ = localStorage.getItem("UID");
         var UID = null;
@@ -106,25 +216,24 @@
                 url: apiURL + "/api/AppUser/SubscriptionDetails?UID=" + UID.AppUserId + "&svcName=" + svcName,
                 async: false,
                 success: function (data) {
-                    //$scope.subDetailOBJ = {};
-
                     if (data.Success) {
-                        //$scope.$apply(function () {
                         $scope.subDetailOBJ = data.Data;
 
                         $scope.subDetailOBJ.PeriodStart = $scope.formatDate(data.Data.PeriodStart);
                         $scope.subDetailOBJ.PeriodEnd = $scope.formatDate(data.Data.PeriodEnd);
-                        //});
-                        $("#txtIsActive").html(getRecordStatus(data.Data.IsActive));
+                        if ($scope.dateIsEalierThanToday($scope.subDetailOBJ.PeriodEnd)) {
+                            $scope.subDetailOBJ.IsActive = 0;
+                        } else {
+                            $scope.subDetailOBJ.IsActive = 1;
+                        }
+                        $("#txtIsActive").html(getRecordStatus($scope.subDetailOBJ.IsActive));
                     } else {
-                        //$scope.$apply(function () {
                         $scope.subDetailOBJ.PeriodStart = "-";
                         $scope.subDetailOBJ.PeriodEnd = "-";
                         $scope.subDetailOBJ.Period = "-";
                         $scope.subDetailOBJ.Amount = "-";
-                        $scope.subDetailOBJ.IsActive = "-";
-                        //});
-                        $("#txtIsActive").html("-");
+                        $scope.subDetailOBJ.IsActive = 0;
+                        $("#txtIsActive").html(getRecordStatus($scope.subDetailOBJ.IsActive));
                     }
                 }, error: function (data) {
                 }
@@ -132,13 +241,98 @@
         }
     };
 
+    /*MTN Subscriber*/
+    $scope.getHeaderData = function () {
+        $.ajax({
+            type: "GET",
+            url: "/Home/GetHeaderByServiceName?serviceName=" + svcName,
+            async: true,
+            success: function (data) {
+                $scope.headerData = JSON.parse(data);
+            }, error: function (data) {
+            }
+        });
+    };
+    $scope.getHeaderData();
 
-    //Subscription Authentication Handler
+    /*Hold User Data for Subscription Purpose*/
+    $scope.keepUserData = function (LoginAppUserVM) {
+        var userOBJ = localStorage.getItem("UID");
+        var UID = null;
+        if (userOBJ) {
+            UID = JSON.parse(localStorage.getItem("UID"));
+            $scope.redirectURL = flutterWaveRedirectURL + UID.AppUserId;
+
+            $.ajax({
+                type: "POST",
+                data: { loginAppUserVM: UID },
+                url: "/Account/StartValidUserSession",
+                async: true,
+                success: function (data) {
+                }, error: function (data) {
+                }
+            });
+        }
+    };
+
+    $scope.deselectAll = function (index) {
+        $.each($scope.headerData, function (i, rec) {
+            rec.selected = false;
+        });
+        $scope.headerData[index].selected = 'true';
+        $scope.HeaderId = $scope.headerData[index].HeaderId;
+    };
+    /*MTN Subscriber*/
+    $scope.GetMTNSubData = function () {
+        var userOBJ = localStorage.getItem("UID");
+        var UID = null;
+        if (userOBJ) {
+            UID = JSON.parse(localStorage.getItem("UID"));
+            $.ajax({
+                type: "GET",
+                url: apiURL + "/api/AppUser/MTNSubscriptionDetails?MSISDN=" + UID.szUsername + "&Shortcode=" + _SERVICE_SHORTCODE,
+                async: false,
+                success: function (data) {
+                    if (data.Success) {
+                        $scope.subDetailOBJ = data.Data;
+                        $scope.subDetailOBJ.Period = data.Data.ServiceName;
+                        $scope.subDetailOBJ.PeriodStart = $scope.formatDate(data.Data.Sub);
+                        $scope.subDetailOBJ.PeriodEnd = $scope.formatDate(data.Data.Exp);
+                        if ($scope.dateIsEalierThanToday($scope.subDetailOBJ.PeriodEnd)) {
+                            $scope.subDetailOBJ.IsActive = 0;
+                        } else {
+                            $scope.subDetailOBJ.IsActive = 1;
+                        }
+                        $("#txtIsActive").html(getRecordStatus($scope.subDetailOBJ.IsActive));
+                    } else {
+                        $scope.subDetailOBJ.PeriodStart = "-";
+                        $scope.subDetailOBJ.PeriodEnd = "-";
+                        $scope.subDetailOBJ.Period = "-";
+                        $scope.subDetailOBJ.Amount = "-";
+                        $scope.subDetailOBJ.IsActive = "0";
+                        $("#txtIsActive").html(getRecordStatus($scope.subDetailOBJ.IsActive));
+                    }
+                }, error: function (data) {
+                }
+            });
+        }
+    };
+
+    /*Return data for subscription validation based on user type*/
+    $scope.validateSubscriptionData = function (AppUserId) {
+        if (_mtnNumber != "") {/*Number is an MTN No*/
+            return { "UID": AppUserId, "MSISDN": _mtnNumber, "svcName": svcName, "Shortcode": _SERVICE_SHORTCODE, "IsMtn": true };
+        } else {
+            return { "UID": AppUserId, "MSISDN": null, "svcName": svcName, "Shortcode": null, "IsMtn": false };
+        }
+    };
+
+    /*Subscription Authentication Handler*/
     $scope.validateSubscription = function (AppUserId) {
         var retVal = false;
         $.ajax({
             type: "POST",
-            data: { "UID": AppUserId, "svcName": svcName },
+            data: $scope.validateSubscriptionData(AppUserId),
             url: "/Account/ValidSubscription",
             async: false,
             success: function (data) {
@@ -149,13 +343,38 @@
         return retVal;
     };
 
-    //Authentication Handler
+    /*Get User Object and Request User Login*/
+    var userOBJ = localStorage.getItem("UID");
+    var UID = null;
+    if (userOBJ) {
+        UID = JSON.parse(userOBJ);
+        $scope.redirectURL = flutterWaveRedirectURL + UID.AppUserId;
+        if ($scope.validateSubscription(UID.AppUserId) == "False") {
+            $scope.subDetailOBJ.IsActive = 0;
+        } else {
+            $scope.subDetailOBJ.IsActive = 1;
+        }
+    } else {
+        if (_IsMobile == "True") {
+            if (_mtnNumber != "") {/*Number is mtn*/
+                /*DO Nothing*/
+            } else {
+                $('#loginModal').modal('show');
+            }
+        } else {
+            $('#loginModal').modal('show');
+        }
+        localStorage.removeItem("selectedGame");
+        $scope.subDetailOBJ.IsActive = 0;
+    }
+
+    /*Authentication Handler*/
     $scope.authHandler = function (retURL) {
         var returnURL = null;
         var userOBJ = localStorage.getItem("UID");
         var userLoginToken = null;
         if (userOBJ) {
-            var userData = JSON.parse(localStorage.getItem("UID")),
+            var userData = JSON.parse(userOBJ),
             userLoginToken = userData.AppUserId + ";" + userData.userLoginToken;
 
             $.ajax({
@@ -171,7 +390,7 @@
                         if (data.includes(";")) {
                             localStorage.removeItem("UID");
                             localStorage.removeItem("selectedGame");
-                            //Clear Username Display
+                            /*Clear Username Display*/
                             ResetUsernameToAccount();
                             $('#loginModal').modal('show');
                         } else {
@@ -180,7 +399,7 @@
                     } else {
                         localStorage.removeItem("UID");
                         localStorage.removeItem("selectedGame");
-                        //Clear Username Display
+                        /*Clear Username Display*/
                         ResetUsernameToAccount();
                         $('#loginModal').modal('show');
                     }
@@ -188,16 +407,19 @@
                 }
             });
         } else {
-            localStorage.removeItem("UID");
-            localStorage.removeItem("selectedGame");
-            //Clear Username Display
-            ResetUsernameToAccount();
-            $('#loginModal').modal('show');
+            if (_mtnNumber != "") {
+                $scope.AutoRegisterNewUser();
+            } else {
+                localStorage.removeItem("selectedGame");
+                /*Clear Username Display*/
+                ResetUsernameToAccount();
+                $('#loginModal').modal('show');
+            }
         }
         return returnURL;
     };
 
-    //CLick handler of Menu Items
+    /*CLick handler of Menu Items*/
     $(".gameMenu").click(function (e) {
         var selCat = $(this).attr("id");
         $scope.getGameData(selCat);
@@ -205,47 +427,67 @@
         e.preventDefault();
     });
 
-    //Game CLick Event Handler
+    /*Game CLick Event Handler*/
     $(document).on("click", "a.game-link", function (e) {
         e.preventDefault();
         e.preventDefault();
 
-        //Authentication
+        /*Authentication*/
         var retVal = $scope.authHandler("/games/gameplay");
         if (retVal != null) {
-            var userData = JSON.parse(localStorage.getItem("UID"));
-            if ($scope.validateSubscription(userData.AppUserId) == "False") {
-                $.notify("Please Subscribe to play our games.", 'error');
-                localStorage.removeItem("selectedGame");
-                $scope.$apply(function () {
-                    $scope.GetSubData();
-                });
-                $scope.keepUserData(userData);
-                setTimeout(function () {
+            var userOBJ = localStorage.getItem("UID");
+            var userData = null;
+            if (userOBJ) {
+                userData = JSON.parse(userOBJ);
+                if ($scope.validateSubscription(userData.AppUserId) == "False") {
+                    $.notify("Please Subscribe to play our games.", 'error');
+                    localStorage.removeItem("selectedGame");
+                    if (_mtnNumber != "") {
+                        if (userData.szUsername != _mtnNumber) {/*Check if user loggedin is same as phone number detected*/
+                            $scope.AutoRegisterNewUser();
+                        }
+                        $scope.$apply(function () {
+                            $scope.GetMTNSubData();
+                        });
+
+                    } else {
+                        $scope.$apply(function () {
+                            $scope.GetSubData();
+                        });
+                        /*Keep User ID in Session*/
+                        $scope.keepUserData(userData);
+                    }
                     $('#pcSubscriptionModal').modal('show');
-                }, 5000);
+                } else {
+                    var selGameURL = $(this).attr("href");
+                    var selGameLongDesc = $(this).find('div.longDescription').html();
+                    var selGameCat = $(this).find('p.game-category').text();
+                    var selGameTitle = $(this).find('h3.game-title').text();
+                    var selectedGame = {
+                        "URL": selGameURL,
+                        "Category": selGameCat,
+                        "Title": selGameTitle,
+                        "LongDescription": selGameLongDesc
+                    };
+                    localStorage.setItem("selectedGame", JSON.stringify(selectedGame));
+                    e.preventDefault();
+                    e.preventDefault();
+                    window.location = selGameURL;
+                }
             } else {
-                var selGameURL = $(this).attr("href");
-                var selGameLongDesc = $(this).find('div.longDescription').html();
-                var selGameCat = $(this).find('p.game-category').text();
-                var selGameTitle = $(this).find('h3.game-title').text();
-                var selectedGame = {
-                    "URL": selGameURL,
-                    "Category": selGameCat,
-                    "Title": selGameTitle,
-                    "LongDescription": selGameLongDesc
-                };
-                localStorage.setItem("selectedGame", JSON.stringify(selectedGame));
-                e.preventDefault();
-                e.preventDefault();
-                //console.log(retVal + "?URL=" + selGameURL);
-                //window.location = retVal + "?URL=" + selGameURL;
-                window.location = selGameURL;
+                if (_mtnNumber != "") {
+                    $scope.AutoRegisterNewUser();
+                } else {
+                    localStorage.removeItem("selectedGame");
+                    /*Clear Username Display*/
+                    ResetUsernameToAccount();
+                    $('#loginModal').modal('show');
+                }
             }
         }
     });
 
-    //Function to handle creation of new users
+    /*Function to handle creation of new users*/
     $scope.RegisterNewUser = function () {
         if (_IsMobile) {
             if (_mtnNumber != null) {
@@ -253,41 +495,41 @@
                 $scope.registerObj.isMobile = true;
             }
         }
-            var szUsername = $scope.registerObj.szUsername;
-            var containsAlphabet = /[a-z]/i.test(szUsername);
-            if (containsAlphabet) {
-                if (!validateEmail(szUsername)) {
-                    $.notify("Please enter a valid email address.", 'error');
-                    return;
-                }
+        var szUsername = $scope.registerObj.szUsername;
+        var containsAlphabet = /[a-z]/i.test(szUsername);
+        if (containsAlphabet) {
+            if (!validateEmail(szUsername)) {
+                $.notify("Please enter a valid email address.", 'error');
+                return;
             }
+        }
 
-            if ($scope.registerObj.szUsername == undefined || $scope.registerObj.szUsername.trim() == "") {
-                $.notify("Please enter your username.", 'error');
-                $("#txtRegUsername").focus();
-                return;
-            }
-            if ($scope.registerObj.szPassword == undefined || $scope.registerObj.szPassword.trim() == "") {
-                $.notify("Please enter your password.", 'error');
-                $("#txtRegPassword").focus();
-                return;
-            }
-            if ($scope.registerObj.szConfirmPassword == undefined || $scope.registerObj.szConfirmPassword.trim() == "") {
-                $.notify("Please confirm your password.", 'error');
-                $("#txtRegPasswordConfirm").focus();
-                return;
-            }
-            if ($scope.registerObj.szConfirmPassword.trim() != $scope.registerObj.szPassword.trim()) {
-                $.notify("Passwords mismatch. Please confirm your password again.", 'error');
-                $("#txtRegPasswordConfirm").focus();
-                return;
-            }
+        if ($scope.registerObj.szUsername == undefined || $scope.registerObj.szUsername.trim() == "") {
+            $.notify("Please enter your username.", 'error');
+            $("#txtRegUsername").focus();
+            return;
+        }
+        if ($scope.registerObj.szPassword == undefined || $scope.registerObj.szPassword.trim() == "") {
+            $.notify("Please enter your password.", 'error');
+            $("#txtRegPassword").focus();
+            return;
+        }
+        if ($scope.registerObj.szConfirmPassword == undefined || $scope.registerObj.szConfirmPassword.trim() == "") {
+            $.notify("Please confirm your password.", 'error');
+            $("#txtRegPasswordConfirm").focus();
+            return;
+        }
+        if ($scope.registerObj.szConfirmPassword.trim() != $scope.registerObj.szPassword.trim()) {
+            $.notify("Passwords mismatch. Please confirm your password again.", 'error');
+            $("#txtRegPasswordConfirm").focus();
+            return;
+        }
 
-            //show loader
-            $("#regLoda").css("display", "block");
-            //Disable COntrols
-            $(".disabledCtrl").attr("disabled", "disabled");
-        
+        /*show loader*/
+        $("#regLoda").css("display", "block");
+        /*Disable COntrols*/
+        $(".disabledCtrl").attr("disabled", "disabled");
+
         $scope.registerObj.AppUserId = 0;
         $scope.registerObj.szImgURL = "";
         $scope.registerObj.szPasswordSalt = "";
@@ -313,11 +555,11 @@
                     } else {
                         $.notify(data.Message, 'error');
                     }
-                    //Hide Loading Gif
+                    /*Hide Loading Gif*/
                     $("#regLoda").css("display", "none");
                     $(".disabledCtrl").removeAttr("disabled");
                 }, error: function (data) {
-                    //Hide Loading Gif
+                    /*Hide Loading Gif*/
                     $("#regLoda").css("display", "none");
                     $(".disabledCtrl").removeAttr("disabled");
                 }
@@ -325,7 +567,7 @@
         }, 1000);
     };
 
-    //Function to handle Reset of user's password
+    /*Function to handle Reset of user's password*/
     $scope.ResetUserPW = function () {
         var szUsername = $scope.forgotpwObj.szUsername;
         var containsAlphabet = /[a-z]/i.test(szUsername);
@@ -342,9 +584,9 @@
             return;
         }
 
-        //show loader
+        /*show loader*/
         $("#forgotLoda").css("display", "block");
-        //Disable COntrols
+        /*Disable COntrols*/
         $(".disabledCtrl").attr("disabled", "disabled");
 
         $scope.forgotpwObj.AppUserId = 0;
@@ -369,15 +611,15 @@
                             autoHideDelay: 10000
                         });
                         $('#loginModal').modal('hide');
-                        $scope.LogUserOut(11000);
+                        $scope.LogUserOut($scope.forgotpwObj.szUsername, 5000);
                     } else {
                         $.notify(data.Message, 'error');
                     }
-                    //Hide Loading Gif
+                    /*Hide Loading Gif*/
                     $("#forgotLoda").css("display", "none");
                     $(".disabledCtrl").removeAttr("disabled");
                 }, error: function (data) {
-                    //Hide Loading Gif
+                    /*Hide Loading Gif*/
                     $("#forgotLoda").css("display", "none");
                     $(".disabledCtrl").removeAttr("disabled");
                 }
@@ -385,7 +627,7 @@
         }, 1000);
     };
 
-    //Function to handle Change of user's password
+    /*Function to handle Change of user's password*/
     $scope.ChangeUserPW = function () {
         var szUsername = $scope.changepwObj.szUsername;
         var containsAlphabet = /[a-z]/i.test(szUsername);
@@ -417,9 +659,9 @@
             return;
         }
 
-        //show loader
+        /*show loader*/
         $("#ChangeLoda").css("display", "block");
-        //Disable COntrols
+        /*Disable COntrols*/
         $(".disabledChangeCtrl").attr("disabled", "disabled");
 
         $scope.changepwObj.AppUserId = 0;
@@ -438,22 +680,22 @@
                 async: false,
                 success: function (data) {
                     if (data.Success) {
-                        $scope.forgotpwObj = {};
                         $.notify(data.Message, 'success', {
                             autoHide: true,
                             autoHideDelay: 8000
                         });
                         $('#passwordChangeModal').modal('hide');
                         $(".disabledChangeCtrl").removeAttr("disabled");
-                        $scope.LogUserOut(9000);
+                        $scope.LogUserOut($scope.changepwObj.szUsername, 5000);
+                        $scope.changepwObj = {};
                     } else {
                         $.notify(data.Message, 'error');
                     }
-                    //Hide Loading Gif
+                    /*Hide Loading Gif*/
                     $("#ChangeLoda").css("display", "none");
                     $(".disabledChangeCtrl").removeAttr("disabled");
                 }, error: function (data) {
-                    //Hide Loading Gif
+                    /*Hide Loading Gif*/
                     $("#ChangeLoda").css("display", "none");
                     $(".disabledChangeCtrl").removeAttr("disabled");
                 }
@@ -461,58 +703,7 @@
         }, 1000);
     };
 
-    //Login Handler
-    $scope.userLogin = function () {
-        if ($scope.loginObj.szUsername == undefined || $scope.loginObj.szUsername.trim() == "") {
-            $.notify("Please enter your username.", 'error');
-            $("#txtUsername").focus();
-            return;
-        }
-        if ($scope.loginObj.szPassword == undefined || $scope.loginObj.szPassword.trim() == "") {
-            $.notify("Please enter your password.", 'error');
-            $("#txtPassword").focus();
-            return;
-        }
-
-        //show loader
-        $("#logLoda").css("display", "block");
-        //Disable COntrols
-        $(".disabledCtrl").attr("disabled", "disabled");
-
-        setTimeout(function () {
-            $.get(apiURL + "/api/AppUser/AuthenticateUser?szUsername=" + $scope.loginObj.szUsername + "&szPassword=" + $scope.loginObj.szPassword)
-                .success(function (data) {
-                    if (!data.Success) {
-                        $.notify(data.Message, 'error');
-                        //Hide Loading Gif
-                        $("#logLoda").css("display", "none");
-                        //Enable Controls
-                        $(".disabledCtrl").removeAttr("disabled");
-                        $scope.loginObj.szPassword = "";
-                        $("#txtPassword").val("");
-                        $("#txtUsername").focus();
-                    } else {
-                        if (data.Data.iChangePW) {
-                            $('#loginModal').modal('hide');
-                            $('#passwordChangeModal').modal('show');
-                        } else {
-                            localStorage.setItem("UID", JSON.stringify(data.Data));
-                            window.location = "/Home";
-                            $('#loginModal').modal('hide');
-                        }
-                    }
-                }).error(function (data) {
-                    $.notify(data.statusText, 'error');
-
-                    //Hide Loading Gif
-                    $("#logLoda").css("display", "none");
-                    //Enable COntrols
-                    $(".disabledCtrl").removeAttr("disabled");
-                });
-        }, 1000);
-    };
-
-    //Get Application Roles Data for Dropdown
+    /*Get Application Roles Data for Dropdown*/
     $scope.StartValidUserSession = function (LoginAppUserVM) {
         $.post("/Account/StartValidUserSession", {
             loginAppUserVM: LoginAppUserVM
@@ -522,66 +713,121 @@
             }
         }).error(function (data) {
             $.notify(data.statusText, 'error');
-            //Hide Loading Gif
+            /*Hide Loading Gif*/
             $("#loadingGif").css("display", "none");
-            //Enable COntrols
+            /*Enable COntrols*/
             $(".disabledCtrl").removeAttr("disabled");
         });
     };
 
-    //Hold User Data for Subscription Purpose
-    $scope.keepUserData = function (LoginAppUserVM) {
-        var userOBJ = localStorage.getItem("UID");
-        var UID = null;
-        if (userOBJ) {
-            UID = JSON.parse(localStorage.getItem("UID"));
-            $scope.redirectURL = flutterWaveRedirectURL + UID.AppUserId;
-
-            $.post("/Account/StartValidUserSession", {
-                loginAppUserVM: UID
-            }).success(function (data) {
-
-            }).error(function (data) {
-
-            });
-        }
-    };
-
     $scope.subscriptionBtnClickEventHandler = function () {
-        var userData = JSON.parse(localStorage.getItem("UID"));
-        if (userData) {
-            $scope.GetSubData();
-            $scope.keepUserData(userData);
+        var userOBJ = localStorage.getItem("UID");
+        var userData = null;
+        if (userOBJ) {
+            userData = JSON.parse(userOBJ);
+            if (_mtnNumber != "") {
+                if (userData.szUsername != _mtnNumber) {/*Check if user loggedin is same as phone number detected*/
+                    $scope.AutoRegisterNewUser();
+                }
+                $scope.GetMTNSubData();
+            } else {
+                $scope.GetSubData();
+                $scope.keepUserData(userData);
+            }
+        } else {
+            if (_mtnNumber != "") {
+                $scope.AutoRegisterNewUser();
+            } else {
+                localStorage.removeItem("selectedGame");
+                /*Clear Username Display*/
+                ResetUsernameToAccount();
+                $('#loginModal').modal('show');
+            }
         }
-
-        //$scope.$apply(function () {
-        //    $scope.GetSubData();
-        //});
-        //$scope.keepUserData();
     };
 
     $scope.USSDSubscription = function () {
-        $.post("/Home/MTNUSSDSubscription", {
-            category: svcName, headerId: _HeaderId
-        }).success(function (data) {
-            var retVal = JSON.parse(data);
-            if (!retVal.Success) {
-                $.notify(retVal.Message, 'error');
-            } else {
-                $.notify(retVal.Message, 'success');
-            }
-        }).error(function (data) {
+        if ($scope.payType == undefined) {
+            $.notify("Please select a payment type.", 'error');
+            $("#payTypeSel").focus();
+            return;
+        }
+        if ($("#txtPhone").val().trim() == "") {
+            $.notify("Please enter your phone no.", 'error');
+            $("#txtPhone").focus();
+            return;
+        }
+        if ($scope.HeaderId == undefined) {
+            $.notify("Please select a subscription package.", 'error');
+            $("#packageSel").focus();
+            return;
+        }
+        if ($scope.HeaderId == "") {
+            $.notify("Please select a subscription package.", 'error');
+            $("#packageSel").focus();
+            return;
+        }
+        /*show loader*/
+        $("#subscribeLoda").css("display", "block");
+        /*Disable COntrols*/
+        $(".disabledCtrl").attr("disabled", "disabled");
+        setTimeout(function () {
+            $.post("/Home/MTNUSSDSubscription", {
+                MSISDN: $("#txtPhone").val(), IsMtn: true,
+                Shortcode: _SERVICE_SHORTCODE, headerId: $scope.HeaderId
+            }).success(function (data) {
+                var retVal = JSON.parse(data);
+                if (!retVal.Success) {
+                    $.notify(retVal.Message, 'error');
+                } else {
+                    $.notify(retVal.Message, 'success');
+                    $('#pcSubscriptionModal').modal('hide');
+                }
+                /*Hide Loading Gif*/
+                $("#subscribeLoda").css("display", "none");
+                /*Enable COntrols*/
+                $(".disabledCtrl").removeAttr("disabled");
+            }).error(function (data) {
+                $.notify(data, 'error');
+                /*Hide Loading Gif*/
+                $("#subscribeLoda").css("display", "none");
+                /*Enable COntrols*/
+                $(".disabledCtrl").removeAttr("disabled");
+            });
+        }, 1000);
+    };
 
+    $scope.UnSubscribe = function () {
+        if (_IsMobile == "True") {
+            if (_mtnNumber != "") {/*Number is mtn*/
+                alert("Please Text 'Stop Game' to " + _SERVICE_SHORTCODE + " to Unsubscribe (MTN Only).");
+                return;
+            }
+        }
+
+        var data = JSON.stringify(false);
+
+        var xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+
+        xhr.addEventListener("readystatechange", function () {
+            if (this.readyState === this.DONE) {
+                console.log(this.responseText);
+            }
         });
-    }
-    
+
+        xhr.open("POST", "http://flw-pms-dev.eu-west-1.elasticbeanstalk.com/merchant/subscriptions/stop");
+        xhr.setRequestHeader("content-type", "application/json");
+
+        xhr.send(data);
+    };
 
     $(document).on("click", ".subType", function (event) {
         var amntSelected = ($(this).attr("id") == "subType1") ? 200 : ($(this).attr("id") == "subType2") ? 100 : 20;
         $(".flwpug_getpaid").attr("data-amount", amntSelected);
     });
 
-    //Method to Format Date to format (DD/MM/YYYY)
+    /*Method to Format Date to format (DD/MM/YYYY)*/
     $scope.formatDate = function (dDate) {
         if (dDate != "" && dDate != null) {
             var dDate = new Date(dDate),
@@ -594,46 +840,29 @@
         } else {
             return "";
         }
-    }
+    };
+
+    /*Check for Date Greater than today*/
+    $scope.dateIsEalierThanToday = function (dDate) {
+        var date = dDate.substring(0, 2);
+        var month = dDate.substring(3, 5);
+        var year = dDate.substring(6, 10);
+        var convDate = new Date(year, month - 1, date);
+        var todaysDate = new Date();
+        return convDate < todaysDate;
+    };
 });
 
 $("a.flwpug_getpaid").find("button").addClass("btn btn-primary");
 
-//Allow Only Numbers into Tel Textboxes
-$(document).on("keypress keyup blur", ".allownumericwithoutdecimal", function (event) {
-    //If entry contains alphabet, validate email address format
-    //var userName = $(this).val();
-    //if (!/[a-z]/i.test(userName)) {
-    //     $(this).val(userName.replace(/[^\d].+/, ""));
-    //    if ((event.which < 48 || event.which > 57)) {
-    //        event.preventDefault();
-    //    }
-    //}
-});
+/*Allow Only Numbers into Tel Textboxes*/
+$(document).on("keypress keyup blur", ".allownumericwithoutdecimal", function (event) {});
 
-//Function to Validate Email address format
+/*Function to Validate Email address format*/
 function validateEmail(Email) {
     var pattern = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
     return $.trim(Email).match(pattern) ? true : false;
 }
-
-function addHeader() {
-    //Set HTTP Header
-    var userOBJ = localStorage.getItem("UID");
-    var appUserId = 0;
-    if (userOBJ) {
-        var userData = JSON.parse(localStorage.getItem("UID"));
-        appUserId = userData.AppUserId;
-    } else {
-        return null;
-    }
-    $.ajaxSetup({
-        headers: {
-            "appUserId": appUserId
-        }
-    });
-}
-
 function getRecordStatus(status) {
-    return (status == true) ? "<span class='btn-custom btn-success btn-xs'>True</span>" : (status == false) ? "<span class='btn-custom btn-warning btn-xs'>False</span>" : "";
+    return (status == 1) ? "<span class='btn-custom btn-success btn-xs'>True</span>" : (status == 0) ? "<span class='btn-custom btn-warning btn-xs'>False</span>" : "";
 }

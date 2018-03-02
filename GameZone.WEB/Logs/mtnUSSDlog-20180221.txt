@@ -1,0 +1,103 @@
+2/21/2018 9:54:27 AM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400W
+2/21/2018 9:54:59 AM ==> "Your subscription request has been sent"
+2/21/2018 9:55:46 AM ==> Subscription Successful. Data:  "Your subscription request has been sent"
+2/21/2018 9:56:07 AM ==> {"Message":"Your subscription was successful.","LogData":"MSISDN: 2348147911707, Header ID: 63"}
+2/21/2018 10:04:46 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 10:06:34 AM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400W
+2/21/2018 10:06:49 AM ==> "Your subscription request has been sent"
+2/21/2018 10:06:56 AM ==> RequestId: 12 - Description: "Your subscription request has been sent"
+2/21/2018 10:09:08 AM ==> Cannot convert type 'GameData.ServiceResponses' to 'GameData.ServiceHeaders'
+2/21/2018 10:10:33 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 10:10:47 AM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400W
+2/21/2018 10:10:48 AM ==> "Your subscription request has been sent"
+2/21/2018 10:10:48 AM ==> RequestId: 13 - Description: "Your subscription request has been sent"
+2/21/2018 10:10:48 AM ==> {"Message":null,"LogData":{"ID":13,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":8,"RequestId":13,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-02-21T10:10:48.1903177+01:00"}}}
+2/21/2018 10:14:25 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 10:17:33 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 10:19:56 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 10:20:24 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 10:25:52 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 10:35:40 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 10:36:43 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 10:37:31 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 10:38:25 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 10:38:57 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 10:40:03 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 10:40:31 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 10:41:47 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 10:44:08 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 10:48:25 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 10:49:08 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 10:49:22 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 10:50:09 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 10:50:49 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 10:52:58 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 10:53:46 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 10:54:12 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 10:54:46 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 10:54:50 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 10:55:07 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 10:55:28 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 10:56:19 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 10:58:42 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 10:59:21 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 11:00:40 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 11:01:46 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 11:02:02 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 11:05:02 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 11:06:00 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 11:06:30 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 11:06:43 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 11:08:00 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 11:08:33 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 11:09:03 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 11:09:15 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 11:10:53 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 11:11:22 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 11:11:50 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 11:11:58 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 11:12:28 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 11:12:35 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 11:12:54 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 11:12:59 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 11:13:24 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 11:13:31 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 11:13:55 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 11:14:10 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 11:14:27 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 11:15:02 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 11:16:58 AM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400W
+2/21/2018 11:16:59 AM ==> "Your subscription request has been sent"
+2/21/2018 11:16:59 AM ==> RequestId: 14 - Description: "Your subscription request has been sent"
+2/21/2018 11:16:59 AM ==> {"Message":null,"LogData":{"ID":14,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":9,"RequestId":14,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-02-21T11:16:59.352715+01:00"}}}
+2/21/2018 11:25:26 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 11:26:00 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 12:36:26 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 12:36:38 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 12:37:48 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 12:40:06 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 12:43:57 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 12:45:40 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 1:06:28 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 1:07:08 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 1:08:24 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 1:13:26 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 1:15:10 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 1:17:33 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 1:17:46 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 1:17:54 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 1:21:13 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 1:21:55 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 1:23:40 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348011111111/400W
+2/21/2018 1:23:43 PM ==> "Your subscription request has been sent"
+2/21/2018 1:23:43 PM ==> RequestId: 15 - Description: "Your subscription request has been sent"
+2/21/2018 1:23:48 PM ==> {"Message":null,"LogData":{"ID":15,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":10,"RequestId":15,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-02-21T13:23:43.2503458+01:00"}}}
+2/21/2018 1:25:19 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 1:25:32 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348011111111/400W
+2/21/2018 1:25:34 PM ==> "Your subscription request has been sent"
+2/21/2018 1:25:34 PM ==> RequestId: 16 - Description: "Your subscription request has been sent"
+2/21/2018 1:25:34 PM ==> {"Message":null,"LogData":{"ID":16,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":11,"RequestId":16,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-02-21T13:25:34.2789097+01:00"}}}
+2/21/2018 1:26:23 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 1:26:30 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 1:27:12 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+2/21/2018 1:39:51 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}

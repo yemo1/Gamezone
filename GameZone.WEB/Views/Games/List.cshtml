@@ -2,6 +2,17 @@
     ViewBag.Title = "GameList";
     Layout = "~/Views/Shared/_Layout.cshtml";
     string rls_vsn = System.Configuration.ConfigurationManager.AppSettings["RELEASE_VERSION"].ToString();
+    bool IsMobile = (bool)ViewBag.IsMobile;
+    string mtnNumber = null;
+    if (IsMobile)
+    {
+        mtnNumber = (string)ViewBag.mtnNumber;
+    }
+    string redirectURL = System.Configuration.ConfigurationManager.AppSettings["FLTAWAVE_REDIRECT_URL"].ToString();
+    var subscriptionSuccessful = ViewBag.subscriptionSuccessful;
+    string SERVICE_SHORTCODE = System.Configuration.ConfigurationManager.AppSettings["SERVICE_SHORTCODE"].ToString();
+
+    string fltwvSubscription = ViewBag.fltwvSubscription;
 }
 
 @section style{
@@ -57,12 +68,148 @@
         </div>
     </div>
 </section>
+
+@* PC Subscription Modal *@
+<div class="modal fade" id="pcSubscriptionModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="modal-title text-center" id="exampleModalLabel">Subscribe to Play Our Games</h3>
+            </div>
+            <div class="modal-body">
+                <form class="fomr-horizontal">
+                    <div class="form-group row">
+                        <div class="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
+                            <table style="width:100%; border:none;">
+                                @if (IsMobile && mtnNumber != null)
+                                {
+                                    <tr>
+                                        <td colspan="2">
+                                            <span>Phone No</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <label>@mtnNumber</label>
+                                        </td>
+                                    </tr>
+                                }
+                                <tr>
+                                    <td>
+                                        <span>Begin Date</span>
+                                    </td>
+                                    <td>
+                                        <span>End Date</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label>{{subDetailOBJ.PeriodStart}}</label></td>
+                                    <td><label>{{subDetailOBJ.PeriodEnd}}</label></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span>Type</span>
+                                    </td>
+                                    <td>
+                                        <span>Active</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @if (IsMobile && mtnNumber != null)
+                                        {<label>{{subDetailOBJ.Period.split(' ')[1]}}</label>
+                                        }
+                                        else
+                                        {
+                                            <label>{{subDetailOBJ.Period}}</label>
+                                        }
+                                    </td>
+                                    <td id="txtIsActive"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    @*<div class="form-group row">*@
+                    @*<div class="col-sm-6 col-sm-offset-3  col-xs-6 col-xs-offset-3">*@
+                    @*<a class="flwpug_getpaid" data-PBFPubKey="FLWPUBK-421b6ed86111a9c686cff34b983cee73-X" data-txref="rave-checkout-1516785905" data-amount="" data-customer_email="user@example.com" data-currency="NGN" data-pay_button_text="Subscribe" data-country="NG" data-custom_title="Gamezone" data-custom_description="" data-redirect_url="http://www.gamezone.ng/Games/List" data-custom_logo="" data-payment_method="both" data-exclude_banks=""></a>*@
+                    @*<a class="btn btn-primary btn-block flwpug_getpaid" data-PBFPubKey="FLWPUBK-421b6ed86111a9c686cff34b983cee73-X" data-txref="rave-checkout-1516369113" data-amount="" data-customer_email="user@example.com" data-currency="NGN" data-pay_button_text="Subscribe" data-country="NG" data-custom_title="Gamezone" data-custom_description="" data-redirect_url="" data-custom_logo="" data-payment_method="card" data-exclude_banks=""></a>*@
+                    @*</div>*@
+                    @*</div>*@
+                    <div class="form-group row" ng-show="subDetailOBJ.IsActive == 0">
+                        <div class="col-sm-6 col-sm-offset-3  col-xs-6 col-xs-offset-3">
+                            <select id="payTypeSel" class="form-control" ng-model="payType">
+                                @if (mtnNumber == null)
+                                {
+                                    <option value="card">Pay with Card</option>
+                                }
+                                <option value="airtime">Pay with Airtime (MTN Only)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row" id="subscribeBtnDiv" ng-show="subDetailOBJ.IsActive == 0">
+                        <div id="ussd" class="col-sm-6 col-sm-offset-3  col-xs-6 col-xs-offset-3" ng-show="payType == 'airtime'">
+                            <div class="form-group row">
+                                <div class="col-sm-12 col-xs-12">
+                                    <input id="txtPhone" type="text" class="form-control" placeholder="Enter Phone No. (MTN Only)" ng-model="mtnMSISDN" aria-describedby="sizing-addon1">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-12 col-xs-12">
+                                    <select id="packageSel" class="form-control" ng-model="HeaderId" ng-options="c.HeaderId as c.Description.split('(')[1].slice(0, -1) for c in headerData">
+                                        <option selected="selected" value="">-- Select Package --</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 col-sm-offset-3  col-xs-6 col-xs-offset-3">
+                                    <img src="~/Content/images/loadingGif.gif?v=@rls_vsn" id="subscribeLoda" style="display: block; margin-left: auto; margin-right: auto;" />
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-sm-12 col-xs-12">
+                                    <button class="btn btn-primary btn-block disabledCtrl" ng-click="USSDSubscription()"> Subscribe</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-6 col-sm-offset-3  col-xs-6 col-xs-offset-3" ng-show="payType == 'card'">
+                                <span>Package:  </span><label>N50/Weekly</label>
+                            </div>
+                            <div id="ePayment" class="col-sm-6 col-sm-offset-3  col-xs-6 col-xs-offset-3" ng-show="payType == 'card'">
+                                <a class="btn btn-block flwpug_getpaid" data-PBFPubKey="FLWPUBK-421b6ed86111a9c686cff34b983cee73-X" data-txref="rave-checkout-1517414809" data-amount="50" data-customer_email="user@example.com" data-currency="NGN" data-pay_button_text="Subscribe" data-country="NG" data-custom_title="Gamezone" data-custom_description="" data-redirect_url="@redirectURL" data-custom_logo="" data-payment_method="card" data-exclude_banks=""></a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer" ng-show="subDetailOBJ.IsActive == 1">
+                <div class="form-group row">
+                    <div class="col-sm-6 col-sm-offset-3  col-xs-6 col-xs-offset-3">
+                        <button class="btn btn-primary btn-block disabledCtrl" ng-click="UnSubscribe()"> Unsubscribe</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section scripts{
     <script type="text/javascript">
         var _Title = "@ViewBag.Title";
+        var _IsMobile = "@IsMobile";
+        var _mtnNumber = "@mtnNumber";
+        var _RedirectURL = "@redirectURL";
+        var _subscriptionSuccessful = "@subscriptionSuccessful";
+        var _SERVICE_SHORTCODE = "@SERVICE_SHORTCODE";
+        var _fltwvSubscription = "@fltwvSubscription";
     </script>
-
+<script type="text/javascript" src="http://flw-pms-dev.eu-west-1.elasticbeanstalk.com/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
     <script src="~/Content/js/notify.min.js?v=@rls_vsn"></script>
-    <script src="~/Scripts/Games/List.js?v=@rls_vsn"></script>
+    @*<script src="~/Scripts/Games/List.js?v=@rls_vsn"></script>*@
+<script src="~/Scripts/Games/List.min.js?v=@rls_vsn"></script>
     <script src="~/Content/js/jquery.lazyload.min.js?v=@rls_vsn"></script>
 }

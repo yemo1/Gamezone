@@ -11,6 +11,7 @@ using System.Configuration;
 using System.Web.UI;
 using GameZone.TOOLS;
 using GameZone.VIEWMODEL;
+using System.Threading;
 
 namespace GameZone.Repositories
 {
@@ -126,6 +127,7 @@ namespace GameZone.Repositories
                     else
                     {
                         HttpContext.Current.Session["Param3"] = null;
+
                         HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ServiceUrlFill(serv, req));
                         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                         using (Stream stream = response.GetResponseStream())
@@ -135,9 +137,13 @@ namespace GameZone.Repositories
                             reply = responseString;
                         }
                     }
-                    
+
                     ServiceResponses rep = new ServiceResponses();
-                    LocalLogger.LogFileWrite(reply);
+                    new Thread(() =>
+                    {
+                        LocalLogger.LogFileWrite(reply);
+                    }).Start();
+
                     rep.Description = reply;
                     rep.RequestId = req.RequestId;
                     var statCode = string.Concat(reply.Take(50));
@@ -146,11 +152,17 @@ namespace GameZone.Repositories
 
                     _IServiceResponseRepository.SaveServiceResponse(rep);
 
+                    new Thread(() =>
+                    {
+                        LocalLogger.LogFileWrite($"RequestId: {rep.RequestId} - Description: {rep.Description}");
+                    }).Start();
+
                     return new ReturnMessage()
                     {
-                        Message = $"Subscription Successful.",
+                        ID = rep.RequestId,
+                        Message = rep.Description,
                         Success = true,
-                        Data = serv
+                        Data = rep
                     };
                 }
                 else
@@ -158,7 +170,7 @@ namespace GameZone.Repositories
                     return new ReturnMessage()
                     {
                         Message = "This service does not exist on this platform.",
-                        Success = true,
+                        Success = false,
                         Data = serv
                     };
                 }
@@ -167,8 +179,8 @@ namespace GameZone.Repositories
             {
                 return new ReturnMessage()
                 {
-                    Message = $"Subscription Successful.",
-                    Success = true,
+                    Message = "This service does not exist on this platform.",
+                    Success = false,
                     Data = serv
                 };
             }
@@ -195,7 +207,11 @@ namespace GameZone.Repositories
                     val += ServiceUrlFill(s.ServiceParams, s.ProductCode);
                     break;
             }
-            LocalLogger.LogFileWrite(val);
+            new Thread(() =>
+            {
+                LocalLogger.LogFileWrite(val);
+            }).Start();
+
             return val;
         }
         //?phone={0}&pID={1}
@@ -224,7 +240,7 @@ namespace GameZone.Repositories
         {
             return string.Format(_params, code);
         }
-        
+
         public enum ServiceUrlFiller
         {
             basic,
@@ -233,7 +249,7 @@ namespace GameZone.Repositories
             nil,
             lone
         }
-        
+
         public void Pop(string url)
         {
             var page = HttpContext.Current.CurrentHandler as Page;

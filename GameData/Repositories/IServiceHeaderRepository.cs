@@ -20,5 +20,6 @@ namespace GameZone.Repositories
         ServiceHeaders GetServiceHeader(string servicename, string productname);
 
         ServiceHeaders GetServiceHeader(string servicename, string productname, string productcode);
+        IList<ServiceHeaders> GetServiceHeaderByServiceName(string servicename);
     }
 }

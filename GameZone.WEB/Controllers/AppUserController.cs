@@ -68,6 +68,8 @@ namespace GameZone.WEB.Controllers
                 {
                     return new ReturnMessage
                     {
+                        ID = (bool)appUserVM.isMobile ? 101 : 0,//MTN Number indicator (IsMobile)
+                        Data = GetAuthenticateUser(appUserVM.szUsername,"password").Data,
                         Success = false,
                         Message = "Sorry, " + appUserVM.szUsername + " already exists. Please try a different UserID."
                     };
@@ -293,7 +295,7 @@ namespace GameZone.WEB.Controllers
         {
             try
             {
-                if (UID <1 || string.IsNullOrEmpty(svcName.Trim()))
+                if (UID < 1 || string.IsNullOrEmpty(svcName.Trim()))
                 {
                     return new ReturnMessage
                     {
@@ -310,6 +312,50 @@ namespace GameZone.WEB.Controllers
                     return new ReturnMessage
                     {
                         ID = retVal.AppUserId,
+                        Success = true,
+                        Data = retVal
+                    };
+                }
+                else
+                {
+                    return new ReturnMessage
+                    {
+                        Success = false,
+                        Message = "Record Not Found"
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                return new ReturnMessage
+                {
+                    Success = false,
+                    Message = ex.Message
+                };
+            }
+        }
+
+        [ResponseType(typeof(ReturnMessage)), Route("api/AppUser/MTNSubscriptionDetails")]
+        public ReturnMessage GetMTNSubscriptionDetails(string MSISDN, string Shortcode)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(MSISDN.Trim()) || string.IsNullOrEmpty(Shortcode.Trim()))
+                {
+                    return new ReturnMessage
+                    {
+                        ID = 0,
+                        Success = false,
+                        Message = "Please enter valid entries."
+                    };
+                }
+
+                var retVal = _IAppUserRepository.GetMTNUserSubscriptionDetails(MSISDN.Trim(), Shortcode.Trim());
+                //Successful
+                if (retVal != null)
+                {
+                    return new ReturnMessage
+                    {
                         Success = true,
                         Data = retVal
                     };

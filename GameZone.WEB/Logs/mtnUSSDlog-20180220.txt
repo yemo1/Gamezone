@@ -1,0 +1,25 @@
+2/20/2018 6:45:03 PM ==> http://www.mobilerush.com.ng/FMWap/Subs//400W
+2/20/2018 6:45:10 PM ==> The remote server returned an error: (404) Not Found.
+2/20/2018 6:47:32 PM ==> Object reference not set to an instance of an object.
+2/20/2018 6:48:41 PM ==> http://www.mobilerush.com.ng/FMWap/Subs//400W
+2/20/2018 6:48:42 PM ==> The remote server returned an error: (404) Not Found.
+2/20/2018 6:49:54 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400W
+2/20/2018 6:49:57 PM ==> "Your subscription request has been sent"
+2/20/2018 6:49:58 PM ==> Subscription Successful. Data:  "Your subscription request has been sent"
+2/20/2018 6:50:25 PM ==> {"Message":"Your subscription was successful.","LogData":"MSISDN: 2348147911707, Header ID: 63"}
+2/20/2018 6:52:36 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400W
+2/20/2018 6:52:37 PM ==> "Your subscription request has been sent"
+2/20/2018 6:52:37 PM ==> Subscription Successful. Data:  "Your subscription request has been sent"
+2/20/2018 6:52:37 PM ==> {"Message":"Your subscription was successful.","LogData":"MSISDN: 2348147911707, Header ID: 63"}
+2/20/2018 7:03:37 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400W
+2/20/2018 7:03:37 PM ==> "Your subscription request has been sent"
+2/20/2018 7:03:38 PM ==> Subscription Successful. Data:  "Your subscription request has been sent"
+2/20/2018 7:04:08 PM ==> {"Message":"Your subscription was successful.","LogData":"MSISDN: 2348147911707, Header ID: 63"}
+2/20/2018 7:07:48 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400W
+2/20/2018 7:08:56 PM ==> "Your subscription request has been sent"
+2/20/2018 7:09:11 PM ==> Subscription Successful. Data:  "Your subscription request has been sent"
+2/20/2018 7:09:11 PM ==> {"Message":"Your subscription was successful.","LogData":"MSISDN: 2348147911707, Header ID: 63"}
+2/20/2018 7:12:42 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400W
+2/20/2018 7:12:43 PM ==> "Your subscription request has been sent"
+2/20/2018 7:12:43 PM ==> Subscription Successful. Data:  "Your subscription request has been sent"
+2/20/2018 7:12:43 PM ==> {"Message":"Your subscription was successful.","LogData":"MSISDN: 2348147911707, Header ID: 63"}

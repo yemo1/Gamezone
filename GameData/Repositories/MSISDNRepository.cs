@@ -1,10 +1,4 @@
-﻿using System;
-using System.Linq;
-using GameData;
-using GameZone.Entities;
-using GameZone.VIEWMODEL;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
+﻿using GameZone.VIEWMODEL;
 using System.Collections.Generic;
 
 namespace GameZone.Repositories

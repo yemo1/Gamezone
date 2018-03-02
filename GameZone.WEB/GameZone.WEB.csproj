@@ -121,6 +121,9 @@
       <HintPath>..\packages\Microsoft.ReportViewer.2015.12.0.2.2403\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MinifyContent">
+      <HintPath>..\..\..\..\Desktop\MinifyContent\bin\Release\MinifyContent.dll</HintPath>
+    </Reference>
     <Reference Include="StructureMap, Version=4.6.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\StructureMap.4.6.1\lib\net45\StructureMap.dll</HintPath>
       <Private>True</Private>
@@ -396,7 +399,9 @@
     <Content Include="Content\js\magnific-popup.min.js" />
     <Content Include="Content\js\notify.min.js" />
     <Content Include="Content\js\scrolla.jquery.min.js" />
+    <Content Include="Content\js\site.min.js" />
     <Content Include="Content\js\site.js" />
+    <Content Include="Content\js\smooth-scroll.min.js" />
     <Content Include="Content\js\smooth-scroll.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -436,8 +441,11 @@
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\flwpbf-inline.js" />
     <Content Include="Scripts\Games\GamePlayFull.js" />
+    <Content Include="Scripts\Games\List.min.js" />
     <Content Include="Scripts\Games\List.js" />
     <Content Include="Scripts\Games\GamePlay.js" />
+    <Content Include="Scripts\Home\Index.min.js" />
+    <Content Include="Scripts\layout.min.js" />
     <Content Include="Scripts\layout.js" />
     <Content Include="Scripts\Home\Index.js" />
     <Content Include="Scripts\Games\Index.js" />

@@ -131,7 +131,11 @@
         </Function>
         <Function Name="ConfirmAppUserSubscription" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="AppUserId" Type="bigint" Mode="In" />
+          <Parameter Name="MSISDN" Type="varchar" Mode="In" />
           <Parameter Name="ServiceName" Type="varchar" Mode="In" />
+          <Parameter Name="Shortcode" Type="varchar" Mode="In" />
+          <Parameter Name="CCode" Type="varchar" Mode="In" />
+          <Parameter Name="IsMtn" Type="bit" Mode="In" />
         </Function>
         <Function Name="GetAppUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="AppUserId" Type="bigint" Mode="In" />
@@ -143,6 +147,10 @@
         </Function>
         <Function Name="GetIDSeriesNextValue" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Description" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetMTNUserSubscriptionDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MSISDN" Type="varchar" Mode="In" />
+          <Parameter Name="Shortcode" Type="varchar" Mode="In" />
         </Function>
         <Function Name="LoginAppUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="szUsername" Type="varchar" Mode="In" />
@@ -218,10 +226,6 @@
             <Parameter Name="isLogin" Mode="In" Type="Boolean" />
             <Parameter Name="LoginToken" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="ConfirmAppUserSubscription" ReturnType="Collection(NGSubscriptionsModel.ConfirmAppUserSubscription_Result)">
-            <Parameter Name="AppUserId" Mode="In" Type="Int64" />
-            <Parameter Name="ServiceName" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="GetAppUserSubscriptionDetails" ReturnType="Collection(NGSubscriptionsModel.GetAppUserSubscriptionDetails_Result)">
             <Parameter Name="AppUserId" Mode="In" Type="Int64" />
             <Parameter Name="ServiceName" Mode="In" Type="String" />
@@ -229,6 +233,18 @@
           <EntitySet Name="ServiceHeaders" EntityType="NGSubscriptionsModel.ServiceHeaders" />
           <EntitySet Name="ServiceRequests" EntityType="NGSubscriptionsModel.ServiceRequests" />
           <EntitySet Name="ServiceResponses" EntityType="NGSubscriptionsModel.ServiceResponses" />
+          <FunctionImport Name="GetMTNUserSubscriptionDetails" ReturnType="Collection(NGSubscriptionsModel.GetMTNUserSubscriptionDetails_Result)">
+            <Parameter Name="MSISDN" Mode="In" Type="String" />
+            <Parameter Name="Shortcode" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ConfirmAppUserSubscription" ReturnType="Collection(NGSubscriptionsModel.ConfirmAppUserSubscription_Result)">
+            <Parameter Name="AppUserId" Mode="In" Type="Int64" />
+            <Parameter Name="MSISDN" Mode="In" Type="String" />
+            <Parameter Name="ServiceName" Mode="In" Type="String" />
+            <Parameter Name="Shortcode" Mode="In" Type="String" />
+            <Parameter Name="CCode" Mode="In" Type="String" />
+            <Parameter Name="IsMtn" Mode="In" Type="Boolean" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Game">
           <Key>
@@ -321,11 +337,6 @@
           <Property Type="String" Name="id" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="message" Nullable="false" />
         </ComplexType>
-        <ComplexType Name="ConfirmAppUserSubscription_Result">
-          <Property Type="Boolean" Name="isSuccess" Nullable="false" />
-          <Property Type="String" Name="id" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="message" Nullable="false" />
-        </ComplexType>
         <ComplexType Name="GetAppUserSubscriptionDetails_Result">
           <Property Type="Int64" Name="AppUserId" Nullable="false" />
           <Property Type="String" Name="ServiceName" Nullable="false" MaxLength="100" />
@@ -383,6 +394,17 @@
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Timestamped" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
+        <ComplexType Name="GetMTNUserSubscriptionDetails_Result">
+          <Property Type="String" Name="ServiceName" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="Sub" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="Exp" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="Status" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ConfirmAppUserSubscription_Result">
+          <Property Type="Boolean" Name="isSuccess" Nullable="false" />
+          <Property Type="String" Name="id" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="message" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -515,15 +537,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="ConfirmAppUserSubscription" FunctionName="NGSubscriptionsModel.Store.ConfirmAppUserSubscription">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="NGSubscriptionsModel.ConfirmAppUserSubscription_Result">
-                <ScalarProperty Name="isSuccess" ColumnName="isSuccess" />
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="message" ColumnName="message" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetAppUserSubscriptionDetails" FunctionName="NGSubscriptionsModel.Store.GetAppUserSubscriptionDetails">
             <ResultMapping>
               <ComplexTypeMapping TypeName="NGSubscriptionsModel.GetAppUserSubscriptionDetails_Result">
@@ -588,6 +601,25 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetMTNUserSubscriptionDetails" FunctionName="NGSubscriptionsModel.Store.GetMTNUserSubscriptionDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NGSubscriptionsModel.GetMTNUserSubscriptionDetails_Result">
+                <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+                <ScalarProperty Name="Sub" ColumnName="Sub" />
+                <ScalarProperty Name="Exp" ColumnName="Exp" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ConfirmAppUserSubscription" FunctionName="NGSubscriptionsModel.Store.ConfirmAppUserSubscription">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NGSubscriptionsModel.ConfirmAppUserSubscription_Result">
+                <ScalarProperty Name="isSuccess" ColumnName="isSuccess" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="message" ColumnName="message" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
