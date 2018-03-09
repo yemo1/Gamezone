@@ -1,7 +1,4 @@
 ﻿gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
-    if (_fltwvSubscription != "") {
-        $.notify(_fltwvSubscription, 'info');
-    }
 
     /*Make Games Page Menu Active*/
     $("#menuUL li").removeClass("current");
@@ -23,7 +20,9 @@
     $scope.mtnMSISDN;
     $scope.headerData;
     $scope.HeaderId;
-    $scope.userName ="";
+    $scope.userName = "";
+    var getSubDataInterval = null;
+
     /*Login Handler*/
     $scope.userLogin = function () {
         if ($scope.loginObj.szUsername == undefined || $scope.loginObj.szUsername.trim() == "") {
@@ -74,7 +73,7 @@
                 });
         }, 1000);
     };
-    
+
     /*Function to handle creation of new users*/
     $scope.AutoRegisterNewUser = function () {
         if (_IsMobile) {
@@ -201,7 +200,7 @@
                     }
                 });
             },
-            error: function (data) {}
+            error: function (data) { }
         });
     };
     $scope.getGameData("family");
@@ -219,23 +218,29 @@
                 async: false,
                 success: function (data) {
                     if (data.Success) {
-                        $scope.subDetailOBJ = data.Data;
+                        /*Clear Timer Interval*/
+                        clearInterval(getSubDataInterval);
+                        $scope.$apply(function () {
+                            $scope.subDetailOBJ = data.Data;
 
-                        $scope.subDetailOBJ.PeriodStart = $scope.formatDate(data.Data.PeriodStart);
-                        $scope.subDetailOBJ.PeriodEnd = $scope.formatDate(data.Data.PeriodEnd);
-                        if ($scope.dateIsEalierThanToday($scope.subDetailOBJ.PeriodEnd)) {
-                            $scope.subDetailOBJ.IsActive = 0;
-                        } else {
-                            $scope.subDetailOBJ.IsActive = 1;
-                        }
-                        $("#txtIsActive").html(getRecordStatus($scope.subDetailOBJ.IsActive));
+                            $scope.subDetailOBJ.PeriodStart = $scope.formatDate(data.Data.PeriodStart);
+                            $scope.subDetailOBJ.PeriodEnd = $scope.formatDate(data.Data.PeriodEnd);
+                            if ($scope.dateIsEalierThanToday($scope.subDetailOBJ.PeriodEnd)) {
+                                $scope.subDetailOBJ.IsActive = 0;
+                            } else {
+                                $scope.subDetailOBJ.IsActive = 1;
+                            }
+                            $("#txtIsActive").html(getRecordStatus($scope.subDetailOBJ.IsActive));
+                        });
                     } else {
-                        $scope.subDetailOBJ.PeriodStart = "-";
-                        $scope.subDetailOBJ.PeriodEnd = "-";
-                        $scope.subDetailOBJ.Period = "-";
-                        $scope.subDetailOBJ.Amount = "-";
-                        $scope.subDetailOBJ.IsActive = 0;
-                        $("#txtIsActive").html(getRecordStatus($scope.subDetailOBJ.IsActive));
+                        $scope.$apply(function () {
+                            $scope.subDetailOBJ.PeriodStart = "-";
+                            $scope.subDetailOBJ.PeriodEnd = "-";
+                            $scope.subDetailOBJ.Period = "-";
+                            $scope.subDetailOBJ.Amount = "-";
+                            $scope.subDetailOBJ.IsActive = 0;
+                            $("#txtIsActive").html(getRecordStatus($scope.subDetailOBJ.IsActive));
+                        });
                     }
                 }, error: function (data) {
                 }
@@ -284,6 +289,7 @@
         $scope.headerData[index].selected = 'true';
         $scope.HeaderId = $scope.headerData[index].HeaderId;
     };
+
     /*MTN Subscriber*/
     $scope.GetMTNSubData = function () {
         var userOBJ = localStorage.getItem("UID");
@@ -296,23 +302,31 @@
                 async: false,
                 success: function (data) {
                     if (data.Success) {
-                        $scope.subDetailOBJ = data.Data;
-                        $scope.subDetailOBJ.Period = data.Data.ServiceName;
-                        $scope.subDetailOBJ.PeriodStart = $scope.formatDate(data.Data.Sub);
-                        $scope.subDetailOBJ.PeriodEnd = $scope.formatDate(data.Data.Exp);
-                        if ($scope.dateIsEalierThanToday($scope.subDetailOBJ.PeriodEnd)) {
-                            $scope.subDetailOBJ.IsActive = 0;
-                        } else {
-                            $scope.subDetailOBJ.IsActive = 1;
-                        }
-                        $("#txtIsActive").html(getRecordStatus($scope.subDetailOBJ.IsActive));
+                        /*Clear Timer Interval*/
+                        //clearInterval(getSubDataInterval);
+                        $scope.subDetailOBJ = {};
+                        //$scope.$apply(function () {
+                            $scope.subDetailOBJ = data.Data;
+                            $scope.subDetailOBJ.Period = data.Data.ServiceName;
+                            $scope.subDetailOBJ.PeriodStart = $scope.formatDate(data.Data.Sub);
+                            $scope.subDetailOBJ.PeriodEnd = $scope.formatDate(data.Data.Exp);
+                            if ($scope.dateIsEalierThanToday($scope.subDetailOBJ.PeriodEnd)) {
+                                $scope.subDetailOBJ.IsActive = 0;
+                            } else {
+                                $scope.subDetailOBJ.IsActive = 1;
+                            }
+                            //console.log($scope.subDetailOBJ.PeriodStart);
+                            $("#txtIsActive").html(getRecordStatus($scope.subDetailOBJ.IsActive));
+                        //});
                     } else {
-                        $scope.subDetailOBJ.PeriodStart = "-";
-                        $scope.subDetailOBJ.PeriodEnd = "-";
-                        $scope.subDetailOBJ.Period = "-";
-                        $scope.subDetailOBJ.Amount = "-";
-                        $scope.subDetailOBJ.IsActive = "0";
-                        $("#txtIsActive").html(getRecordStatus($scope.subDetailOBJ.IsActive));
+                        //$scope.$apply(function () {
+                            $scope.subDetailOBJ.PeriodStart = "-";
+                            $scope.subDetailOBJ.PeriodEnd = "-";
+                            $scope.subDetailOBJ.Period = "-";
+                            $scope.subDetailOBJ.Amount = "-";
+                            $scope.subDetailOBJ.IsActive = "0";
+                            $("#txtIsActive").html(getRecordStatus($scope.subDetailOBJ.IsActive));
+                        //});
                     }
                 }, error: function (data) {
                 }
@@ -344,7 +358,7 @@
         });
         return retVal;
     };
-    
+
     /*Get User Object and Request User Login*/
     var userOBJ = localStorage.getItem("UID");
     var UID = null;
@@ -368,6 +382,42 @@
         }
         localStorage.removeItem("selectedGame");
         $scope.subDetailOBJ.IsActive = 0;
+    }
+
+    /*Check for Subscription Data*/
+    if (_subGo == "True") {
+        var userOBJ = localStorage.getItem("UID");
+        var userData = null;
+        if (userOBJ) {
+            userData = JSON.parse(userOBJ);
+            if (_mtnNumber != "") {
+                if (userData.szUsername != _mtnNumber) {/*Check if user loggedin is same as phone number detected*/
+                    $scope.AutoRegisterNewUser();
+                }
+
+                setInterval(function () {
+                    $scope.$apply(function () {
+                        $scope.GetMTNSubData();
+                    });
+                }, 10000);
+            } else {
+                setInterval(function () {
+                    $scope.$apply(function () {
+                        $scope.GetSubData();
+                    });
+                }, 10000);
+                $scope.keepUserData(userData);
+            }
+        } else {
+            if (_mtnNumber != "") {
+                $scope.AutoRegisterNewUser();
+            } else {
+                localStorage.removeItem("selectedGame");
+                /*Clear Username Display*/
+                ResetUsernameToAccount();
+                $('#loginModal').modal('show');
+            }
+        }
     }
 
     /*Authentication Handler*/
@@ -860,7 +910,7 @@
 $("a.flwpug_getpaid").find("button").addClass("btn btn-primary");
 
 /*Allow Only Numbers into Tel Textboxes*/
-$(document).on("keypress keyup blur", ".allownumericwithoutdecimal", function (event) {});
+$(document).on("keypress keyup blur", ".allownumericwithoutdecimal", function (event) { });
 
 /*Function to Validate Email address format*/
 function validateEmail(Email) {

@@ -24,6 +24,7 @@ namespace GameZone.WEB.Controllers
         static TOOLS.WapHeaderUtil _WapHeaderUtil;
         public static readonly log4net.ILog _Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         string svcName = System.Configuration.ConfigurationManager.AppSettings["SERVICE_NAME"].ToString();
+        static string serviceShortcode = System.Configuration.ConfigurationManager.AppSettings["SERVICE_SHORTCODE"].ToString();
         public HomeController(IServiceHeaderRepository ServiceHeader, MSISDNRepository mSISDNRepository, HeaderController headerController, IServiceRequestRepository serviceRequestRepository, TOOLS.WapHeaderUtil wapHeaderUtil)
         {
             _IServiceHeaderRpository = ServiceHeader;
@@ -33,7 +34,7 @@ namespace GameZone.WEB.Controllers
             _NGSubscriptionsEntities = new GameData.NGSubscriptionsEntities();
             _WapHeaderUtil = wapHeaderUtil;
         }
-        public ActionResult Index(string retVal = "")
+        public ActionResult Index(string retVal = null)
         {
             #region WEB DOI Implementation
             //ReturnMessage returnMessage;
@@ -76,7 +77,7 @@ namespace GameZone.WEB.Controllers
             //    ViewBag.IsMTN = false;
             //}
             #endregion
-            
+
             //if (request.Browser.IsMobileDevice)
             if (Request.UserAgent.Contains("Mobi") == true)
             {
@@ -103,7 +104,7 @@ namespace GameZone.WEB.Controllers
                     //Not Mtn
                     //ViewBag.mtnNumber = nvc.GetValues("MSISDN");
                     var mtnNumber = headerData.Lines.FirstOrDefault().Phone;
-                    ViewBag.mtnNumber = (mtnNumber.Trim() == "XXX-XXXXXXXX")? null: mtnNumber.Trim();
+                    ViewBag.mtnNumber = (mtnNumber.Trim() == "XXX-XXXXXXXX") ? null : mtnNumber.Trim();
                     new Thread(() =>
                     {
                         LocalLogger.LogFileWrite(
@@ -130,7 +131,76 @@ namespace GameZone.WEB.Controllers
 
             //Just for test of Auto Registration
             //ViewBag.IsMobile = true;
-            ViewBag.mtnNumber = "2348168423222";
+            ViewBag.mtnNumber = "2348147911707";
+            return View();
+        }
+
+        public ActionResult Subscription(string msisdn, bool go, bool mobi, string heda, bool frmGame)
+        {
+            //AppUserController AUC = new AppUserController();
+            //AppUserVM AUVM = new AppUserVM();
+            //AUC.Post();
+
+            ViewBag.IsMobile = false;
+            ViewBag.mtnNumber = null;
+            bool isMobi = false;
+            ViewBag.Go = go;
+            ViewBag.frmGame = frmGame; 
+            if (Request.UserAgent.Contains("Mobi") == true)
+            {
+                isMobi = true;
+            }
+            if (go && !isMobi)
+            {
+                ViewBag.responseMSG = "Sorry. Unrecognised Mobile Device.";
+                ViewBag.IsMobile = isMobi;
+                ViewBag.mtnNumber = null;
+                return View();
+            }
+            isMobi = true;
+            if (go && string.IsNullOrEmpty(msisdn))
+            {
+                ViewBag.mtnNumber = null;
+                ViewBag.IsMobile = isMobi;
+                ViewBag.responseMSG = "Sorry. Could not verify your phone number.";
+                return View();
+            }
+            if (go && !string.IsNullOrEmpty(msisdn) && isMobi)
+            {
+                //mobile
+                //ViewBag.IsMobile = true;
+                //var headerData = _HeaderController.FillMSISDN();
+
+                //if (headerData == null)
+                //{
+                //    //Not Mtn
+                //    ViewBag.mtnNumber = null;
+                //}
+                //else
+                //{
+                //Not Mtn
+                //var mtnNumber = headerData.Lines.FirstOrDefault().Phone;
+                //ViewBag.mtnNumber = (mtnNumber.Trim() == "XXX-XXXXXXXX") ? null : mtnNumber.Trim();
+
+                //Valid MTN Number
+                //Initiate USSD Subscription
+                new Thread(() =>
+                {
+                    LocalLogger.LogFileWrite(
+                        JsonConvert.SerializeObject(new LogVM()
+                        {
+                            Message = "Initiating USSD Subscription",
+                            LogData = msisdn
+                        }));
+                }).Start();
+                ViewBag.mtnNumber = msisdn;
+                ViewBag.IsMobile = isMobi;
+                ViewBag.responseMSG = MTNUSSDSubscription(msisdn, true, serviceShortcode, null, heda);
+            }
+            //Just for test of Auto Registration
+            //ViewBag.IsMobile = true;
+            //ViewBag.mtnNumber = "2348168423222";
+
             return View();
         }
 
@@ -283,7 +353,7 @@ namespace GameZone.WEB.Controllers
         }
 
         [HttpPost]
-        public string MTNUSSDSubscription(string MSISDN, bool IsMtn, string Shortcode, string Productcode, string headerId = "")
+        public string MTNUSSDSubscription(string MSISDN, bool IsMtn, string Shortcode, string Productcode = null, string headerId = "")
         {
             if (string.IsNullOrEmpty(MSISDN))
             {
@@ -308,7 +378,7 @@ namespace GameZone.WEB.Controllers
                         Success = false,
                         Message = "You already have an active Subscription."
                     });
-                }                
+                }
 
                 msisdn = (MSISDNRepository)Session["XMSISDN"];
 
@@ -320,10 +390,12 @@ namespace GameZone.WEB.Controllers
                 {
                     msisdn = _HeaderController.FillMSISDN();
                 }
-                
-                msisdn.Lines.FirstOrDefault().Phone = "2348147911707";
-                msisdn.Lines.FirstOrDefault().IsHeader = true;
-                msisdn.Lines.FirstOrDefault().IpAddress = "192.168.10.212";
+
+                //For test
+                //msisdn.Lines.FirstOrDefault().Phone = "2348147911707";
+                //msisdn.Lines.FirstOrDefault().IsHeader = true;
+                //msisdn.Lines.FirstOrDefault().IpAddress = "192.168.10.212";
+                //For test
 
                 var ipthis = msisdn.Lines.FirstOrDefault().IpAddress;
                 msisdn.Clear();

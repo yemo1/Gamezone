@@ -444,6 +444,7 @@
     <Content Include="Scripts\Games\List.min.js" />
     <Content Include="Scripts\Games\List.js" />
     <Content Include="Scripts\Games\GamePlay.js" />
+    <Content Include="Scripts\Home\Subscription.js" />
     <Content Include="Scripts\Home\Index.min.js" />
     <Content Include="Scripts\layout.min.js" />
     <Content Include="Scripts\layout.js" />
@@ -508,6 +509,7 @@
     <Content Include="Views\Games\EchoTest.cshtml" />
     <Content Include="Views\Games\GamePlayFull.cshtml" />
     <Content Include="Views\Shared\_MobileLayout.cshtml" />
+    <Content Include="Views\Home\Subscription.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

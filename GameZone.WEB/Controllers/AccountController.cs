@@ -12,6 +12,7 @@ using GameZone.WEB.Models;
 using GameZone.VIEWMODEL;
 using GameZone.TOOLS;
 using GameZone.Repositories;
+using System.Data.SqlClient;
 
 namespace GameZone.WEB.Controllers
 {
@@ -21,6 +22,8 @@ namespace GameZone.WEB.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         IAppUserRepository _IAppUserRepository;
+
+        string conString = System.Configuration.ConfigurationManager.ConnectionStrings["NGSubscriptionsConnectionString"].ConnectionString;
         public AccountController(IAppUserRepository iAppUserRepository)
         {
             _IAppUserRepository = iAppUserRepository;
@@ -82,11 +85,57 @@ namespace GameZone.WEB.Controllers
         [AllowAnonymous]
         public bool ValidSubscription(long UID, string MSISDN, string svcName, string Shortcode, bool IsMtn, string Productcode = null)
         {
-            var retVal = _IAppUserRepository.ConfirmUserSubscription(UID, MSISDN, svcName, Shortcode, Productcode, IsMtn);
-            return retVal.isSuccess;
+            //var retVal = _IAppUserRepository.ConfirmUserSubscription(UID, MSISDN, svcName, Shortcode, Productcode, IsMtn);
+            //return retVal.isSuccess;
+
+            //Verification using ADO dot net for speed sake
+
+            // Provide the query string with a parameter placeholder.
+            string queryString = "ConfirmAppUserSubscription";
+
+            // Create and open the connection in a using block. This
+            // ensures that all resources will be closed and disposed
+            // when the code exits.
+            using (SqlConnection connection =
+                new SqlConnection(conString))
+            {
+                // Create the Command and Parameter objects.
+                SqlCommand cmd = new SqlCommand(queryString, connection);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@AppUserId", UID);
+                cmd.Parameters.AddWithValue("@MSISDN", MSISDN);
+                cmd.Parameters.AddWithValue("@ServiceName", svcName);
+                cmd.Parameters.AddWithValue("@Shortcode", Shortcode);
+                cmd.Parameters.AddWithValue("@CCode", Productcode);
+                cmd.Parameters.AddWithValue("@IsMtn", IsMtn);
+
+
+                // Open the connection in a try/catch block. 
+                // Create and execute the DataReader, writing the result
+                // set to the console window.
+                try
+                {
+                    if (connection.State == System.Data.ConnectionState.Closed)
+                    {
+                        connection.Open();
+                    }
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Console.WriteLine("\t{0}\t{1}\t{2}",
+                            reader[0], reader[1], reader[2]);
+                    }
+                    reader.Close();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+            return true;
         }
 
-        
+
         // POST: /Account/LogOff
         [HttpPost]
         [AllowAnonymous]

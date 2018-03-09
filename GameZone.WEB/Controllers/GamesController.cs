@@ -113,7 +113,7 @@ namespace GameZone.WEB.Controllers
 
             //Just for test of Auto Registration
             //ViewBag.IsMobile = true;
-            ViewBag.mtnNumber = "2348168423222";
+            //ViewBag.mtnNumber = "2348168423222";
             return View();
         }
 

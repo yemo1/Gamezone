@@ -19,6 +19,8 @@
     $scope.mtnMSISDN;
     $scope.headerData;
     $scope.HeaderId;
+    $scope.userName ="";
+
 
     /*Login Handler*/
     $scope.userLogin = function () {
@@ -135,6 +137,8 @@
     /*Initialize Phone Number gotten from wap header*/
     if (_IsMobile == "True") {
         if (_mtnNumber != "") {
+            $("#userIDSpan").val(_mtnNumber);
+            $scope.userName = _mtnNumber;
             $("#txtUsername").val(_mtnNumber);
             $scope.loginObj.szUsername = _mtnNumber;
             $("#txtRegUsername").val(_mtnNumber);

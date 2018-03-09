@@ -1,0 +1,13 @@
+3/9/2018 10:45:56 AM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+3/9/2018 10:46:43 AM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+3/9/2018 10:48:57 AM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+3/9/2018 10:50:05 AM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+3/9/2018 10:50:57 AM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+3/9/2018 10:52:43 AM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+3/9/2018 10:52:58 AM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+3/9/2018 10:53:36 AM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+3/9/2018 10:56:51 AM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+3/9/2018 11:25:27 AM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+3/9/2018 11:26:20 AM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+3/9/2018 11:26:56 AM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+3/9/2018 11:31:37 AM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}

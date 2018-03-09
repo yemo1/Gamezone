@@ -36,6 +36,7 @@
 /// <reference path="games/list.js" />
 /// <reference path="global.js" />
 /// <reference path="home/index.js" />
+/// <reference path="home/subscription.js" />
 /// <reference path="jquery.validate.js" />
 /// <reference path="jquery.validate.unobtrusive.js" />
 /// <reference path="jquery-3.2.1.js" />

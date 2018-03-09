@@ -1,0 +1,82 @@
+3/8/2018 11:33:26 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+3/8/2018 11:36:59 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+3/8/2018 11:40:16 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+3/8/2018 11:42:09 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+3/8/2018 11:49:08 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+3/8/2018 1:57:39 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+3/8/2018 1:59:41 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+3/8/2018 2:01:20 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+3/8/2018 2:01:20 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+3/8/2018 2:31:02 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+3/8/2018 5:52:31 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+3/8/2018 5:57:53 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348168423222"}
+3/8/2018 6:04:25 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348168423222"}
+3/8/2018 6:11:24 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348168423222"}
+3/8/2018 6:12:49 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348168423222"}
+3/8/2018 6:12:50 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348168423222"}
+3/8/2018 6:14:14 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348168423222"}
+3/8/2018 6:15:12 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348168423222"}
+3/8/2018 6:18:51 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348168423222"}
+3/8/2018 6:18:59 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348168423222/400D
+3/8/2018 6:19:03 PM ==> "Your subscription request has been sent"
+3/8/2018 6:19:04 PM ==> RequestId: 86587 - Description: "Your subscription request has been sent"
+3/8/2018 6:19:05 PM ==> {"Message":null,"LogData":{"ID":86587,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85508,"RequestId":86587,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-03-08T18:19:03.4294929+01:00"}}}
+3/8/2018 6:24:10 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348168423222"}
+3/8/2018 6:24:26 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348168423222/400D
+3/8/2018 6:24:28 PM ==> "Your subscription request has been sent"
+3/8/2018 6:24:29 PM ==> RequestId: 86588 - Description: "Your subscription request has been sent"
+3/8/2018 6:24:29 PM ==> {"Message":null,"LogData":{"ID":86588,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85509,"RequestId":86588,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-03-08T18:24:28.7600659+01:00"}}}
+3/8/2018 6:24:54 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348168423222"}
+3/8/2018 6:24:56 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348168423222/400D
+3/8/2018 6:24:57 PM ==> "Your subscription request has been sent"
+3/8/2018 6:24:58 PM ==> RequestId: 86589 - Description: "Your subscription request has been sent"
+3/8/2018 6:24:58 PM ==> {"Message":null,"LogData":{"ID":86589,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85510,"RequestId":86589,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-03-08T18:24:57.5065273+01:00"}}}
+3/8/2018 6:25:03 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348168423222"}
+3/8/2018 6:25:04 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348168423222/400D
+3/8/2018 6:25:05 PM ==> "Your subscription request has been sent"
+3/8/2018 6:25:06 PM ==> RequestId: 86590 - Description: "Your subscription request has been sent"
+3/8/2018 6:25:06 PM ==> {"Message":null,"LogData":{"ID":86590,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85511,"RequestId":86590,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-03-08T18:25:05.5904395+01:00"}}}
+3/8/2018 6:28:43 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348168423222"}
+3/8/2018 6:28:45 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348168423222/400D
+3/8/2018 6:28:47 PM ==> "Your subscription request has been sent"
+3/8/2018 6:28:48 PM ==> RequestId: 86591 - Description: "Your subscription request has been sent"
+3/8/2018 6:28:48 PM ==> {"Message":null,"LogData":{"ID":86591,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85512,"RequestId":86591,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-03-08T18:28:47.29479+01:00"}}}
+3/8/2018 6:31:23 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348168423222"}
+3/8/2018 6:31:24 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348168423222/400D
+3/8/2018 6:31:26 PM ==> "Your subscription request has been sent"
+3/8/2018 6:31:27 PM ==> RequestId: 86592 - Description: "Your subscription request has been sent"
+3/8/2018 6:31:27 PM ==> {"Message":null,"LogData":{"ID":86592,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85513,"RequestId":86592,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-03-08T18:31:26.4414894+01:00"}}}
+3/8/2018 6:33:59 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348168423222"}
+3/8/2018 6:34:01 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348168423222/400D
+3/8/2018 6:34:03 PM ==> "Your subscription request has been sent"
+3/8/2018 6:34:04 PM ==> RequestId: 86593 - Description: "Your subscription request has been sent"
+3/8/2018 6:34:04 PM ==> {"Message":null,"LogData":{"ID":86593,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85514,"RequestId":86593,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-03-08T18:34:03.4458654+01:00"}}}
+3/8/2018 6:35:13 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+3/8/2018 6:35:15 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400D
+3/8/2018 6:35:16 PM ==> "Your subscription request has been sent"
+3/8/2018 6:35:17 PM ==> RequestId: 86594 - Description: "Your subscription request has been sent"
+3/8/2018 6:35:17 PM ==> {"Message":null,"LogData":{"ID":86594,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85515,"RequestId":86594,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-03-08T18:35:16.8367693+01:00"}}}
+3/8/2018 6:36:02 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+3/8/2018 6:36:03 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400D
+3/8/2018 6:36:04 PM ==> "Your subscription request has been sent"
+3/8/2018 6:36:05 PM ==> RequestId: 86595 - Description: "Your subscription request has been sent"
+3/8/2018 6:36:05 PM ==> {"Message":null,"LogData":{"ID":86595,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85516,"RequestId":86595,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-03-08T18:36:04.8216608+01:00"}}}
+3/8/2018 6:42:33 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+3/8/2018 6:42:37 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+3/8/2018 6:42:54 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400D
+3/8/2018 6:42:57 PM ==> "Your subscription request has been sent"
+3/8/2018 6:42:58 PM ==> "Your subscription request has been sent"
+3/8/2018 6:44:51 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+3/8/2018 6:44:51 PM ==> RequestId: 86596 - Description: "Your subscription request has been sent"
+3/8/2018 7:04:29 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+3/8/2018 7:04:34 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400D
+3/8/2018 7:04:36 PM ==> "Your subscription request has been sent"
+3/8/2018 7:04:37 PM ==> RequestId: 86598 - Description: "Your subscription request has been sent"
+3/8/2018 7:04:37 PM ==> {"Message":null,"LogData":{"ID":86598,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85519,"RequestId":86598,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-03-08T19:04:36.5343281+01:00"}}}
+3/8/2018 7:04:49 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+3/8/2018 7:05:13 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+3/8/2018 7:05:14 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400D
+3/8/2018 7:05:16 PM ==> "Your subscription request has been sent"
+3/8/2018 7:05:16 PM ==> RequestId: 86599 - Description: "Your subscription request has been sent"
+3/8/2018 7:05:16 PM ==> {"Message":null,"LogData":{"ID":86599,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85520,"RequestId":86599,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-03-08T19:05:16.0625424+01:00"}}}
+3/8/2018 7:07:35 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}

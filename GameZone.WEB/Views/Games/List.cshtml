@@ -35,7 +35,7 @@
     </style>
 }
 
-<section class="page-section " id="game-area">
+<section class="page-section" id="game-area">
     <div class="game-filter filter-fixed hidden-xs hidden-sm ">
         <div class="container">
             <div class="row">
@@ -82,7 +82,7 @@
             <div class="modal-body">
                 <form class="fomr-horizontal">
                     <div class="form-group row">
-                        <div class="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
+                        <div class="col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
                             <table style="width:100%; border:none;">
                                 @if (IsMobile && mtnNumber != null)
                                 {
@@ -139,7 +139,7 @@
                     @*</div>*@
                     @*</div>*@
                     <div class="form-group row" ng-show="subDetailOBJ.IsActive == 0">
-                        <div class="col-sm-6 col-sm-offset-3  col-xs-6 col-xs-offset-3">
+                        <div class="col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
                             <select id="payTypeSel" class="form-control" ng-model="payType">
                                 @if (mtnNumber == null)
                                 {
@@ -150,7 +150,7 @@
                         </div>
                     </div>
                     <div class="form-group row" id="subscribeBtnDiv" ng-show="subDetailOBJ.IsActive == 0">
-                        <div id="ussd" class="col-sm-6 col-sm-offset-3  col-xs-6 col-xs-offset-3" ng-show="payType == 'airtime'">
+                        <div id="ussd" class="col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1" ng-show="payType == 'airtime'">
                             <div class="form-group row">
                                 <div class="col-sm-12 col-xs-12">
                                     <input id="txtPhone" type="text" class="form-control" placeholder="Enter Phone No. (MTN Only)" ng-model="mtnMSISDN" aria-describedby="sizing-addon1">
@@ -164,7 +164,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-sm-6 col-sm-offset-3  col-xs-6 col-xs-offset-3">
+                                <div class="col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
                                     <img src="~/Content/images/loadingGif.gif?v=@rls_vsn" id="subscribeLoda" style="display: block; margin-left: auto; margin-right: auto;" />
                                 </div>
                             </div>
@@ -176,10 +176,10 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-sm-6 col-sm-offset-3  col-xs-6 col-xs-offset-3" ng-show="payType == 'card'">
+                            <div class="col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1" ng-show="payType == 'card'">
                                 <span>Package:  </span><label>N50/Weekly</label>
                             </div>
-                            <div id="ePayment" class="col-sm-6 col-sm-offset-3  col-xs-6 col-xs-offset-3" ng-show="payType == 'card'">
+                            <div id="ePayment" class="col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1" ng-show="payType == 'card'">
                                 <a class="btn btn-block flwpug_getpaid" data-PBFPubKey="FLWPUBK-421b6ed86111a9c686cff34b983cee73-X" data-txref="rave-checkout-1517414809" data-amount="50" data-customer_email="user@example.com" data-currency="NGN" data-pay_button_text="Subscribe" data-country="NG" data-custom_title="Gamezone" data-custom_description="" data-redirect_url="@redirectURL" data-custom_logo="" data-payment_method="card" data-exclude_banks=""></a>
                             </div>
                         </div>
@@ -188,7 +188,7 @@
             </div>
             <div class="modal-footer" ng-show="subDetailOBJ.IsActive == 1">
                 <div class="form-group row">
-                    <div class="col-sm-6 col-sm-offset-3  col-xs-6 col-xs-offset-3">
+                    <div class="col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
                         <button class="btn btn-primary btn-block disabledCtrl" ng-click="UnSubscribe()"> Unsubscribe</button>
                     </div>
                 </div>
@@ -209,7 +209,7 @@
     </script>
 <script type="text/javascript" src="http://flw-pms-dev.eu-west-1.elasticbeanstalk.com/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
     <script src="~/Content/js/notify.min.js?v=@rls_vsn"></script>
-    @*<script src="~/Scripts/Games/List.js?v=@rls_vsn"></script>*@
-<script src="~/Scripts/Games/List.min.js?v=@rls_vsn"></script>
+    <script src="~/Scripts/Games/List.js?v=@rls_vsn"></script>
+@*<script src="~/Scripts/Games/List.min.js?v=@rls_vsn"></script>*@
     <script src="~/Content/js/jquery.lazyload.min.js?v=@rls_vsn"></script>
 }

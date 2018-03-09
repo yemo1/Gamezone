@@ -1,0 +1,191 @@
+3/8/2018 11:33:25 AM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+3/8/2018 11:36:59 AM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+3/8/2018 11:40:16 AM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+3/8/2018 11:42:09 AM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+3/8/2018 11:49:06 AM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+3/8/2018 1:57:38 PM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+3/8/2018 1:59:41 PM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+3/8/2018 2:01:20 PM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+3/8/2018 2:01:20 PM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+3/8/2018 2:31:01 PM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+3/8/2018 5:52:31 PM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+3/8/2018 5:58:03 PM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+3/8/2018 6:24:11 PM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+3/8/2018 6:24:55 PM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+3/8/2018 6:25:03 PM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+3/8/2018 6:28:44 PM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+3/8/2018 6:31:23 PM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+3/8/2018 6:34:00 PM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+3/8/2018 6:35:14 PM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+3/8/2018 6:36:02 PM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+3/8/2018 6:42:40 PM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+3/8/2018 6:42:40 PM ==> System.IO.IOException: The process cannot access the file 'C:\Users\Systems\Documents\GitHub\Gamezone\GameZone.WEB\Logs\AppLog-20180308.txt' because it is being used by another process.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode)
+   at GameZone.TOOLS.WapHeaderUtil.LogFileWrite(String message) in C:\Users\Systems\Documents\GitHub\Gamezone\GameZone.TOOLS\WapHeaderUtil.cs:line 37
+   at GameZone.TOOLS.WapHeaderUtil.MSISDN_HEADER() in C:\Users\Systems\Documents\GitHub\Gamezone\GameZone.TOOLS\WapHeaderUtil.cs:line 106
+3/8/2018 7:04:30 PM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+3/8/2018 7:04:49 PM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
