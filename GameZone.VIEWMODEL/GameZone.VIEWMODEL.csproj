@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SubscriberVM.cs" />
     <Compile Include="ServiceHeaderVM.cs" />
     <Compile Include="HeaderVM.cs" />
     <Compile Include="MSISDNLine.cs" />

@@ -156,7 +156,7 @@
 
     /*Function to handle creation of new users*/
     $scope.RegisterNewUser = function () {
-        if (_IsMobile) {
+        if (_IsMobile == "True") {
             if (_mtnNumber != null) {
                 $scope.registerObj.szUsername = _mtnNumber;
                 $scope.registerObj.isMobile = true;
@@ -171,17 +171,32 @@
             }
         }
 
-        if ($scope.registerObj.szUsername == undefined || $scope.registerObj.szUsername.trim() == "") {
+        if ($scope.registerObj.szUsername == undefined) {
             $.notify("Please enter your username.", 'error');
             $("#txtRegUsername").focus();
             return;
         }
-        if ($scope.registerObj.szPassword == undefined || $scope.registerObj.szPassword.trim() == "") {
+        if ($scope.registerObj.szUsername.trim() == "") {
+            $.notify("Please enter your username.", 'error');
+            $("#txtRegUsername").focus();
+            return;
+        }
+        if ($scope.registerObj.szPassword == undefined) {
             $.notify("Please enter your password.", 'error');
             $("#txtRegPassword").focus();
             return;
         }
-        if ($scope.registerObj.szConfirmPassword == undefined || $scope.registerObj.szConfirmPassword.trim() == "") {
+        if ($scope.registerObj.szPassword.trim() == "") {
+            $.notify("Please enter your password.", 'error');
+            $("#txtRegPassword").focus();
+            return;
+        }
+        if ($scope.registerObj.szConfirmPassword == undefined) {
+            $.notify("Please confirm your password.", 'error');
+            $("#txtRegPasswordConfirm").focus();
+            return;
+        }
+        if ($scope.registerObj.szConfirmPassword.trim() == "") {
             $.notify("Please confirm your password.", 'error');
             $("#txtRegPasswordConfirm").focus();
             return;
@@ -632,20 +647,24 @@
     $scope.subscriptionBtnClickEventHandler = function () {
         var userOBJ = localStorage.getItem("UID");
         var userData = null;
-        if (userOBJ) {
-            userData = JSON.parse(userOBJ);
-            if (_mtnNumber != "") {
-                if (userData.szUsername != _mtnNumber) {/*Check if user loggedin is same as phone number detected*/
-                    $scope.AutoRegisterNewUser();
-                }
-                $scope.GetMTNSubData();
+        if (_IsMobile == "True") {
+            if (_mtnNumber != "") {/*Number is mtn*/
+                window.location = "/Home/Subscription?msisdn=" + _mtnNumber + "&go=" + false + "&mobi=" + _IsMobile + "&heda=0&frmGame=false&uID=0";
             } else {
-                $scope.GetSubData();
-                $scope.keepUserData(userData);
+                if (userOBJ) {
+                    userData = JSON.parse(userOBJ);
+                    window.location = "/Home/Subscription?msisdn=" + _mtnNumber + "&go=" + false + "&mobi=" + _IsMobile + "&heda=0&frmGame=false&uID=" + userData.AppUserId;
+                } else {
+                    localStorage.removeItem("selectedGame");
+                    /*Clear Username Display*/
+                    ResetUsernameToAccount();
+                    $('#loginModal').modal('show');
+                }
             }
         } else {
-            if (_mtnNumber != "") {
-                $scope.AutoRegisterNewUser();
+            if (userOBJ) {
+                userData = JSON.parse(userOBJ);
+                window.location = "/Home/Subscription?msisdn=" + _mtnNumber + "&go=" + false + "&mobi=" + _IsMobile + "&heda=0&frmGame=false&uID=" + userData.AppUserId;
             } else {
                 localStorage.removeItem("selectedGame");
                 /*Clear Username Display*/
@@ -775,56 +794,76 @@
         e.preventDefault();
         e.preventDefault();
 
-        /*Authentication*/
-        var retVal = $scope.authHandler("/games/gameplay");
-        if (retVal != null) {
-            var userOBJ = localStorage.getItem("UID");
-            var userData = null;
-            if (userOBJ) {
-                userData = JSON.parse(userOBJ);
-                if ($scope.validateSubscription(userData.AppUserId) == "False") {
-                    $.notify("Please Subscribe to play our games.", 'error');
-                    localStorage.removeItem("selectedGame");
-                    if (_mtnNumber != "") {
-                        if (userData.szUsername != _mtnNumber) {/*Check if user loggedin is same as phone number detected*/
-                            $scope.AutoRegisterNewUser();
-                        }
-                        $scope.$apply(function () {
-                            $scope.GetMTNSubData();
-                        });
-                    } else {
-                        $scope.$apply(function () {
-                            $scope.GetSubData();
-                        });
-                        /*Keep User ID in Session*/
-                        $scope.keepUserData(userData);
-                    }
-                    /*setTimeout(function () {*/
-                    $('#pcSubscriptionModal').modal('show');
-                } else {
-                    var selGameURL = $(this).attr("href");
-                    var selGameLongDesc = $(this).find('div.longDescription').html();
-                    var selGameCat = $(this).find('p.game-category').text();
-                    var selGameTitle = $(this).find('h3.game-title').text();
+        var selGameURL = $(this).attr("href");
+        var selGameLongDesc = $(this).find('div.longDescription').html();
+        var selGameCat = $(this).find('p.game-category').text();
+        var selGameTitle = $(this).find('h3.game-title').text();
+        var selectedGame = {
+            "URL": selGameURL,
+            "Category": selGameCat,
+            "Title": selGameTitle,
+            "LongDescription": selGameLongDesc
+        };
 
-                    var selectedGame = {
-                        "URL": selGameURL,
-                        "Category": selGameCat,
-                        "Title": selGameTitle,
-                        "LongDescription": selGameLongDesc
-                    };
-                    localStorage.setItem("selectedGame", JSON.stringify(selectedGame));
-                    /*window.location = retVal;*/
-                    window.location = selGameURL;
+        $('#lodaModal').modal('show');
+
+        setTimeout(function () {
+            /*Authentication*/
+            var retVal = $scope.authHandler("/games/gameplay");
+            if (retVal != null) {
+                var userOBJ = localStorage.getItem("UID");
+                var userData = null;
+                if (userOBJ) {
+                    userData = JSON.parse(userOBJ);
+                    if ($scope.validateSubscription(userData.AppUserId) == "False") {
+                        var uID = 0;
+                        if (_IsMobile == "True") {
+                            if (_mtnNumber != "") {/*Number is mtn*/
+                                localStorage.setItem("selectedGame", JSON.stringify(selectedGame));
+                                window.location = "/Home/Subscription?msisdn=" + _mtnNumber + "&go=" + false + "&mobi=" + _IsMobile + "&heda=0&frmGame=true&uID=0";
+                            } else {
+                                window.location = "/Home/Subscription?msisdn=" + _mtnNumber + "&go=" + false + "&mobi=" + _IsMobile + "&heda=0&frmGame=true&uID=" + userData.AppUserId;
+                            }
+                        } else {
+                            window.location = "/Home/Subscription?msisdn=" + _mtnNumber + "&go=" + false + "&mobi=" + _IsMobile + "&heda=0&frmGame=false&uID=" + userData.AppUserId;
+                        }
+                    } else {
+                        localStorage.setItem("selectedGame", JSON.stringify(selectedGame));
+                        e.preventDefault();
+                        e.preventDefault();
+                        window.location = selGameURL;
+                    }
+                } else {
+                    if (_mtnNumber != "") {
+                        window.location = "/Home/Subscription?msisdn=" + _mtnNumber + "&go=" + false + "&mobi=" + _IsMobile + "&heda=0&frmGame=true&uID=0";
+                    } else {
+                        localStorage.removeItem("selectedGame");
+                        /*Clear Username Display*/
+                        ResetUsernameToAccount();
+                        $('#lodaModal').modal('hide');
+                        $('#loginModal').modal('show');
+                    }
                 }
             } else {
                 if (_mtnNumber != "") {
-                    $scope.AutoRegisterNewUser();
+                    localStorage.setItem("selectedGame", JSON.stringify(selectedGame));
+                    e.preventDefault();
+                    e.preventDefault();
+                    window.location = "/Home/Subscription?msisdn=" + _mtnNumber + "&go=" + false + "&mobi=" + _IsMobile + "&heda=0&frmGame=true&uID=0";
                 } else {
-                    localStorage.removeItem("selectedGame");
+                    if (_mtnNumber != "") {
+                        localStorage.setItem("selectedGame", JSON.stringify(selectedGame));
+                        window.location = "/Home/Subscription?msisdn=" + _mtnNumber + "&go=" + false + "&mobi=" + _IsMobile + "&heda=0&frmGame=true&uID=0";
+                    } else {
+                        localStorage.removeItem("selectedGame");
+                        /*Clear Username Display*/
+                        ResetUsernameToAccount();
+                        $('#lodaModal').modal('hide');
+                        $('#loginModal').modal('show');
+                    }
                 }
             }
-        }
+        }, 1000);
     });
 });
 /*Function to Validate Email address format*/

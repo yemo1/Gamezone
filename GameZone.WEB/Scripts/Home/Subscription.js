@@ -1,11 +1,14 @@
-﻿gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
+﻿/*Hide Loaders by default*/
+$("#logLoda, #regLoda, #forgotLoda, #ChangeLoda, #subscribeLoda").css("display", "none");
+
+gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
+    if (_fltwvSubscription != "") {
+        $.notify(_fltwvSubscription, 'info');
+    }
 
     /*Make Games Page Menu Active*/
     $("#menuUL li").removeClass("current");
     $("#homeMenu").addClass("current");
-
-    /*Hide Loaders by default*/
-    $("#logLoda, #regLoda, #forgotLoda, #ChangeLoda, #subscribeLoda").css("display", "none");
 
     ("#subType2").checked = true;
 
@@ -22,6 +25,16 @@
     $scope.HeaderId;
     $scope.userName = "";
     var getSubDataInterval = null;
+    var goInterval = null;
+
+    var userOBJ = localStorage.getItem("UID");
+    var userData = null;
+    //if (userOBJ) {
+    //    /*Do nothing*/
+    //} else {
+    //    /*User not logged in, back to home*/
+    //    window.location = "/Home/";
+    //}
 
     /*Login Handler*/
     $scope.userLogin = function () {
@@ -59,7 +72,7 @@
                             $('#passwordChangeModal').modal('show');
                         } else {
                             localStorage.setItem("UID", JSON.stringify(data.Data));
-                            window.location = "/Home";
+                            window.location = window.location.href;
                             $('#loginModal').modal('hide');
                         }
                     }
@@ -110,7 +123,7 @@
 
                             localStorage.setItem("UID", JSON.stringify(data.Data));
                             $scope.registerObj = {};
-                            window.location = "/Home";
+                            window.location = window.location.href;
                         } else {
                             $.notify(data.Message, 'error');
                         }
@@ -126,7 +139,6 @@
         $.post("/Account/LogOff", { "UID": UID }).success(function (data) {
             localStorage.removeItem("UID");
             localStorage.removeItem("selectedGame");
-            console.log(data);
             if (data != "") {
                 setTimeout(function () {
                     window.location = "/Home";
@@ -156,54 +168,6 @@
     } else {
         $scope.payType = 'card';
     }
-
-    /*Get ApplicationUser Data from DB*/
-    $scope.getGameData = function (selectedCat) {
-        $("#isotopeContainer").empty();
-        /*Show Loading Gif*/
-        $("body").find('.game-loader').addClass('show').removeClass('hide');
-
-        $.ajax({
-            type: "GET",
-            url: apiURL + "/api/Game?gameCategory=" + selectedCat + "&gameCount=13",
-            async: true,
-            success: function (data) {
-                var gameContent = "";
-                /*Empty Div*/
-                $("#isotopeContainer").empty();
-                $("body").find('.game-loader').addClass('hide').removeClass('show');
-                $.each(data.Data, function (i, rec) {
-                    if (rec.title != "What's My Icon?") {
-                        gameContent = "<div class='col-sm-2 col-xs-6 isotopeSelector block " + selectedCat + "'>";
-                        gameContent = gameContent + "<div class='service-wrap hovereffect panel clearfix animate' data-animate='bounceIn' data-duration='1.0s' data-delay='0.2s'>";
-
-                        gameContent = gameContent + "<a href='" + rec.url + "' class='game-link'>";
-
-                        gameContent = gameContent + "<h3 class='game-title hiddenPara'>" + rec.title + "</h3>";
-                        gameContent = gameContent + "<p class='game-category hiddenPara'>" + selectedCat + "</p>";
-                        gameContent = gameContent + "<div class='longDescription hiddenPara'>" + rec.long_description + "</div>";
-
-                        gameContent = gameContent + "<div class='lazy'>";
-                        gameContent = gameContent + "<img data-original='" + rec.banner_medium + "' alt='" + rec.title + "' class='img-responsive' width='100%' height='186.45' max-width='294.98' max-height='187.7'/>";
-                        gameContent = gameContent + "</div><div class='game-description'>";
-
-                        gameContent = gameContent + "<h3 class='game-title text-center '>" + rec.title + "</h3>";
-                        gameContent = gameContent + "<a class='pull-right btn  bitsumishi game-link' href='" + rec.url + "'>play";
-                        gameContent = gameContent + "<p class='game-category hiddenPara'>" + selectedCat + "</p>";
-                        gameContent = gameContent + "<div class='longDescription hiddenPara'>" + rec.long_description + "</div>";
-                        gameContent = gameContent + "<h3 class='game-title hiddenPara'>" + rec.title + "</h3></a>";
-
-                        gameContent = gameContent + "<small class='game-category pull-left text-muted'>" + selectedCat + "</small>";
-                        gameContent = gameContent + "</div></a></div></div>";
-                        $("#isotopeContainer").append(gameContent);
-                        $('body').find('.lazy .img-responsive').lazyload({});
-                    }
-                });
-            },
-            error: function (data) { }
-        });
-    };
-    $scope.getGameData("family");
 
     /*EPayment Subscriber*/
     $scope.GetSubData = function () {
@@ -253,7 +217,7 @@
         $.ajax({
             type: "GET",
             url: "/Home/GetHeaderByServiceName?serviceName=" + svcName,
-            async: true,
+            async: false,
             success: function (data) {
                 $scope.headerData = JSON.parse(data);
             }, error: function (data) {
@@ -306,26 +270,26 @@
                         //clearInterval(getSubDataInterval);
                         $scope.subDetailOBJ = {};
                         //$scope.$apply(function () {
-                            $scope.subDetailOBJ = data.Data;
-                            $scope.subDetailOBJ.Period = data.Data.ServiceName;
-                            $scope.subDetailOBJ.PeriodStart = $scope.formatDate(data.Data.Sub);
-                            $scope.subDetailOBJ.PeriodEnd = $scope.formatDate(data.Data.Exp);
-                            if ($scope.dateIsEalierThanToday($scope.subDetailOBJ.PeriodEnd)) {
-                                $scope.subDetailOBJ.IsActive = 0;
-                            } else {
-                                $scope.subDetailOBJ.IsActive = 1;
-                            }
-                            //console.log($scope.subDetailOBJ.PeriodStart);
-                            $("#txtIsActive").html(getRecordStatus($scope.subDetailOBJ.IsActive));
+                        $scope.subDetailOBJ = data.Data;
+                        $scope.subDetailOBJ.Period = data.Data.ServiceName;
+                        $scope.subDetailOBJ.PeriodStart = $scope.formatDate(data.Data.Sub);
+                        $scope.subDetailOBJ.PeriodEnd = $scope.formatDate(data.Data.Exp);
+                        if ($scope.dateIsEalierThanToday($scope.subDetailOBJ.PeriodEnd)) {
+                            $scope.subDetailOBJ.IsActive = 0;
+                        } else {
+                            $scope.subDetailOBJ.IsActive = 1;
+                        }
+                        //console.log($scope.subDetailOBJ.PeriodStart);
+                        $("#txtIsActive").html(getRecordStatus($scope.subDetailOBJ.IsActive));
                         //});
                     } else {
                         //$scope.$apply(function () {
-                            $scope.subDetailOBJ.PeriodStart = "-";
-                            $scope.subDetailOBJ.PeriodEnd = "-";
-                            $scope.subDetailOBJ.Period = "-";
-                            $scope.subDetailOBJ.Amount = "-";
-                            $scope.subDetailOBJ.IsActive = "0";
-                            $("#txtIsActive").html(getRecordStatus($scope.subDetailOBJ.IsActive));
+                        $scope.subDetailOBJ.PeriodStart = "-";
+                        $scope.subDetailOBJ.PeriodEnd = "-";
+                        $scope.subDetailOBJ.Period = "-";
+                        $scope.subDetailOBJ.Amount = "-";
+                        $scope.subDetailOBJ.IsActive = "0";
+                        $("#txtIsActive").html(getRecordStatus($scope.subDetailOBJ.IsActive));
                         //});
                     }
                 }, error: function (data) {
@@ -359,6 +323,13 @@
         return retVal;
     };
 
+    /*Function to Refresh Page on Intervals*/
+    $scope.refreshPage = function () {
+        setInterval(function () {
+            window.location = window.location.href;
+        }, 20000);
+    };
+
     /*Get User Object and Request User Login*/
     var userOBJ = localStorage.getItem("UID");
     var UID = null;
@@ -367,13 +338,22 @@
         $scope.redirectURL = flutterWaveRedirectURL + UID.AppUserId;
         if ($scope.validateSubscription(UID.AppUserId) == "False") {
             $scope.subDetailOBJ.IsActive = 0;
+            $scope.keepUserData(UID);
         } else {
+            /*If Game was licked auto redirect*/
+            var gameData = localStorage.getItem("selectedGame");
+            if (gameData) {
+                if (_frmGame =="True") {
+                    var gameString = JSON.parse(gameData);
+                    window.location = gameString.URL;
+                }
+            }
             $scope.subDetailOBJ.IsActive = 1;
         }
     } else {
         if (_IsMobile == "True") {
             if (_mtnNumber != "") {/*Number is mtn*/
-                /*DO Nothing*/
+                $scope.AutoRegisterNewUser();
             } else {
                 $('#loginModal').modal('show');
             }
@@ -386,6 +366,22 @@
 
     /*Check for Subscription Data*/
     if (_subGo == "True") {
+        $(".disabledCtrl").attr("disabled", "disabled");
+        var loadCnt = sessionStorage.getItem("loadCnt");
+        var cntIndex = 0;
+        if (loadCnt) {
+            cntIndex = parseInt(loadCnt);
+            if (cntIndex >= 3) {
+                clearInterval(goInterval);
+                sessionStorage.removeItem("loadCnt");
+                $(".disabledCtrl").removeAttr("disabled");
+            } else {
+                sessionStorage.setItem("loadCnt", cntIndex + 1);
+            }
+        } else {
+            sessionStorage.setItem("loadCnt", cntIndex + 1);
+        }
+
         var userOBJ = localStorage.getItem("UID");
         var userData = null;
         if (userOBJ) {
@@ -394,28 +390,20 @@
                 if (userData.szUsername != _mtnNumber) {/*Check if user loggedin is same as phone number detected*/
                     $scope.AutoRegisterNewUser();
                 }
-
-                setInterval(function () {
-                    $scope.$apply(function () {
-                        $scope.GetMTNSubData();
-                    });
-                }, 10000);
+                $scope.HeaderId = parseInt(_HedaID);
+                goInterval = setInterval(function () {
+                    /*Refresh Page every 10 secs*/
+                    window.location = window.location.href;
+                }, 35000);
             } else {
-                setInterval(function () {
-                    $scope.$apply(function () {
-                        $scope.GetSubData();
-                    });
-                }, 10000);
                 $scope.keepUserData(userData);
+                $(".flwpug_getpaid").click();
             }
         } else {
             if (_mtnNumber != "") {
                 $scope.AutoRegisterNewUser();
             } else {
-                localStorage.removeItem("selectedGame");
-                /*Clear Username Display*/
-                ResetUsernameToAccount();
-                $('#loginModal').modal('show');
+                window.location = "/Home/";
             }
         }
     }
@@ -470,75 +458,6 @@
         }
         return returnURL;
     };
-
-    /*CLick handler of Menu Items*/
-    $(".gameMenu").click(function (e) {
-        var selCat = $(this).attr("id");
-        $scope.getGameData(selCat);
-        e.preventDefault();
-        e.preventDefault();
-    });
-
-    /*Game CLick Event Handler*/
-    $(document).on("click", "a.game-link", function (e) {
-        e.preventDefault();
-        e.preventDefault();
-        $('#lodaModal').modal('show');
-        return;
-        /*Authentication*/
-        var retVal = $scope.authHandler("/games/gameplay");
-        if (retVal != null) {
-            var userOBJ = localStorage.getItem("UID");
-            var userData = null;
-            if (userOBJ) {
-                userData = JSON.parse(userOBJ);
-                if ($scope.validateSubscription(userData.AppUserId) == "False") {
-                    $.notify("Please Subscribe to play our games.", 'error');
-                    localStorage.removeItem("selectedGame");
-                    if (_mtnNumber != "") {
-                        if (userData.szUsername != _mtnNumber) {/*Check if user loggedin is same as phone number detected*/
-                            $scope.AutoRegisterNewUser();
-                        }
-                        $scope.$apply(function () {
-                            $scope.GetMTNSubData();
-                        });
-
-                    } else {
-                        $scope.$apply(function () {
-                            $scope.GetSubData();
-                        });
-                        /*Keep User ID in Session*/
-                        $scope.keepUserData(userData);
-                    }
-                    $('#pcSubscriptionModal').modal('show');
-                } else {
-                    var selGameURL = $(this).attr("href");
-                    var selGameLongDesc = $(this).find('div.longDescription').html();
-                    var selGameCat = $(this).find('p.game-category').text();
-                    var selGameTitle = $(this).find('h3.game-title').text();
-                    var selectedGame = {
-                        "URL": selGameURL,
-                        "Category": selGameCat,
-                        "Title": selGameTitle,
-                        "LongDescription": selGameLongDesc
-                    };
-                    localStorage.setItem("selectedGame", JSON.stringify(selectedGame));
-                    e.preventDefault();
-                    e.preventDefault();
-                    window.location = selGameURL;
-                }
-            } else {
-                if (_mtnNumber != "") {
-                    $scope.AutoRegisterNewUser();
-                } else {
-                    localStorage.removeItem("selectedGame");
-                    /*Clear Username Display*/
-                    ResetUsernameToAccount();
-                    $('#loginModal').modal('show');
-                }
-            }
-        }
-    });
 
     /*Function to handle creation of new users*/
     $scope.RegisterNewUser = function () {
@@ -774,30 +693,33 @@
     };
 
     $scope.subscriptionBtnClickEventHandler = function () {
-        window.location = "/Home/Subscription?msisdn=" + _mtnNumber + "&go=" + false + "&mobi=" + _IsMobile + "&heda=" + 111;
-        //var userOBJ = localStorage.getItem("UID");
-        //var userData = null;
-        //if (userOBJ) {
-        //    userData = JSON.parse(userOBJ);
-        //    if (_mtnNumber != "") {
-        //        if (userData.szUsername != _mtnNumber) {/*Check if user loggedin is same as phone number detected*/
-        //            $scope.AutoRegisterNewUser();
-        //        }
-        //        $scope.GetMTNSubData();
-        //    } else {
-        //        $scope.GetSubData();
-        //        $scope.keepUserData(userData);
-        //    }
-        //} else {
-        //    if (_mtnNumber != "") {
-        //        $scope.AutoRegisterNewUser();
-        //    } else {
-        //        localStorage.removeItem("selectedGame");
-        //        /*Clear Username Display*/
-        //        ResetUsernameToAccount();
-        //        $('#loginModal').modal('show');
-        //    }
-        //}
+        var userOBJ = localStorage.getItem("UID");
+        var userData = null;
+        if (_IsMobile == "True") {
+            if (_mtnNumber != "") {/*Number is mtn*/
+                /*Do Nothing*/
+            } else {
+                if (userOBJ) {
+                    userData = JSON.parse(userOBJ);
+                    window.location = "/Home/Subscription?msisdn=" + _mtnNumber + "&go=" + false + "&mobi=" + _IsMobile + "&heda=0&frmGame=false&uID=" + userData.AppUserId;
+                } else {
+                    localStorage.removeItem("selectedGame");
+                    /*Clear Username Display*/
+                    ResetUsernameToAccount();
+                    window.location = "/Home/";
+                }
+            }
+        } else {
+            if (userOBJ) {
+                userData = JSON.parse(userOBJ);
+                window.location = "/Home/Subscription?msisdn=" + _mtnNumber + "&go=" + false + "&mobi=" + _IsMobile + "&heda=0&frmGame=false&uID=" + userData.AppUserId;
+            } else {
+                localStorage.removeItem("selectedGame");
+                /*Clear Username Display*/
+                ResetUsernameToAccount();
+                window.location = "/Home/";
+            }
+        }
     };
 
     $scope.USSDSubscription = function () {
@@ -835,12 +757,13 @@
                     $.notify(retVal.Message, 'error');
                 } else {
                     $.notify(retVal.Message, 'success');
-                    $('#pcSubscriptionModal').modal('hide');
+                    /*Refresh Page every 20 secs*/
+                    refreshPage();
                 }
                 /*Hide Loading Gif*/
                 $("#subscribeLoda").css("display", "none");
                 /*Enable COntrols*/
-                $(".disabledCtrl").removeAttr("disabled");
+                //$(".disabledCtrl").removeAttr("disabled");
             }).error(function (data) {
                 $.notify(data, 'error');
                 /*Hide Loading Gif*/
@@ -910,7 +833,12 @@
 $("a.flwpug_getpaid").find("button").addClass("btn btn-primary");
 
 /*Allow Only Numbers into Tel Textboxes*/
-$(document).on("keypress keyup blur", ".allownumericwithoutdecimal", function (event) { });
+/*$(document).on("click", ".flwpug_getpaid", function (event) {
+    event.preventDefault();
+    event.preventDefault();
+    alert("I catch am");
+    event.preventDefault();
+});*/
 
 /*Function to Validate Email address format*/
 function validateEmail(Email) {
@@ -920,3 +848,8 @@ function validateEmail(Email) {
 function getRecordStatus(status) {
     return (status == 1) ? "<span class='btn-custom btn-success btn-xs'>True</span>" : (status == 0) ? "<span class='btn-custom btn-warning btn-xs'>False</span>" : "";
 }
+function refreshPage() {
+    setInterval(function () {
+        window.location = window.location.href;
+    }, 35000);
+};

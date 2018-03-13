@@ -81,25 +81,30 @@
                                                         <li class="loginReg"><a data-toggle="modal" id="login-target" data-target="#loginModal">Login </a></li>
                                                         <li class="loginReg"><a data-toggle="modal" id="register-target" data-target="#loginModal">Register </a></li>
                                                         @*<li class="logout subscribeBTN"><a data-toggle="modal" id="subDetails-target" data-target="#pcSubscriptionModal" ng-click="subscriptionBtnClickEventHandler()">Subscription </a></li>*@
+
                                                         <li class="logout subscribeBTN"><a id="subDetails-target" ng-click="subscriptionBtnClickEventHandler()">Subscription </a></li>
+
                                                         <li class="logout"><a id="logout-target">Logout </a></li>
                                                     </ul>
                                                 </li>
                                             </ul>
                                         </div>
-                                        <div class="col-md-7 visible-xs-block visible-sm-block">
-                                            <div class="filter-container isotopeFilters">
-                                                <ul class="text-center nav navbar-nav top-filter">
-                                                    <li class="gameMenu parent active all collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse" id="family"><a href="#" data-filter=".family"><i class="fa fa-universal-access"></i>Family</a></li>
-                                                    <li class="gameMenu parent adv  collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse" id="strategy"><a href="#" data-filter=".strategy"> <i class="fa fa-delicious"></i>Strategy</a></li>
-                                                    <li class="gameMenu parent arc  collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse" id="action"><a href="#" data-filter=".action"> <i class="fa fa-codiepie"></i>Action</a></li>
-                                                    <li class="gameMenu parent spo  collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse" id="cards"><a href="#" data-filter=".cards"> <i class="fa fa-steam-square"></i>Cards</a></li>
-                                                    <li class="gameMenu parent car  collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse" id="sports"><a href="#" data-filter=".sports"> <i class="fa fa-soccer-ball-o"></i>Sports</a></li>
-                                                    <li class="gameMenu parent car  collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse" id="adventure"><a href="#" data-filter=".adventure"> <i class="fa fa-anchor"></i>Adventure</a></li>
-                                                    <li class="gameMenu parent car  collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse" id="puzzle"><a href="#" data-filter=".puzzle"> <i class="fa fa-puzzle-piece"></i>Puzzle</a></li>
-                                                </ul>
+                                        @if (ViewBag.Title != "Subscription")
+                                        {
+                                            <div class="col-md-7 visible-xs-block visible-sm-block">
+                                                <div class="filter-container isotopeFilters">
+                                                    <ul class="text-center nav navbar-nav top-filter">
+                                                        <li class="gameMenu parent active all collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse" id="family"><a href="#" data-filter=".family"><i class="fa fa-universal-access"></i>Family</a></li>
+                                                        <li class="gameMenu parent adv  collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse" id="strategy"><a href="#" data-filter=".strategy"> <i class="fa fa-delicious"></i>Strategy</a></li>
+                                                        <li class="gameMenu parent arc  collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse" id="action"><a href="#" data-filter=".action"> <i class="fa fa-codiepie"></i>Action</a></li>
+                                                        <li class="gameMenu parent spo  collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse" id="cards"><a href="#" data-filter=".cards"> <i class="fa fa-steam-square"></i>Cards</a></li>
+                                                        <li class="gameMenu parent car  collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse" id="sports"><a href="#" data-filter=".sports"> <i class="fa fa-soccer-ball-o"></i>Sports</a></li>
+                                                        <li class="gameMenu parent car  collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse" id="adventure"><a href="#" data-filter=".adventure"> <i class="fa fa-anchor"></i>Adventure</a></li>
+                                                        <li class="gameMenu parent car  collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse" id="puzzle"><a href="#" data-filter=".puzzle"> <i class="fa fa-puzzle-piece"></i>Puzzle</a></li>
+                                                    </ul>
+                                                </div>
                                             </div>
-                                        </div>
+                                        }
                                     </nav>
                                 </div>
                             </div>

@@ -1,0 +1,152 @@
+3/12/2018 3:10:13 PM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+3/12/2018 4:36:12 PM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+3/12/2018 4:45:54 PM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+3/12/2018 5:32:01 PM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+3/12/2018 6:01:32 PM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+3/12/2018 6:01:59 PM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+3/12/2018 6:02:43 PM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+3/12/2018 6:02:50 PM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+3/12/2018 6:05:19 PM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+3/12/2018 6:22:05 PM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+3/12/2018 6:22:38 PM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+3/12/2018 6:22:55 PM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+3/12/2018 6:28:07 PM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+3/12/2018 6:28:16 PM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+3/12/2018 6:29:01 PM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+3/12/2018 6:29:11 PM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+3/12/2018 6:31:49 PM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+3/12/2018 6:33:00 PM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+3/12/2018 6:33:24 PM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+

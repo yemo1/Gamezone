@@ -113,7 +113,7 @@ namespace GameZone.WEB.Controllers
 
             //Just for test of Auto Registration
             //ViewBag.IsMobile = true;
-            //ViewBag.mtnNumber = "2348168423222";
+            //ViewBag.mtnNumber = "2348147911707";
             return View();
         }
 
@@ -128,7 +128,7 @@ namespace GameZone.WEB.Controllers
                 if (userData == null)
                 {
                     Session["fltwvSubscription"] = "Session timed out. Please try again.";
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Subscription", "Home", new { msisdn="", go=false, mobi=false, heda=0, frmGame=false, uID=0 });
                 }
                 //Check for valid Exisiting Subscription
                 var subscriptionConfirm = _NGSubscriptionsEntities.ConfirmAppUserSubscription(userData.AppUserId, null, svcName, null,null, false).FirstOrDefault();
@@ -136,7 +136,7 @@ namespace GameZone.WEB.Controllers
                 if (subscriptionConfirm.isSuccess)
                 {
                     Session["fltwvSubscription"] = "You already have an active Subscription.";
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Subscription", "Home", new { msisdn = "", go = false, mobi = false, heda = 0, frmGame = false, uID = userData.AppUserId });
                 }
                 logObj = JsonConvert.SerializeObject(new LogVM()
                 {
@@ -176,7 +176,7 @@ namespace GameZone.WEB.Controllers
                 {
                     //Transaction Failed
                     Session["fltwvSubscription"] = "Sorry. Your subscription failed. Please try again later.";
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Subscription", "Home", new { msisdn = "", go = false, mobi = false, heda = 0, frmGame = false, uID = userData.AppUserId });
                 }
                 else
                 {
@@ -204,7 +204,7 @@ namespace GameZone.WEB.Controllers
                     var rezolt = _NGSubscriptionsEntities.AddServiceSubscription(userData.AppUserId, svcName, Enum.GetName(typeof(GameZonePrice), subscriptionPeriod), DateTime.Now, periodEnd, verifyRspJSON.data.amount, true, true, DateTime.Now).FirstOrDefault();
                     Session["fltwvSubscription"] = "Your subscription was successful.";
                     //ViewBag.subscriptionSuccessful = "Your subscription was successful.";
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Subscription", "Home", new { msisdn = "", go = false, mobi = false, heda = 0, frmGame = false, uID = userData.AppUserId });
                 }
                 #endregion
                 #endregion

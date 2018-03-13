@@ -44,7 +44,7 @@
 <section class="page-section pale-white home">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-6 col-md-5 col-xs-12 col-md-offset-1  home-text">
+            <div id="btnDIV" class="col-sm-6 col-md-5 col-xs-12 col-md-offset-1  home-text">
                 <h1 class="main-header">Play fun & <strike>cool</strike><br /> awesome games!</h1>
                 <h5 class="text-justify ">
                     @*Play over 500 games on GameZone with just a single button click.
@@ -52,8 +52,10 @@
                     Play awesome HTML5 games available on your smartphones, tablet or PC. Our catalogue is often updated with new games to keep you engaged!
                 </h5>
                 @*<a class="btn bitsumishi smooth-scroll scroll-down animate" href="http://funmobilelive.html5games.net/serve?portal_id=4774417016029184&game_id=6066710801022976&branding_id=5848139915329536&ad_id=5284106556407808&portal_localization_id=4539491968614400&clear_cache=yes" data-animate="wobble" data-duration="1.0s" data-delay="0.4s" data-iteration="2" type="button">play free game <i class="fa fa-play-circle"></i></a>*@
-                <a id="subscribeBTN" class="btn bitsumishi smooth-scroll scroll-down animate subscribeBTN" href="" data-animate="wobble" data-duration="1.0s" data-delay="0.4s" ng-click="subscriptionBtnClickEventHandler()" data-iteration="2" type="button" ng-show="subDetailOBJ.IsActive == 0">Subscribe <i class="fa fa-certificate"></i></a>
-                @*data-toggle="modal" data-target="#exampleModal"*@
+                
+                @*<a id="subscribeBTN" class="btn bitsumishi smooth-scroll scroll-down animate subscribeBTN" href="" data-animate="wobble" data-duration="1.0s" data-delay="0.4s" ng-click="subscriptionBtnClickEventHandler()" data-iteration="2" type="button" ng-show="subDetailOBJ.IsActive == 0">Subscribe <i class="fa fa-certificate"></i></a>
+                <a id="subscribeBTN" class="btn bitsumishi smooth-scroll scroll-down animate subscribeBTN" href="" data-animate="wobble" data-duration="1.0s" data-delay="0.4s" ng-click="subscriptionBtnClickEventHandler()" data-iteration="2" type="button" ng-show="subDetailOBJ.IsActive == 0">Subscribe <i class="fa fa-certificate"></i></a>*@
+                
             </div>
             <div class="col-sm-6 col-md-6 col-xs-12  ">
 
@@ -111,7 +113,6 @@
                             <li class="gameMenu parent car  collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse" id="sports"><a href="#" data-filter=".sports"> <i class="fa fa-soccer-ball-o"></i>Sports</a></li>
                             <li class="gameMenu parent car  collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse" id="adventure"><a href="#" data-filter=".adventure"> <i class="fa fa-anchor"></i>Adventure</a></li>
                             <li class="gameMenu parent car  collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse" id="puzzle"><a href="#" data-filter=".puzzle"> <i class="fa fa-puzzle-piece"></i>Puzzle</a></li>
-
                         </ul>
                     </div>
                 </div>
@@ -137,7 +138,7 @@
         </div>
         <div class="row">
             <div class="col-md-12 text-center">
-                <a class="btn bitsumishi scroll-down animate orange-btn" href="/Games/List" data-animate="wobble" type="button">View All <i class="fa fa-eye"></i></a>
+                <a class="btn bitsumishi scroll-down animate orange-btn" href="/Games/List" data-animate="wobble" type="button">View All</a>
                 @*<a href="/Games/List" id="more-btn" class="btn  smooth-scroll scroll-down animate orange-btn" type="button">View All </a>*@
             </div>
         </div>
