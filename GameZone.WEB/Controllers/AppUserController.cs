@@ -3,6 +3,7 @@ using GameZone.TOOLS;
 using GameZone.VIEWMODEL;
 using GameZone.WEB.Mappings;
 using System;
+using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Description;
 
@@ -377,6 +378,116 @@ namespace GameZone.WEB.Controllers
                     Message = ex.Message
                 };
             }
+        }
+
+        [Route("api/AppUser/StartValidUserSession")]
+        public void PostStartValidUserSession(LoginAppUserVM loginAppUserVM)
+        {
+            if (loginAppUserVM != null)
+            {
+                //Put Valid Login User Data in Session
+                GameUserIdentity.LoggedInUser = loginAppUserVM;
+            }
+        }
+
+        [ResponseType(typeof(string)), Route("api/AppUser/AuthUserToken")]
+        public string GetAuthUserToken(string redirectURL = null)
+        {
+            //System.Net.Http.HttpRequestMessage request = new System.Net.Http.HttpRequestMessage();
+            string headerToken = "";
+            System.Collections.Generic.IEnumerable<string> keys = null;
+
+            //if (request.Headers.TryGetValues("authToken", out keys))
+            //    headerToken = keys.First();
+
+            if (Request.Headers.TryGetValues("authToken", out keys))
+                headerToken = keys.First();
+
+            //System.Collections.Specialized.NameValueCollection nvc = new System.Collections.Specialized.NameValueCollection();
+            //nvc = Request.Headers;
+            //System.Collections.Generic.Dictionary<string, string> ss = new System.Collections.Generic.Dictionary<string, string>();
+            //foreach (var item in nvc.AllKeys)
+            //{
+            //    ss.Add(item, nvc[item]);
+            //}
+
+            //Check for Authentication Token in Request Header
+            if (!string.IsNullOrEmpty(headerToken))
+            {
+                //Validate User and Token
+                string appUserID = headerToken.Split(';')[0], userToken = headerToken.Split(';')[1];
+                var retVal = _IAppUserRepository.ConfirmAppUserToken(userToken, long.Parse(appUserID));
+                //User and Token Match
+                if (retVal.isSuccess)
+                {
+                    return redirectURL ?? "/Home/Index";
+                }
+                else
+                {
+                    return "/Home/Index;Access Denied";
+                }
+            }
+            else
+            {
+                return "/Home/Index;Access Denied";
+            }
+        }
+
+        [ResponseType(typeof(bool)), Route("api/AppUser/ValidSubscription")]
+        public bool GetValidSubscription(long UID, string MSISDN, string svcName, string Shortcode, bool IsMtn, string Productcode = null)
+        {
+            bool retVal = false;
+            string conString = System.Configuration.ConfigurationManager.ConnectionStrings["NGSubscriptionsConnectionString"].ConnectionString;
+            using (System.Data.SqlClient.SqlConnection connection = new System.Data.SqlClient.SqlConnection(conString))
+            {
+                try
+                {
+                    if (connection.State == System.Data.ConnectionState.Closed)
+                    {
+                        connection.Open();
+                    }
+                    System.Data.DataTable dt = new System.Data.DataTable();
+                    using (var cmd = new System.Data.SqlClient.SqlCommand("ConfirmAppUserSubscription", connection))
+                    {
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@AppUserId", UID);
+                        cmd.Parameters.AddWithValue("@MSISDN", MSISDN);
+                        cmd.Parameters.AddWithValue("@ServiceName", svcName);
+                        cmd.Parameters.AddWithValue("@Shortcode", Shortcode);
+                        cmd.Parameters.AddWithValue("@CCode", Productcode);
+                        cmd.Parameters.AddWithValue("@IsMtn", IsMtn);
+                        using (var da = new System.Data.SqlClient.SqlDataAdapter(cmd))
+                        {
+                            da.Fill(dt);
+                        }
+                    }
+                    retVal = bool.Parse(dt.Rows[0]["isSuccess"].ToString());
+                }
+                catch (Exception ex)
+                {
+                    new System.Threading.Thread(() =>
+                    {
+                        LocalLogger.LogFileWrite(Newtonsoft.Json.JsonConvert.SerializeObject(new LogVM()
+                        {
+                            Message = ex.Message,
+                            LogData = $"AppUserID: {UID}"
+                        }));
+                    }).Start();
+                }
+            }
+            return retVal;
+        }
+
+        //POST: /Account/LogOff
+       [ResponseType(typeof(string)), Route("api/AppUser/LogOff")]
+        public string GetLogOff(string UID)
+        {
+            if (string.IsNullOrEmpty(UID))
+            {
+                return "";
+            }
+            _IAppUserRepository.LoginAppUser(UID, false, null);
+            return "/Home";
         }
     }
 }

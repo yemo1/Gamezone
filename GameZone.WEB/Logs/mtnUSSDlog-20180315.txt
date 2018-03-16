@@ -1,0 +1,44 @@
+3/15/2018 11:59:32 AM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+3/15/2018 12:09:30 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+3/15/2018 12:13:28 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+3/15/2018 12:13:54 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+3/15/2018 12:14:47 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+3/15/2018 12:15:03 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+3/15/2018 12:15:07 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+3/15/2018 12:15:18 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+3/15/2018 1:19:52 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+3/15/2018 2:30:19 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+3/15/2018 2:31:37 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+3/15/2018 2:43:54 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+3/15/2018 2:45:42 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+3/15/2018 2:45:51 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+3/15/2018 2:50:58 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+3/15/2018 2:53:28 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400D
+3/15/2018 2:53:31 PM ==> "Your subscription request has been sent"
+3/15/2018 2:53:32 PM ==> RequestId: 86662 - Description: "Your subscription request has been sent"
+3/15/2018 2:53:32 PM ==> {"Message":null,"LogData":{"ID":86662,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85583,"RequestId":86662,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-03-15T14:53:31.1484984+01:00"}}}
+3/15/2018 3:56:48 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+3/15/2018 4:02:12 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+3/15/2018 4:02:31 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+3/15/2018 4:03:27 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+3/15/2018 4:05:07 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+3/15/2018 5:22:37 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+3/15/2018 5:23:23 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+3/15/2018 5:26:59 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+3/15/2018 5:28:18 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+3/15/2018 5:28:49 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400D
+3/15/2018 5:28:51 PM ==> "Your subscription request has been sent"
+3/15/2018 5:28:52 PM ==> RequestId: 86669 - Description: "Your subscription request has been sent"
+3/15/2018 5:28:52 PM ==> {"Message":null,"LogData":{"ID":86669,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85590,"RequestId":86669,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-03-15T17:28:51.4078801+01:00"}}}
+3/15/2018 5:30:13 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+3/15/2018 5:32:49 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+3/15/2018 5:33:32 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+3/15/2018 5:34:59 PM ==> {"Message":"Recognised MTN Number","LogData":"XXX-XXXXXXXX"}
+3/15/2018 5:35:29 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400D
+3/15/2018 5:35:32 PM ==> "Your subscription request has been sent"
+3/15/2018 5:35:32 PM ==> RequestId: 86670 - Description: "Your subscription request has been sent"
+3/15/2018 5:35:32 PM ==> {"Message":null,"LogData":{"ID":86670,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85591,"RequestId":86670,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-03-15T17:35:32.1330178+01:00"}}}
+3/15/2018 5:36:18 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400D
+3/15/2018 5:36:19 PM ==> "Your subscription request has been sent"
+3/15/2018 5:36:20 PM ==> RequestId: 86671 - Description: "Your subscription request has been sent"
+3/15/2018 5:36:20 PM ==> {"Message":null,"LogData":{"ID":86671,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85592,"RequestId":86671,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-03-15T17:36:19.4059931+01:00"}}}

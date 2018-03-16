@@ -23,6 +23,7 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
     $scope.mtnMSISDN;
     $scope.headerData;
     $scope.HeaderId;
+    $scope.selectedGame = "";
     $scope.userName = "";
     var getSubDataInterval = null;
     var goInterval = null;
@@ -191,8 +192,10 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
                             $scope.subDetailOBJ.PeriodEnd = $scope.formatDate(data.Data.PeriodEnd);
                             if ($scope.dateIsEalierThanToday($scope.subDetailOBJ.PeriodEnd)) {
                                 $scope.subDetailOBJ.IsActive = 0;
+                                $(".activeOneCtrl").css("display", "block");
                             } else {
                                 $scope.subDetailOBJ.IsActive = 1;
+                                $(".activeOneCtrl").css("display","none");
                             }
                             $("#txtIsActive").html(getRecordStatus($scope.subDetailOBJ.IsActive));
                         });
@@ -203,6 +206,7 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
                             $scope.subDetailOBJ.Period = "-";
                             $scope.subDetailOBJ.Amount = "-";
                             $scope.subDetailOBJ.IsActive = 0;
+                            $(".activeOneCtrl").css("display", "block");
                             $("#txtIsActive").html(getRecordStatus($scope.subDetailOBJ.IsActive));
                         });
                     }
@@ -276,8 +280,10 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
                         $scope.subDetailOBJ.PeriodEnd = $scope.formatDate(data.Data.Exp);
                         if ($scope.dateIsEalierThanToday($scope.subDetailOBJ.PeriodEnd)) {
                             $scope.subDetailOBJ.IsActive = 0;
+                            $(".activeOneCtrl").css("display", "block");
                         } else {
                             $scope.subDetailOBJ.IsActive = 1;
+                            $(".activeOneCtrl").css("display", "none");
                         }
                         //console.log($scope.subDetailOBJ.PeriodStart);
                         $("#txtIsActive").html(getRecordStatus($scope.subDetailOBJ.IsActive));
@@ -289,6 +295,7 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
                         $scope.subDetailOBJ.Period = "-";
                         $scope.subDetailOBJ.Amount = "-";
                         $scope.subDetailOBJ.IsActive = "0";
+                        $(".activeOneCtrl").css("display", "block");
                         $("#txtIsActive").html(getRecordStatus($scope.subDetailOBJ.IsActive));
                         //});
                     }
@@ -327,7 +334,7 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
     $scope.refreshPage = function () {
         setInterval(function () {
             window.location = window.location.href;
-        }, 20000);
+        }, 30000);
     };
 
     /*Get User Object and Request User Login*/
@@ -338,30 +345,37 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
         $scope.redirectURL = flutterWaveRedirectURL + UID.AppUserId;
         if ($scope.validateSubscription(UID.AppUserId) == "False") {
             $scope.subDetailOBJ.IsActive = 0;
+            $(".activeOneCtrl").css("display", "block");
             $scope.keepUserData(UID);
         } else {
+            /*Clear Reload Interval*/
+            clearInterval(goInterval);
             /*If Game was licked auto redirect*/
             var gameData = localStorage.getItem("selectedGame");
             if (gameData) {
-                if (_frmGame =="True") {
+                if (_frmGame == "True") {
                     var gameString = JSON.parse(gameData);
-                    window.location = gameString.URL;
+                    $scope.selectedGame = gameString.URL;
+                    /* window.location = gameString.URL;*/
                 }
             }
             $scope.subDetailOBJ.IsActive = 1;
+            $(".activeOneCtrl").css("display", "none");
         }
     } else {
         if (_IsMobile == "True") {
             if (_mtnNumber != "") {/*Number is mtn*/
                 $scope.AutoRegisterNewUser();
             } else {
+                localStorage.removeItem("selectedGame");
                 $('#loginModal').modal('show');
             }
         } else {
+        localStorage.removeItem("selectedGame");
             $('#loginModal').modal('show');
         }
-        localStorage.removeItem("selectedGame");
         $scope.subDetailOBJ.IsActive = 0;
+        $(".activeOneCtrl").css("display", "block");
     }
 
     /*Check for Subscription Data*/
@@ -392,9 +406,9 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
                 }
                 $scope.HeaderId = parseInt(_HedaID);
                 goInterval = setInterval(function () {
-                    /*Refresh Page every 10 secs*/
+                    /*Refresh Page every 30 secs*/
                     window.location = window.location.href;
-                }, 35000);
+                }, 30000);
             } else {
                 $scope.keepUserData(userData);
                 $(".flwpug_getpaid").click();
@@ -429,16 +443,19 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
                     if (data != "") {
                         if (data.includes(";")) {
                             localStorage.removeItem("UID");
-                            localStorage.removeItem("selectedGame");
                             /*Clear Username Display*/
                             ResetUsernameToAccount();
-                            $('#loginModal').modal('show');
+                            if (_mtnNumber != "") {
+                                /*Do nothing*/
+                            } else {
+                                localStorage.removeItem("selectedGame");
+                                $('#loginModal').modal('show');
+                            }
                         } else {
                             returnURL = data;
                         }
                     } else {
                         localStorage.removeItem("UID");
-                        localStorage.removeItem("selectedGame");
                         /*Clear Username Display*/
                         ResetUsernameToAccount();
                         $('#loginModal').modal('show');
@@ -765,7 +782,7 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
                 /*Enable COntrols*/
                 //$(".disabledCtrl").removeAttr("disabled");
             }).error(function (data) {
-                $.notify(data, 'error');
+                $.notify("Connectivity Error, please try again.", 'error');
                 /*Hide Loading Gif*/
                 $("#subscribeLoda").css("display", "none");
                 /*Enable COntrols*/
@@ -851,5 +868,14 @@ function getRecordStatus(status) {
 function refreshPage() {
     setInterval(function () {
         window.location = window.location.href;
-    }, 35000);
+    }, 30000);
 };
+$(document).on("click", "#gameBtn", function () {
+    var gameData = localStorage.getItem("selectedGame");
+    if (gameData) {
+        if (_frmGame == "True") {
+            var gameString = JSON.parse(gameData);
+            window.location = gameString.URL;
+        }
+    }
+});

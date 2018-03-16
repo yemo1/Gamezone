@@ -579,9 +579,17 @@
             $scope.subDetailOBJ.IsActive = 1;
         }
     } else {
-        localStorage.removeItem("selectedGame");
+        if (_IsMobile == "True") {
+            if (_mtnNumber != "") {/*Number is mtn*/
+                /*Do nothing*/
+            } else {
+                $('#loginModal').modal('show');
+            }
+        } else {
+            $('#loginModal').modal('show');
+        }
+        $scope.subDetailOBJ.IsActive = 0;
         $('.subscribeBTN').css("display", "none");
-        /*$('#loginModal').modal('show');*/
     }
 
     /*Authentication Handler*/
@@ -604,21 +612,36 @@
                 success: function (data) {
                     if (data != "") {
                         if (data.includes(";")) {
-                            window.location = data.split(';')[0];
+                            localStorage.removeItem("UID");
+                            /*Clear Username Display*/
+                            ResetUsernameToAccount();
+                            if (_mtnNumber != "") {
+                                /*Do nothing*/
+                            } else {
+                                localStorage.removeItem("selectedGame");
+                                $('#loginModal').modal('show');
+                            }
+                           /* window.location = data.split(';')[0];*/
                         } else {
                             returnURL = data;
                         }
                     } else {
-                        window.location = "/Home/Index";
+                        if (_mtnNumber != "") {
+                            /*Do nothing*/
+                        } else {
+                            localStorage.removeItem("UID");
+                            /*Clear Username Display*/
+                            ResetUsernameToAccount();
+                            $('#loginModal').modal('show');
+                        }
                     }
                 }, error: function (data) {
                 }
             });
         } else {
             if (_mtnNumber != "") {
-                $scope.AutoRegisterNewUser();
+                /*Do nothing*/
             } else {
-                localStorage.removeItem("selectedGame");
                 /*Clear Username Display*/
                 ResetUsernameToAccount();
                 $('#loginModal').modal('show');
@@ -835,6 +858,7 @@
                     }
                 } else {
                     if (_mtnNumber != "") {
+                        localStorage.setItem("selectedGame", JSON.stringify(selectedGame));
                         window.location = "/Home/Subscription?msisdn=" + _mtnNumber + "&go=" + false + "&mobi=" + _IsMobile + "&heda=0&frmGame=true&uID=0";
                     } else {
                         localStorage.removeItem("selectedGame");

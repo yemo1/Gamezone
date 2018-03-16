@@ -400,7 +400,6 @@
         } else {
             $('#loginModal').modal('show');
         }
-        localStorage.removeItem("selectedGame");
         $scope.subDetailOBJ.IsActive = 0;
     }
 
@@ -425,16 +424,19 @@
                     if (data != "") {
                         if (data.includes(";")) {
                             localStorage.removeItem("UID");
-                            localStorage.removeItem("selectedGame");
                             /*Clear Username Display*/
                             ResetUsernameToAccount();
-                            $('#loginModal').modal('show');
+                            if (_mtnNumber != "") {
+                                /*Do nothing*/
+                            } else {
+                                localStorage.removeItem("selectedGame");
+                                 $('#loginModal').modal('show');   
+                            }
                         } else {
                             returnURL = data;
                         }
                     } else {
                         localStorage.removeItem("UID");
-                        localStorage.removeItem("selectedGame");
                         /*Clear Username Display*/
                         ResetUsernameToAccount();
                         $('#loginModal').modal('show');
@@ -444,9 +446,8 @@
             });
         } else {
             if (_mtnNumber != "") {
-                //$scope.AutoRegisterNewUser();
+                /*$scope.AutoRegisterNewUser();*/
             } else {
-                localStorage.removeItem("selectedGame");
                 /*Clear Username Display*/
                 ResetUsernameToAccount();
                 $('#loginModal').modal('show');
@@ -521,6 +522,7 @@
                 }
             } else {
                 if (_mtnNumber != "") {
+                    localStorage.setItem("selectedGame", JSON.stringify(selectedGame));
                     window.location = "/Home/Subscription?msisdn=" + _mtnNumber + "&go=" + false + "&mobi=" + _IsMobile + "&heda=0&frmGame=true&uID=0";
                 } else {
                     localStorage.removeItem("selectedGame");

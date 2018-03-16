@@ -8,9 +8,9 @@ namespace GameZone.Repositories
     {
         private readonly NGSubscriptionsEntities context;
         //private readonly EFDbContext context = new EFDbContext();
-        public ServiceResponseRepository(NGSubscriptionsEntities nGSubscriptionsEntities)
+        public ServiceResponseRepository()
         {
-            context = nGSubscriptionsEntities;
+            context = new NGSubscriptionsEntities();
         }
         public IEnumerable<ServiceResponses> ServiceResponses
         {

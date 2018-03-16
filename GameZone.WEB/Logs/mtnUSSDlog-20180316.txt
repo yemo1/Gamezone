@@ -1,0 +1,1 @@
+3/16/2018 11:17:47 AM ==> {"Message":"Procedure or function 'ConfirmAppUserSubscription' expects parameter '@MSISDN', which was not supplied.","LogData":"AppUserID: 1"}

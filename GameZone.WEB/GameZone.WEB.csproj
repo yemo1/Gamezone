@@ -273,6 +273,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AppUserController.cs" />
+    <Compile Include="Controllers\BadRequestTestController.cs" />
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\GamesController.cs" />
     <Compile Include="Controllers\HeaderController.cs" />
@@ -510,6 +511,7 @@
     <Content Include="Views\Games\GamePlayFull.cshtml" />
     <Content Include="Views\Shared\_MobileLayout.cshtml" />
     <Content Include="Views\Home\Subscription.cshtml" />
+    <Content Include="Views\BadRequestTest\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

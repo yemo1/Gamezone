@@ -23,7 +23,7 @@ namespace GameZone.WEB.Controllers
         private ApplicationUserManager _userManager;
         IAppUserRepository _IAppUserRepository;
 
-        string conString = System.Configuration.ConfigurationManager.ConnectionStrings["NGSubscriptionsConnectionString"].ConnectionString;
+        
         public AccountController(IAppUserRepository iAppUserRepository)
         {
             _IAppUserRepository = iAppUserRepository;
@@ -83,8 +83,52 @@ namespace GameZone.WEB.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public bool ValidSubscription(long UID, string MSISDN, string svcName, string Shortcode, bool IsMtn, string Productcode = null){bool retVal = false;using (SqlConnection connection = new SqlConnection(conString)){try{if (connection.State == System.Data.ConnectionState.Closed){connection.Open();}System.Data.DataTable dt = new System.Data.DataTable();using (var cmd = new SqlCommand("ConfirmAppUserSubscription", connection)){cmd.CommandType = System.Data.CommandType.StoredProcedure;cmd.Parameters.AddWithValue("@AppUserId", UID);cmd.Parameters.AddWithValue("@MSISDN", MSISDN);cmd.Parameters.AddWithValue("@ServiceName", svcName);cmd.Parameters.AddWithValue("@Shortcode", Shortcode);cmd.Parameters.AddWithValue("@CCode", Productcode);cmd.Parameters.AddWithValue("@IsMtn", IsMtn);using (var da = new SqlDataAdapter(cmd)){da.Fill(dt);}}retVal = bool.Parse(dt.Rows[0]["isSuccess"].ToString());}catch (Exception ex){new System.Threading.Thread(() =>{LocalLogger.LogFileWrite(Newtonsoft.Json.JsonConvert.SerializeObject(new LogVM(){Message = ex.Message,LogData = $"AppUserID: {UID}"}));}).Start();}}return retVal;}
-        
+        public bool ValidSubscription(long UID, string MSISDN, string svcName, string Shortcode, bool IsMtn, string Productcode = null)
+        {
+            var retVal = _IAppUserRepository.ConfirmUserSubscription(UID, MSISDN, svcName, Shortcode, Productcode, IsMtn);
+                        return retVal.isSuccess;
+            //bool retVal = false;
+            //using (SqlConnection connection = new SqlConnection(conString))
+            //{
+            //    try
+            //    {
+            //        if (connection.State == System.Data.ConnectionState.Closed)
+            //        {
+            //            connection.Open();
+            //        }
+            //        System.Data.DataTable dt = new System.Data.DataTable();
+            //        using (var cmd = new SqlCommand("ConfirmAppUserSubscription", connection))
+            //        {
+            //            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            //            cmd.Parameters.AddWithValue("@AppUserId", UID);
+            //            cmd.Parameters.AddWithValue("@MSISDN", MSISDN);
+            //            cmd.Parameters.AddWithValue("@ServiceName", svcName);
+            //            cmd.Parameters.AddWithValue("@Shortcode", Shortcode);
+            //            cmd.Parameters.AddWithValue("@CCode", Productcode);
+            //            cmd.Parameters.AddWithValue("@IsMtn", IsMtn);
+            //            using (var da = new SqlDataAdapter(cmd))
+            //            {
+            //                da.Fill(dt);
+            //            }
+            //        }
+            //        retVal = bool.Parse(dt.Rows[0]["isSuccess"].ToString());
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        new System.Threading.Thread(() =>
+            //        {
+            //            LocalLogger.LogFileWrite(Newtonsoft.Json.JsonConvert.SerializeObject(
+            //                new LogVM()
+            //                {
+            //                    Message = ex.Message,
+            //                    LogData = $"AppUserID: {UID}"
+            //                }));
+            //        }).Start();
+            //    }
+            //}
+            //return retVal;
+        }
+
         // POST: /Account/LogOff
         [HttpPost]
         [AllowAnonymous]

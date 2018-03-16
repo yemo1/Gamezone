@@ -2,6 +2,7 @@
 //var apiURL = "http://localhost:62101";
 var apiURL = "http://localhost:17683";
 var flutterWaveRedirectURL = apiURL + "/Games/SubResponse?uid=";
+
 //Validate Form Controls
 function isFormValid(containerId) {
     var isInValid = 0;
@@ -40,3 +41,21 @@ function partialHarsh(val) {
     }
     return retVal;
 };
+
+/*Function to Fetch MSISDN from Wap Header
+for Global Application Consumption
+Method not in use yet
+*/
+function FetchMSISDN() {
+    var _mtnNumber = "";
+    $.ajax({
+        type: "Get",
+        url: "/Home/GetMSISDN",
+        async: false,
+        success: function (data) {
+            _mtnNumber = data;
+        }, error: function (data) {
+            console.log("Wap Header Fetch Error:  " + data);
+        }
+    });
+}

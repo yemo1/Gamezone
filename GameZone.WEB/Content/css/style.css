@@ -996,7 +996,8 @@ body::-webkit-scrollbar-thumb {
     position: relative;
     background:rgba(250, 252, 254, 0.97);
     padding: 4% 0;
-    min-height: 301px;
+    /*min-height: 301px;*/
+    height: 301px;
 }
 
 .modal-footer {

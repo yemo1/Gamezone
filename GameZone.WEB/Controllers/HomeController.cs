@@ -79,23 +79,12 @@ namespace GameZone.WEB.Controllers
             //    ViewBag.IsMTN = false;
             //}
             #endregion
-
-            //if (request.Browser.IsMobileDevice)
+            
             if (Request.UserAgent.Contains("Mobi") == true)
             {
                 //mobile
                 ViewBag.IsMobile = true;
-
-                //Get Number from Header
-                //NameValueCollection nvc = new NameValueCollection();
-                //nvc = Request.Headers;
-                //Dictionary<string, string> ss = new Dictionary<string, string>();
-                //foreach (var item in nvc.AllKeys)
-                //{
-                //    ss.Add(item, nvc[item]);
-                //}
                 var headerData = _HeaderController.FillMSISDN();
-                //if (!ss.ContainsKey("MSISDN"))
                 if (headerData == null)
                 {
                     //Not Mtn
@@ -103,8 +92,6 @@ namespace GameZone.WEB.Controllers
                 }
                 else
                 {
-                    //Not Mtn
-                    //ViewBag.mtnNumber = nvc.GetValues("MSISDN");
                     var mtnNumber = headerData.Lines.FirstOrDefault().Phone;
                     ViewBag.mtnNumber = (mtnNumber.Trim() == "XXX-XXXXXXXX") ? null : mtnNumber.Trim();
                     new Thread(() =>
@@ -127,7 +114,6 @@ namespace GameZone.WEB.Controllers
             if (Session["fltwvSubscription"] != null)
             {
                 ViewBag.fltwvSubscription = Session["fltwvSubscription"].ToString();
-                //Response.Write($"<script language='javascript' type='text/javascript'>alert('{Session["fltwvSubscription"].ToString()}');</script>");
             }
             Session["fltwvSubscription"] = null;
 
@@ -169,7 +155,7 @@ namespace GameZone.WEB.Controllers
                             }));
 
                     }).Start();
-                    
+
                     ViewBag.mtnNumber = msisdn;
                     ViewBag.IsMobile = isMobi;
 
@@ -268,7 +254,7 @@ namespace GameZone.WEB.Controllers
                     }
                 }
             }
-            else if (string.IsNullOrEmpty(msisdn) && !isMobi)//Ordinary User
+            else
             {
                 ViewBag.mtnNumber = null;
                 ViewBag.IsMobile = isMobi;
@@ -332,7 +318,7 @@ namespace GameZone.WEB.Controllers
 
             //Just for test of Auto Registration
             //ViewBag.IsMobile = true;
-            //ViewBag.mtnNumber = "2348168423222";
+            ViewBag.mtnNumber = "2348147911707";
             if (Session["fltwvSubscription"] != null)
             {
                 ViewBag.fltwvSubscription = Session["fltwvSubscription"].ToString();
@@ -650,6 +636,37 @@ namespace GameZone.WEB.Controllers
                 return Redirect(Url.Action("Index", new { controller = category, action = "Index" }));
             }
             return Redirect(Request.Url.PathAndQuery);
+        }
+
+        [HttpGet]
+        public string GetMSISDN()
+        {
+            try
+            {
+                var headerData = _HeaderController.FillMSISDN();
+                if (headerData == null)
+                {
+                    //Not Mtn
+                    return null;
+                }
+                else
+                {
+                    var mtnNumber = headerData.Lines.FirstOrDefault().Phone;
+                    return (mtnNumber.Trim() == "XXX-XXXXXXXX") ? null : mtnNumber.Trim();
+                }
+            }
+            catch (Exception ex)
+            {
+                new Thread(() =>
+                {
+                    LocalLogger.LogFileWrite(
+                        JsonConvert.SerializeObject(new LogVM()
+                        {
+                            Message = ex.Message
+                        }));
+                }).Start();
+                return null;
+            }
         }
     }
 }

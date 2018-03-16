@@ -7,7 +7,6 @@ using System.Web;
 using System.Net;
 using System.IO;
 using System.Text;
-using System.Configuration;
 using System.Web.UI;
 using GameZone.TOOLS;
 using GameZone.VIEWMODEL;
@@ -17,13 +16,11 @@ namespace GameZone.Repositories
 {
     public class ServiceRequestRepository : IServiceRequestRepository
     {
-        private readonly NGSubscriptionsEntities context;
+        private readonly NGSubscriptionsEntities context = new NGSubscriptionsEntities();
         //private readonly EFDbContext context = new EFDbContext();
-        IServiceResponseRepository _IServiceResponseRepository;
-        public ServiceRequestRepository(NGSubscriptionsEntities nGSubscriptionsEntities, IServiceResponseRepository ServiceResponseRepository)
+        ServiceResponseRepository _IServiceResponseRepository = new Repositories.ServiceResponseRepository();
+        public ServiceRequestRepository()
         {
-            context = nGSubscriptionsEntities;
-            _IServiceResponseRepository = ServiceResponseRepository;
         }
         public IEnumerable<ServiceRequests> ServiceRequests
         {

@@ -61,49 +61,37 @@ namespace GameZone.WEB.Controllers
         /// <returns></returns>
         public ActionResult List(string t = null)
         {
-            if (Request.UserAgent.Contains("Mobi") == true)
-            {
-                //mobile
-                ViewBag.IsMobile = true;
-
-                //Get Number from Header
-                //NameValueCollection nvc = new NameValueCollection();
-                //nvc = Request.Headers;
-                //Dictionary<string, string> ss = new Dictionary<string, string>();
-                //foreach (var item in nvc.AllKeys)
-                //{
-                //    ss.Add(item, nvc[item]);
-                //}
-                var headerData = _HeaderController.FillMSISDN();
-                //if (!ss.ContainsKey("MSISDN"))
-                if (headerData == null)
-                {
-                    //Not Mtn
-                    ViewBag.mtnNumber = null;
-                }
-                else
-                {
-                    //Not Mtn
-                    //ViewBag.mtnNumber = nvc.GetValues("MSISDN");
-                    var mtnNumber = headerData.Lines.FirstOrDefault().Phone;
-                    ViewBag.mtnNumber = (mtnNumber.Trim() == "XXX-XXXXXXXX") ? null : mtnNumber.Trim();
-                    new Thread(() =>
-                    {
-                        LocalLogger.LogFileWrite(
-                            JsonConvert.SerializeObject(new LogVM()
-                            {
-                                Message = "Recognised MTN Number",
-                                LogData = mtnNumber
-                            }));
-                    }).Start();
-                }
-            }
-            else
-            {
-                //laptop or desktop
-                ViewBag.IsMobile = false;
-                ViewBag.mtnNumber = null;
-            }
+            //if (Request.UserAgent.Contains("Mobi") == true)
+            //{
+            //    //mobile
+            //    ViewBag.IsMobile = true;
+            //    var headerData = _HeaderController.FillMSISDN();
+            //    if (headerData == null)
+            //    {
+            //        //Not Mtn
+            //        ViewBag.mtnNumber = null;
+            //    }
+            //    else
+            //    {
+            //        var mtnNumber = headerData.Lines.FirstOrDefault().Phone;
+            //        ViewBag.mtnNumber = (mtnNumber.Trim() == "XXX-XXXXXXXX") ? null : mtnNumber.Trim();
+            //        new Thread(() =>
+            //        {
+            //            LocalLogger.LogFileWrite(
+            //                JsonConvert.SerializeObject(new LogVM()
+            //                {
+            //                    Message = "Recognised MTN Number",
+            //                    LogData = mtnNumber
+            //                }));
+            //        }).Start();
+            //    }
+            //}
+            //else
+            //{
+            //    //laptop or desktop
+            //    ViewBag.IsMobile = false;
+            //    ViewBag.mtnNumber = null;
+            //}
             if (Session["fltwvSubscription"] != null)
             {
                 ViewBag.fltwvSubscription = Session["fltwvSubscription"].ToString();
