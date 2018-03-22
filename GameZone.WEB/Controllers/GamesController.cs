@@ -15,7 +15,7 @@ using System.Web.Script.Serialization;
 
 namespace GameZone.WEB.Controllers
 {
-    public class GamesController : Controller
+    public class GamesController : BaseController
     {
         SubscriberRepository subscriberRepository;
         string testFlutterwaveSecKey = "FLWSECK-62c555ca07f7a21adc144f757778a729-X";
@@ -61,30 +61,42 @@ namespace GameZone.WEB.Controllers
         /// <returns></returns>
         public ActionResult List(string t = null)
         {
-            //if (Request.UserAgent.Contains("Mobi") == true)
+            bool isMobi = false;
+            if (Request.UserAgent.Contains("Mobi") == true)
+            {
+                isMobi = true;
+            }
+            ViewBag.IsMobile = isMobi;
+           
+            var hedaData = System.Web.HttpContext.Current.Session["mtnNumber"] != null ? (MSISDNRepository)System.Web.HttpContext.Current.Session["mtnNumber"] : null;
+            string mtnNumber = null;
+            if (hedaData != null)
+            {
+                mtnNumber = (hedaData.Lines.FirstOrDefault().Phone.Trim() == "XXX-XXXXXXXX") ? null : hedaData.Lines.FirstOrDefault().Phone.Trim();
+            }
+
+            ViewBag.mtnNumber = mtnNumber;
+
+            //var headerData = _HeaderController.FillMSISDN();
+            //if (headerData == null)
             //{
-            //    //mobile
-            //    ViewBag.IsMobile = true;
-            //    var headerData = _HeaderController.FillMSISDN();
-            //    if (headerData == null)
+            //    //Not Mtn
+            //    ViewBag.mtnNumber = null;
+            //}
+            //else
+            //{
+            //    var mtnNumber = headerData.Lines.FirstOrDefault().Phone;
+            //    ViewBag.mtnNumber = (mtnNumber.Trim() == "XXX-XXXXXXXX") ? null : mtnNumber.Trim();
+            //    new Thread(() =>
             //    {
-            //        //Not Mtn
-            //        ViewBag.mtnNumber = null;
-            //    }
-            //    else
-            //    {
-            //        var mtnNumber = headerData.Lines.FirstOrDefault().Phone;
-            //        ViewBag.mtnNumber = (mtnNumber.Trim() == "XXX-XXXXXXXX") ? null : mtnNumber.Trim();
-            //        new Thread(() =>
-            //        {
-            //            LocalLogger.LogFileWrite(
-            //                JsonConvert.SerializeObject(new LogVM()
-            //                {
-            //                    Message = "Recognised MTN Number",
-            //                    LogData = mtnNumber
-            //                }));
-            //        }).Start();
-            //    }
+            //        LocalLogger.LogFileWrite(
+            //            JsonConvert.SerializeObject(new LogVM()
+            //            {
+            //                Message = "Recognised MTN Number",
+            //                LogData = mtnNumber
+            //            }));
+            //    }).Start();
+            //}
             //}
             //else
             //{
@@ -92,12 +104,12 @@ namespace GameZone.WEB.Controllers
             //    ViewBag.IsMobile = false;
             //    ViewBag.mtnNumber = null;
             //}
-            if (Session["fltwvSubscription"] != null)
+            ViewBag.fltwvSubscription = null;
+            if (System.Web.HttpContext.Current.Session["fltwvSubscription"] != null)
             {
-                ViewBag.fltwvSubscription = Session["fltwvSubscription"].ToString();
-                //Response.Write($"<script language='javascript' type='text/javascript'>alert('{Session["fltwvSubscription"].ToString()}');</script>");
+                ViewBag.fltwvSubscription = System.Web.HttpContext.Current.Session["fltwvSubscription"].ToString();
             }
-            Session["fltwvSubscription"] = null;
+            System.Web.HttpContext.Current.Session["fltwvSubscription"] = null;
 
             //Just for test of Auto Registration
             //ViewBag.IsMobile = true;
@@ -115,7 +127,7 @@ namespace GameZone.WEB.Controllers
                 var userData = (LoginAppUserVM)GameUserIdentity.LoggedInUser;
                 if (userData == null)
                 {
-                    Session["fltwvSubscription"] = "Session timed out. Please try again.";
+                    System.Web.HttpContext.Current.Session["fltwvSubscription"] = "Session timed out. Please try again.";
                     return RedirectToAction("Subscription", "Home", new { msisdn="", go=false, mobi=false, heda=0, frmGame=false, uID=0 });
                 }
                 //Check for valid Exisiting Subscription
@@ -123,7 +135,7 @@ namespace GameZone.WEB.Controllers
                 //Valid Subscription Exists
                 if (subscriptionConfirm.isSuccess)
                 {
-                    Session["fltwvSubscription"] = "You already have an active Subscription.";
+                    System.Web.HttpContext.Current.Session["fltwvSubscription"] = "You already have an active Subscription.";
                     return RedirectToAction("Subscription", "Home", new { msisdn = "", go = false, mobi = false, heda = 0, frmGame = false, uID = userData.AppUserId });
                 }
                 logObj = JsonConvert.SerializeObject(new LogVM()
@@ -163,7 +175,7 @@ namespace GameZone.WEB.Controllers
                 if (verifyRspJSON.data.status.ToLower() != "successful" && verifyRspJSON.data.flwMeta.chargeResponse != "00" || verifyRspJSON.data.status.ToLower() != "successful" && verifyRspJSON.data.flwMeta.chargeResponse != "0")
                 {
                     //Transaction Failed
-                    Session["fltwvSubscription"] = "Sorry. Your subscription failed. Please try again later.";
+                    System.Web.HttpContext.Current.Session["fltwvSubscription"] = "Sorry. Your subscription failed. Please try again later.";
                     return RedirectToAction("Subscription", "Home", new { msisdn = "", go = false, mobi = false, heda = 0, frmGame = false, uID = userData.AppUserId });
                 }
                 else
@@ -190,7 +202,7 @@ namespace GameZone.WEB.Controllers
                     
                     //Save Subscription Data in DB
                     var rezolt = _NGSubscriptionsEntities.AddServiceSubscription(userData.AppUserId, svcName, Enum.GetName(typeof(GameZonePrice), subscriptionPeriod), DateTime.Now, periodEnd, verifyRspJSON.data.amount, true, true, DateTime.Now).FirstOrDefault();
-                    Session["fltwvSubscription"] = "Your subscription was successful.";
+                    System.Web.HttpContext.Current.Session["fltwvSubscription"] = "Your subscription was successful.";
                     //ViewBag.subscriptionSuccessful = "Your subscription was successful.";
                     return RedirectToAction("Subscription", "Home", new { msisdn = "", go = false, mobi = false, heda = 0, frmGame = false, uID = userData.AppUserId });
                 }

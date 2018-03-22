@@ -1,6 +1,6 @@
 ﻿@using GameZone.VIEWMODEL;
 @{
-    ViewBag.Title = "Home | Game Zone";
+    ViewBag.Title = "Home";
     Layout = "~/Views/Shared/_Layout.cshtml";
     bool IsMobile = (bool)ViewBag.IsMobile;
     string mtnNumber = null;
@@ -287,17 +287,8 @@
         var _fltwvSubscription = "@fltwvSubscription";
     </script>
 
-    @*<script type="text/javascript" src="https://api.ravepay.co/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>*@
-    <script type="text/javascript" src="http://flw-pms-dev.eu-west-1.elasticbeanstalk.com/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
-    <script src="~/Content/js/notify.min.js?v=@rls_vsn"></script>
+    @*<script src="~/Content/js/notify.min.js?v=@rls_vsn"></script>
     <script src="~/Scripts/Home/Index.js?v=@rls_vsn"></script>
-@*<script src="~/Scripts/Home/Index.min.js?v=@rls_vsn"></script>*@
-    <script src="~/Content/js/jquery.lazyload.min.js?v=@rls_vsn"></script>
-    @*<script src="~/Scripts/flwpbf-inline.js"></script>*@
-    @*<script type="text/javascript" src="https://api.ravepay.co/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>*@
-    @*@Scripts.Render("~/bundles/Home-IndexPageJs")*@
-
-    @*<script type="text/javascript" src="http://flw-pms-dev.eu-west-1.elasticbeanstalk.com/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>*@
-
-
+    <script src="~/Content/js/jquery.lazyload.min.js?v=@rls_vsn"></script>*@
+    @Scripts.Render("~/bundles/homeIndex")
 }

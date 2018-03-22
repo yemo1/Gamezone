@@ -274,6 +274,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AppUserController.cs" />
     <Compile Include="Controllers\BadRequestTestController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\GamesController.cs" />
     <Compile Include="Controllers\HeaderController.cs" />
@@ -442,12 +443,9 @@
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\flwpbf-inline.js" />
     <Content Include="Scripts\Games\GamePlayFull.js" />
-    <Content Include="Scripts\Games\List.min.js" />
     <Content Include="Scripts\Games\List.js" />
     <Content Include="Scripts\Games\GamePlay.js" />
     <Content Include="Scripts\Home\Subscription.js" />
-    <Content Include="Scripts\Home\Index.min.js" />
-    <Content Include="Scripts\layout.min.js" />
     <Content Include="Scripts\layout.js" />
     <Content Include="Scripts\Home\Index.js" />
     <Content Include="Scripts\Games\Index.js" />
@@ -516,6 +514,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Report Files\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

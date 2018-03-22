@@ -8,7 +8,16 @@ namespace GameZone.WEB
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+            bundles.UseCdn = true;   //enable CDN support
+
+            //add link to jquery on the CDN
+            var jqueryCdnPath = "https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.0.min.js";
+
+            //bundles.Add(new ScriptBundle("~/bundles/jquery",
+            //            jqueryCdnPath).Include(
+            //            "~/Scripts/jquery-{version}.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/jquery", jqueryCdnPath).Include(
                         "~/Content/js/jquery.min.js"
                         ));
 
@@ -25,62 +34,55 @@ namespace GameZone.WEB
                       "~/Scripts/respond.js"
                       ));
 
-            bundles.Add(new ScriptBundle("~/bundles/baseJS").Include(
+            bundles.Add(new ScriptBundle("~/bundles/angularGlobal").Include(
+                "~/Scripts/angular.min.js",
+                      "~/Scripts/global.js"
+                      ));
+
+            bundles.Add(new ScriptBundle("~/bundles/ContentScript").Include(
                 "~/Content/js/magnific-popup.min.js",
                       "~/Content/js/imagesloaded.pkgd.min.js",
                       "~/Content/js/appear.js",
                       "~/Content/js/base.js",
-                      "~/Content/js/smooth-scroll.js"
+                      "~/Content/js/smooth-scroll.min.js",
+                      "~/Content/js/isotope.pkgd.min.js",
+                      "~/Content/js/lightbox.min.js",
+                      "~/Content/js/dofilter.js",
+                      "~/Content/js/scrolla.jquery.min.js",
+                      "~/Content/js/site.js",
+                      "~/Content/js/notify.min.js"
                       ));
 
-            bundles.Add(new ScriptBundle("~/bundles/silteringJs").Include(
-                "~/Content/js/isotope.pkgd.min.js",
-                "~/Content/js/lightbox.min.js",
-                "~/Content/js/dofilter.js",
-                "~/Content/js/scrolla.jquery.min.js"
+            bundles.Add(new ScriptBundle("~/bundles/layout").Include(
+                "~/Scripts/layout.js"
                       ));
 
-            bundles.Add(new ScriptBundle("~/bundles/Home-IndexPageJs").Include(
-               "~/Content/js/notify.min.js",
-               "~/Scripts/Home/Index.js"
+            bundles.Add(new ScriptBundle("~/bundles/homeIndex").Include(
+                "~/Scripts/Home/Index.js",
+                "~/Content/js/jquery.lazyload.min.js"
                       ));
 
-            bundles.Add(new ScriptBundle("~/bundles/Games-GamePlayPageJs").Include(
-                "~/Content/js/jquery.sliderPro.min.js",
-                "~/Content/js/jquery.fancybox.pack.js",
-                "~/Content/js/games.js",
-                "~/Scripts/Games/GamePlay.js"
+            bundles.Add(new ScriptBundle("~/bundles/gamesList").Include(
+                "~/Scripts/Games/List.js",
+                "~/Content/js/jquery.lazyload.min.js"
                       ));
 
-            bundles.Add(new ScriptBundle("~/bundles/Games-ListPageJs").Include(
-                "~/Content/js/jquery.sliderPro.min.js",
-                "~/Content/js/jquery.fancybox.pack.js",
-                "~/Content/js/games.js",
-                "~/Scripts/Games/List.js"
+            bundles.Add(new ScriptBundle("~/bundles/homeSubscription").Include(
+                "~/Scripts/Home/Subscription.js"
                       ));
 
-            bundles.Add(new ScriptBundle("~/bundles/customjs").Include(
-                "~/Content/js/site.js"
-                      ));
-
-            bundles.Add(new ScriptBundle("~/bundles/angular").Include(
-                      "~/Scripts/angular.min.js",
-                      "~/Scripts/global.js"));
-
-            bundles.Add(new StyleBundle("~/Content/css").Include(
+            bundles.Add(new StyleBundle("~/bundles/contentCss").Include(
                       "~/Content/css/bootstrap.min.css",
                       "~/Content/css/animate.min.css",
                       "~/Content/css/font-awesome.min.css",
-                      "~/Content/css/base-stylesheet.css",
+                      "~/Content/css/base-stylesheet.css"
+                      ));
+            bundles.Add(new StyleBundle("~/Content/css/contentCssStyle").Include(
                       "~/Content/css/style.css"
                       ));
 
-            bundles.Add(new StyleBundle("~/Content/pageSpecificCss").Include(
-                      "~/Content/js/fancybox/jquery.fancybox.css",
-                      "~/Content/css/slider-pro.min.css",
-                      "~/Content/css/font-awesome.min.css",
-                      "~/Content/css/base-stylesheet.css",
-                      "~/Content/css/style.css"
+            bundles.Add(new StyleBundle("~/bundles/contentGamesList").Include(
+                      "~/Content/css/slider-pro.min.css"
                       ));
         }
     }

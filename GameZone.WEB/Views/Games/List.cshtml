@@ -17,7 +17,8 @@
 
 @section style{
 
-    <link href="~/Content/css/slider-pro.min.css?v=@rls_vsn" rel="stylesheet" />
+    @*<link href="~/Content/css/slider-pro.min.css?v=@rls_vsn" rel="stylesheet" />*@
+    @Styles.Render("~/bundles/contentGamesList")
     <style>
         header {
             position: fixed;
@@ -86,16 +87,16 @@
                             <table style="width:100%; border:none;">
                                 @if (IsMobile && mtnNumber != null)
                                 {
-                                    <tr>
-                                        <td colspan="2">
-                                            <span>Phone No</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2">
-                                            <label>@mtnNumber</label>
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <span>Phone No</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <label>@mtnNumber</label>
+                                    </td>
+                                </tr>
                                 }
                                 <tr>
                                     <td>
@@ -124,7 +125,7 @@
                                         }
                                         else
                                         {
-                                            <label>{{subDetailOBJ.Period}}</label>
+                                        <label>{{subDetailOBJ.Period}}</label>
                                         }
                                     </td>
                                     <td id="txtIsActive"></td>
@@ -143,7 +144,7 @@
                             <select id="payTypeSel" class="form-control" ng-model="payType">
                                 @if (mtnNumber == null)
                                 {
-                                    <option value="card">Pay with Card</option>
+                                <option value="card">Pay with Card</option>
                                 }
                                 <option value="airtime">Pay with Airtime (MTN Only)</option>
                             </select>
@@ -207,9 +208,9 @@
         var _SERVICE_SHORTCODE = "@SERVICE_SHORTCODE";
         var _fltwvSubscription = "@fltwvSubscription";
     </script>
-<script type="text/javascript" src="http://flw-pms-dev.eu-west-1.elasticbeanstalk.com/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
-    <script src="~/Content/js/notify.min.js?v=@rls_vsn"></script>
-    <script src="~/Scripts/Games/List.js?v=@rls_vsn"></script>
-@*<script src="~/Scripts/Games/List.min.js?v=@rls_vsn"></script>*@
-    <script src="~/Content/js/jquery.lazyload.min.js?v=@rls_vsn"></script>
+    @*<script src="~/Content/js/notify.min.js?v=@rls_vsn"></script>
+        <script src="~/Scripts/Games/List.js?v=@rls_vsn"></script>
+        <script src="~/Content/js/jquery.lazyload.min.js?v=@rls_vsn"></script>*@
+
+    @Scripts.Render("~/bundles/gamesList")
 }

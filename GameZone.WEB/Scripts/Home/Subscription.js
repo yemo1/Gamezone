@@ -1,7 +1,7 @@
 ﻿/*Hide Loaders by default*/
 $("#logLoda, #regLoda, #forgotLoda, #ChangeLoda, #subscribeLoda").css("display", "none");
 
-gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
+gamezoneApp.controller('gamezoneCtrlr', ['$scope', '$http', function ($scope, $http) {
     if (_fltwvSubscription != "") {
         $.notify(_fltwvSubscription, 'info');
     }
@@ -22,7 +22,7 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
     $scope.payType = {};
     $scope.mtnMSISDN;
     $scope.headerData;
-    $scope.HeaderId;
+    $scope.HeaderId = 63;
     $scope.selectedGame = "";
     $scope.userName = "";
     var getSubDataInterval = null;
@@ -164,10 +164,12 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
             $scope.payType = 'airtime';
             $('#logout-target').css("display", "none");/*Hide Logout Button*/
         } else {
-            $scope.payType = 'card';
+            $scope.payType = 'airtime';
+           /* $scope.payType = 'card';*/
         }
     } else {
-        $scope.payType = 'card';
+        $scope.payType = 'airtime';
+       // $scope.payType = 'card';
     }
 
     /*EPayment Subscriber*/
@@ -192,10 +194,8 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
                             $scope.subDetailOBJ.PeriodEnd = $scope.formatDate(data.Data.PeriodEnd);
                             if ($scope.dateIsEalierThanToday($scope.subDetailOBJ.PeriodEnd)) {
                                 $scope.subDetailOBJ.IsActive = 0;
-                                $(".activeOneCtrl").css("display", "block");
                             } else {
                                 $scope.subDetailOBJ.IsActive = 1;
-                                $(".activeOneCtrl").css("display","none");
                             }
                             $("#txtIsActive").html(getRecordStatus($scope.subDetailOBJ.IsActive));
                         });
@@ -206,7 +206,6 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
                             $scope.subDetailOBJ.Period = "-";
                             $scope.subDetailOBJ.Amount = "-";
                             $scope.subDetailOBJ.IsActive = 0;
-                            $(".activeOneCtrl").css("display", "block");
                             $("#txtIsActive").html(getRecordStatus($scope.subDetailOBJ.IsActive));
                         });
                     }
@@ -269,9 +268,10 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
                 url: apiURL + "/api/AppUser/MTNSubscriptionDetails?MSISDN=" + UID.szUsername + "&Shortcode=" + _SERVICE_SHORTCODE,
                 async: false,
                 success: function (data) {
+                    console.log(data);
                     if (data.Success) {
                         /*Clear Timer Interval*/
-                        //clearInterval(getSubDataInterval);
+                        /*clearInterval(getSubDataInterval);*/
                         $scope.subDetailOBJ = {};
                         //$scope.$apply(function () {
                         $scope.subDetailOBJ = data.Data;
@@ -280,10 +280,8 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
                         $scope.subDetailOBJ.PeriodEnd = $scope.formatDate(data.Data.Exp);
                         if ($scope.dateIsEalierThanToday($scope.subDetailOBJ.PeriodEnd)) {
                             $scope.subDetailOBJ.IsActive = 0;
-                            $(".activeOneCtrl").css("display", "block");
                         } else {
                             $scope.subDetailOBJ.IsActive = 1;
-                            $(".activeOneCtrl").css("display", "none");
                         }
                         //console.log($scope.subDetailOBJ.PeriodStart);
                         $("#txtIsActive").html(getRecordStatus($scope.subDetailOBJ.IsActive));
@@ -294,8 +292,7 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
                         $scope.subDetailOBJ.PeriodEnd = "-";
                         $scope.subDetailOBJ.Period = "-";
                         $scope.subDetailOBJ.Amount = "-";
-                        $scope.subDetailOBJ.IsActive = "0";
-                        $(".activeOneCtrl").css("display", "block");
+                        $scope.subDetailOBJ.IsActive = 0;
                         $("#txtIsActive").html(getRecordStatus($scope.subDetailOBJ.IsActive));
                         //});
                     }
@@ -345,7 +342,6 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
         $scope.redirectURL = flutterWaveRedirectURL + UID.AppUserId;
         if ($scope.validateSubscription(UID.AppUserId) == "False") {
             $scope.subDetailOBJ.IsActive = 0;
-            $(".activeOneCtrl").css("display", "block");
             $scope.keepUserData(UID);
         } else {
             /*Clear Reload Interval*/
@@ -360,27 +356,22 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
                 }
             }
             $scope.subDetailOBJ.IsActive = 1;
-            $(".activeOneCtrl").css("display", "none");
         }
     } else {
         if (_IsMobile == "True") {
             if (_mtnNumber != "") {/*Number is mtn*/
                 $scope.AutoRegisterNewUser();
             } else {
-                localStorage.removeItem("selectedGame");
                 $('#loginModal').modal('show');
             }
         } else {
-        localStorage.removeItem("selectedGame");
-            $('#loginModal').modal('show');
+        window.location = "/Home/";
         }
         $scope.subDetailOBJ.IsActive = 0;
-        $(".activeOneCtrl").css("display", "block");
     }
 
     /*Check for Subscription Data*/
     if (_subGo == "True") {
-        $(".disabledCtrl").attr("disabled", "disabled");
         var loadCnt = sessionStorage.getItem("loadCnt");
         var cntIndex = 0;
         if (loadCnt) {
@@ -401,6 +392,7 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
         if (userOBJ) {
             userData = JSON.parse(userOBJ);
             if (_mtnNumber != "") {
+                $(".disabledCtrl").attr("disabled", "disabled");
                 if (userData.szUsername != _mtnNumber) {/*Check if user loggedin is same as phone number detected*/
                     $scope.AutoRegisterNewUser();
                 }
@@ -411,7 +403,6 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
                 }, 30000);
             } else {
                 $scope.keepUserData(userData);
-                $(".flwpug_getpaid").click();
             }
         } else {
             if (_mtnNumber != "") {
@@ -745,6 +736,9 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
             $("#payTypeSel").focus();
             return;
         }
+        if (_mtnNumber != "") {/*Number is mtn*/
+            $("#txtPhone").val(_mtnNumber);
+        }
         if ($("#txtPhone").val().trim() == "") {
             $.notify("Please enter your phone no.", 'error');
             $("#txtPhone").focus();
@@ -772,6 +766,10 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
                 var retVal = JSON.parse(data);
                 if (!retVal.Success) {
                     $.notify(retVal.Message, 'error');
+                    /*Hide Loading Gif*/
+                    $("#subscribeLoda").css("display", "none");
+                    /*Enable COntrols*/
+                    $(".disabledCtrl").removeAttr("disabled");
                 } else {
                     $.notify(retVal.Message, 'success');
                     /*Refresh Page every 20 secs*/
@@ -845,7 +843,7 @@ gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
         var todaysDate = new Date();
         return convDate < todaysDate;
     };
-});
+}]);
 
 $("a.flwpug_getpaid").find("button").addClass("btn btn-primary");
 

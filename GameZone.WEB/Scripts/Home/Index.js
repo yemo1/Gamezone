@@ -1,4 +1,4 @@
-﻿gamezoneApp.controller('gamezoneCtrlr', function ($scope, $http) {
+﻿gamezoneApp.controller('gamezoneCtrlr', ['$scope', '$http', function ($scope, $http) {
     /*Make Games Page Menu Active*/
     $("#menuUL li").removeClass("current");
     $("#homeMenu").addClass("current");
@@ -20,6 +20,32 @@
     $scope.headerData;
     $scope.HeaderId;
     $scope.userName = "";
+
+    /*Method to Format Date to format (DD/MM/YYYY)*/
+    $scope.formatDate = function (dDate) {
+        if (dDate != "" && dDate != null) {
+            var dDate = new Date(dDate),
+            month = dDate.getMonth() + 1,
+            day = dDate.getDate(),
+            year = dDate.getFullYear();
+            day = (day < 10) ? '0' + day.toString() : day;
+            month = (month < 10) ? '0' + month.toString() : month;
+            return day + "/" + month + "/" + year;
+        } else {
+            return "";
+        }
+    };
+
+    /*Check for Date Greater than today*/
+    $scope.dateIsEalierThanToday = function (dDate) {
+        var date = dDate.substring(0, 2);
+        var month = dDate.substring(3, 5);
+        var year = dDate.substring(6, 10);
+        var convDate = new Date(year, month - 1, date);
+        var todaysDate = new Date();
+        return convDate < todaysDate;
+    };
+
     /*Login Handler*/
     $scope.userLogin = function () {
         if ($scope.loginObj.szUsername == undefined || $scope.loginObj.szUsername.trim() == "") {
@@ -187,8 +213,79 @@
         $scope.payType = 'card';
     }
 
+    /*Function to Display Game List*/
+    $scope.displayGameList = function (gameData, selectedCat) {
+        var gameContent = "";
+        /*Empty Div*/
+        $("#isotopeContainer").empty();
+        $("body").find('.game-loader').addClass('hide').removeClass('show');
+        $.each(gameData, function (i, rec) {
+            if (rec.title != "What's My Icon?") {
+                gameContent = "<div class='col-sm-2 col-xs-6 isotopeSelector block " + selectedCat + "'>";
+                gameContent = gameContent + "<div class='service-wrap hovereffect panel clearfix animate' data-animate='bounceIn' data-duration='1.0s' data-delay='0.2s'>";
+
+                gameContent = gameContent + "<a href='" + rec.url + "' class='game-link'>";
+
+                gameContent = gameContent + "<h3 class='game-title hiddenPara'>" + rec.title + "</h3>";
+                gameContent = gameContent + "<p class='game-category hiddenPara'>" + selectedCat + "</p>";
+                gameContent = gameContent + "<div class='longDescription hiddenPara'>" + rec.long_description + "</div>";
+
+                gameContent = gameContent + "<div class='lazy'>";
+                gameContent = gameContent + "<img data-original='" + rec.banner_medium + "' alt='" + rec.title + "' class='img-responsive' width='100%' height='186.45' max-width='294.98' max-height='187.7'/>";
+                gameContent = gameContent + "</div><div class='game-description'>";
+
+                gameContent = gameContent + "<h3 class='game-title text-center '>" + rec.title + "</h3>";
+                gameContent = gameContent + "<a class='pull-right btn  bitsumishi game-link' href='" + rec.url + "'>play";
+                gameContent = gameContent + "<p class='game-category hiddenPara'>" + selectedCat + "</p>";
+                gameContent = gameContent + "<div class='longDescription hiddenPara'>" + rec.long_description + "</div>";
+                gameContent = gameContent + "<h3 class='game-title hiddenPara'>" + rec.title + "</h3></a>";
+
+                gameContent = gameContent + "<small class='game-category pull-left text-muted'>" + selectedCat + "</small>";
+                gameContent = gameContent + "</div></a></div></div>";
+                $("#isotopeContainer").append(gameContent);
+                $('body').find('.lazy .img-responsive').lazyload({});
+
+                var lastselectedCat = localStorage.getItem("lastHomeSelectedCat");
+                if (lastselectedCat) {
+                    $("li#family").removeClass("active");
+                    $("li#" + lastselectedCat).addClass("active");
+                } else {
+                    $("li#family").addClass("active");
+                }
+            }
+        });
+    };
+
+    /*Refresh Game Cache every 30 days*/
+    $scope.shouldRefreshGameCache = function () {
+        var refreshCache = true;
+        var gameCacheDate = localStorage.getItem("gameCacheDate");
+        if (gameCacheDate) {
+            var originalDate = new Date(gameCacheDate),
+                targetDate = new Date();
+            targetDate.setDate(originalDate.getDate() + 30);
+            var dateToWorkwith = $scope.formatDate(targetDate);
+            var day = dateToWorkwith.substring(0, 2),
+            month = dateToWorkwith.substring(3, 5),
+            year = dateToWorkwith.substring(6, 10),
+            cacheDatePlusTety = new Date(year, month - 1, day);
+            var todaysDate = new Date();
+            return cacheDatePlusTety < todaysDate;
+        } else {
+            return refreshCache;
+        }
+    };
+
     /*Get ApplicationUser Data from DB*/
     $scope.getGameData = function (selectedCat) {
+        var gameList = localStorage.getItem("home" + selectedCat);
+        if (gameList) {
+            //Check if Game List has been cachedfor more than 30 days
+            if (!$scope.shouldRefreshGameCache()) {
+                $scope.displayGameList(JSON.parse(gameList), selectedCat);
+                return;
+            }
+        }
         $("#isotopeContainer").empty();
         /*Show Loading Gif*/
         $("body").find('.game-loader').addClass('show').removeClass('hide');
@@ -198,42 +295,22 @@
             url: apiURL + "/api/Game?gameCategory=" + selectedCat + "&gameCount=13",
             async: true,
             success: function (data) {
-                var gameContent = "";
-                /*Empty Div*/
-                $("#isotopeContainer").empty();
-                $("body").find('.game-loader').addClass('hide').removeClass('show');
-                $.each(data.Data, function (i, rec) {
-                    if (rec.title != "What's My Icon?") {
-                        gameContent = "<div class='col-sm-2 col-xs-6 isotopeSelector block " + selectedCat + "'>";
-                        gameContent = gameContent + "<div class='service-wrap hovereffect panel clearfix animate' data-animate='bounceIn' data-duration='1.0s' data-delay='0.2s'>";
-
-                        gameContent = gameContent + "<a href='" + rec.url + "' class='game-link'>";
-
-                        gameContent = gameContent + "<h3 class='game-title hiddenPara'>" + rec.title + "</h3>";
-                        gameContent = gameContent + "<p class='game-category hiddenPara'>" + selectedCat + "</p>";
-                        gameContent = gameContent + "<div class='longDescription hiddenPara'>" + rec.long_description + "</div>";
-
-                        gameContent = gameContent + "<div class='lazy'>";
-                        gameContent = gameContent + "<img data-original='" + rec.banner_medium + "' alt='" + rec.title + "' class='img-responsive' width='100%' height='186.45' max-width='294.98' max-height='187.7'/>";
-                        gameContent = gameContent + "</div><div class='game-description'>";
-
-                        gameContent = gameContent + "<h3 class='game-title text-center '>" + rec.title + "</h3>";
-                        gameContent = gameContent + "<a class='pull-right btn  bitsumishi game-link' href='" + rec.url + "'>play";
-                        gameContent = gameContent + "<p class='game-category hiddenPara'>" + selectedCat + "</p>";
-                        gameContent = gameContent + "<div class='longDescription hiddenPara'>" + rec.long_description + "</div>";
-                        gameContent = gameContent + "<h3 class='game-title hiddenPara'>" + rec.title + "</h3></a>";
-
-                        gameContent = gameContent + "<small class='game-category pull-left text-muted'>" + selectedCat + "</small>";
-                        gameContent = gameContent + "</div></a></div></div>";
-                        $("#isotopeContainer").append(gameContent);
-                        $('body').find('.lazy .img-responsive').lazyload({});
-                    }
-                });
+                $scope.displayGameList(data.Data, selectedCat);
+                localStorage.setItem("home" + selectedCat, JSON.stringify(data.Data));
+                localStorage.setItem("gameCacheDate", new Date());
             },
             error: function (data) { }
         });
     };
-    $scope.getGameData("family");
+
+    /*Populate Page with Games*/
+    var lastselectedCat = localStorage.getItem("lastHomeSelectedCat");
+    if (lastselectedCat) {
+        $scope.getGameData(lastselectedCat);
+    } else {
+        $scope.getGameData("family");
+    }
+    
 
     /*EPayment Subscriber*/
     $scope.GetSubData = function () {
@@ -405,7 +482,7 @@
 
     /*Authentication Handler*/
     $scope.authHandler = function (retURL) {
-        var returnURL = null;
+        var returnURL = "";
         var userOBJ = localStorage.getItem("UID");
         var userLoginToken = null;
         if (userOBJ) {
@@ -430,7 +507,7 @@
                                 /*Do nothing*/
                             } else {
                                 localStorage.removeItem("selectedGame");
-                                 $('#loginModal').modal('show');   
+                                $('#loginModal').modal('show');
                             }
                         } else {
                             returnURL = data;
@@ -459,6 +536,7 @@
     /*CLick handler of Menu Items*/
     $(".gameMenu").click(function (e) {
         var selCat = $(this).attr("id");
+        localStorage.setItem("lastHomeSelectedCat", selCat);
         $scope.getGameData(selCat);
         e.preventDefault();
         e.preventDefault();
@@ -485,7 +563,7 @@
         setTimeout(function () {
             /*Authentication*/
             var retVal = $scope.authHandler("/games/gameplay");
-            if (retVal != null) {
+            if (retVal != "") {
                 var userOBJ = localStorage.getItem("UID");
                 var userData = null;
                 if (userOBJ) {
@@ -534,7 +612,7 @@
             }
         }, 1000);
     });
-        
+
     $(document).on("click", "a.mtnSubscribeBTN", function () {
         $('#lodaModal').modal('show');
     });
@@ -788,7 +866,7 @@
                     $('#loginModal').modal('show');
                 }
             }
-        } else {            
+        } else {
             if (userOBJ) {
                 userData = JSON.parse(userOBJ);
                 window.location = "/Home/Subscription?msisdn=" + _mtnNumber + "&go=" + false + "&mobi=" + _IsMobile + "&heda=0&frmGame=false&uID=" + userData.AppUserId;
@@ -881,33 +959,7 @@
         var amntSelected = ($(this).attr("id") == "subType1") ? 200 : ($(this).attr("id") == "subType2") ? 100 : 20;
         $(".flwpug_getpaid").attr("data-amount", amntSelected);
     });
-
-    /*Method to Format Date to format (DD/MM/YYYY)*/
-    $scope.formatDate = function (dDate) {
-        if (dDate != "" && dDate != null) {
-            var dDate = new Date(dDate),
-            month = dDate.getMonth() + 1,
-            day = dDate.getDate(),
-            year = dDate.getFullYear();
-            day = (day < 10) ? '0' + day.toString() : day;
-            month = (month < 10) ? '0' + month.toString() : month;
-            return day + "/" + month + "/" + year;
-        } else {
-            return "";
-        }
-    };
-
-    /*Check for Date Greater than today*/
-    $scope.dateIsEalierThanToday = function (dDate) {
-        var date = dDate.substring(0, 2);
-        var month = dDate.substring(3, 5);
-        var year = dDate.substring(6, 10);
-        var convDate = new Date(year, month - 1, date);
-        var todaysDate = new Date();
-        return convDate < todaysDate;
-    };
-
-});
+}]);
 
 $("a.flwpug_getpaid").find("button").addClass("btn btn-primary");
 

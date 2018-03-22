@@ -14,7 +14,7 @@ using System.Web.Mvc;
 
 namespace GameZone.WEB.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         GameData.NGSubscriptionsEntities _NGSubscriptionsEntities;
         MSISDNRepository _MSISDNRepository;
@@ -79,43 +79,59 @@ namespace GameZone.WEB.Controllers
             //    ViewBag.IsMTN = false;
             //}
             #endregion
-            
+
+            bool isMobi = false;
             if (Request.UserAgent.Contains("Mobi") == true)
             {
-                //mobile
-                ViewBag.IsMobile = true;
-                var headerData = _HeaderController.FillMSISDN();
-                if (headerData == null)
-                {
-                    //Not Mtn
-                    ViewBag.mtnNumber = null;
-                }
-                else
-                {
-                    var mtnNumber = headerData.Lines.FirstOrDefault().Phone;
-                    ViewBag.mtnNumber = (mtnNumber.Trim() == "XXX-XXXXXXXX") ? null : mtnNumber.Trim();
-                    new Thread(() =>
-                    {
-                        LocalLogger.LogFileWrite(
-                            JsonConvert.SerializeObject(new LogVM()
-                            {
-                                Message = "Recognised MTN Number",
-                                LogData = mtnNumber
-                            }));
-                    }).Start();
-                }
+                isMobi = true;
             }
-            else
+            ViewBag.IsMobile = isMobi;
+
+            //mobile
+            //ViewBag.IsMobile = true;
+            var mtnNumberSession = System.Web.HttpContext.Current.Session["mtnNumber"];
+            var hedaData = mtnNumberSession != null ? (MSISDNRepository)mtnNumberSession : null;
+            string mtnNumber = null;
+            if (hedaData != null)
             {
-                //laptop or desktop
-                ViewBag.IsMobile = false;
-                ViewBag.mtnNumber = null;
+                mtnNumber = (hedaData.Lines.FirstOrDefault().Phone.Trim() == "XXX-XXXXXXXX") ? null : hedaData.Lines.FirstOrDefault().Phone.Trim();
             }
-            if (Session["fltwvSubscription"] != null)
+
+            ViewBag.mtnNumber = mtnNumber;
+
+            //var headerData = _HeaderController.FillMSISDN();
+            //if (headerData == null)
+            //{
+            //    //Not Mtn
+            //    ViewBag.mtnNumber = null;
+            //}
+            //else
+            //{
+            //    var mtnNumber = headerData.Lines.FirstOrDefault().Phone;
+            //    ViewBag.mtnNumber = (mtnNumber.Trim() == "XXX-XXXXXXXX") ? null : mtnNumber.Trim();
+            //    new Thread(() =>
+            //    {
+            //        LocalLogger.LogFileWrite(
+            //            JsonConvert.SerializeObject(new LogVM()
+            //            {
+            //                Message = "Recognised MTN Number",
+            //                LogData = mtnNumber
+            //            }));
+            //    }).Start();
+            //}
+            //}
+            //else
+            //{
+            //    //laptop or desktop
+            //    ViewBag.IsMobile = false;
+            //    ViewBag.mtnNumber = null;
+            //}
+            ViewBag.fltwvSubscription = null;
+            if (System.Web.HttpContext.Current.Session["fltwvSubscription"] != null)
             {
-                ViewBag.fltwvSubscription = Session["fltwvSubscription"].ToString();
+                ViewBag.fltwvSubscription = System.Web.HttpContext.Current.Session["fltwvSubscription"].ToString();
             }
-            Session["fltwvSubscription"] = null;
+            System.Web.HttpContext.Current.Session["fltwvSubscription"] = null;
 
             //Just for test of Auto Registration
             //ViewBag.IsMobile = true;
@@ -126,8 +142,6 @@ namespace GameZone.WEB.Controllers
         public ActionResult Subscription(string msisdn, bool go, bool mobi, string heda, bool frmGame, long uID = 0)
         {
             ReturnMessage rm = null;
-            ViewBag.IsMobile = false;
-            ViewBag.mtnNumber = null;
             ViewBag.heda = (string.IsNullOrEmpty(heda)) ? null : heda;
             bool isMobi = false;
             ViewBag.Go = go;
@@ -136,7 +150,8 @@ namespace GameZone.WEB.Controllers
             {
                 isMobi = true;
             }
-
+            ViewBag.IsMobile = isMobi;
+            ViewBag.mtnNumber = string.IsNullOrEmpty(msisdn) ? null : msisdn;
             string subResponse = null;
             SubscriberVM SVM;
             if (!string.IsNullOrEmpty(msisdn))//MTN Number
@@ -156,8 +171,7 @@ namespace GameZone.WEB.Controllers
 
                     }).Start();
 
-                    ViewBag.mtnNumber = msisdn;
-                    ViewBag.IsMobile = isMobi;
+
 
                     if (mtnRetVal.Data == null)
                     {
@@ -217,9 +231,6 @@ namespace GameZone.WEB.Controllers
                 }
                 else if (!go && isMobi)//MTN Number with Subscription NOT Clicked
                 {
-                    ViewBag.mtnNumber = msisdn;
-                    ViewBag.IsMobile = isMobi;
-
                     if (mtnRetVal.Data == null)
                     {
                         rm = new ReturnMessage()
@@ -256,9 +267,6 @@ namespace GameZone.WEB.Controllers
             }
             else
             {
-                ViewBag.mtnNumber = null;
-                ViewBag.IsMobile = isMobi;
-
                 //Pull Valid Login User Data from Session
                 ReturnMessage retVal = null;
                 if (uID > 0)
@@ -293,7 +301,7 @@ namespace GameZone.WEB.Controllers
                             {
                                 Sub = subData.PeriodStart,
                                 Exp = subData.PeriodEnd,
-                                ServiceName = subData.ServiceName,
+                                ServiceName = subData.Period,
                                 Status = subData.IsActive ? 1 : 0
                             }
                         };
@@ -318,12 +326,13 @@ namespace GameZone.WEB.Controllers
 
             //Just for test of Auto Registration
             //ViewBag.IsMobile = true;
-            ViewBag.mtnNumber = "2348147911707";
-            if (Session["fltwvSubscription"] != null)
+            //ViewBag.mtnNumber = "2348147911707";
+            ViewBag.fltwvSubscription = null;
+            if (System.Web.HttpContext.Current.Session["fltwvSubscription"] != null)
             {
-                ViewBag.fltwvSubscription = Session["fltwvSubscription"].ToString();
+                ViewBag.fltwvSubscription = System.Web.HttpContext.Current.Session["fltwvSubscription"].ToString();
             }
-            Session["fltwvSubscription"] = null;
+            System.Web.HttpContext.Current.Session["fltwvSubscription"] = null;
             return View(rm);
         }
 
@@ -478,15 +487,8 @@ namespace GameZone.WEB.Controllers
         [HttpPost]
         public string MTNUSSDSubscription(string MSISDN, bool IsMtn, string Shortcode, string Productcode = null, string headerId = "")
         {
-            if (string.IsNullOrEmpty(MSISDN))
-            {
-                return JsonConvert.SerializeObject(new ReturnMessage()
-                {
-                    Success = false,
-                    Message = "Subscription failed. \n Could not validate your phone number."
-                });
-            }
             MSISDNRepository msisdn = new MSISDNRepository();
+            string ipthis = null;
             try
             {
                 if (MSISDN.StartsWith("0"))
@@ -502,29 +504,43 @@ namespace GameZone.WEB.Controllers
                         Message = "You already have an active Subscription."
                     });
                 }
-
-                msisdn = (MSISDNRepository)Session["XMSISDN"];
-
-                if ((MSISDNRepository)Session["XMSISDN"] != null)
+                if (Session["XMSISDN"] != null || System.Web.HttpContext.Current.Session["mtnNumber"] != null)
                 {
-                    msisdn = (MSISDNRepository)Session["XMSISDN"];
-                }
-                else
-                {
-                    msisdn = _HeaderController.FillMSISDN();
+                    msisdn = (MSISDNRepository)Session["XMSISDN"] == null ? (MSISDNRepository)System.Web.HttpContext.Current.Session["mtnNumber"] : (MSISDNRepository)Session["XMSISDN"];
+                    HttpContext.Session["XMSISDN"] = msisdn;
+                    System.Web.HttpContext.Current.Session["mtnNumber"] = msisdn;
+                    ipthis = msisdn.Lines.FirstOrDefault().IpAddress;
+                    var mtnNumber = (msisdn.Lines.FirstOrDefault().Phone.Trim() == "XXX-XXXXXXXX") ? null : msisdn.Lines.FirstOrDefault().Phone.Trim();
+                    if (mtnNumber == null)//Mtn number not gotten by wap header
+                    {
+                        if (string.IsNullOrEmpty(MSISDN))
+                        {
+                            return JsonConvert.SerializeObject(new ReturnMessage()
+                            {
+                                Success = false,
+                                Message = "Subscription failed. \n Could not validate your phone number."
+                            });
+                        }
+                        msisdn.Clear();
+                        msisdn.AddItem(MSISDN, ipthis, true);
+                    }
                 }
 
-                //For test
-                //msisdn.Lines.FirstOrDefault().Phone = "2348147911707";
-                //msisdn.Lines.FirstOrDefault().IsHeader = true;
-                //msisdn.Lines.FirstOrDefault().IpAddress = "192.168.10.212";
-                //For test
+                //if ((MSISDNRepository)Session["XMSISDN"] != null)
+                //{
+                //    msisdn = (MSISDNRepository)Session["XMSISDN"];
+                //}
+                //else
+                //{
+                //    msisdn = _HeaderController.FillMSISDN();
+                //}
 
-                var ipthis = msisdn.Lines.FirstOrDefault().IpAddress;
-                msisdn.Clear();
-                msisdn.AddItem(MSISDN, ipthis, true);
-                var newmsisdn = (MSISDNRepository)Session["XMSISDN"];
-                HttpContext.Session["XMSISDN"] = msisdn;
+
+                //var ipthis = msisdn.Lines.FirstOrDefault().IpAddress;
+                //msisdn.Clear();
+                //msisdn.AddItem(MSISDN, ipthis, true);
+
+                //HttpContext.Session["XMSISDN"] = msisdn;
 
                 if (msisdn != null && msisdn.Lines.Count() > 0 && msisdn.Lines.FirstOrDefault().Phone != "XXX-XXXXXXXX")
                 {
