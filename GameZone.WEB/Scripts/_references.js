@@ -25,6 +25,7 @@
 /// <reference path="../content/js/notify.min.js" />
 /// <reference path="../content/js/scrolla.jquery.min.js" />
 /// <reference path="../content/js/site.js" />
+/// <reference path="../content/js/slick.min.js" />
 /// <reference path="../content/js/smooth-scroll.js" />
 /// <reference path="ai.0.22.9-build00167.min.js" />
 /// <reference path="angular.min.js" />

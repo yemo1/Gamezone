@@ -1032,6 +1032,25 @@ body::-webkit-scrollbar-thumb {
     border-bottom: 1px solid #cccccc;
 }
 
+.recommended {
+    position:relative;
+    background:url(../images/escape.jpg);
+
+}
+.recommended:before {
+    content:'';
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:linear-gradient(to right,rgba(9, 89, 142, 0.12),#09598e 54%);
+}
+
+.slider .isotopeSelector.block{
+    padding:0 5px;
+}
+
 @media(min-width:1023px) {
 
     .page-section:first-of-type,.page-section.home  {

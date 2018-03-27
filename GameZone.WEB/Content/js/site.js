@@ -103,9 +103,14 @@ $(document).ready(function () {
     });
 
     $('.animate').scrolla({
-        mobile: true,
+        mobile: false,
         once: false
     });
+    $('.animate.once').scrolla({
+        mobile: false,
+        once: true
+    });
+
 
 
 });
