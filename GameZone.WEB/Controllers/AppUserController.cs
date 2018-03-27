@@ -171,7 +171,7 @@ namespace GameZone.WEB.Controllers
                     {
                         //"C:\\Users\\Systems\\Documents\\GitHub\\Gamezone\\GameZone.WEB\\Content\\images\\logo.png"
                         //Send Email Notification
-                        _Notification.SendEMail(appUserVM.szUsername.Trim(), "GameZone Password Change.", $"Your password change was successful. <br/><br/> <a style='background:#ff6a00; color: #ffffff; font-family:bitsumishi !important; padding:6px 12px; font-weight:400;text-align:center; vertical-align: middle; cursor: pointer; border:1px solid transparent; border-radius:4px; text-decoration: none;' href='http://www.gamezone.ng/'> Login </a>");
+                        _Notification.SendEMail(appUserVM.szUsername.Trim(), "GameZone Password Change.", $"Your password change was successful. <br/><br/> <a style='background:#ff6a00; color: #ffffff; font-family:bitsumishi !important; padding:6px 12px; font-weight:400;text-align:center; vertical-align: middle; cursor: pointer; border:1px solid transparent; border-radius:4px; text-decoration: none;' href='http://www.gamezone.ng/Account/Login'> Login </a>");
                     }
 
                     return new ReturnMessage

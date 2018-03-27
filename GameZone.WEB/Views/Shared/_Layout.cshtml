@@ -89,9 +89,11 @@
                                                         <li class="loginReg"><a data-toggle="modal" id="register-target" data-target="#loginModal">Register </a></li>
                                                         @*<li class="logout subscribeBTN"><a data-toggle="modal" id="subDetails-target" data-target="#pcSubscriptionModal" ng-click="subscriptionBtnClickEventHandler()">Subscription </a></li>*@
 
-                                                        <li class="logout subscribeBTN"><a id="subDetails-target" ng-click="subscriptionBtnClickEventHandler()">Subscription </a></li>
+                                                        <li class="logout subscribeBTN">
+                                                        <a id="subDetails-target" ng-click="subscriptionBtnClickEventHandler()">Subscription </a>
+                                                        </li>
 
-                                                        <li class="logout"><a id="logout-target">Logout </a></li>
+                                                        <li class="logout"><a href="" id="logout-target">Logout </a></li>
                                                     </ul>
                                                 </li>
                                             </ul>
@@ -123,7 +125,7 @@
                 @RenderBody()
 
                 @* PC Login/Registration Modal *@
-                <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                @*<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -223,10 +225,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>*@
 
                 @* Password Change Modal *@
-                <div class="modal fade" id="passwordChangeModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                @*<div class="modal fade" id="passwordChangeModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -266,12 +268,12 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>*@
 
                 <div class="modal fade" id="lodaModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
-                            <div class="modal-body" style="min-height:95px;text-align:center;">
+                            <div class="modal-body" style="max-height:95px;text-align:center;">
                                 <div class="form-group row">
                                     <div class="col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
                                         <label class="modal-title text-center" id="lodaModalLabel">... processing, please wait.</label>
@@ -338,7 +340,6 @@
 
     <!-- JS begin -->
     @*jquery*@
-    @*<script src="~/Content/js/jquery.min.js?v=@rls_vsn"></script>*@
     @Scripts.Render("~/bundles/jquery")
 
     <script type="text/javascript">
@@ -350,42 +351,14 @@
             }
     </script> 
     @*Responsiveness*@
-    @*<script src="~/Content/js/bootstrap.min.js?v=@rls_vsn"></script>
-    <script src="~/Scripts/respond.js?v=@rls_vsn"></script>*@
     @Scripts.Render("~/bundles/bootstrap")
-    @*angular*@
-    @*<script src="~/Scripts/angular.min.js?v=@rls_vsn"></script>
-    <script src="~/Scripts/global.js?v=@rls_vsn"></script>*@
     @Scripts.Render("~/bundles/angularGlobal")
-    @*baseJS*@
-
-    @*<script src="~/Content/js/magnific-popup.min.js?v=@rls_vsn"></script>
-    <script src="~/Content/js/imagesloaded.pkgd.min.js?v=@rls_vsn"></script>
-    <script src="~/Content/js/appear.js?v=@rls_vsn"></script>
-    <script src="~/Content/js/base.js?v=@rls_vsn"></script>
-    <script src="~/Content/js/smooth-scroll.min.js?v=@rls_vsn"></script>*@
-
-    @*silteringJs*@
-    @*<script src="~/Content/js/isotope.pkgd.min.js?v=@rls_vsn"></script>
-    <script src="~/Content/js/lightbox.min.js?v=@rls_vsn"></script>
-    <script src="~/Content/js/dofilter.js?v=@rls_vsn"></script>
-    <script src="~/Content/js/scrolla.jquery.min.js?v=@rls_vsn"></script>*@
-
-    @*customjs*@
-    @*<script src="~/Content/js/site.js?v=@rls_vsn"></script>
-
-    <script src="~/Content/js/notify.min.js?v=@rls_vsn"></script>*@
 
     @Scripts.Render("~/bundles/ContentScript")
 
     <script>
         var svcName = "@svcName";
-        @*var _IsMobile = "@IsMobile";
-        if (_IsMobile == "True") {
-            FetchMSISDN();
-        }*@
     </script>
-    @*<script src="~/Scripts/layout.js?v=@rls_vsn"></script>*@
     @Scripts.Render("~/bundles/layout")
 
     @RenderSection("scripts", required: false)

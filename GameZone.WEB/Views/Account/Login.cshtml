@@ -1,63 +1,59 @@
 ﻿@using GameZone.WEB.Models
-@model LoginViewModel
 @{
     ViewBag.Title = "Log in";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    bool IsMobile = (bool)ViewBag.IsMobile;
+    string mtnNumber = null;
+    if (IsMobile)
+    {
+        mtnNumber = (string)ViewBag.mtnNumber;
+    }
+    string SERVICE_SHORTCODE = System.Configuration.ConfigurationManager.AppSettings["SERVICE_SHORTCODE"].ToString();
 }
-
-<h2>@ViewBag.Title.</h2>
-<div class="row">
-    <div class="col-md-8">
-        <section id="loginForm">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                <h4>Use a local account to log in.</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                    </div>
+<section class="page-section pale-white home">
+    <div class="container-fluid">
+        <form class="form-horizontal animated" id="login-form">
+            <div class="form-group row">
+                <div class="well" ng-show="loginSuccess == 0">
+                    <p id="pWellMsg">{{wellMsg}}</p>
                 </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                    </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-lg-4 col-md-4 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 col-md-offset-3 col-lg-offset-4">
+                    <input id="txtUsername" type="text" class="form-control" placeholder="Username" ng-model="loginObj.szUsername" aria-describedby="sizing-addon1">
                 </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
-                        </div>
-                    </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-lg-4 col-md-4 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 col-md-offset-3 col-lg-offset-4">
+                    <input id="txtPassword" type="password" class="form-control" placeholder="Password" ng-model="loginObj.szPassword">
                 </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Log in" class="btn btn-default" />
-                    </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-lg-4 col-md-4 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 col-md-offset-3 col-lg-offset-4">
+                    <img src="~/Content/images/loadingGif.gif" id="logLoda" style="display: block; margin-left: auto; margin-right: auto;" />
                 </div>
-                <p>
-                    @Html.ActionLink("Register as a new user", "Register")
-                </p>
-                @* Enable this once you have account confirmation enabled for password reset functionality
-                    <p>
-                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                    </p>*@
-            }
-        </section>
+            </div>
+            <div class="form-group row">
+                <div class="col-lg-2 col-md-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 col-md-offset-4 col-lg-offset-5">
+                    <button class="btn btn-primary btn-block disabledCtrl" ng-click="userLogin()"> Login</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3">
+                    <hr />
+                    <p class="text-center">Forgot password?  <a href="/Account/ForgotPassword" class="disabledCtrl">Reset password</a></p>
+                    <p class="text-center">Don't have an account?  <a href="/Account/Register" class="disabledCtrl">Register</a></p>
+                </div>
+            </div>
+        </form>
     </div>
-    <div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
-    </div>
-</div>
+</section>
+@section scripts{
+    <script type="text/javascript">
+        var _IsMobile = "@IsMobile";
+        var _mtnNumber = "@mtnNumber";
+        var _SERVICE_SHORTCODE = "@SERVICE_SHORTCODE";
+    </script>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/accountLogin")
 }

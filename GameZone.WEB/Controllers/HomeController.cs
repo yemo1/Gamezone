@@ -36,6 +36,7 @@ namespace GameZone.WEB.Controllers
             _NGSubscriptionsEntities = new GameData.NGSubscriptionsEntities();
             _WapHeaderUtil = wapHeaderUtil;
         }
+
         public ActionResult Index(string retVal = null)
         {
             #region WEB DOI Implementation
@@ -79,261 +80,264 @@ namespace GameZone.WEB.Controllers
             //    ViewBag.IsMTN = false;
             //}
             #endregion
-
-            bool isMobi = false;
-            if (Request.UserAgent.Contains("Mobi") == true)
+            try
             {
-                isMobi = true;
-            }
-            ViewBag.IsMobile = isMobi;
 
-            //mobile
-            //ViewBag.IsMobile = true;
-            var mtnNumberSession = System.Web.HttpContext.Current.Session["mtnNumber"];
-            var hedaData = mtnNumberSession != null ? (MSISDNRepository)mtnNumberSession : null;
-            string mtnNumber = null;
-            if (hedaData != null)
+                bool isMobi = false;
+                if (Request.UserAgent.Contains("Mobi") == true)
+                {
+                    isMobi = true;
+                }
+                ViewBag.IsMobile = isMobi;
+
+                //mobile
+                //ViewBag.IsMobile = true;
+                var mtnNumberSession = System.Web.HttpContext.Current.Session["mtnNumber"];
+                var hedaData = mtnNumberSession != null ? (MSISDNRepository)mtnNumberSession : null;
+                string mtnNumber = null;
+                if (hedaData != null)
+                {
+                    mtnNumber = (hedaData.Lines.FirstOrDefault().Phone.Trim() == "XXX-XXXXXXXX") ? null : hedaData.Lines.FirstOrDefault().Phone.Trim();
+                }
+
+                ViewBag.mtnNumber = mtnNumber;
+
+                ViewBag.fltwvSubscription = null;
+                if (System.Web.HttpContext.Current.Session["fltwvSubscription"] != null)
+                {
+                    ViewBag.fltwvSubscription = System.Web.HttpContext.Current.Session["fltwvSubscription"].ToString();
+                }
+                System.Web.HttpContext.Current.Session["fltwvSubscription"] = null;
+
+                //Just for test of Auto Registration
+                //ViewBag.mtnNumber = "2348147911707";
+                return View();
+            }
+            catch (Exception ex)
             {
-                mtnNumber = (hedaData.Lines.FirstOrDefault().Phone.Trim() == "XXX-XXXXXXXX") ? null : hedaData.Lines.FirstOrDefault().Phone.Trim();
+                new Thread(() =>
+                {
+                    LocalLogger.LogFileWrite(
+                        JsonConvert.SerializeObject(new VIEWMODEL.LogVM()
+                        {
+                            Message = "Controller Method Error",
+                            LogData = ex
+                        }));
+                }).Start();
+                return View();
             }
-
-            ViewBag.mtnNumber = mtnNumber;
-
-            //var headerData = _HeaderController.FillMSISDN();
-            //if (headerData == null)
-            //{
-            //    //Not Mtn
-            //    ViewBag.mtnNumber = null;
-            //}
-            //else
-            //{
-            //    var mtnNumber = headerData.Lines.FirstOrDefault().Phone;
-            //    ViewBag.mtnNumber = (mtnNumber.Trim() == "XXX-XXXXXXXX") ? null : mtnNumber.Trim();
-            //    new Thread(() =>
-            //    {
-            //        LocalLogger.LogFileWrite(
-            //            JsonConvert.SerializeObject(new LogVM()
-            //            {
-            //                Message = "Recognised MTN Number",
-            //                LogData = mtnNumber
-            //            }));
-            //    }).Start();
-            //}
-            //}
-            //else
-            //{
-            //    //laptop or desktop
-            //    ViewBag.IsMobile = false;
-            //    ViewBag.mtnNumber = null;
-            //}
-            ViewBag.fltwvSubscription = null;
-            if (System.Web.HttpContext.Current.Session["fltwvSubscription"] != null)
-            {
-                ViewBag.fltwvSubscription = System.Web.HttpContext.Current.Session["fltwvSubscription"].ToString();
-            }
-            System.Web.HttpContext.Current.Session["fltwvSubscription"] = null;
-
-            //Just for test of Auto Registration
-            //ViewBag.IsMobile = true;
-            //ViewBag.mtnNumber = "2348147911707";
-            return View();
         }
 
         public ActionResult Subscription(string msisdn, bool go, bool mobi, string heda, bool frmGame, long uID = 0)
         {
-            ReturnMessage rm = null;
-            ViewBag.heda = (string.IsNullOrEmpty(heda)) ? null : heda;
-            bool isMobi = false;
-            ViewBag.Go = go;
-            ViewBag.frmGame = frmGame;
-            if (Request.UserAgent.Contains("Mobi") == true)
+            try
             {
-                isMobi = true;
-            }
-            ViewBag.IsMobile = isMobi;
-            ViewBag.mtnNumber = string.IsNullOrEmpty(msisdn) ? null : msisdn;
-            string subResponse = null;
-            SubscriberVM SVM;
-            if (!string.IsNullOrEmpty(msisdn))//MTN Number
-            {
-                var mtnRetVal = _AppUserController.GetMTNSubscriptionDetails(msisdn, serviceShortcode);
-                if (go && isMobi)//MTN Number with Subscription Clicked
+                ReturnMessage rm = null;
+                ViewBag.heda = (string.IsNullOrEmpty(heda)) ? null : heda;
+                bool isMobi = false;
+                ViewBag.Go = go;
+                ViewBag.frmGame = frmGame;
+                if (Request.UserAgent.Contains("Mobi") == true)
                 {
-                    //Initiate USSD Subscription
-                    new Thread(() =>
+                    isMobi = true;
+                }
+                ViewBag.IsMobile = isMobi;
+                ViewBag.mtnNumber = string.IsNullOrEmpty(msisdn) ? null : msisdn;
+                string subResponse = null;
+                SubscriberVM SVM;
+                if (!string.IsNullOrEmpty(msisdn))//MTN Number
+                {
+                    var mtnRetVal = _AppUserController.GetMTNSubscriptionDetails(msisdn, serviceShortcode);
+                    if (go && isMobi)//MTN Number with Subscription Clicked
                     {
-                        LocalLogger.LogFileWrite(
-                            JsonConvert.SerializeObject(new LogVM()
-                            {
-                                Message = "Initiating USSD Subscription",
-                                LogData = msisdn
-                            }));
-
-                    }).Start();
-
-
-
-                    if (mtnRetVal.Data == null)
-                    {
-                        subResponse = MTNUSSDSubscription(msisdn, true, serviceShortcode, null, heda);
-                        ViewBag.responseMSG = subResponse;
-
-                        rm = new ReturnMessage()
+                        //Initiate USSD Subscription
+                        new Thread(() =>
                         {
-                            Message = subResponse,
-                            Success = mtnRetVal.Success,
-                            Data = SVM = new SubscriberVM()
-                            {
-                                Exp = null,
-                                ServiceName = null,
-                                Status = null,
-                                Sub = null
-                            }
-                        };
-                    }
-                    else if (mtnRetVal.Data != null)
-                    {
-                        var subData = (GameData.GetMTNUserSubscriptionDetails_Result)mtnRetVal.Data;
-                        if (subData.Exp < DateTime.Now)
+                            LocalLogger.LogFileWrite(
+                                JsonConvert.SerializeObject(new LogVM()
+                                {
+                                    Message = "Initiating USSD Subscription",
+                                    LogData = msisdn
+                                }));
+
+                        }).Start();
+
+                        if (mtnRetVal.Data == null)
                         {
                             subResponse = MTNUSSDSubscription(msisdn, true, serviceShortcode, null, heda);
                             ViewBag.responseMSG = subResponse;
+
+                            rm = new ReturnMessage()
+                            {
+                                Message = subResponse,
+                                Success = mtnRetVal.Success,
+                                Data = SVM = new SubscriberVM()
+                                {
+                                    Exp = null,
+                                    ServiceName = null,
+                                    Status = null,
+                                    Sub = null
+                                }
+                            };
                         }
+                        else if (mtnRetVal.Data != null)
+                        {
+                            var subData = (GameData.GetMTNUserSubscriptionDetails_Result)mtnRetVal.Data;
+                            if (subData.Exp < DateTime.Now)
+                            {
+                                subResponse = MTNUSSDSubscription(msisdn, true, serviceShortcode, null, heda);
+                                ViewBag.responseMSG = subResponse;
+                            }
 
-                        rm = new ReturnMessage()
-                        {
-                            Message = subResponse,
-                            Success = mtnRetVal.Success,
-                            Data = SVM = new SubscriberVM()
+                            rm = new ReturnMessage()
                             {
-                                Exp = subData.Exp,
-                                ServiceName = subData.ServiceName,
-                                Status = subData.Status,
-                                Sub = subData.Sub
-                            }
-                        };
+                                Message = subResponse,
+                                Success = mtnRetVal.Success,
+                                Data = SVM = new SubscriberVM()
+                                {
+                                    Exp = subData.Exp,
+                                    ServiceName = subData.ServiceName,
+                                    Status = subData.Status,
+                                    Sub = subData.Sub
+                                }
+                            };
+                        }
+                        else
+                        {
+                            rm = new ReturnMessage()
+                            {
+                                Message = subResponse,
+                                Success = mtnRetVal.Success,
+                                Data = SVM = new SubscriberVM()
+                                {
+                                    Exp = null,
+                                    ServiceName = null,
+                                    Status = null,
+                                    Sub = null
+                                }
+                            };
+                        }
                     }
-                    else
+                    else if (!go && isMobi)//MTN Number with Subscription NOT Clicked
                     {
-                        rm = new ReturnMessage()
+                        if (mtnRetVal.Data == null)
                         {
-                            Message = subResponse,
-                            Success = mtnRetVal.Success,
-                            Data = SVM = new SubscriberVM()
+                            rm = new ReturnMessage()
                             {
-                                Exp = null,
-                                ServiceName = null,
-                                Status = null,
-                                Sub = null
-                            }
-                        };
-                    }
-                }
-                else if (!go && isMobi)//MTN Number with Subscription NOT Clicked
-                {
-                    if (mtnRetVal.Data == null)
-                    {
-                        rm = new ReturnMessage()
+                                Message = subResponse,
+                                Success = mtnRetVal.Success,
+                                Data = SVM = new SubscriberVM()
+                                {
+                                    Exp = null,
+                                    ServiceName = null,
+                                    Status = null,
+                                    Sub = null
+                                }
+                            };
+                        }
+                        else
                         {
-                            Message = subResponse,
-                            Success = mtnRetVal.Success,
-                            Data = SVM = new SubscriberVM()
+                            var subData = (GameData.GetMTNUserSubscriptionDetails_Result)mtnRetVal.Data;
+                            ViewBag.responseMSG = null;
+                            rm = new ReturnMessage()
                             {
-                                Exp = null,
-                                ServiceName = null,
-                                Status = null,
-                                Sub = null
-                            }
-                        };
-                    }
-                    else
-                    {
-                        var subData = (GameData.GetMTNUserSubscriptionDetails_Result)mtnRetVal.Data;
-                        ViewBag.responseMSG = null;
-                        rm = new ReturnMessage()
-                        {
-                            Message = subResponse,
-                            Success = mtnRetVal.Success,
-                            Data = SVM = new SubscriberVM()
-                            {
-                                Exp = subData.Exp,
-                                ServiceName = subData.ServiceName,
-                                Status = subData.Status,
-                                Sub = subData.Sub
-                            }
-                        };
-                    }
-                }
-            }
-            else
-            {
-                //Pull Valid Login User Data from Session
-                ReturnMessage retVal = null;
-                if (uID > 0)
-                {
-                    retVal = _AppUserController.GetSubscriptionDetails(uID, svcName);
-                    subResponse = retVal.Message;
-                    if (retVal.Data == null)
-                    {
-                        ViewBag.responseMSG = subResponse;
-
-                        rm = new ReturnMessage()
-                        {
-                            Message = subResponse,
-                            Success = retVal.Success,
-                            Data = SVM = new SubscriberVM()
-                            {
-                                Exp = null,
-                                ServiceName = null,
-                                Status = null,
-                                Sub = null
-                            }
-                        };
-                    }
-                    else if (retVal.Data != null)
-                    {
-                        var subData = (GetAppUserSubscriptionDetails_Result)retVal.Data;
-                        rm = new ReturnMessage()
-                        {
-                            Message = subResponse,
-                            Success = retVal.Success,
-                            Data = SVM = new SubscriberVM()
-                            {
-                                Sub = subData.PeriodStart,
-                                Exp = subData.PeriodEnd,
-                                ServiceName = subData.Period,
-                                Status = subData.IsActive ? 1 : 0
-                            }
-                        };
+                                Message = subResponse,
+                                Success = mtnRetVal.Success,
+                                Data = SVM = new SubscriberVM()
+                                {
+                                    Exp = subData.Exp,
+                                    ServiceName = subData.ServiceName,
+                                    Status = subData.Status,
+                                    Sub = subData.Sub
+                                }
+                            };
+                        }
                     }
                 }
                 else
                 {
-                    rm = new ReturnMessage()
+                    //Pull Valid Login User Data from Session
+                    ReturnMessage retVal = null;
+                    if (uID > 0)
                     {
-                        Message = "Could not find user",
-                        Success = false,
-                        Data = SVM = new SubscriberVM()
+                        retVal = _AppUserController.GetSubscriptionDetails(uID, svcName);
+                        subResponse = retVal.Message;
+                        if (retVal.Data == null)
                         {
-                            Exp = null,
-                            ServiceName = null,
-                            Status = null,
-                            Sub = null
-                        }
-                    };
-                }
-            }
+                            ViewBag.responseMSG = subResponse;
 
-            //Just for test of Auto Registration
-            //ViewBag.IsMobile = true;
-            //ViewBag.mtnNumber = "2348147911707";
-            ViewBag.fltwvSubscription = null;
-            if (System.Web.HttpContext.Current.Session["fltwvSubscription"] != null)
-            {
-                ViewBag.fltwvSubscription = System.Web.HttpContext.Current.Session["fltwvSubscription"].ToString();
+                            rm = new ReturnMessage()
+                            {
+                                Message = subResponse,
+                                Success = retVal.Success,
+                                Data = SVM = new SubscriberVM()
+                                {
+                                    Exp = null,
+                                    ServiceName = null,
+                                    Status = null,
+                                    Sub = null
+                                }
+                            };
+                        }
+                        else if (retVal.Data != null)
+                        {
+                            var subData = (GetAppUserSubscriptionDetails_Result)retVal.Data;
+                            rm = new ReturnMessage()
+                            {
+                                Message = subResponse,
+                                Success = retVal.Success,
+                                Data = SVM = new SubscriberVM()
+                                {
+                                    Sub = subData.PeriodStart,
+                                    Exp = subData.PeriodEnd,
+                                    ServiceName = subData.Period,
+                                    Status = subData.IsActive ? 1 : 0
+                                }
+                            };
+                        }
+                    }
+                    else
+                    {
+                        rm = new ReturnMessage()
+                        {
+                            Message = "Could not find user",
+                            Success = false,
+                            Data = SVM = new SubscriberVM()
+                            {
+                                Exp = null,
+                                ServiceName = null,
+                                Status = null,
+                                Sub = null
+                            }
+                        };
+                    }
+
+                }
+
+                //Just for test of Auto Registration
+                //ViewBag.IsMobile = true;
+                //ViewBag.mtnNumber = "2348147911707";
+                ViewBag.fltwvSubscription = null;
+                if (System.Web.HttpContext.Current.Session["fltwvSubscription"] != null)
+                {
+                    ViewBag.fltwvSubscription = System.Web.HttpContext.Current.Session["fltwvSubscription"].ToString();
+                }
+                System.Web.HttpContext.Current.Session["fltwvSubscription"] = null;
+                return View(rm);
             }
-            System.Web.HttpContext.Current.Session["fltwvSubscription"] = null;
-            return View(rm);
+            catch (Exception ex)
+            {
+                new Thread(() =>
+                {
+                    LocalLogger.LogFileWrite(
+                        JsonConvert.SerializeObject(new VIEWMODEL.LogVM()
+                        {
+                            Message = "Controller Method Error",
+                            LogData = ex
+                        }));
+                }).Start();
+                return View();
+            }
         }
 
         public ActionResult About()

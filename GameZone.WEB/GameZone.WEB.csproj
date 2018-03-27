@@ -409,6 +409,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\Account\ForgotPassword.js" />
+    <Content Include="Scripts\Account\Register.js" />
+    <Content Include="Scripts\Account\ResetPassword.js" />
+    <Content Include="Scripts\Account\Login.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\angular.min.js" />
@@ -510,6 +514,7 @@
     <Content Include="Views\Shared\_MobileLayout.cshtml" />
     <Content Include="Views\Home\Subscription.cshtml" />
     <Content Include="Views\BadRequestTest\Index.cshtml" />
+    <Content Include="Views\Shared\_LoginLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
