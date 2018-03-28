@@ -1,0 +1,188 @@
+﻿@using GameZone.TOOLS;
+@{
+    string svcName = System.Configuration.ConfigurationManager.AppSettings["SERVICE_NAME"].ToString();
+    string rls_vsn = System.Configuration.ConfigurationManager.AppSettings["RELEASE_VERSION"].ToString();
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="generator" content="Jekyll v3.6.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Game Zone</title>
+
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico">
+    <!-- Meta -->
+    <meta name="description" content="The marketplace for HTML5 games">
+    <meta name="author" content="Funmobile,Bernard Oreva, Aishat Mosuro">
+
+    <link href="~/Content/css/bootstrap.min.css?v=@rls_vsn" rel="stylesheet" />
+    <link href="~/Content/css/animate.min.css?v=@rls_vsn" rel="stylesheet" />
+    <link href="~/Content/css/font-awesome.min.css?v=@rls_vsn" rel="stylesheet" />
+    <link href="~/Content/css/base-stylesheet.css?v=@rls_vsn" rel="stylesheet" />
+    <link href="~/Content/css/style.css?v=@rls_vsn" rel="stylesheet" />
+
+    @*@Styles.Render("~/bundles/contentCss")
+    <link href="~/Content/css/style.css?v=@rls_vsn" rel="stylesheet" />*@
+    <style>
+        #games #main-menu .navbar .nav > li > a {
+            color: #797979;
+        }
+    </style>
+    @RenderSection("style", required: false)
+</head>
+<body ng-app="gamezoneApp">
+    <div class="wrapper" ng-controller="gamezoneCtrlr">
+        <!-- LOADER -->
+        <div id="loader-overflow">
+            <div id="loader3">Please enable JS</div>
+        </div>
+        <div class="site-container">
+            <div class="header-black-bg"></div>
+            <header id="nav" class="header header-1 header-black animated fadeInDown sticky ">
+                <div class="header-wrapper">
+                    <div class="container-m-30 clearfix">
+                        <div class="logo-row">
+                            <div class="logo-container-2">
+                                <div class="logo-2">
+                                    <a href="/Home" class="clearfix">
+                                        <img src="~/Content/images/logo.png" alt="Gamezone logo" />
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="menu-btn-respons-container">
+                                <button id="menu-btn" type="button" class="navbar-toggle btn-navbar collapsed" data-toggle="collapse" data-target="#main-menu .navbar-collapse">
+                                    <span aria-hidden="true" class="icon_menu hamb-mob-icon"><i class="fa fa-bars"></i></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="main-menu-container">
+                        <div class="container-m-30 clearfix">
+                            <div id="main-menu" class="">
+                                <div class="navbar navbar-default" role="navigation">
+                                    <nav class="navbar-collapse  collapse row" aria-expanded="false" style="height: 0px;">
+                                        <div class="col-md-4 col-md-offset-8 ">
+                                            <ul class="nav navbar-nav" id="menuUL">
+                                                <li class="parent current" id="homeMenu">
+                                                    <a href="/Home" class=""><div class="main-menu-title">Home</div></a>
+                                                </li>
+                                                <li class="parent " id="gameMenu">
+                                                    <a href="/Games/List" class=""><div class="main-menu-title">Games </div></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <main class="main-content">
+                @RenderBody()
+                <div class="modal fade" id="lodaModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body" style="max-height:95px;text-align:center;">
+                                <div class="form-group row">
+                                    <div class="col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+                                        <label class="modal-title text-center" id="lodaModalLabel">... processing, please wait.</label>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+                                        <img src="~/Content/images/loadingGif.gif" id="lodaModalGif" style="display: block; margin-left: auto; margin-right: auto;" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <footer id="footer4" class="footer2-black site-footer">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-5 widget pt-10 ">
+                                <div class="footer2-text-cont contact">
+                                    <img class="footer-logo" src="~/Content/images/logo 1 flip.png" alt="Gamezone" />
+                                    <p>Get so much more by subscribing a token for loads of interesting Arcade, Sports, Family and Puzzle games!</p>
+                                </div>
+                            </div>
+                            <div class="col-md-2 widget pt-10 col-md-offset-2">
+                                <ul class="links-list a-text-cont">
+                                    <li class="white_c">INFO</li>
+                                    <li><a href="/Games/List">Games </a></li>
+                                    <!-- <li><a href="">About</a></li> -->
+                                    <li><a href="">Terms & Conditions</a></li>
+                                    <li><a href="">Privacy </a></li>
+                                </ul>
+                            </div>
+                            <div class="col-md-2 widget pt-10">
+                                <div class="footer2-text-cont">
+                                    <!-- Social Links -->
+                                    <ul class="links-list a-text-cont">
+                                        <li class="white_c">CONNECT</li>
+                                        <li><a href="https://www.facebook.com/funmobile.nigeria" rel="noopener">Facebook <i class="fa fa-facebook-square"></i></a></li>
+                                        <li><a href="https://twitter.com/funmobilelive" rel="noopener">Twitter <i class="fa  fa-twitter-square"></i></a></li>
+                                        <li><a href="https://www.instagram.com/funmobilelive/" rel="noopener">Instagram <i class="fa fa-instagram"></i></a></li>
+                                        <!-- <li><a href="">Privacy </a></li> -->
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-11 ">
+                                <!-- SUB FOOTER -->
+                                <div class="copyright clearfix">
+                                    <a class="#" href="" target="_blank">&copy; @DateTime.Now.Year Gamezone.ng</a>
+                                    <a class="#" href="/www.funmobilelive.com" target="_blank" style="float:right;">Powered by FunMobile</a>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <p id="back-top">
+                        <a href="#top" title="Back to Top"><span class="icon icon-arrows-up"><i class="fa fa-arrow-up"></i></span></a>
+                    </p>
+                </footer>
+            </main>
+        </div>
+    </div>
+
+    <!-- JS begin -->
+    @*jquery*@
+    @*<script src="~/Content/js/jquery.min.js?v=@rls_vsn"></script>*@
+    @Scripts.Render("~/bundles/jquery")
+
+    <script type="text/javascript">
+            if (typeof jQuery == 'undefined') {
+                var e = document.createElement('script');
+                e.src = '@Url.Content("~/Scripts/jquery.min.js")';
+                e.type = 'text/javascript';
+                document.getElementsByTagName("head")[0].appendChild(e);
+            }
+    </script> 
+    @*Responsiveness*@
+    @Scripts.Render("~/bundles/bootstrap")
+    @*angular*@
+    @Scripts.Render("~/bundles/angularGlobal")
+    @*baseJS*@
+
+    @Scripts.Render("~/bundles/ContentScript")
+
+    <script>
+        var svcName = "@svcName";
+        @*var _IsMobile = "@IsMobile";
+        if (_IsMobile == "True") {
+            FetchMSISDN();
+        }*@
+    </script>
+    @Scripts.Render("~/bundles/layout")
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

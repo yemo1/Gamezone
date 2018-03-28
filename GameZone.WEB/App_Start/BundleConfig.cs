@@ -71,6 +71,22 @@ namespace GameZone.WEB
                 "~/Scripts/Home/Subscription.js"
                       ));
 
+            bundles.Add(new ScriptBundle("~/bundles/accountLogin").Include(
+                "~/Scripts/Account/Login.js"
+                      ));
+
+            bundles.Add(new ScriptBundle("~/bundles/accountRegister").Include(
+                "~/Scripts/Account/Register.js"
+                      ));
+
+            bundles.Add(new ScriptBundle("~/bundles/accountForgotPassword").Include(
+                "~/Scripts/Account/ForgotPassword.js"
+                      ));
+
+            bundles.Add(new ScriptBundle("~/bundles/accountResetPassword").Include(
+                "~/Scripts/Account/ResetPassword.js"
+                      ));
+
             bundles.Add(new StyleBundle("~/bundles/contentCss").Include(
                       "~/Content/css/bootstrap.min.css",
                       "~/Content/css/animate.min.css",

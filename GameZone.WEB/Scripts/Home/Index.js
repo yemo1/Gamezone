@@ -78,12 +78,10 @@
                         $("#txtUsername").focus();
                     } else {
                         if (data.Data.iChangePW) {
-                            $('#loginModal').modal('hide');
-                            $('#passwordChangeModal').modal('show');
+                            window.location = "/Account/ResetPassword";
                         } else {
                             localStorage.setItem("UID", JSON.stringify(data.Data));
                             window.location = "/Home";
-                            $('#loginModal').modal('hide');
                         }
                     }
                 }).error(function (data) {
@@ -195,8 +193,8 @@
 
     /*Initialize Phone Number gotten from wap header*/
     if (_IsMobile == "True") {
-        if (_mtnNumber != "") {
-            $("#userIDSpan").val(_mtnNumber);
+        if (_mtnNumber != "") {            
+            $("#userIDSpan").text(_mtnNumber);
             $scope.userName = _mtnNumber;
             $("#txtUsername").val(_mtnNumber);
             $scope.loginObj.szUsername = _mtnNumber;
@@ -205,7 +203,7 @@
             $scope.registerObj.isMobile = true;
             $scope.mtnMSISDN = _mtnNumber;
             $scope.payType = 'airtime';
-            $('#logout-target').css("display", "none");/*Hide Logout Button*/
+            $('#logout-target, .loginReg').css("display", "none");/*Hide Logout Button*/
         } else {
             $scope.payType = 'card';
         }
@@ -472,10 +470,10 @@
                 /*Get Header Data*/
                 $scope.getHeaderData();
             } else {
-                $('#loginModal').modal('show');
+                window.location = "/Account/Login";
             }
         } else {
-            $('#loginModal').modal('show');
+            window.location = "/Account/Login";
         }
         $scope.subDetailOBJ.IsActive = 0;
     }
@@ -507,7 +505,7 @@
                                 /*Do nothing*/
                             } else {
                                 localStorage.removeItem("selectedGame");
-                                $('#loginModal').modal('show');
+                                window.location = "/Account/Login";
                             }
                         } else {
                             returnURL = data;
@@ -516,7 +514,7 @@
                         localStorage.removeItem("UID");
                         /*Clear Username Display*/
                         ResetUsernameToAccount();
-                        $('#loginModal').modal('show');
+                        window.location = "/Account/Login";
                     }
                 }, error: function (data) {
                 }
@@ -527,7 +525,7 @@
             } else {
                 /*Clear Username Display*/
                 ResetUsernameToAccount();
-                $('#loginModal').modal('show');
+                window.location = "/Account/Login";
             }
         }
         return returnURL;
@@ -595,7 +593,7 @@
                         /*Clear Username Display*/
                         ResetUsernameToAccount();
                         $('#lodaModal').modal('hide');
-                        $('#loginModal').modal('show');
+                        window.location = "/Account/Login";
                     }
                 }
             } else {
@@ -607,7 +605,7 @@
                     /*Clear Username Display*/
                     ResetUsernameToAccount();
                     $('#lodaModal').modal('hide');
-                    $('#loginModal').modal('show');
+                    window.location = "/Account/Login";
                 }
             }
         }, 1000);
@@ -739,7 +737,6 @@
                             autoHide: true,
                             autoHideDelay: 10000
                         });
-                        $('#loginModal').modal('hide');
                         $scope.LogUserOut($scope.forgotpwObj.szUsername, 5000);
                     } else {
                         $.notify(data.Message, 'error');
@@ -863,7 +860,7 @@
                     localStorage.removeItem("selectedGame");
                     /*Clear Username Display*/
                     ResetUsernameToAccount();
-                    $('#loginModal').modal('show');
+                    window.location = "/Account/Login";
                 }
             }
         } else {
@@ -874,7 +871,7 @@
                 localStorage.removeItem("selectedGame");
                 /*Clear Username Display*/
                 ResetUsernameToAccount();
-                $('#loginModal').modal('show');
+                window.location = "/Account/Login";
             }
         }
     };

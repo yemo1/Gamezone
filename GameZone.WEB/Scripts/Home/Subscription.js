@@ -153,7 +153,7 @@ gamezoneApp.controller('gamezoneCtrlr', ['$scope', '$http', function ($scope, $h
     /*Initialize Phone Number gotten from wap header*/
     if (_IsMobile == "True") {
         if (_mtnNumber != "") {
-            $("#userIDSpan").val(_mtnNumber);
+            $("#userIDSpan").text(_mtnNumber);
             $scope.userName = _mtnNumber;
             $("#txtUsername").val(_mtnNumber);
             $scope.loginObj.szUsername = _mtnNumber;
@@ -162,14 +162,14 @@ gamezoneApp.controller('gamezoneCtrlr', ['$scope', '$http', function ($scope, $h
             $scope.registerObj.isMobile = true;
             $scope.mtnMSISDN = _mtnNumber;
             $scope.payType = 'airtime';
-            $('#logout-target').css("display", "none");/*Hide Logout Button*/
+            $('#logout-target, .loginReg').css("display", "none");/*Hide Logout Button*/
         } else {
             $scope.payType = 'airtime';
-           /* $scope.payType = 'card';*/
+            /* $scope.payType = 'card';*/
         }
     } else {
         $scope.payType = 'airtime';
-       // $scope.payType = 'card';
+        // $scope.payType = 'card';
     }
 
     /*EPayment Subscriber*/
@@ -329,9 +329,9 @@ gamezoneApp.controller('gamezoneCtrlr', ['$scope', '$http', function ($scope, $h
 
     /*Function to Refresh Page on Intervals*/
     $scope.refreshPage = function () {
-        setInterval(function () {
+        setTimeout(function () {
             window.location = window.location.href;
-        }, 30000);
+        }, 20000);
     };
 
     /*Get User Object and Request User Login*/
@@ -339,6 +339,13 @@ gamezoneApp.controller('gamezoneCtrlr', ['$scope', '$http', function ($scope, $h
     var UID = null;
     if (userOBJ) {
         UID = JSON.parse(userOBJ);
+        if (_mtnNumber != "") {
+            if (UID.szUsername != _mtnNumber) {
+                $scope.AutoRegisterNewUser();
+                return;
+            }
+        }
+
         $scope.redirectURL = flutterWaveRedirectURL + UID.AppUserId;
         if ($scope.validateSubscription(UID.AppUserId) == "False") {
             $scope.subDetailOBJ.IsActive = 0;
@@ -365,28 +372,14 @@ gamezoneApp.controller('gamezoneCtrlr', ['$scope', '$http', function ($scope, $h
                 $('#loginModal').modal('show');
             }
         } else {
-        window.location = "/Home/";
+            window.location = "/Home/";
         }
         $scope.subDetailOBJ.IsActive = 0;
     }
 
     /*Check for Subscription Data*/
     if (_subGo == "True") {
-        var loadCnt = sessionStorage.getItem("loadCnt");
-        var cntIndex = 0;
-        if (loadCnt) {
-            cntIndex = parseInt(loadCnt);
-            if (cntIndex >= 3) {
-                clearInterval(goInterval);
-                sessionStorage.removeItem("loadCnt");
-                $(".disabledCtrl").removeAttr("disabled");
-            } else {
-                sessionStorage.setItem("loadCnt", cntIndex + 1);
-            }
-        } else {
-            sessionStorage.setItem("loadCnt", cntIndex + 1);
-        }
-
+        $scope.HeaderId = parseInt(_HedaID);
         var userOBJ = localStorage.getItem("UID");
         var userData = null;
         if (userOBJ) {
@@ -397,10 +390,16 @@ gamezoneApp.controller('gamezoneCtrlr', ['$scope', '$http', function ($scope, $h
                     $scope.AutoRegisterNewUser();
                 }
                 $scope.HeaderId = parseInt(_HedaID);
-                goInterval = setInterval(function () {
-                    /*Refresh Page every 30 secs*/
-                    window.location = window.location.href;
-                }, 30000);
+                var refreshLrdy = localStorage.getItem("refreshLrdy");
+                if (refreshLrdy) {
+                    localStorage.removeItem("refreshLrdy");
+                } else {
+                    setTimeout(function () {
+                        /*Refresh Page every 20 secs*/
+                        localStorage.setItem("refreshLrdy", true);
+                        window.location = window.location.href;
+                    }, 20000);
+                }
             } else {
                 $scope.keepUserData(userData);
             }
@@ -864,9 +863,9 @@ function getRecordStatus(status) {
     return (status == 1) ? "<span class='btn-custom btn-success btn-xs'>True</span>" : (status == 0) ? "<span class='btn-custom btn-warning btn-xs'>False</span>" : "";
 }
 function refreshPage() {
-    setInterval(function () {
+    setTimeout(function () {
         window.location = window.location.href;
-    }, 30000);
+    }, 20000);
 };
 $(document).on("click", "#gameBtn", function () {
     var gameData = localStorage.getItem("selectedGame");

@@ -17,7 +17,7 @@ function LogUserOut(delay, UID) {
         localStorage.removeItem("selectedGame");
         if (data != "") {
             setTimeout(function () {
-                window.location = data;
+                window.location = "/Account/Login";
             }, delay);
         }
     }).error(function (data) {
@@ -31,7 +31,7 @@ $(document).on("click", "#logout-target", function (event) {
     var UID = null;
     if (userOBJ) {
         UID = JSON.parse(localStorage.getItem("UID"));
-        LogUserOut(1000, UID.szUsername);
+        LogUserOut(500, UID.szUsername);
     }
 });
 
