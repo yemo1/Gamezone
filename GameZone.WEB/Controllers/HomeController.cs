@@ -82,7 +82,6 @@ namespace GameZone.WEB.Controllers
             #endregion
             try
             {
-
                 bool isMobi = false;
                 if (Request.UserAgent.Contains("Mobi") == true)
                 {
@@ -110,7 +109,7 @@ namespace GameZone.WEB.Controllers
                 System.Web.HttpContext.Current.Session["fltwvSubscription"] = null;
 
                 //Just for test of Auto Registration
-                //ViewBag.mtnNumber = "2348147911707";
+                ViewBag.mtnNumber = "2348147911707";
                 return View();
             }
             catch (Exception ex)

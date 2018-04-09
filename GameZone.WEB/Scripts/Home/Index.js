@@ -470,10 +470,10 @@
                 /*Get Header Data*/
                 $scope.getHeaderData();
             } else {
-                window.location = "/Account/Login";
+                //window.location = "/Account/Login";
             }
         } else {
-            window.location = "/Account/Login";
+            //window.location = "/Account/Login";
         }
         $scope.subDetailOBJ.IsActive = 0;
     }
@@ -519,15 +519,16 @@
                 }, error: function (data) {
                 }
             });
-        } else {
-            if (_mtnNumber != "") {
-                /*$scope.AutoRegisterNewUser();*/
-            } else {
-                /*Clear Username Display*/
-                ResetUsernameToAccount();
-                window.location = "/Account/Login";
-            }
         }
+        //else {
+        //    if (_mtnNumber != "") {
+        //        /*$scope.AutoRegisterNewUser();*/
+        //    } else {
+        //        /*Clear Username Display*/
+        //        ResetUsernameToAccount();
+        //        window.location = "/Account/Login";
+        //    }
+        //}
         return returnURL;
     };
 

@@ -1,4 +1,5 @@
 ﻿@using GameZone.WEB.Models
+@model string
 @{
     ViewBag.Title = "Log in";
     Layout = "~/Views/Shared/_LoginLayout.cshtml";
@@ -9,6 +10,7 @@
         mtnNumber = (string)ViewBag.mtnNumber;
     }
     string SERVICE_SHORTCODE = System.Configuration.ConfigurationManager.AppSettings["SERVICE_SHORTCODE"].ToString();
+    string returnUrl = Model;
 }
 <section class="page-section pale-white home">
     <div class="container-fluid">
@@ -53,6 +55,7 @@
         var _IsMobile = "@IsMobile";
         var _mtnNumber = "@mtnNumber";
         var _SERVICE_SHORTCODE = "@SERVICE_SHORTCODE";
+        var _ReturnUrl = "@returnUrl";
     </script>
 
     @Scripts.Render("~/bundles/accountLogin")

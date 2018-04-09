@@ -86,7 +86,12 @@
                             window.location = "/Account/ResetPassword";
                         } else {
                             localStorage.setItem("UID", JSON.stringify(data.Data));
-                            window.location = "/Home";
+                            if (_ReturnUrl != "") {
+                                //window.location = _ReturnUrl;
+                                console.log(_ReturnUrl);
+                            } else {
+                                window.location = "/Home";
+                            }
                         }
                     }
                 }).error(function (data) {

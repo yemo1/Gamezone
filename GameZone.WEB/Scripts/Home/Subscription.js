@@ -161,6 +161,7 @@ gamezoneApp.controller('gamezoneCtrlr', ['$scope', '$http', function ($scope, $h
             $scope.registerObj.szUsername = _mtnNumber;
             $scope.registerObj.isMobile = true;
             $scope.mtnMSISDN = _mtnNumber;
+            $("#txtPhone").val(_mtnNumber);
             $scope.payType = 'airtime';
             $('#logout-target, .loginReg').css("display", "none");/*Hide Logout Button*/
         } else {
@@ -343,6 +344,9 @@ gamezoneApp.controller('gamezoneCtrlr', ['$scope', '$http', function ($scope, $h
             if (UID.szUsername != _mtnNumber) {
                 $scope.AutoRegisterNewUser();
                 return;
+            } else {
+                $scope.mtnMSISDN = _mtnNumber;
+                $("#txtPhone").val(_mtnNumber);
             }
         }
 

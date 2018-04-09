@@ -657,10 +657,10 @@
             if (_mtnNumber != "") {/*Number is mtn*/
                 /*Do nothing*/
             } else {
-                window.location = "/Account/Login";
+                //window.location = "/Account/Login";
             }
         } else {
-            window.location = "/Account/Login";
+            //window.location = "/Account/Login";
         }
         $scope.subDetailOBJ.IsActive = 0;
         $('.subscribeBTN').css("display", "none");
@@ -712,15 +712,16 @@
                 }, error: function (data) {
                 }
             });
-        } else {
-            if (_mtnNumber != "") {
-                /*Do nothing*/
-            } else {
-                /*Clear Username Display*/
-                ResetUsernameToAccount();
-                window.location = "/Account/Login";
-            }
         }
+        //else {
+        //    if (_mtnNumber != "") {
+        //        /*Do nothing*/
+        //    } else {
+        //        /*Clear Username Display*/
+        //        ResetUsernameToAccount();
+        //        window.location = "/Account/Login";
+        //    }
+        //}
         return returnURL;
     };
 

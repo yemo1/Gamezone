@@ -1,0 +1,16 @@
+4/9/2018 4:46:31 PM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+
+4/9/2018 4:47:28 PM ==> Logging from ::1................
+HTTP_X-MSISDN = 
+HTTP_MSISDN = 
+HEADER_X-MSISDN = 
+HEADER_MSISDN = 
+Header(X-MSISDN) = 
+Header(MSISDN) = 
+

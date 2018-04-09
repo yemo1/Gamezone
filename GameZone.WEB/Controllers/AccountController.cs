@@ -150,7 +150,7 @@ namespace GameZone.WEB.Controllers
             }
 
             ViewBag.mtnNumber = mtnNumber;
-            return View();
+            return View(returnUrl);
         }
         
         //

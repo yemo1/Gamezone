@@ -1,0 +1,2 @@
+4/9/2018 4:46:31 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/9/2018 4:47:28 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}

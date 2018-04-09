@@ -59,7 +59,8 @@ namespace GameZone.WEB
 
             bundles.Add(new ScriptBundle("~/bundles/homeIndex").Include(
                 "~/Scripts/Home/Index.js",
-                "~/Content/js/jquery.lazyload.min.js"
+                "~/Content/js/jquery.lazyload.min.js",
+                "~/Content/js/slick.min.js"
                       ));
 
             bundles.Add(new ScriptBundle("~/bundles/gamesList").Include(
