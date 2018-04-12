@@ -202,11 +202,11 @@ namespace GameZone.Repositories
             }
         }
 
-        public GetAppUserSubscriptionDetails_Result GetUserSubscriptionDetails(long AppUserID, string ServiceName)
+        public GetAppUserSubscriptionDetails_Result GetUserSubscriptionDetails(long AppUserID, string ServiceName, string shortCode = null)
         {
             try
             {
-                var retVal = _NGSubscriptionsEntities.GetAppUserSubscriptionDetails(AppUserID, ServiceName).FirstOrDefault();
+                var retVal = _NGSubscriptionsEntities.GetAppUserSubscriptionDetails(AppUserID, ServiceName, shortCode).FirstOrDefault();
                 return retVal;
             }
             catch (Exception ex)
@@ -227,7 +227,18 @@ namespace GameZone.Repositories
                 throw ex;
             }
         }
-
+        
+        public void UpdateAppUserMobilePayer(long AppUserId, string szMobilePayer)
+        {
+            try
+            {
+                _NGSubscriptionsEntities.UpdateGameZoneAppUserMobilePayer(AppUserId, szMobilePayer);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public bool SubscriberExists(string tell)
         {
             return _NGSubscriptionsEntities.Games.Count(e => e.MSISDN == tell) > 0;

@@ -29,10 +29,10 @@ namespace GameData
     
         public virtual DbSet<Game> Games { get; set; }
         public virtual DbSet<IDSeries> IDSeries { get; set; }
-        public virtual DbSet<AppUser> AppUser { get; set; }
         public virtual DbSet<ServiceHeaders> ServiceHeaders { get; set; }
         public virtual DbSet<ServiceRequests> ServiceRequests { get; set; }
         public virtual DbSet<ServiceResponses> ServiceResponses { get; set; }
+        public virtual DbSet<AppUser> AppUser { get; set; }
     
         public virtual ObjectResult<ChangeAppUserPassword_Result> ChangeAppUserPassword(string szUsername, string szPassword, string szPasswordSalt, Nullable<int> iStatus, Nullable<bool> iChangePW)
         {
@@ -210,32 +210,6 @@ namespace GameData
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<LoginAppUser_Result>("LoginAppUser", szUsernameParameter, isLoginParameter, loginTokenParameter);
         }
     
-        public virtual ObjectResult<GetAppUserSubscriptionDetails_Result> GetAppUserSubscriptionDetails(Nullable<long> appUserId, string serviceName)
-        {
-            var appUserIdParameter = appUserId.HasValue ?
-                new ObjectParameter("AppUserId", appUserId) :
-                new ObjectParameter("AppUserId", typeof(long));
-    
-            var serviceNameParameter = serviceName != null ?
-                new ObjectParameter("ServiceName", serviceName) :
-                new ObjectParameter("ServiceName", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAppUserSubscriptionDetails_Result>("GetAppUserSubscriptionDetails", appUserIdParameter, serviceNameParameter);
-        }
-    
-        public virtual ObjectResult<GetMTNUserSubscriptionDetails_Result> GetMTNUserSubscriptionDetails(string mSISDN, string shortcode)
-        {
-            var mSISDNParameter = mSISDN != null ?
-                new ObjectParameter("MSISDN", mSISDN) :
-                new ObjectParameter("MSISDN", typeof(string));
-    
-            var shortcodeParameter = shortcode != null ?
-                new ObjectParameter("Shortcode", shortcode) :
-                new ObjectParameter("Shortcode", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetMTNUserSubscriptionDetails_Result>("GetMTNUserSubscriptionDetails", mSISDNParameter, shortcodeParameter);
-        }
-    
         public virtual ObjectResult<ConfirmAppUserSubscription_Result> ConfirmAppUserSubscription(Nullable<long> appUserId, string mSISDN, string serviceName, string shortcode, string cCode, Nullable<bool> isMtn)
         {
             var appUserIdParameter = appUserId.HasValue ?
@@ -263,6 +237,49 @@ namespace GameData
                 new ObjectParameter("IsMtn", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConfirmAppUserSubscription_Result>("ConfirmAppUserSubscription", appUserIdParameter, mSISDNParameter, serviceNameParameter, shortcodeParameter, cCodeParameter, isMtnParameter);
+        }
+    
+        public virtual int UpdateGameZoneAppUserMobilePayer(Nullable<long> appUserId, string szMobilePayer)
+        {
+            var appUserIdParameter = appUserId.HasValue ?
+                new ObjectParameter("AppUserId", appUserId) :
+                new ObjectParameter("AppUserId", typeof(long));
+    
+            var szMobilePayerParameter = szMobilePayer != null ?
+                new ObjectParameter("szMobilePayer", szMobilePayer) :
+                new ObjectParameter("szMobilePayer", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateGameZoneAppUserMobilePayer", appUserIdParameter, szMobilePayerParameter);
+        }
+    
+        public virtual ObjectResult<GetAppUserSubscriptionDetails_Result> GetAppUserSubscriptionDetails(Nullable<long> appUserId, string serviceName, string shortcode)
+        {
+            var appUserIdParameter = appUserId.HasValue ?
+                new ObjectParameter("AppUserId", appUserId) :
+                new ObjectParameter("AppUserId", typeof(long));
+    
+            var serviceNameParameter = serviceName != null ?
+                new ObjectParameter("ServiceName", serviceName) :
+                new ObjectParameter("ServiceName", typeof(string));
+    
+            var shortcodeParameter = shortcode != null ?
+                new ObjectParameter("Shortcode", shortcode) :
+                new ObjectParameter("Shortcode", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAppUserSubscriptionDetails_Result>("GetAppUserSubscriptionDetails", appUserIdParameter, serviceNameParameter, shortcodeParameter);
+        }
+    
+        public virtual ObjectResult<GetMTNUserSubscriptionDetails_Result> GetMTNUserSubscriptionDetails(string mSISDN, string shortcode)
+        {
+            var mSISDNParameter = mSISDN != null ?
+                new ObjectParameter("MSISDN", mSISDN) :
+                new ObjectParameter("MSISDN", typeof(string));
+    
+            var shortcodeParameter = shortcode != null ?
+                new ObjectParameter("Shortcode", shortcode) :
+                new ObjectParameter("Shortcode", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetMTNUserSubscriptionDetails_Result>("GetMTNUserSubscriptionDetails", mSISDNParameter, shortcodeParameter);
         }
     }
 }

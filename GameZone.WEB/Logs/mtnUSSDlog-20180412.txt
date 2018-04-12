@@ -1,0 +1,486 @@
+4/12/2018 1:01:16 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 1:02:44 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 1:02:46 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 1:53:26 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 1:53:28 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 1:53:29 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400D
+4/12/2018 1:53:37 PM ==> "Your subscription request has been sent"
+4/12/2018 1:53:38 PM ==> RequestId: 86811 - Description: "Your subscription request has been sent"
+4/12/2018 1:53:38 PM ==> {"Message":null,"LogData":{"ID":86811,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85731,"RequestId":86811,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-04-12T13:53:37.600851+01:00"}}}
+4/12/2018 1:53:38 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 1:53:40 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 1:54:50 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 1:54:52 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 2:31:30 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 2:31:34 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 2:31:49 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 3:35:35 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 3:35:43 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 3:36:03 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 3:36:04 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 3:36:06 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 3:36:06 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 4:24:46 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 4:24:52 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 4:26:28 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 4:26:29 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 4:33:24 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 4:33:25 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 4:35:14 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 4:35:23 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 4:35:30 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 4:41:01 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 4:41:02 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 4:41:03 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 4:45:45 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 4:46:55 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 4:46:56 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 4:48:08 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 4:49:04 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 4:49:04 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 4:49:10 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 4:52:55 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 4:52:55 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 4:52:57 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 4:54:15 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 4:54:16 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 4:54:22 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 4:55:38 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 4:55:38 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 4:55:41 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 4:57:25 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 4:57:26 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 5:32:08 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 5:32:19 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 5:34:15 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 5:35:28 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 5:35:30 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 5:35:55 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 5:36:05 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 5:36:05 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 5:36:23 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 5:36:24 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 5:37:41 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 5:37:48 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 5:38:11 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 5:38:17 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 5:38:51 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400D
+4/12/2018 5:38:54 PM ==> "Your subscription request has been sent"
+4/12/2018 5:38:55 PM ==> RequestId: 86812 - Description: "Your subscription request has been sent"
+4/12/2018 5:39:01 PM ==> {"Message":null,"LogData":{"ID":86812,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85732,"RequestId":86812,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-04-12T17:38:54.3938177+01:00"}}}
+4/12/2018 5:39:45 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 5:42:25 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 5:42:33 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 5:43:10 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400D
+4/12/2018 5:43:12 PM ==> "Your subscription request has been sent"
+4/12/2018 5:43:13 PM ==> RequestId: 86813 - Description: "Your subscription request has been sent"
+4/12/2018 5:43:13 PM ==> {"Message":null,"LogData":{"ID":86813,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85733,"RequestId":86813,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-04-12T17:43:12.9612502+01:00"}}}
+4/12/2018 5:43:23 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 5:43:24 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 5:43:39 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 5:43:54 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 5:46:37 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400D
+4/12/2018 5:46:40 PM ==> "Your subscription request has been sent"
+4/12/2018 5:46:40 PM ==> RequestId: 86814 - Description: "Your subscription request has been sent"
+4/12/2018 5:47:39 PM ==> {"Message":null,"LogData":{"ID":86814,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85734,"RequestId":86814,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-04-12T17:46:40.1426708+01:00"}}}
+4/12/2018 5:48:06 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 5:49:28 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 5:49:37 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 5:49:38 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400D
+4/12/2018 5:49:41 PM ==> "Your subscription request has been sent"
+4/12/2018 5:49:41 PM ==> RequestId: 86815 - Description: "Your subscription request has been sent"
+4/12/2018 5:49:42 PM ==> {"Message":null,"LogData":{"ID":86815,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85735,"RequestId":86815,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-04-12T17:49:41.2113473+01:00"}}}
+4/12/2018 5:49:45 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 5:53:42 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 5:53:46 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 5:53:48 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400D
+4/12/2018 5:53:51 PM ==> "Your subscription request has been sent"
+4/12/2018 5:53:52 PM ==> RequestId: 86816 - Description: "Your subscription request has been sent"
+4/12/2018 5:53:52 PM ==> {"Message":null,"LogData":{"ID":86816,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85736,"RequestId":86816,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-04-12T17:53:51.8496282+01:00"}}}
+4/12/2018 5:53:54 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:01:51 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:01:53 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 6:01:56 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400D
+4/12/2018 6:01:58 PM ==> "Your subscription request has been sent"
+4/12/2018 6:01:59 PM ==> RequestId: 86817 - Description: "Your subscription request has been sent"
+4/12/2018 6:01:59 PM ==> {"Message":null,"LogData":{"ID":86817,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85737,"RequestId":86817,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-04-12T18:01:58.6297942+01:00"}}}
+4/12/2018 6:02:11 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:03:19 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:03:20 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 6:03:22 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400D
+4/12/2018 6:03:24 PM ==> "Your subscription request has been sent"
+4/12/2018 6:03:25 PM ==> RequestId: 86818 - Description: "Your subscription request has been sent"
+4/12/2018 6:03:25 PM ==> {"Message":null,"LogData":{"ID":86818,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85738,"RequestId":86818,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-04-12T18:03:24.5131152+01:00"}}}
+4/12/2018 6:03:29 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:03:30 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:03:31 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:05:14 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:05:19 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 6:05:21 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400D
+4/12/2018 6:05:24 PM ==> "Your subscription request has been sent"
+4/12/2018 6:05:25 PM ==> RequestId: 86819 - Description: "Your subscription request has been sent"
+4/12/2018 6:05:25 PM ==> {"Message":null,"LogData":{"ID":86819,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85739,"RequestId":86819,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-04-12T18:05:24.446892+01:00"}}}
+4/12/2018 6:05:29 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:05:30 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:05:31 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:05:50 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:05:54 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 6:05:56 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400D
+4/12/2018 6:05:58 PM ==> "Your subscription request has been sent"
+4/12/2018 6:05:59 PM ==> RequestId: 86820 - Description: "Your subscription request has been sent"
+4/12/2018 6:05:59 PM ==> {"Message":null,"LogData":{"ID":86820,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85740,"RequestId":86820,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-04-12T18:05:57.7647075+01:00"}}}
+4/12/2018 6:06:03 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:06:05 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:06:06 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:06:28 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:07:00 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400D
+4/12/2018 6:07:02 PM ==> "Your subscription request has been sent"
+4/12/2018 6:07:02 PM ==> RequestId: 86821 - Description: "Your subscription request has been sent"
+4/12/2018 6:07:03 PM ==> {"Message":null,"LogData":{"ID":86821,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85741,"RequestId":86821,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-04-12T18:07:02.2880709+01:00"}}}
+4/12/2018 6:07:24 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:07:28 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 6:07:30 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400D
+4/12/2018 6:07:31 PM ==> "Your subscription request has been sent"
+4/12/2018 6:07:32 PM ==> RequestId: 86822 - Description: "Your subscription request has been sent"
+4/12/2018 6:07:32 PM ==> {"Message":null,"LogData":{"ID":86822,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85742,"RequestId":86822,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-04-12T18:07:31.6761747+01:00"}}}
+4/12/2018 6:07:34 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:07:35 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:07:35 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:07:55 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:08:02 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 6:08:04 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400D
+4/12/2018 6:08:05 PM ==> "Your subscription request has been sent"
+4/12/2018 6:08:06 PM ==> RequestId: 86823 - Description: "Your subscription request has been sent"
+4/12/2018 6:08:06 PM ==> {"Message":null,"LogData":{"ID":86823,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85743,"RequestId":86823,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-04-12T18:08:05.4804928+01:00"}}}
+4/12/2018 6:08:10 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:08:10 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:08:11 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:09:51 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:09:55 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 6:09:57 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400D
+4/12/2018 6:09:59 PM ==> "Your subscription request has been sent"
+4/12/2018 6:10:00 PM ==> RequestId: 86824 - Description: "Your subscription request has been sent"
+4/12/2018 6:10:00 PM ==> {"Message":null,"LogData":{"ID":86824,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85744,"RequestId":86824,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-04-12T18:09:59.5007294+01:00"}}}
+4/12/2018 6:10:05 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:10:05 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:10:06 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:10:26 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:10:26 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 6:10:31 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400D
+4/12/2018 6:10:32 PM ==> "Your subscription request has been sent"
+4/12/2018 6:10:33 PM ==> RequestId: 86825 - Description: "Your subscription request has been sent"
+4/12/2018 6:10:33 PM ==> {"Message":null,"LogData":{"ID":86825,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85745,"RequestId":86825,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-04-12T18:10:32.3198565+01:00"}}}
+4/12/2018 6:10:35 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:10:35 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:10:37 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:11:34 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:14:43 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400D
+4/12/2018 6:14:45 PM ==> "Your subscription request has been sent"
+4/12/2018 6:14:46 PM ==> RequestId: 86826 - Description: "Your subscription request has been sent"
+4/12/2018 6:14:46 PM ==> {"Message":null,"LogData":{"ID":86826,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85746,"RequestId":86826,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-04-12T18:14:45.9238346+01:00"}}}
+4/12/2018 6:15:07 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:16:21 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 6:16:22 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400D
+4/12/2018 6:16:25 PM ==> "Your subscription request has been sent"
+4/12/2018 6:16:25 PM ==> RequestId: 86827 - Description: "Your subscription request has been sent"
+4/12/2018 6:16:25 PM ==> {"Message":null,"LogData":{"ID":86827,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85747,"RequestId":86827,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-04-12T18:16:25.1381221+01:00"}}}
+4/12/2018 6:16:27 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:16:27 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:16:28 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:16:48 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:16:49 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 6:16:50 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400D
+4/12/2018 6:16:51 PM ==> "Your subscription request has been sent"
+4/12/2018 6:16:51 PM ==> RequestId: 86828 - Description: "Your subscription request has been sent"
+4/12/2018 6:16:51 PM ==> {"Message":null,"LogData":{"ID":86828,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85748,"RequestId":86828,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-04-12T18:16:51.3223293+01:00"}}}
+4/12/2018 6:16:53 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:16:53 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:16:53 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:31:21 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:31:23 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 6:32:57 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400D
+4/12/2018 6:33:03 PM ==> "Your subscription request has been sent"
+4/12/2018 6:33:04 PM ==> RequestId: 86829 - Description: "Your subscription request has been sent"
+4/12/2018 6:33:04 PM ==> {"Message":null,"LogData":{"ID":86829,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85749,"RequestId":86829,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-04-12T18:33:03.705137+01:00"}}}
+4/12/2018 6:33:16 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:33:16 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:33:17 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:33:37 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:33:42 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 6:33:44 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400D
+4/12/2018 6:33:46 PM ==> "Your subscription request has been sent"
+4/12/2018 6:33:47 PM ==> RequestId: 86830 - Description: "Your subscription request has been sent"
+4/12/2018 6:33:48 PM ==> {"Message":null,"LogData":{"ID":86830,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85750,"RequestId":86830,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-04-12T18:33:46.952632+01:00"}}}
+4/12/2018 6:33:49 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:33:51 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:33:52 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:34:08 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:34:53 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2349065800120/400D
+4/12/2018 6:34:55 PM ==> "Your subscription request has been sent"
+4/12/2018 6:34:56 PM ==> RequestId: 86831 - Description: "Your subscription request has been sent"
+4/12/2018 6:35:13 PM ==> {"Message":null,"LogData":{"ID":86831,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85751,"RequestId":86831,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-04-12T18:34:55.0843356+01:00"}}}
+4/12/2018 6:35:49 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:43:33 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 6:43:35 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400D
+4/12/2018 6:43:37 PM ==> "Your subscription request has been sent"
+4/12/2018 6:43:38 PM ==> RequestId: 86833 - Description: "Your subscription request has been sent"
+4/12/2018 6:43:38 PM ==> {"Message":null,"LogData":{"ID":86833,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85753,"RequestId":86833,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-04-12T18:43:37.3961395+01:00"}}}
+4/12/2018 6:43:40 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:43:41 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:43:41 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:44:01 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:44:06 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 6:44:08 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400D
+4/12/2018 6:44:09 PM ==> "Your subscription request has been sent"
+4/12/2018 6:44:10 PM ==> RequestId: 86834 - Description: "Your subscription request has been sent"
+4/12/2018 6:44:10 PM ==> {"Message":null,"LogData":{"ID":86834,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85754,"RequestId":86834,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-04-12T18:44:09.5402054+01:00"}}}
+4/12/2018 6:44:11 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:44:12 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:44:13 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:44:39 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:44:44 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2349065800120/400D
+4/12/2018 6:44:45 PM ==> "Your subscription request has been sent"
+4/12/2018 6:44:46 PM ==> RequestId: 86835 - Description: "Your subscription request has been sent"
+4/12/2018 6:44:46 PM ==> {"Message":null,"LogData":{"ID":86835,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85755,"RequestId":86835,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-04-12T18:44:45.7027287+01:00"}}}
+4/12/2018 6:45:07 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:45:12 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 6:45:13 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400D
+4/12/2018 6:45:15 PM ==> "Your subscription request has been sent"
+4/12/2018 6:45:16 PM ==> RequestId: 86836 - Description: "Your subscription request has been sent"
+4/12/2018 6:45:16 PM ==> {"Message":null,"LogData":{"ID":86836,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85756,"RequestId":86836,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-04-12T18:45:15.1511207+01:00"}}}
+4/12/2018 6:45:18 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:45:19 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:45:21 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:45:40 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:45:46 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 6:45:47 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400D
+4/12/2018 6:45:48 PM ==> "Your subscription request has been sent"
+4/12/2018 6:45:49 PM ==> RequestId: 86837 - Description: "Your subscription request has been sent"
+4/12/2018 6:45:49 PM ==> {"Message":null,"LogData":{"ID":86837,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85757,"RequestId":86837,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-04-12T18:45:48.6984821+01:00"}}}
+4/12/2018 6:45:51 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:45:51 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:45:52 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:46:03 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:46:20 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 6:46:25 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400D
+4/12/2018 6:46:26 PM ==> "Your subscription request has been sent"
+4/12/2018 6:46:27 PM ==> RequestId: 86838 - Description: "Your subscription request has been sent"
+4/12/2018 6:46:27 PM ==> {"Message":null,"LogData":{"ID":86838,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85758,"RequestId":86838,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-04-12T18:46:26.7591864+01:00"}}}
+4/12/2018 6:57:14 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:57:15 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:57:16 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:57:21 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:57:27 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 6:57:29 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400D
+4/12/2018 6:57:31 PM ==> "Your subscription request has been sent"
+4/12/2018 6:57:32 PM ==> RequestId: 86839 - Description: "Your subscription request has been sent"
+4/12/2018 6:57:32 PM ==> {"Message":null,"LogData":{"ID":86839,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85759,"RequestId":86839,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-04-12T18:57:31.4748081+01:00"}}}
+4/12/2018 6:57:36 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:57:37 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:57:38 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:58:20 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:58:20 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 6:58:22 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400D
+4/12/2018 6:58:23 PM ==> "Your subscription request has been sent"
+4/12/2018 6:58:24 PM ==> RequestId: 86840 - Description: "Your subscription request has been sent"
+4/12/2018 6:58:25 PM ==> {"Message":null,"LogData":{"ID":86840,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85760,"RequestId":86840,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-04-12T18:58:23.6945511+01:00"}}}
+4/12/2018 6:58:27 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:58:28 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:58:29 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:58:58 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:59:04 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 6:59:05 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400D
+4/12/2018 6:59:07 PM ==> "Your subscription request has been sent"
+4/12/2018 6:59:08 PM ==> RequestId: 86841 - Description: "Your subscription request has been sent"
+4/12/2018 6:59:08 PM ==> {"Message":null,"LogData":{"ID":86841,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85761,"RequestId":86841,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-04-12T18:59:07.8630468+01:00"}}}
+4/12/2018 6:59:10 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:59:10 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:59:10 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:59:39 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:59:39 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 6:59:40 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400D
+4/12/2018 6:59:42 PM ==> "Your subscription request has been sent"
+4/12/2018 6:59:43 PM ==> RequestId: 86842 - Description: "Your subscription request has been sent"
+4/12/2018 6:59:43 PM ==> {"Message":null,"LogData":{"ID":86842,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85762,"RequestId":86842,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-04-12T18:59:42.5654273+01:00"}}}
+4/12/2018 6:59:46 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:59:48 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 6:59:48 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:01:21 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:01:21 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 7:01:23 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400D
+4/12/2018 7:01:25 PM ==> "Your subscription request has been sent"
+4/12/2018 7:01:26 PM ==> RequestId: 86843 - Description: "Your subscription request has been sent"
+4/12/2018 7:01:27 PM ==> {"Message":null,"LogData":{"ID":86843,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85763,"RequestId":86843,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-04-12T19:01:25.606863+01:00"}}}
+4/12/2018 7:01:30 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:01:31 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:01:32 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:02:13 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:02:13 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 7:02:15 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400D
+4/12/2018 7:02:16 PM ==> "Your subscription request has been sent"
+4/12/2018 7:02:17 PM ==> RequestId: 86844 - Description: "Your subscription request has been sent"
+4/12/2018 7:02:17 PM ==> {"Message":null,"LogData":{"ID":86844,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85764,"RequestId":86844,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-04-12T19:02:16.7110834+01:00"}}}
+4/12/2018 7:02:19 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:02:21 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:02:23 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:02:45 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:02:45 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 7:02:47 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400D
+4/12/2018 7:02:48 PM ==> "Your subscription request has been sent"
+4/12/2018 7:02:49 PM ==> RequestId: 86845 - Description: "Your subscription request has been sent"
+4/12/2018 7:02:49 PM ==> {"Message":null,"LogData":{"ID":86845,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85765,"RequestId":86845,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-04-12T19:02:48.4839586+01:00"}}}
+4/12/2018 7:02:54 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:02:55 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:02:57 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:04:58 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:04:59 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 7:05:02 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400D
+4/12/2018 7:05:05 PM ==> "Your subscription request has been sent"
+4/12/2018 7:05:05 PM ==> RequestId: 86846 - Description: "Your subscription request has been sent"
+4/12/2018 7:05:06 PM ==> {"Message":null,"LogData":{"ID":86846,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85766,"RequestId":86846,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-04-12T19:05:05.1547211+01:00"}}}
+4/12/2018 7:05:09 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:05:10 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:05:12 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:05:51 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:05:51 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 7:05:53 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400D
+4/12/2018 7:05:55 PM ==> "Your subscription request has been sent"
+4/12/2018 7:05:56 PM ==> RequestId: 86847 - Description: "Your subscription request has been sent"
+4/12/2018 7:05:56 PM ==> {"Message":null,"LogData":{"ID":86847,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85767,"RequestId":86847,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-04-12T19:05:55.2702667+01:00"}}}
+4/12/2018 7:06:00 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:06:01 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:06:02 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:06:11 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:06:52 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 7:10:30 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400D
+4/12/2018 7:10:32 PM ==> "Your subscription request has been sent"
+4/12/2018 7:10:33 PM ==> RequestId: 86848 - Description: "Your subscription request has been sent"
+4/12/2018 7:10:33 PM ==> {"Message":null,"LogData":{"ID":86848,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85768,"RequestId":86848,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-04-12T19:10:32.4985546+01:00"}}}
+4/12/2018 7:10:35 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:10:36 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:10:37 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:11:00 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:11:00 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 7:11:02 PM ==> http://www.mobilerush.com.ng/FMWap/Subs/2348147911707/400D
+4/12/2018 7:11:04 PM ==> "Your subscription request has been sent"
+4/12/2018 7:11:04 PM ==> RequestId: 86849 - Description: "Your subscription request has been sent"
+4/12/2018 7:11:04 PM ==> {"Message":null,"LogData":{"ID":86849,"Message":"\"Your subscription request has been sent\"","Success":true,"Data":{"ResponseId":85769,"RequestId":86849,"StatusCode":"\"Your subscription request has been sent\"","Description":"\"Your subscription request has been sent\"","Timestamped":"2018-04-12T19:11:04.0486279+01:00"}}}
+4/12/2018 7:11:07 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:11:07 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:11:07 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:27:10 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:30:25 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 7:30:36 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:30:37 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:30:38 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:30:58 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:33:56 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 7:33:57 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:33:57 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:33:57 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:40:05 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:40:09 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 7:40:15 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:40:15 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:40:16 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:40:36 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:40:36 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 7:40:37 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:40:37 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:40:37 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:41:45 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:41:46 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 7:41:47 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:41:47 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:41:47 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:42:07 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:42:08 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 7:42:08 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:42:09 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:42:09 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:42:59 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:42:59 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 7:43:00 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:43:00 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:43:01 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:43:21 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:43:22 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 7:43:22 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:43:22 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:43:23 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:45:18 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:45:19 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 7:45:20 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:45:20 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:45:20 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:45:39 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:45:39 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 7:45:40 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:45:40 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:45:40 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:46:00 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:46:01 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 7:46:01 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:46:01 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:46:02 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:46:44 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:46:45 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 7:46:46 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:46:46 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:46:46 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:47:06 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:47:07 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 7:47:08 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:47:08 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:47:08 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:48:04 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:48:05 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 7:48:05 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:48:05 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:48:06 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:48:26 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:48:27 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:48:27 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:48:28 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:49:20 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:49:21 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 7:49:21 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:49:22 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:49:22 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:50:28 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:50:29 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:50:30 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:50:30 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:53:22 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:53:23 PM ==> {"Message":"Initiating USSD Subscription","LogData":"2348147911707"}
+4/12/2018 7:53:23 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:53:24 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:53:24 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:53:44 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:53:45 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:53:46 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:53:46 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:54:58 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:55:07 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:55:07 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:55:07 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:56:09 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:56:10 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:56:10 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:56:11 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:56:57 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:57:05 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:57:06 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:57:06 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 7:57:43 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 8:00:55 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 8:00:55 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 8:00:56 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 8:01:34 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 8:01:43 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 8:01:43 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 8:01:44 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 8:02:03 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 8:02:04 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 8:02:04 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}
+4/12/2018 8:02:04 PM ==> {"Message":"Recognised Wap Header","LogData":{"Lines":[{"Phone":"XXX-XXXXXXXX","IpAddress":"::1","IsHeader":false}]}}

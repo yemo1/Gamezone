@@ -9,6 +9,7 @@ namespace GameZone.VIEWMODEL
     public class SubscriberVM
     {
         public string ServiceName { get; set; }
+        public string Subscriber { get; set; }
         public Nullable<System.DateTime> Sub { get; set; }
         public Nullable<System.DateTime> Exp { get; set; }
         public Nullable<int> Status { get; set; }

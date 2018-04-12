@@ -90,7 +90,7 @@ gamezoneApp.controller('gamezoneCtrlr', ['$scope', '$http', function ($scope, $h
 
     /*Function to handle creation of new users*/
     $scope.AutoRegisterNewUser = function () {
-        if (_IsMobile) {
+        if (_IsMobile == "True") {
             if (_mtnNumber != "") {
                 $scope.registerObj.szUsername = _mtnNumber;
                 $scope.registerObj.szPassword = "password";
@@ -124,7 +124,7 @@ gamezoneApp.controller('gamezoneCtrlr', ['$scope', '$http', function ($scope, $h
 
                             localStorage.setItem("UID", JSON.stringify(data.Data));
                             $scope.registerObj = {};
-                            window.location = window.location.href;
+                            //window.location = window.location.href;
                         } else {
                             $.notify(data.Message, 'error');
                         }
@@ -369,15 +369,16 @@ gamezoneApp.controller('gamezoneCtrlr', ['$scope', '$http', function ($scope, $h
             $scope.subDetailOBJ.IsActive = 1;
         }
     } else {
-        if (_IsMobile == "True") {
-            if (_mtnNumber != "") {/*Number is mtn*/
-                $scope.AutoRegisterNewUser();
-            } else {
-                $('#loginModal').modal('show');
-            }
+        //if (_IsMobile == "True") {
+        if (_mtnNumber != "") {/*Number is mtn*/
+            //alert("mtn number");
+            $scope.AutoRegisterNewUser();
         } else {
-            window.location = "/Home/";
+            window.location = "/Account/Login";
         }
+        //} else {
+        //    window.location = "/Account/Login";
+        //}
         $scope.subDetailOBJ.IsActive = 0;
     }
 
@@ -388,6 +389,21 @@ gamezoneApp.controller('gamezoneCtrlr', ['$scope', '$http', function ($scope, $h
         var userData = null;
         if (userOBJ) {
             userData = JSON.parse(userOBJ);
+
+            //#region URL Rewrite
+                var myURL = window.location.href;
+                var uidIndex = myURL.indexOf("uID");
+                var urlWithoutUID = myURL.substr(0, uidIndex);
+            //Rewrite UID
+                myURL = urlWithoutUID + "uID=" + userData.AppUserId;
+
+                var goIndex = myURL.indexOf("&go=true");
+                var urlBeforego = myURL.substr(0, goIndex);
+                var urlAftergo = myURL.substr(goIndex + ("&go=true".length), myURL.length);
+            //Rewrite Go
+                myURL = urlBeforego + "&go=false" + urlAftergo;
+            //#endregion
+
             if (_mtnNumber != "") {
                 $(".disabledCtrl").attr("disabled", "disabled");
                 if (userData.szUsername != _mtnNumber) {/*Check if user loggedin is same as phone number detected*/
@@ -396,12 +412,14 @@ gamezoneApp.controller('gamezoneCtrlr', ['$scope', '$http', function ($scope, $h
                 $scope.HeaderId = parseInt(_HedaID);
                 var refreshLrdy = localStorage.getItem("refreshLrdy");
                 if (refreshLrdy) {
+                    $(".disabledCtrl").removeAttr("disabled");
                     localStorage.removeItem("refreshLrdy");
                 } else {
                     setTimeout(function () {
                         /*Refresh Page every 20 secs*/
                         localStorage.setItem("refreshLrdy", true);
-                        window.location = window.location.href;
+
+                        window.location = myURL;
                     }, 20000);
                 }
             } else {
@@ -734,14 +752,29 @@ gamezoneApp.controller('gamezoneCtrlr', ['$scope', '$http', function ($scope, $h
     };
 
     $scope.USSDSubscription = function () {
+        var userOBJ = localStorage.getItem("UID");
+        var UID = null,
+            appUserID = 0;
+        if (userOBJ) {
+            alert("dataAvailable");
+            UID = JSON.parse(userOBJ);
+            appUserID = UID.AppUserId;
+        } else {
+            if (_mtnNumber != "") {/*Number is mtn*/
+                $scope.AutoRegisterNewUser();
+            } else {
+                window.location = "/Account/Login";
+            }
+            $scope.subDetailOBJ.IsActive = 0;
+        }
         if ($scope.payType == undefined) {
             $.notify("Please select a payment type.", 'error');
             $("#payTypeSel").focus();
             return;
         }
-        if (_mtnNumber != "") {/*Number is mtn*/
-            $("#txtPhone").val(_mtnNumber);
-        }
+        //if (_mtnNumber != "") {/*Number is mtn*/
+        //    $("#txtPhone").val(_mtnNumber);
+        //}
         if ($("#txtPhone").val().trim() == "") {
             $.notify("Please enter your phone no.", 'error');
             $("#txtPhone").focus();
@@ -763,6 +796,7 @@ gamezoneApp.controller('gamezoneCtrlr', ['$scope', '$http', function ($scope, $h
         $(".disabledCtrl").attr("disabled", "disabled");
         setTimeout(function () {
             $.post("/Home/MTNUSSDSubscription", {
+                AppUserID: appUserID,
                 MSISDN: $("#txtPhone").val(), IsMtn: true,
                 Shortcode: _SERVICE_SHORTCODE, headerId: $scope.HeaderId
             }).success(function (data) {

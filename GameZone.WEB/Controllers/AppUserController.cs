@@ -292,7 +292,7 @@ namespace GameZone.WEB.Controllers
         }
 
         [ResponseType(typeof(ReturnMessage)), Route("api/AppUser/SubscriptionDetails")]
-        public ReturnMessage GetSubscriptionDetails(long UID, string svcName)
+        public ReturnMessage GetSubscriptionDetails(long UID, string svcName, string shortCode = null)
         {
             try
             {
@@ -306,7 +306,7 @@ namespace GameZone.WEB.Controllers
                     };
                 }
 
-                var retVal = _IAppUserRepository.GetUserSubscriptionDetails(UID, svcName.Trim());
+                var retVal = _IAppUserRepository.GetUserSubscriptionDetails(UID, svcName.Trim(), shortCode);
                 //Successful
                 if (retVal != null)
                 {
@@ -393,23 +393,11 @@ namespace GameZone.WEB.Controllers
         [ResponseType(typeof(string)), Route("api/AppUser/AuthUserToken")]
         public string GetAuthUserToken(string redirectURL = null)
         {
-            //System.Net.Http.HttpRequestMessage request = new System.Net.Http.HttpRequestMessage();
             string headerToken = "";
-            System.Collections.Generic.IEnumerable<string> keys = null;
-
-            //if (request.Headers.TryGetValues("authToken", out keys))
-            //    headerToken = keys.First();
+            System.Collections.Generic.IEnumerable<string> keys = null;            
 
             if (Request.Headers.TryGetValues("authToken", out keys))
                 headerToken = keys.First();
-
-            //System.Collections.Specialized.NameValueCollection nvc = new System.Collections.Specialized.NameValueCollection();
-            //nvc = Request.Headers;
-            //System.Collections.Generic.Dictionary<string, string> ss = new System.Collections.Generic.Dictionary<string, string>();
-            //foreach (var item in nvc.AllKeys)
-            //{
-            //    ss.Add(item, nvc[item]);
-            //}
 
             //Check for Authentication Token in Request Header
             if (!string.IsNullOrEmpty(headerToken))

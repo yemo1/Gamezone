@@ -25,6 +25,8 @@ namespace GameData
         public Nullable<bool> isLogin { get; set; }
         public string LoginToken { get; set; }
         public Nullable<bool> isMobile { get; set; }
+        public string szMobilePayer { get; set; }
+        public Nullable<int> iNetwork { get; set; }
         public bool isDeleted { get; set; }
     }
 }

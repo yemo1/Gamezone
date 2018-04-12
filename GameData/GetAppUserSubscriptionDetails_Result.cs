@@ -16,6 +16,7 @@ namespace GameData
         public long AppUserId { get; set; }
         public string ServiceName { get; set; }
         public string Period { get; set; }
+        public string Subscriber { get; set; }
         public System.DateTime PeriodStart { get; set; }
         public System.DateTime PeriodEnd { get; set; }
         public double Amount { get; set; }

@@ -19,18 +19,20 @@ namespace GameZone.WEB.Controllers
         GameData.NGSubscriptionsEntities _NGSubscriptionsEntities;
         MSISDNRepository _MSISDNRepository;
         HeaderController _HeaderController;
-        private readonly IServiceRequestRepository _IServiceRequestRepository;
-        private readonly IServiceHeaderRepository _IServiceHeaderRpository;
+        private readonly IServiceRequestRepository _ServiceRequestRepository;
+        private readonly IServiceHeaderRepository _ServiceHeaderRpository;
+        private readonly IAppUserRepository _AppUserRepository;
         static TOOLS.WapHeaderUtil _WapHeaderUtil;
         public static readonly log4net.ILog _Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         string svcName = System.Configuration.ConfigurationManager.AppSettings["SERVICE_NAME"].ToString();
         static string serviceShortcode = System.Configuration.ConfigurationManager.AppSettings["SERVICE_SHORTCODE"].ToString();
         AppUserController _AppUserController;
-        public HomeController(AppUserController appUserController, IServiceHeaderRepository ServiceHeader, MSISDNRepository mSISDNRepository, HeaderController headerController, IServiceRequestRepository serviceRequestRepository, TOOLS.WapHeaderUtil wapHeaderUtil)
+        public HomeController(AppUserController appUserController, IAppUserRepository AppUserRepository, IServiceHeaderRepository ServiceHeader, MSISDNRepository mSISDNRepository, HeaderController headerController, IServiceRequestRepository serviceRequestRepository, TOOLS.WapHeaderUtil wapHeaderUtil)
         {
+            _AppUserRepository = AppUserRepository;
             _AppUserController = appUserController;
-            _IServiceHeaderRpository = ServiceHeader;
-            _IServiceRequestRepository = serviceRequestRepository;
+            _ServiceHeaderRpository = ServiceHeader;
+            _ServiceRequestRepository = serviceRequestRepository;
             _HeaderController = headerController;
             _MSISDNRepository = mSISDNRepository;
             _NGSubscriptionsEntities = new GameData.NGSubscriptionsEntities();
@@ -108,8 +110,10 @@ namespace GameZone.WEB.Controllers
                 }
                 System.Web.HttpContext.Current.Session["fltwvSubscription"] = null;
 
-                //Just for test of Auto Registration
-                ViewBag.mtnNumber = "2348147911707";
+                #region Just for test of Auto Registration
+                //ViewBag.mtnNumber = "2348147911707";
+                #endregion
+
                 return View();
             }
             catch (Exception ex)
@@ -143,10 +147,21 @@ namespace GameZone.WEB.Controllers
                 ViewBag.IsMobile = isMobi;
                 ViewBag.mtnNumber = string.IsNullOrEmpty(msisdn) ? null : msisdn;
                 string subResponse = null;
+
+                //Get App User Record
+                var userRetVal = _NGSubscriptionsEntities.AppUser.Where(a => a.AppUserId == uID);
+                AppUser appUser = null;
+                if (userRetVal != null)
+                {
+                    appUser = userRetVal.FirstOrDefault();
+                }
+
                 SubscriberVM SVM;
                 if (!string.IsNullOrEmpty(msisdn))//MTN Number
                 {
-                    var mtnRetVal = _AppUserController.GetMTNSubscriptionDetails(msisdn, serviceShortcode);
+                    ReturnMessage mtnRetVal = null;
+                    mtnRetVal = _AppUserController.GetMTNSubscriptionDetails(msisdn, serviceShortcode);
+
                     if (go && isMobi)//MTN Number with Subscription Clicked
                     {
                         //Initiate USSD Subscription
@@ -158,12 +173,19 @@ namespace GameZone.WEB.Controllers
                                     Message = "Initiating USSD Subscription",
                                     LogData = msisdn
                                 }));
-
                         }).Start();
 
                         if (mtnRetVal.Data == null)
                         {
-                            subResponse = MTNUSSDSubscription(msisdn, true, serviceShortcode, null, heda);
+                            if (appUser != null && !string.IsNullOrEmpty(appUser.szMobilePayer) && appUser.szMobilePayer.Trim() != msisdn.Trim())
+                            {
+                                subResponse = MTNUSSDSubscription(uID, appUser.szMobilePayer, true, serviceShortcode, null, heda);
+                            }
+                            else
+                            {
+                                subResponse = MTNUSSDSubscription(uID, msisdn, true, serviceShortcode, null, heda);
+                            }
+
                             ViewBag.responseMSG = subResponse;
 
                             rm = new ReturnMessage()
@@ -172,6 +194,7 @@ namespace GameZone.WEB.Controllers
                                 Success = mtnRetVal.Success,
                                 Data = SVM = new SubscriberVM()
                                 {
+                                    Subscriber = null,
                                     Exp = null,
                                     ServiceName = null,
                                     Status = null,
@@ -179,12 +202,12 @@ namespace GameZone.WEB.Controllers
                                 }
                             };
                         }
-                        else if (mtnRetVal.Data != null)
+                        else
                         {
                             var subData = (GameData.GetMTNUserSubscriptionDetails_Result)mtnRetVal.Data;
                             if (subData.Exp < DateTime.Now)
                             {
-                                subResponse = MTNUSSDSubscription(msisdn, true, serviceShortcode, null, heda);
+                                subResponse = MTNUSSDSubscription(uID, msisdn, true, serviceShortcode, null, heda);
                                 ViewBag.responseMSG = subResponse;
                             }
 
@@ -194,6 +217,7 @@ namespace GameZone.WEB.Controllers
                                 Success = mtnRetVal.Success,
                                 Data = SVM = new SubscriberVM()
                                 {
+                                    Subscriber = subData.Subscriber,
                                     Exp = subData.Exp,
                                     ServiceName = subData.ServiceName,
                                     Status = subData.Status,
@@ -201,21 +225,21 @@ namespace GameZone.WEB.Controllers
                                 }
                             };
                         }
-                        else
-                        {
-                            rm = new ReturnMessage()
-                            {
-                                Message = subResponse,
-                                Success = mtnRetVal.Success,
-                                Data = SVM = new SubscriberVM()
-                                {
-                                    Exp = null,
-                                    ServiceName = null,
-                                    Status = null,
-                                    Sub = null
-                                }
-                            };
-                        }
+                        //else
+                        //{
+                        //    rm = new ReturnMessage()
+                        //    {
+                        //        Message = subResponse,
+                        //        Success = mtnRetVal.Success,
+                        //        Data = SVM = new SubscriberVM()
+                        //        {
+                        //            Exp = null,
+                        //            ServiceName = null,
+                        //            Status = null,
+                        //            Sub = null
+                        //        }
+                        //    };
+                        //}
                     }
                     else if (!go && isMobi)//MTN Number with Subscription NOT Clicked
                     {
@@ -227,6 +251,7 @@ namespace GameZone.WEB.Controllers
                                 Success = mtnRetVal.Success,
                                 Data = SVM = new SubscriberVM()
                                 {
+                                    Subscriber = null,
                                     Exp = null,
                                     ServiceName = null,
                                     Status = null,
@@ -244,6 +269,7 @@ namespace GameZone.WEB.Controllers
                                 Success = mtnRetVal.Success,
                                 Data = SVM = new SubscriberVM()
                                 {
+                                    Subscriber = subData.Subscriber,
                                     Exp = subData.Exp,
                                     ServiceName = subData.ServiceName,
                                     Status = subData.Status,
@@ -259,7 +285,7 @@ namespace GameZone.WEB.Controllers
                     ReturnMessage retVal = null;
                     if (uID > 0)
                     {
-                        retVal = _AppUserController.GetSubscriptionDetails(uID, svcName);
+                        retVal = _AppUserController.GetSubscriptionDetails(uID, svcName, serviceShortcode);
                         subResponse = retVal.Message;
                         if (retVal.Data == null)
                         {
@@ -271,6 +297,7 @@ namespace GameZone.WEB.Controllers
                                 Success = retVal.Success,
                                 Data = SVM = new SubscriberVM()
                                 {
+                                    Subscriber = null,
                                     Exp = null,
                                     ServiceName = null,
                                     Status = null,
@@ -278,7 +305,7 @@ namespace GameZone.WEB.Controllers
                                 }
                             };
                         }
-                        else if (retVal.Data != null)
+                        else
                         {
                             var subData = (GetAppUserSubscriptionDetails_Result)retVal.Data;
                             rm = new ReturnMessage()
@@ -287,6 +314,7 @@ namespace GameZone.WEB.Controllers
                                 Success = retVal.Success,
                                 Data = SVM = new SubscriberVM()
                                 {
+                                    Subscriber = subData.Subscriber,
                                     Sub = subData.PeriodStart,
                                     Exp = subData.PeriodEnd,
                                     ServiceName = subData.Period,
@@ -303,6 +331,7 @@ namespace GameZone.WEB.Controllers
                             Success = false,
                             Data = SVM = new SubscriberVM()
                             {
+                                Subscriber = null,
                                 Exp = null,
                                 ServiceName = null,
                                 Status = null,
@@ -488,7 +517,7 @@ namespace GameZone.WEB.Controllers
         }
 
         [HttpPost]
-        public string MTNUSSDSubscription(string MSISDN, bool IsMtn, string Shortcode, string Productcode = null, string headerId = "")
+        public string MTNUSSDSubscription(long AppUserID, string MSISDN, bool IsMtn, string Shortcode, string Productcode = null, string headerId = "")
         {
             MSISDNRepository msisdn = new MSISDNRepository();
             string ipthis = null;
@@ -497,7 +526,7 @@ namespace GameZone.WEB.Controllers
                 if (MSISDN.StartsWith("0"))
                     MSISDN = "234" + MSISDN.TrimStart('0');
 
-                var subscriptionConfirm = _NGSubscriptionsEntities.ConfirmAppUserSubscription(0, MSISDN, null, Shortcode, Productcode, IsMtn).FirstOrDefault();
+                var subscriptionConfirm = _NGSubscriptionsEntities.ConfirmAppUserSubscription(AppUserID, MSISDN, null, Shortcode, Productcode, IsMtn).FirstOrDefault();
                 //Valid Subscription Exists
                 if (subscriptionConfirm.isSuccess)
                 {
@@ -507,51 +536,41 @@ namespace GameZone.WEB.Controllers
                         Message = "You already have an active Subscription."
                     });
                 }
-                if (Session["XMSISDN"] != null || System.Web.HttpContext.Current.Session["mtnNumber"] != null)
+
+                msisdn = (MSISDNRepository)Session["XMSISDN"] == null ?
+                        (MSISDNRepository)System.Web.HttpContext.Current.Session["mtnNumber"] :
+                        (MSISDNRepository)Session["XMSISDN"];
+                HttpContext.Session["XMSISDN"] = msisdn;
+                System.Web.HttpContext.Current.Session["mtnNumber"] = msisdn;
+
+                ipthis = msisdn.Lines.FirstOrDefault().IpAddress;
+
+                //Use Phone Number Passed
+                if (!string.IsNullOrEmpty(MSISDN))
                 {
-                    msisdn = (MSISDNRepository)Session["XMSISDN"] == null ? (MSISDNRepository)System.Web.HttpContext.Current.Session["mtnNumber"] : (MSISDNRepository)Session["XMSISDN"];
-                    HttpContext.Session["XMSISDN"] = msisdn;
-                    System.Web.HttpContext.Current.Session["mtnNumber"] = msisdn;
-                    ipthis = msisdn.Lines.FirstOrDefault().IpAddress;
-                    var mtnNumber = (msisdn.Lines.FirstOrDefault().Phone.Trim() == "XXX-XXXXXXXX") ? null : msisdn.Lines.FirstOrDefault().Phone.Trim();
-                    if (mtnNumber == null)//Mtn number not gotten by wap header
-                    {
-                        if (string.IsNullOrEmpty(MSISDN))
-                        {
-                            return JsonConvert.SerializeObject(new ReturnMessage()
-                            {
-                                Success = false,
-                                Message = "Subscription failed. \n Could not validate your phone number."
-                            });
-                        }
-                        msisdn.Clear();
-                        msisdn.AddItem(MSISDN, ipthis, true);
-                    }
+                    msisdn.Clear();
+                    msisdn.AddItem(MSISDN, ipthis, true);
                 }
 
-                //if ((MSISDNRepository)Session["XMSISDN"] != null)
-                //{
-                //    msisdn = (MSISDNRepository)Session["XMSISDN"];
-                //}
-                //else
-                //{
-                //    msisdn = _HeaderController.FillMSISDN();
-                //}
+                var lineObject = msisdn.Lines.FirstOrDefault();
 
+                var mtnNumber = (lineObject.Phone.Trim() == "XXX-XXXXXXXX") ? null : lineObject.Phone.Trim();
 
-                //var ipthis = msisdn.Lines.FirstOrDefault().IpAddress;
-                //msisdn.Clear();
-                //msisdn.AddItem(MSISDN, ipthis, true);
-
-                //HttpContext.Session["XMSISDN"] = msisdn;
-
-                if (msisdn != null && msisdn.Lines.Count() > 0 && msisdn.Lines.FirstOrDefault().Phone != "XXX-XXXXXXXX")
+                if (mtnNumber == null)//Mtn number not gotten by wap header
                 {
-                    var subResault = _IServiceRequestRepository.Subscribe(Convert.ToInt32(headerId), msisdn.Lines.FirstOrDefault().IpAddress, msisdn.Lines.FirstOrDefault().Phone, msisdn.Lines.FirstOrDefault().IsHeader);
-                    //ServiceHeaders serviceHeaders = new ServiceHeaders();
+                    return JsonConvert.SerializeObject(new ReturnMessage()
+                    {
+                        Success = false,
+                        Message = "Subscription failed. \n Could not validate your phone number."
+                    });
+                }
+
+
+                if (msisdn != null && msisdn.Lines.Count() > 0 && lineObject.Phone != "XXX-XXXXXXXX")
+                {
+                    var subResault = _ServiceRequestRepository.Subscribe(Convert.ToInt32(headerId), lineObject.IpAddress, lineObject.Phone, lineObject.IsHeader);
                     if (subResault.Success)
                     {
-                        //serviceHeaders = (ServiceHeaders)subResault.Data;
                         new Thread(() =>
                         {
                             LocalLogger.LogFileWrite(
@@ -560,6 +579,9 @@ namespace GameZone.WEB.Controllers
                                     LogData = subResault
                                 }));
                         }).Start();
+
+                        //Update User Mobile Payer Record
+                        _AppUserRepository.UpdateAppUserMobilePayer(AppUserID, lineObject.Phone);
 
                         return JsonConvert.SerializeObject(subResault);
                     }
@@ -574,11 +596,6 @@ namespace GameZone.WEB.Controllers
                 }
                 else
                 {
-                    //var header = _IServiceHeaderRpository.GetServiceHeader(Convert.ToInt32(headerId));
-                    //header.Category = category;
-                    //var model = new HeaderVM();
-                    //model.header = header.ToModel();
-                    //return View(model);
                     return JsonConvert.SerializeObject(new ReturnMessage()
                     {
                         Success = false,
@@ -604,7 +621,7 @@ namespace GameZone.WEB.Controllers
         [HttpGet]
         public string GetHeaderByServiceName(string serviceName)
         {
-            var serviceHeda = _IServiceHeaderRpository.GetServiceHeaderByServiceName(serviceName).Select(x => x.ToModel()).ToList();
+            var serviceHeda = _ServiceHeaderRpository.GetServiceHeaderByServiceName(serviceName).Select(x => x.ToModel()).ToList();
             return JsonConvert.SerializeObject((List<ServiceHeaderVM>)serviceHeda);
         }
         public ActionResult AddSubscription(string textPhone, string category, string headerId)
@@ -638,7 +655,7 @@ namespace GameZone.WEB.Controllers
                 {
                     if (msisdn != null && msisdn.Lines.Count() > 0 && msisdn.Lines.FirstOrDefault().Phone != "XXX-XXXXXXXX")
 
-                        _IServiceRequestRepository.Subscribe(Convert.ToInt32(headerId), msisdn.Lines.FirstOrDefault().IpAddress, msisdn.Lines.FirstOrDefault().Phone, msisdn.Lines.FirstOrDefault().IsHeader);
+                        _ServiceRequestRepository.Subscribe(Convert.ToInt32(headerId), msisdn.Lines.FirstOrDefault().IpAddress, msisdn.Lines.FirstOrDefault().Phone, msisdn.Lines.FirstOrDefault().IsHeader);
 
                     //to return manual numbers here
                     else

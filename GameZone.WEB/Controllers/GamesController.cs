@@ -22,7 +22,7 @@ namespace GameZone.WEB.Controllers
         NGSubscriptionsEntities _NGSubscriptionsEntities;
         public static readonly log4net.ILog _Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         static string svcName = System.Configuration.ConfigurationManager.AppSettings["SERVICE_NAME"].ToString();
-        string logObj;
+        
 
         HeaderController _HeaderController;
         public GamesController(HeaderController headerController)
@@ -67,7 +67,7 @@ namespace GameZone.WEB.Controllers
                 isMobi = true;
             }
             ViewBag.IsMobile = isMobi;
-           
+
             var hedaData = System.Web.HttpContext.Current.Session["mtnNumber"] != null ? (MSISDNRepository)System.Web.HttpContext.Current.Session["mtnNumber"] : null;
             string mtnNumber = null;
             if (hedaData != null)
@@ -116,7 +116,11 @@ namespace GameZone.WEB.Controllers
             //ViewBag.mtnNumber = "2348147911707";
             return View();
         }
-
+        /// <summary>
+        /// This is the fall back function from flutterwave pay button
+        /// </summary>
+        /// <param name="resp"></param>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult SubResponse(string resp = null)
         {
@@ -128,24 +132,23 @@ namespace GameZone.WEB.Controllers
                 if (userData == null)
                 {
                     System.Web.HttpContext.Current.Session["fltwvSubscription"] = "Session timed out. Please try again.";
-                    return RedirectToAction("Subscription", "Home", new { msisdn="", go=false, mobi=false, heda=0, frmGame=false, uID=0 });
+                    return RedirectToAction("Subscription", "Home", new { msisdn = "", go = false, mobi = false, heda = 0, frmGame = false, uID = 0 });
                 }
                 //Check for valid Exisiting Subscription
-                var subscriptionConfirm = _NGSubscriptionsEntities.ConfirmAppUserSubscription(userData.AppUserId, null, svcName, null,null, false).FirstOrDefault();
+                var subscriptionConfirm = _NGSubscriptionsEntities.ConfirmAppUserSubscription(userData.AppUserId, null, svcName, null, null, false).FirstOrDefault();
                 //Valid Subscription Exists
                 if (subscriptionConfirm.isSuccess)
                 {
                     System.Web.HttpContext.Current.Session["fltwvSubscription"] = "You already have an active Subscription.";
                     return RedirectToAction("Subscription", "Home", new { msisdn = "", go = false, mobi = false, heda = 0, frmGame = false, uID = userData.AppUserId });
                 }
-                logObj = JsonConvert.SerializeObject(new LogVM()
-                {
-                    Message = "User Making Payment",
-                    LogData = userData
-                });
                 new Thread(() =>
                 {
-                    _Log.Info(logObj);
+                    _Log.Info(JsonConvert.SerializeObject(new LogVM()
+                    {
+                        Message = "User Making Payment",
+                        LogData = userData
+                    }));
                 }).Start();
 
                 var responseJSON = JsonConvert.DeserializeObject<FlutterWaveJSONVM>(resp);
@@ -159,14 +162,13 @@ namespace GameZone.WEB.Controllers
                 var verifyRspJSON = JsonConvert.DeserializeObject<FlutterWavePayVerifyJSONVM>(responseStr);
 
                 #region Log
-                logObj = JsonConvert.SerializeObject(new LogVM()
-                {
-                    Message = "Payment Verification Result",
-                    LogData = verifyRspJSON.data
-                });
                 new Thread(() =>
                 {
-                    _Log.Info(logObj);
+                    _Log.Info(JsonConvert.SerializeObject(new LogVM()
+                    {
+                        Message = "Payment Verification Result",
+                        LogData = verifyRspJSON.data
+                    }));
                 }).Start();
                 #endregion
                 #region Verify Payment was really successful
@@ -199,9 +201,13 @@ namespace GameZone.WEB.Controllers
                     DateTime periodEnd = (subscriptionPeriod == (int)GameZonePrice.Daily) ? DateTime.Now.AddDays(1) :
                                             (subscriptionPeriod == (int)GameZonePrice.Weekly) ? DateTime.Now.AddDays(7) :
                                             DateTime.Now.AddDays(30);
-                    
+
                     //Save Subscription Data in DB
                     var rezolt = _NGSubscriptionsEntities.AddServiceSubscription(userData.AppUserId, svcName, Enum.GetName(typeof(GameZonePrice), subscriptionPeriod), DateTime.Now, periodEnd, verifyRspJSON.data.amount, true, true, DateTime.Now).FirstOrDefault();
+                    
+                    //Update User Mobile Payer Record
+                    _NGSubscriptionsEntities.UpdateGameZoneAppUserMobilePayer(userData.AppUserId, null);
+
                     System.Web.HttpContext.Current.Session["fltwvSubscription"] = "Your subscription was successful.";
                     //ViewBag.subscriptionSuccessful = "Your subscription was successful.";
                     return RedirectToAction("Subscription", "Home", new { msisdn = "", go = false, mobi = false, heda = 0, frmGame = false, uID = userData.AppUserId });
@@ -212,14 +218,13 @@ namespace GameZone.WEB.Controllers
             catch (Exception ex)
             {
                 #region Log
-                logObj = JsonConvert.SerializeObject(new LogVM()
-                {
-                    Message = "Exception",
-                    LogData = ex
-                });
                 new Thread(() =>
                 {
-                    _Log.Error(logObj);
+                    _Log.Error(JsonConvert.SerializeObject(new LogVM()
+                    {
+                        Message = "Exception",
+                        LogData = ex
+                    }));
                 }).Start();
                 #endregion
                 throw ex;
@@ -323,5 +328,5 @@ namespace GameZone.WEB.Controllers
                 return ex.Message;
             }
         }
-    }    
+    }
 }
