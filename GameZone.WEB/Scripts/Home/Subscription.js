@@ -371,7 +371,6 @@ gamezoneApp.controller('gamezoneCtrlr', ['$scope', '$http', function ($scope, $h
     } else {
         //if (_IsMobile == "True") {
         if (_mtnNumber != "") {/*Number is mtn*/
-            //alert("mtn number");
             $scope.AutoRegisterNewUser();
         } else {
             window.location = "/Account/Login";
@@ -756,7 +755,6 @@ gamezoneApp.controller('gamezoneCtrlr', ['$scope', '$http', function ($scope, $h
         var UID = null,
             appUserID = 0;
         if (userOBJ) {
-            alert("dataAvailable");
             UID = JSON.parse(userOBJ);
             appUserID = UID.AppUserId;
         } else {
@@ -883,14 +881,6 @@ gamezoneApp.controller('gamezoneCtrlr', ['$scope', '$http', function ($scope, $h
 }]);
 
 $("a.flwpug_getpaid").find("button").addClass("btn btn-primary");
-
-/*Allow Only Numbers into Tel Textboxes*/
-/*$(document).on("click", ".flwpug_getpaid", function (event) {
-    event.preventDefault();
-    event.preventDefault();
-    alert("I catch am");
-    event.preventDefault();
-});*/
 
 /*Function to Validate Email address format*/
 function validateEmail(Email) {

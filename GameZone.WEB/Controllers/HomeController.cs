@@ -111,7 +111,7 @@ namespace GameZone.WEB.Controllers
                 System.Web.HttpContext.Current.Session["fltwvSubscription"] = null;
 
                 #region Just for test of Auto Registration
-                //ViewBag.mtnNumber = "2348147911707";
+                ViewBag.mtnNumber = "2348147911707";
                 #endregion
 
                 return View();

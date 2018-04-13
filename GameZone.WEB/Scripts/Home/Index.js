@@ -193,7 +193,7 @@
 
     /*Initialize Phone Number gotten from wap header*/
     if (_IsMobile == "True") {
-        if (_mtnNumber != "") {            
+        if (_mtnNumber != "") {
             $("#userIDSpan").text(_mtnNumber);
             $scope.userName = _mtnNumber;
             $("#txtUsername").val(_mtnNumber);
